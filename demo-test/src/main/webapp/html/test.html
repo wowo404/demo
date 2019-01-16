@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+var Ajax={
+    get: function(url, fn) {
+        var obj = new XMLHttpRequest();  // XMLHttpRequest对象用于在后台与服务器交换数据          
+        obj.open('GET', url, true);
+        obj.onreadystatechange = function() {
+            if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState == 4说明请求已完成
+                fn.call(this, obj.responseText);  //从服务器获得数据
+            }
+        };
+        obj.send();
+    },
+    post: function (url, data, fn) {         // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+        var obj = new XMLHttpRequest();
+        obj.open("POST", url, true);
+        obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // 添加http头，发送信息至服务器时内容编码类型
+        obj.onreadystatechange = function() {
+            if (obj.readyState == 4 && (obj.status == 200 || obj.status == 304)) {  // 304未修改
+                fn.call(this, obj.responseText);
+            }
+        };
+        obj.send(data);
+    }
+}
+function clickMe(){
+	var url = "http://101.132.90.35:8080/api/user/index?userId=407030&accessToken=62615dbef6bb882dc3927696bb0b578a457c26fe4aad865a03752eeb24332331961084e508bf22b2ee28a1313848fa884855f9c9f1d71b505253f1ce063e80c4";
+	Ajax.get(url,function(obj,respText){
+		document.getElementById('respTextArea').value = respText;
+	})
+}
+</script>
+</head>
+<body>
+<div>
+	<a href="http://101.132.90.35:8080/api/user/index?userId=407030&accessToken=62615dbef6bb882dc3927696bb0b578a457c26fe4aad865a03752eeb24332331961084e508bf22b2ee28a1313848fa884855f9c9f1d71b505253f1ce063e80c4">click me</a>
+	<button onclick="clickMe()">button click</button>
+	<textarea rows="30" cols="30" id="respTextArea"></textarea>
+</div>
+</body>
+</html>

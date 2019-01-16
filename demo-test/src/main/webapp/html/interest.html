@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/**
+	 * 获取总利息
+	 */
+	function getTotalInterest(principal, rateArray, term) {
+		var totalInterest = 0;
+		for (var i = 0; i < rateArray.length; i++) {
+			var interestArray = getInterestArray(principal, rateArray[i], term);
+			totalInterest += Number(interestArray[i]);
+		}
+		return totalInterest;
+	}
+
+	var testRateArray = [ 0.078, 0.083, 0.098, 0.108, 0.118, 0.128 ];
+	console.log(getTotalInterest(1000, testRateArray, 6));
+
+	/**
+	 * 获取利息数组
+	 */
+	function getInterestArray(principal, yearRate, term) {
+		var interestArray = [];
+		var monthRate = yearRate / 12;
+		var monthRepay = getMonthRepayment(principal, monthRate, term);//每月还款额
+		var surplusPrincipal = principal;//剩余本金
+		for (var i = 1; i < term + 1; i++) {
+			// 每月利息 = 剩余本金 x 贷款月利率
+			var profit;
+			//每月本金 = 每月还款额 - 每月利息
+			var monthPrincipal;
+			if (i < term) {
+				profit = trimDecimal(surplusPrincipal * monthRate);
+				monthPrincipal = monthRepay - profit;
+			} else {
+				monthPrincipal = surplusPrincipal;
+				profit = monthRepay - surplusPrincipal;
+			}
+			surplusPrincipal -= monthPrincipal;
+			interestArray.push(profit);
+		}
+		return interestArray;
+	}
+
+	console.log(getInterestArray(10000, 0.088, 6));
+
+	/**
+	 * 等额本息，获得每月还款额
+	 * (totalLoan * monthRate * (1 + monthRate)^lifeOfLoan) / ((1 + monthRate)^lifeOfLoan - 1)
+	 */
+	function getMonthRepayment(totalLoan, monthRate, lifeOfLoan) {
+		var monthRatePower = Math.pow(monthRate + 1, lifeOfLoan);
+		var left = totalLoan * monthRate * monthRatePower;
+		var right = monthRatePower - 1;
+		return trimDecimal(left / right);
+	}
+	console.log(getMonthRepayment(10000, 0.088 / 12, 6));
+
+	//截取数字，保留两个小数位
+	function trimDecimal(num) {
+		num = (num + '').indexOf('.') != -1 ? num + '00' : num + '.00';
+		var re = /([0-9]+\.[0-9]{2})[0-9]*/;
+		return num.replace(re, '$1');
+	}
+	console.log(trimDecimal(54));
+	console.log(trimDecimal(0.2278));
+	console.log(trimDecimal(109737.001));
+	console.log(trimDecimal(100.3434));
+	console.log(trimDecimal(0.00467));
+</script>
+</head>
+<body>
+
+</body>
+</html>
