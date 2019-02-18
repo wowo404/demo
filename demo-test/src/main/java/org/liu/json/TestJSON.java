@@ -29,7 +29,13 @@ public class TestJSON {
 //        requestData.setDigest("b");
 //        System.out.println(JSON.toJSONString(requestData));
 
-        transferJsonToMap();
+        dashengDataTest();
+    }
+
+    private static void dashengDataTest(){
+        String json2 = "{\"message\":\"请求成功\",\"res\":{\"result\":\"击中规则\",\"Rule_final_decision\":\"复议\",\"rules\":[{\"rule_weight\":\"20\",\"rule_name\":\"朋友等关系银行不良\"},{\"rule_weight\":\"25\",\"rule_name\":\"银行不良\"}],\"Rule_final_weight\":\"45\"},\"orderNo\":\"170602170701919******\",\"code\":200}";
+        DaShengBaseResponse daShengBaseResponse = JSON.parseObject(json2, DaShengBaseResponse.class);
+        System.out.println(daShengBaseResponse);
     }
 
     private static void transferJsonToMap() throws IOException {

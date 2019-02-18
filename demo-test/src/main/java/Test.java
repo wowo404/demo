@@ -10,8 +10,15 @@ import org.liu.model.ChannelProductReq;
 public class Test {
 	public static void main(String[] args) {
 
+	    String hashcode = "a";
+        System.out.println(hashcode.hashCode());
+        Integer hashcodeOfInteger = 10086;
+        System.out.println(hashcodeOfInteger.hashCode());
+        System.out.println(Integer.toBinaryString(10086));
+
 		String[] ip = {"123", "127.0.0.1", "0.0.0.0"};
         ArrayList<String> list = Lists.newArrayList(ip);
+        System.out.println(list.hashCode());
         boolean contains = list.contains("192.168.0.1");
         boolean contains1 = list.contains("127.0.0.1");
         if (!contains && !contains1) {
