@@ -10,26 +10,7 @@ import org.liu.model.ChannelProductReq;
 public class Test {
 	public static void main(String[] args) {
 
-	    String hashcode = "a";
-        System.out.println(hashcode.hashCode());
-        Integer hashcodeOfInteger = 10086;
-        System.out.println(hashcodeOfInteger.hashCode());
-        System.out.println(Integer.toBinaryString(10086));
-
-		String[] ip = {"123", "127.0.0.1", "0.0.0.0"};
-        ArrayList<String> list = Lists.newArrayList(ip);
-        System.out.println(list.hashCode());
-        boolean contains = list.contains("192.168.0.1");
-        boolean contains1 = list.contains("127.0.0.1");
-        if (!contains && !contains1) {
-            System.out.println("invalid ip");
-        }
-
-        boolean endsWithAny = StringUtils.endsWithAny("a.JPEG".toLowerCase(), "jpeg");
-        System.out.println(endsWithAny);
-
-        int search = Arrays.binarySearch(ip, "1b1b1b");
-		System.out.println(search);
+        test2();
 
 		System.out.println(Test.class.getName());
 
@@ -39,18 +20,6 @@ public class Test {
 		Boolean flag = false;
 		change(flag);
 		System.out.println(flag);
-
-		int[] a = {1,2};
-		int[] b = {3,4};
-		int[] c = new int[a.length + b.length];
-        for (int i = 0; i < c.length; i++) {
-            if (i < a.length) {
-                c[i] = a[i];
-            } else {
-                c[i] = b[i - a.length];
-            }
-            System.out.println(i);
-        }
 	}
 	
 	public static void change(Boolean flag) {
@@ -88,4 +57,61 @@ public class Test {
 		//this will throw exception
 		list.add(3);
 	}
+
+	public static void test2(){
+	    int a = 1;
+	    int b = ++a + a;
+	    //int b = 2 + 2;
+        System.out.println(b);
+        System.out.println(a);
+        int c = a++ + a;
+        //int c = 2 + 3;
+        System.out.println(c);
+        System.out.println(a);
+    }
+
+    public static void testHashcode(){
+        String hashcode = "a";
+        System.out.println(hashcode.hashCode());
+        Integer hashcodeOfInteger = 10086;
+        System.out.println(hashcodeOfInteger.hashCode());
+        System.out.println(Integer.toBinaryString(10086));
+    }
+
+    public static void testArray(){
+        int[] a = {1,2};
+        int[] b = {3,4};
+        int[] c = new int[a.length + b.length];
+        for (int i = 0; i < c.length; i++) {
+            if (i < a.length) {
+                c[i] = a[i];
+            } else {
+                c[i] = b[i - a.length];
+            }
+            System.out.println(i);
+        }
+    }
+
+    public static void binarySearch(){
+        String[] ip = {"123", "127.0.0.1", "0.0.0.0"};
+        int search = Arrays.binarySearch(ip, "1b1b1b");
+        System.out.println(search);
+    }
+
+    public static void listContains(){
+        String[] ip = {"123", "127.0.0.1", "0.0.0.0"};
+        ArrayList<String> list = Lists.newArrayList(ip);
+        System.out.println(list.hashCode());
+        boolean contains = list.contains("192.168.0.1");
+        boolean contains1 = list.contains("127.0.0.1");
+        if (!contains && !contains1) {
+            System.out.println("invalid ip");
+        }
+    }
+
+    public static void endWithAny(){
+        boolean endsWithAny = StringUtils.endsWithAny("a.JPEG".toLowerCase(), "jpeg");
+        System.out.println(endsWithAny);
+    }
+
 }
