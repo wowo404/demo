@@ -29,7 +29,29 @@ public class TestJSON {
 //        requestData.setDigest("b");
 //        System.out.println(JSON.toJSONString(requestData));
 
-        dashengDataTest();
+        testPriceModel();
+    }
+
+    private static void testPriceModel(){
+	    List<PriceModel> list = new ArrayList<>();
+	    PriceModel model = new PriceModel();
+	    model.setId(1);
+	    model.setPersonalPrice(new BigDecimal("322.33"));
+	    model.setSubsidyPrice(new BigDecimal("444.33"));
+	    model.setTotalPrice(new BigDecimal("322.33").add(new BigDecimal("444.33")));
+	    model.setApplyCondition("残疾人");
+
+        PriceModel model2 = new PriceModel();
+        model2.setId(2);
+        model2.setPersonalPrice(new BigDecimal("3222.33"));
+        model2.setSubsidyPrice(new BigDecimal("4424.33"));
+        model2.setTotalPrice(new BigDecimal("3222.33").add(new BigDecimal("4424.33")));
+        model2.setApplyCondition("正常人");
+
+        list.add(model);
+        list.add(model2);
+
+        System.out.println(JSON.toJSONString(list));
     }
 
     private static void dashengDataTest(){

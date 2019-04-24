@@ -7,7 +7,15 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 参考详细介绍：
+ * https://www.cnblogs.com/andywithu/p/7404101.html
+ */
 public class TestJDK18 {
+
+    public void create(){
+
+    }
 
     public void sort() {
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100"), 1),
@@ -125,9 +133,16 @@ public class TestJDK18 {
                 (array1, array2) -> array1.addAll(array2)));
     }
 
+    public void distinct(){
+        List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100")),
+                new Person("b", new BigDecimal("200")), new Person("a", new BigDecimal("300")));
+        Set<String> set = new HashSet<>();
+        list.stream().filter(person -> set.add(person.getName())).forEach(person -> System.out.println(person.getName() + person.getAge()));
+    }
+
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
-        test.reduce();
+        test.distinct();
     }
 
     static class Person {

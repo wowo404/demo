@@ -6,9 +6,13 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.liu.enums.ServiceName;
 import org.liu.model.ChannelProductReq;
+import org.liu.obj.Superior;
 
 public class Test {
 	public static void main(String[] args) {
+
+	    String name = "中国银行杭州支行";
+        System.out.println(name.substring(0, name.indexOf("银行") + 2));
 
         test2();
 
@@ -17,13 +21,21 @@ public class Test {
 		System.out.println(4 % 2);
 		
 		System.out.println(clazzEqual(ChannelProductReq.class));
+		//值传递和引用传递
 		Boolean flag = false;
-		change(flag);
-		System.out.println(flag);
+		int a = 1;
+		Integer pkgA = 10;
+        Superior superior = new Superior();
+        superior.setId(100);
+		change(flag, 1, pkgA, superior);
+		System.out.println(flag + "--" + a + "--" + pkgA + "--" + superior.getId());
 	}
 	
-	public static void change(Boolean flag) {
+	public static void change(Boolean flag, int a, Integer pkgA, Superior superior) {
 		flag = true;
+		a = 2;
+		pkgA = 20;
+		superior.setId(200);
 	}
 	
 	public static boolean clazzEqual(Class clazz) {

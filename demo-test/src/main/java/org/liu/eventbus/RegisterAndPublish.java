@@ -18,7 +18,7 @@ public class RegisterAndPublish {
 
     public void sync(){
         //Creates a new EventBus with the given identifier
-        EventBus eventBus = new EventBus("syncEventBus");
+        EventBus eventBus = new EventBus("perThreadEventBus");
 
         //register all subscriber
         OrderEventListener orderEventListener = new OrderEventListener();
@@ -28,7 +28,7 @@ public class RegisterAndPublish {
 
         //publish event
         eventBus.post(new OrderEvent(1L, 145.30));
-        eventBus.post(new MessageEvent("liu order", "quick send my product"));
+        eventBus.post(new MessageEvent("liu order", "send my msg"));
 
         //unregister
         eventBus.unregister(orderEventListener);
