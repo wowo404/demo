@@ -13,27 +13,10 @@ import java.util.*;
 public class TestCommonsLang3 {
 
     public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
-        System.out.println(System.nanoTime());
 
-        List<String> idList = new ArrayList<>();
-        String id = "101047880689025434110104839508014571571010487468555833351101049115454793728210107642887275192351010764464808562692101076462079053414710107647729934704731010764925158592512101084532721480908910108456321868472411010845784016490501";
-        substring(idList, id);
+        String s1 = "abcdefg";
+        System.out.println(s1.substring(0, s1.length() - 4) + "****");
 
-        StringBuffer sb = new StringBuffer();
-        for (String signId : idList) {
-            sb.append(signId + ",");
-        }
-        System.out.println(sb.toString());
-        Integer integer = new Integer("5");
-        System.out.println(Arrays.asList(5,6,7,8,9).contains(integer));
-
-        Calendar c = Calendar.getInstance();
-        c.set(2018, 01, 07, 23, 59, 59);
-        c.add(Calendar.DATE, 90);
-        c.add(Calendar.DATE, 1);
-        Date date = c.getTime();
-        System.out.println(date);
 
         double a = RandomUtils.nextInt(1, 99);
 

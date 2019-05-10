@@ -36,6 +36,8 @@ public class TestJDK18 {
                 new Person("b", new BigDecimal("200"), 2), new Person("b", new BigDecimal("200"), 3));
         List<Person> newList = list.parallelStream().filter(p -> p.getAge().compareTo(new BigDecimal("200")) == 0).collect(Collectors.toList());
         System.out.println(newList.size());
+        Optional<Person> first = list.stream().filter(person -> person.getOrder() == 2).findFirst();
+        first.ifPresent(person -> System.out.println(person.getName() + person.getAge() + person.getOrder()));
     }
 
     /**
@@ -140,9 +142,20 @@ public class TestJDK18 {
         list.stream().filter(person -> set.add(person.getName())).forEach(person -> System.out.println(person.getName() + person.getAge()));
     }
 
+    //peek
+    public void peek(){
+        List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100")),
+                new Person("b", new BigDecimal("200")), new Person("a", new BigDecimal("300")));
+        list.stream().filter(e -> e.getAge().compareTo(new BigDecimal("150")) > 0)
+                .peek(e -> System.out.println(e.getName() + e.getAge()))
+                .map(e -> e.getName().toUpperCase())
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+    }
+
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
-        test.distinct();
+        test.countSpecific();
     }
 
     static class Person {
