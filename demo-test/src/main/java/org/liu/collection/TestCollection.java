@@ -1,5 +1,7 @@
 package org.liu.collection;
 
+import org.liu.obj.Superior;
+
 import java.util.*;
 
 /**
