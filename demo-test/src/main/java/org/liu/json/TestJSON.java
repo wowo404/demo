@@ -3,6 +3,9 @@ package org.liu.json;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import org.liu.obj.Junior;
+import org.liu.obj.Superior;
+import org.liu.obj.TestObj;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +33,21 @@ public class TestJSON {
 //        System.out.println(JSON.toJSONString(requestData));
 
         testPriceModel();
+    }
+
+    private static void testJsonFromSon(){
+        Junior junior = new Junior();
+        junior.setId(1);
+        junior.setName("test");
+        junior.setBirthday(new Date());
+        junior.setGender("man");
+
+        test(junior);
+    }
+
+    private static void test(Superior superior){
+        String jsonString = JSON.toJSONString(superior);
+        System.out.println(jsonString);
     }
 
     private static void testPriceModel(){

@@ -17,5 +17,6 @@ public class Junior extends Superior {
 
     private Date birthday;
     private String gender;
+    private int type;
 
 }

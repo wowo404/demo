@@ -5,7 +5,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.RandomStringGenerator;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Created by liuzhsh on 2017/11/10.
@@ -16,7 +16,6 @@ public class TestCommonsLang3 {
 
         String s1 = "abcdefg";
         System.out.println(s1.substring(0, s1.length() - 4) + "****");
-
 
         double a = RandomUtils.nextInt(1, 99);
 
@@ -45,21 +44,21 @@ public class TestCommonsLang3 {
         System.out.println(ends);
 
         RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
-        System.out.println(generator.generate(5,5));
+        System.out.println(generator.generate(5, 5));
 
         System.out.println(RandomStringUtils.random(5, true, true));
 
     }
 
-    private static void substring(List<String> idList, String id){
+    private static void substring(List<String> idList, String id) {
         int division = 19;
         if (id.length() % 17 == 0) {
             division = 17;
-        } else if(id.length() % 18 == 0){
+        } else if (id.length() % 18 == 0) {
             division = 18;
-        } else if(id.length() % 19 == 0){
+        } else if (id.length() % 19 == 0) {
             division = 19;
-        } else if(id.length() % 20 == 0){
+        } else if (id.length() % 20 == 0) {
             division = 20;
         }
         if (id.length() > division) {

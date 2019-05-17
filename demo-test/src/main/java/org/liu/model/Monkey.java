@@ -9,6 +9,8 @@ public class Monkey extends Animal implements Action, Serializable {
 
 	private List<MonkeySons> sons;
 
+	private MonkeySons oldSon;
+
 	public String getColor() {
 		return color;
 	}
@@ -25,7 +27,15 @@ public class Monkey extends Animal implements Action, Serializable {
         this.sons = sons;
     }
 
-    @Override
+	public MonkeySons getOldSon() {
+		return oldSon;
+	}
+
+	public void setOldSon(MonkeySons oldSon) {
+		this.oldSon = oldSon;
+	}
+
+	@Override
 	public void run() {
 		System.out.println("Monkey climb tree");
 	}

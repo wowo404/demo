@@ -1,9 +1,5 @@
 package org.liu.obj;
 
-import com.alibaba.fastjson.JSON;
-
-import java.util.Date;
-
 /**
  * main
  *
@@ -13,19 +9,57 @@ import java.util.Date;
 public class TestObj {
 
     public static void main(String[] args) {
-        Junior junior = new Junior();
-        junior.setId(1);
-        junior.setName("test");
-        junior.setBirthday(new Date());
-        junior.setGender("man");
-
-        TestObj testObj = new TestObj();
-        testObj.test(junior);
+        char a = 'a';
+        TestObj test = new TestObj();
+        char[] i = (char[])test.transferStringToBasicDataType(String.valueOf(a), char.class);
     }
 
-    public void test(Superior superior){
-        String jsonString = JSON.toJSONString(superior);
-        System.out.println(jsonString);
+    public Object test(int i) {
+        switch (i) {
+            case 0:
+                return "1";
+            case 1:
+                return "0.1";
+            case 2:
+                return "19181712334461651273";
+            case 3:
+                return "";
+            case 4:
+                return "";
+            default:
+                return null;
+        }
+    }
+
+    private Object transferStringToBasicDataType(String value, Class<?> clazz) {
+        if (clazz.equals(String.class)) {
+            return value;
+        }
+        if (clazz.equals(Integer.class) || clazz.equals(int.class)) {
+            return Integer.valueOf(value);
+        }
+        if (clazz.equals(Byte.class) || clazz.equals(byte.class)) {
+            return Byte.valueOf(value);
+        }
+        if (clazz.equals(Long.class) || clazz.equals(long.class)) {
+            return Long.valueOf(value);
+        }
+        if (clazz.equals(Double.class) || clazz.equals(double.class)) {
+            return Double.valueOf(value);
+        }
+        if (clazz.equals(Float.class) || clazz.equals(float.class)) {
+            return Float.valueOf(value);
+        }
+        if (clazz.equals(Character.class) || clazz.equals(char.class)) {
+            return value.toCharArray();
+        }
+        if (clazz.equals(Short.class) || clazz.equals(short.class)) {
+            return Short.valueOf(value);
+        }
+        if (clazz.equals(Boolean.class) || clazz.equals(boolean.class)) {
+            return Boolean.valueOf(value);
+        }
+        return null;
     }
 
 }
