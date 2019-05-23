@@ -17,7 +17,7 @@ public class TestCommonsLang3 {
         String s1 = "abcdefg";
         System.out.println(s1.substring(0, s1.length() - 4) + "****");
 
-        double a = RandomUtils.nextInt(1, 99);
+        int a = RandomUtils.nextInt(100000, 999999);
 
         System.out.println(String.valueOf(a));
 

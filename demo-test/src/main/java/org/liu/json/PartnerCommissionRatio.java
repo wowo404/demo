@@ -14,5 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class PartnerCommissionRatio {
     private Integer level;//合伙人级别
+    private Integer partnerId;
+    private String partnerName;
     private BigDecimal ratio;//分佣比例
 }
