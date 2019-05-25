@@ -16,7 +16,8 @@ public class Test {
         System.out.println(vv);
 
 	    String name = "中国银行杭州支行";
-        System.out.println(name.substring(0, name.indexOf("银行") + 2));
+        System.out.println(String.format(name));
+        System.out.println(name.substring(0, name.length() - 1));
 
         test2();
 
