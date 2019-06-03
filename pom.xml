@@ -7,6 +7,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>demo-test</module>
+        <module>demo-log</module>
+        <module>demo-database</module>
     </modules>
     <build>
         <plugins>

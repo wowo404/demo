@@ -11,6 +11,9 @@ import org.liu.obj.Superior;
 public class Test {
 	public static void main(String[] args) {
 
+	    String str = "/a";
+        System.out.println(str.startsWith("/"));
+
 	    int vv = 0;
 	    vv |= 2;//等同于 vv = vv | 2，将vv和2转为二进制后的与运算，有一真为真，同假为假
         System.out.println(vv);
