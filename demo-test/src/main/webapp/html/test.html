@@ -1,45 +1,109 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript">
-var Ajax={
-    get: function(url, fn) {
-        var obj = new XMLHttpRequest();  // XMLHttpRequest对象用于在后台与服务器交换数据          
-        obj.open('GET', url, true);
-        obj.onreadystatechange = function() {
-            if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState == 4说明请求已完成
-                fn.call(this, obj.responseText);  //从服务器获得数据
-            }
-        };
-        obj.send();
-    },
-    post: function (url, data, fn) {         // datat应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
-        var obj = new XMLHttpRequest();
-        obj.open("POST", url, true);
-        obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // 添加http头，发送信息至服务器时内容编码类型
-        obj.onreadystatechange = function() {
-            if (obj.readyState == 4 && (obj.status == 200 || obj.status == 304)) {  // 304未修改
-                fn.call(this, obj.responseText);
-            }
-        };
-        obj.send(data);
-    }
+    <meta charset="utf-8">
+    <title>sample</title>
+    <script src="https://cdn.bootcss.com/fetch/2.0.4/fetch.js"></script>
+</head>
+
+<body>
+    <button id="login">登录</button>
+    <button id='btn'>下载</button>
+    <span id='status'></span>
+</body>
+<script>
+//登录
+var loginUrl = "http://127.0.0.1:9011/admin/user/login";
+document.getElementById('login').onclick = function() {
+    fetch(loginUrl, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: '{"account":"admin","password":"lghf888888"}'
+    }).then(res => {
+        console.log(res.headers.get('Set-Cookie'));
+        console.log(res.headers.get('content-type'));
+    });
+};
+
+//下载
+var url = "http://127.0.0.1:9011/admin/order/orderExcel";
+
+let order = {
+    orderNos: "328712769350275072"
 }
-function clickMe(){
-	var url = "http://101.132.90.35:8080/api/user/index?userId=407030&accessToken=62615dbef6bb882dc3927696bb0b578a457c26fe4aad865a03752eeb24332331961084e508bf22b2ee28a1313848fa884855f9c9f1d71b505253f1ce063e80c4";
-	Ajax.get(url,function(obj,respText){
-		document.getElementById('respTextArea').value = respText;
-	})
+
+document.getElementById('btn').onclick = function() {
+    document.getElementById('status').innerHTML = '下载中';
+    fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded'
+        },
+        body: "orderNos=328712769350275072"
+    }).then(res => {
+        if (res.status != 200) {
+            alert(res.statusText);
+        } else {
+            //判断content-type
+            let contentType = res.headers.get('content-type');
+            if (contentType.includes('application/json')) {
+                handleJSONResponse(res);
+            } else if (contentType.includes('text/html')) {
+                handleTextResponse(res);
+            } else if (contentType.includes('application/vnd.ms-excel')) {
+                handlerStreamResponse(res);
+            }
+        }
+    });
+};
+
+function handleJSONResponse(response) {
+    response.json()
+        .then(json => {
+            if (response.ok) {
+                console.log(json);
+            } else {
+                return Promise.reject(Object.assign({}, json, {
+                    status: response.status,
+                    statusText: response.statusText
+                }))
+            }
+        })
+}
+
+function handleTextResponse(response) {
+    response.text()
+        .then(text => {
+            if (response.ok) {
+                console.log(text);
+            } else {
+                return Promise.reject({
+                    status: response.status,
+                    statusText: response.statusText,
+                    err: text
+                })
+            }
+        })
+}
+
+function handlerStreamResponse(response) {
+    response.blob().then(blob => {
+        let a = document.createElement('a');
+        let url = window.URL.createObjectURL(blob);
+        let disposition = response.headers.get('content-disposition');
+        let fileName = decodeURI(disposition.split('=')[1]);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.getElementById('status').innerHTML = '下载完成';
+    })
 }
 </script>
-</head>
-<body>
-<div>
-	<a href="http://101.132.90.35:8080/api/user/index?userId=407030&accessToken=62615dbef6bb882dc3927696bb0b578a457c26fe4aad865a03752eeb24332331961084e508bf22b2ee28a1313848fa884855f9c9f1d71b505253f1ce063e80c4">click me</a>
-	<button onclick="clickMe()">button click</button>
-	<textarea rows="30" cols="30" id="respTextArea"></textarea>
-</div>
-</body>
+
 </html>

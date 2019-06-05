@@ -35,7 +35,7 @@ public class TestFastJson {
     }
 
     private static void parseArea() throws IOException {
-        InputStream is = TestFastJson.class.getClassLoader().getResourceAsStream("area.json");
+        InputStream is = TestFastJson.class.getClassLoader().getResourceAsStream("src/main/webapp/json/area.json");
         String resource = IOUtils.toString(is, "utf-8");
         JSONObject jsonObject = JSON.parseObject(resource);
         JSONObject province = jsonObject.getJSONObject("150000");
