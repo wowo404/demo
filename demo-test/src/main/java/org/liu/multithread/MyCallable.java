@@ -1,6 +1,7 @@
 package org.liu.multithread;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author liuzhangsheng
@@ -8,12 +9,12 @@ import java.util.concurrent.Callable;
  */
 public class MyCallable implements Callable<Integer> {
 
-    private int a = 0;
+    private static final AtomicInteger a = new AtomicInteger(0);
 
     @Override
     public Integer call() throws Exception {
-        ++a;
-        System.out.println(Thread.currentThread().getName() + "  a=" + a);
-        return a;
+        a.incrementAndGet();
+        System.out.println(Thread.currentThread().getName() + "  a=" + a.get());
+        return a.get();
     }
 }
