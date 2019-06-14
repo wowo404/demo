@@ -9,6 +9,8 @@
         <module>demo-test</module>
         <module>demo-log</module>
         <module>demo-database</module>
+        <module>demo-netty</module>
+        <module>demo-mina</module>
     </modules>
     <build>
         <plugins>
