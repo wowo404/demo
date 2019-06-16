@@ -1,0 +1,126 @@
+//created on: 2017-5-5
+package com.sample.mytest
+
+import com.sample.com.sample.mdl.School;
+import com.sample.com.sample.mdl.Student;
+
+global java.util.List list;
+global java.util.Map map;
+//����ע��
+/*
+����ע��
+*/
+rule "contains"
+
+    when
+    	$s:School();
+    	$su:Student($s.nickname contains name,$s.name contains name);
+    then
+        System.out.println("Congraturations,success to use: contains");
+
+end
+
+rule "not contains"
+
+    when
+    	$s:School();
+    	$su:Student(name not contains $s.name);
+    then
+        System.out.println("Congraturations,success to use: not contains");
+
+end
+
+rule "memberOf"
+
+    when
+    	$su:Student(name memberOf list);
+    then
+        System.out.println("Congraturations,success to use: memberOf");
+
+end
+
+rule "not memberOf"
+
+    when
+    	School(address not memberOf list);
+    then
+        System.out.println("Congraturations,success to use: not memberOf");
+
+end
+
+rule "matches"
+
+    when
+    	School(address matches "ɽ.*");
+    then
+        System.out.println("Congraturations,success to use: matches");
+
+end
+
+rule "not matches"
+
+    when
+    	School(address not matches "�㽭.*");
+    then
+        System.out.println("Congraturations,success to use: not matches");
+
+end
+
+rule "get array or map or list value"
+salience 1
+no-loop true
+    when
+    	School(nickname[0] == "����");
+    	School(gradeList[0] == "��һ");
+    	School(advertisementMap["a"] == "ţ��");
+    then
+        System.out.println("Congraturations,success to use: get array or map or list value");
+
+end
+
+rule "date-effective"
+date-effective "2017-05-08"
+//���û������System.setProperty("drools.dateformat", "yyyy-MM-dd");������������
+date-effective "8-����-2017"
+	when
+		eval(true);
+	then
+		System.out.println("success to use: date-effective����ָ����ʱ���֮��Ż�ִ��");
+end
+
+rule "date-expires"
+date-expires "2017-05-09"
+	when
+		eval(true);
+	then
+		System.out.println("success to use: date-expires����ָ����ʱ���֮��ִ��");
+end
+
+rule "dialect enabled lock-on-active activation-group agenda-group"
+dialect "mvel"//or java
+enabled true//or false
+lock-on-active false//or true,default false
+activation-group "my-rule"
+agenda-group "my-rule"
+	when
+		eval(true);
+	then
+		System.out.println("success to use: dialect enabled lock-on-active activation-group agenda-group");
+end
+
+rule "auto-focus"
+auto-focus true//or false,ʹ���������������Ϊtrue��agenda-group����Ч
+	when
+		eval(true);
+	then
+		System.out.println("success to use: auto-focus");
+end
+
+rule "ruleflow-group"
+ruleflow-group "rule-group-one"
+	when
+		eval(true);
+	then
+		System.out.println("success to use: auto-focus");
+end
+

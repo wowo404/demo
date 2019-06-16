@@ -1,0 +1,24 @@
+//created on: 2017-5-26
+package org.liu;
+
+//list any import classes here.
+import org.liu.pojo.User;
+import org.liu.pojo.UserRuleRecord;
+
+//declare any global variables here
+
+
+
+
+rule "用户年龄小于20或者大于50"
+
+    when
+        $u:User(age < 20 || age > 50);
+    then
+        UserRuleRecord record = new UserRuleRecord();
+        record.setUserId($u.getUserId());
+        record.setRulePackage(kcontext.getRule().getPackageName());
+        record.setRuleName(kcontext.getRule().getName());
+        record.setScore(1);
+		insert(record);
+end

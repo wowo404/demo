@@ -1,0 +1,30 @@
+//created on: 2017-5-9
+package com.sample.calendar
+
+//list any import classes here.
+
+
+
+//declare any global variables here
+
+
+
+
+rule "use calendar"
+calendars "weekend"
+timer(int:0 1h)
+    when
+        //conditions
+    then
+        System.out.println("自定义calendar和timer");
+
+end
+
+rule "Your Second Rule"
+    //include attributes such as "salience" here...
+    when
+        //conditions
+    then
+        //actions
+
+end

@@ -1,0 +1,124 @@
+<w:tr>
+<w:tblPrEx>
+<w:tblBorders>
+<w:top w:val="single" w:color="000000" w:sz="6" w:space="0"/>
+<w:left w:val="single" w:color="000000" w:sz="6" w:space="0"/>
+<w:bottom w:val="single" w:color="000000" w:sz="6" w:space="0"/>
+<w:right w:val="single" w:color="000000" w:sz="6" w:space="0"/>
+<w:insideH w:val="none" w:color="auto" w:sz="0" w:space="0"/>
+<w:insideV w:val="none" w:color="auto" w:sz="0" w:space="0"/>
+</w:tblBorders>
+<w:tblLayout w:type="fixed"/>
+<w:tblCellMar>
+<w:top w:w="15" w:type="dxa"/>
+<w:left w:w="15" w:type="dxa"/>
+<w:bottom w:w="15" w:type="dxa"/>
+<w:right w:w="15" w:type="dxa"/>
+</w:tblCellMar>
+</w:tblPrEx>
+<w:trPr>
+<w:trHeight w:val="239" w:hRule="atLeast"/>
+</w:trPr>
+<w:tc>
+<w:tcPr>
+<w:tcW w:w="2799" w:type="dxa"/>
+<w:gridSpan w:val="2"/>
+<w:tcBorders>
+<w:top w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:left w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:bottom w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:right w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+</w:tcBorders>
+<w:tcMar>
+<w:top w:w="15" w:type="dxa"/>
+<w:left w:w="150" w:type="dxa"/>
+<w:bottom w:w="15" w:type="dxa"/>
+<w:right w:w="15" w:type="dxa"/>
+</w:tcMar>
+<w:vAlign w:val="center"/>
+</w:tcPr>
+<w:p>
+<w:pPr>
+<w:widowControl/>
+<w:jc w:val="center"/>
+<w:rPr>
+<w:rFonts w:hint="eastAsia" w:eastAsia="宋体"/>
+<w:lang w:eastAsia="zh-CN"/>
+</w:rPr>
+</w:pPr>
+<w:r>
+<w:rPr>
+<w:rFonts w:hint="eastAsia"/>
+<w:lang w:eastAsia="zh-CN"/>
+</w:rPr>
+<w:t>第2期</w:t>
+</w:r>
+</w:p>
+</w:tc>
+<w:tc>
+<w:tcPr>
+<w:tcW w:w="2799" w:type="dxa"/>
+<w:tcBorders>
+<w:top w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:left w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:bottom w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:right w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+</w:tcBorders>
+<w:tcMar>
+<w:top w:w="15" w:type="dxa"/>
+<w:left w:w="150" w:type="dxa"/>
+<w:bottom w:w="15" w:type="dxa"/>
+<w:right w:w="15" w:type="dxa"/>
+</w:tcMar>
+<w:vAlign w:val="center"/>
+</w:tcPr>
+<w:p>
+<w:pPr>
+<w:widowControl/>
+<w:jc w:val="center"/>
+<w:rPr>
+<w:rFonts w:hint="eastAsia"/>
+<w:lang w:val="en-US" w:eastAsia="zh-CN"/>
+</w:rPr>
+</w:pPr>
+<w:r>
+<w:rPr>
+<w:rFonts w:hint="eastAsia"/>
+<w:lang w:val="en-US" w:eastAsia="zh-CN"/>
+</w:rPr>
+<w:t>2014-03-02</w:t>
+</w:r>
+</w:p>
+</w:tc>
+<w:tc>
+<w:tcPr>
+<w:tcW w:w="2800" w:type="dxa"/>
+<w:tcBorders>
+<w:top w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:left w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:bottom w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+<w:right w:val="outset" w:color="auto" w:sz="6" w:space="0"/>
+</w:tcBorders>
+<w:tcMar>
+<w:top w:w="15" w:type="dxa"/>
+<w:left w:w="150" w:type="dxa"/>
+<w:bottom w:w="15" w:type="dxa"/>
+<w:right w:w="15" w:type="dxa"/>
+</w:tcMar>
+<w:vAlign w:val="center"/>
+</w:tcPr>
+<w:p>
+<w:pPr>
+<w:widowControl/>
+<w:jc w:val="center"/>
+<w:rPr>
+<w:rFonts w:hint="eastAsia"/>
+<w:lang w:eastAsia="zh-CN"/>
+</w:rPr>
+</w:pPr>
+<w:r>
+<w:t>¥2200.00</w:t>
+</w:r>
+</w:p>
+</w:tc>
+</w:tr>

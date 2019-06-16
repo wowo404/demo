@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${page_title}</title>
+#if($!{CSS})
+ #foreach($_css in ${CSS})
+   <link type="text/css" rel="stylesheet" href="${ContextPath}/$_css">
+ #end
+#end
+</head>
+<body>
+  <div class="header">
+      #parse("/templates/layout/header.vm")
+  </div>
+  <div class="container">
+      <div class="sub">
+          #parse($sub)
+      </div>
+      <div class="main">
+          $screen_content
+      </div>
+  </div>
+#if($!JS)
+ #foreach($_js in $JS)
+   <script type="text/javascript" src="${CntextPath}/${_js}">
+ #end
+#end
+</body>
+</html>

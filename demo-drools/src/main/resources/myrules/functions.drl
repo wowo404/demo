@@ -1,0 +1,30 @@
+//created on: 2017-5-9
+package com.sample.functions
+
+import function com.sample.com.sample.mdl.School.say
+
+function String hello(String name){
+	return "Hello, " + name;
+}
+
+function boolean check(int num){
+	if(num > 10){
+		return true;
+	}
+	return false;
+}
+
+rule "test function"
+
+    when
+    	//����д��������ֱ����when��ʹ��
+    	//check(11)
+    	//��ȷд��
+        eval(check(11));
+    then
+        System.out.println(hello("liu"));
+        //ʹ�þ�̬����
+        say("Olive");
+
+end
+

@@ -1,0 +1,15 @@
+//created on: 2017-5-9
+package com.sample.testquery
+
+import com.sample.com.sample.mdl.Student;
+
+query "Student age great or equal then 20"(String $name)
+	student:Student(name == $name,age >= 20);
+end
+
+rule "query test"
+
+	when
+	then
+		System.out.println("query test");
+end

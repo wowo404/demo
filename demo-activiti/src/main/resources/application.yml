@@ -1,0 +1,41 @@
+#系统配置
+server: 
+  port: 8080
+  context-path: /activiti
+
+#数据源配置
+spring: 
+ datasource: 
+  type: com.zaxxer.hikari.HikariDataSource
+  driverClassName: com.mysql.jdbc.Driver
+  jdbcUrl: jdbc:mysql://192.168.137.5:3306/springboot?useUnicode=true&characterEncoding=UTF-8
+  username: springboot
+  password: springboot
+ jpa: 
+  database: MYSQL
+  show-sql: true
+  hibernate.ddl-auto: none
+  properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+#redis配置
+ redis:
+  database: 0
+  host: 192.168.137.5
+  port: 6379
+  #password:
+#freemarker配置
+ freemarker: 
+  expose-request-attributes: true
+  expose-session-attributes: false
+  expose-spring-macro-helpers: true
+  request-context-attribute: request
+
+#远程drools配置
+drools: 
+ url: http://192.168.137.5:8080/kie-wb/maven2/org/liu/drools-start/1.0/drools-start-1.0.jar
+ userName: kie
+ password: kie
+
+#线程池数量设置
+task.executor: 
+ max.pool.size: 50
+ core.pool.size: 5

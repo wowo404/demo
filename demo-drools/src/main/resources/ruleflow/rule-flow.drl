@@ -1,0 +1,12 @@
+//created on: 2017-5-23
+package com.sample.ruleflow
+
+rule "A stand alone rule"
+	ruleflow-group "rule-flow-test1"
+    when
+        eval(true)
+    then
+        System.out.println("规则流测试一");
+
+end
+

@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class TestCountDownLatch {
 
-    public void test(){
+    public void test() throws InterruptedException {
         int len = 10;
         CountDownLatch countDownLatch = new CountDownLatch(len);
         for (int i = 0; i < len; i++) {
@@ -25,16 +25,12 @@ public class TestCountDownLatch {
                 countDownLatch.countDown();
             }).start();//一定不要忘记调用start方法
         }
-        try {
-            //主线程阻塞，直到CountDownLatch的所有子线程完成
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //主线程阻塞，直到CountDownLatch的所有子线程完成
+        countDownLatch.await();
         System.out.println("所有线程都执行完毕");
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         TestCountDownLatch test = new TestCountDownLatch();
         test.test();
     }

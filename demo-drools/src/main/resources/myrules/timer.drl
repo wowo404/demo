@@ -1,0 +1,28 @@
+//created on: 2017-5-9
+package com.sample.timer
+
+//list any import classes here.
+import com.sample.com.sample.mdl.School;
+import com.sample.com.sample.mdl.Student;
+
+
+//declare any global variables here
+
+
+
+
+rule "test timer use int"
+timer(int: 5s 5s)
+    when
+        eval(true);
+    then
+        System.out.println("int timer is running");
+end
+
+rule "test timer use cron"
+timer(cron:0/5 * * * * ?)
+    when
+        eval(true);
+    then
+		System.out.println("cron timer is running");
+end
