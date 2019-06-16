@@ -2,7 +2,6 @@ package org.liu.readproperties;
 
 import org.apache.commons.io.IOUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +9,7 @@ import java.util.Properties;
 public class TestReadProperties {
 
     public static void main(String[] args) throws IOException {
-        readFromClassPath();
+        readFromJar();
     }
 
     public static void readSystemProperties(){
@@ -27,12 +26,12 @@ public class TestReadProperties {
     }
 
     //只有web工程才有webapp目录，并且打成war包才有会webapp目录下的文件
-    public static void readFromWebappPath(HttpServletRequest request){
-        String realPath = request.getSession().getServletContext().getRealPath("/");
-        System.out.println("servlet context real path:" + realPath);
-        String filePath = realPath + "js/testjson.js";
-        System.out.println(filePath);
-    }
+//    public static void readFromWebappPath(HttpServletRequest request){
+//        String realPath = request.getSession().getServletContext().getRealPath("/");
+//        System.out.println("servlet context real path:" + realPath);
+//        String filePath = realPath + "js/testjson.js";
+//        System.out.println(filePath);
+//    }
 
     //jar中的文件就是classpath文件
     public static void readFromJar() throws IOException {
@@ -40,8 +39,8 @@ public class TestReadProperties {
         String content = IOUtils.toString(stream, "utf-8");
         System.out.println(content);
 
-        //1.在javax-servlet-api-3.1.0.jar包里的package目录下
-        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("javax/servlet/LocalStrings.properties");
+        //1.在commons-codec-1.6.jar!\org\apache\commons\codec\language\bm目录下
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("org/apache/commons/codec/language/bm/ash_approx_any.txt");
 
         byte[] b = new byte[10240];
         is.read(b);
@@ -50,7 +49,8 @@ public class TestReadProperties {
 
         System.out.println("-----------------------------------------------------");
         //2.就在xmlbeans-2.3.0.jar包的根目录下
-        InputStream is2 = Thread.currentThread().getContextClassLoader().getResourceAsStream("LICENSE.txt");
+//        InputStream is2 = TestReadProperties.class.getResourceAsStream("/build.properties");
+        InputStream is2 = Thread.currentThread().getContextClassLoader().getResourceAsStream("build.properties");
 
         byte[] b2 = new byte[20480];
         is2.read(b2);

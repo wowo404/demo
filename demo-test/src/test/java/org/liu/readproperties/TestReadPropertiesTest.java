@@ -30,6 +30,6 @@ public class TestReadPropertiesTest {
         when(request.getSession()).thenReturn(session);
         when(session.getServletContext()).thenReturn(servletContext);
         when(servletContext.getRealPath("/")).thenReturn("");
-        TestReadProperties.readFromWebappPath(request);
+//        TestReadProperties.readFromWebappPath(request);
     }
 }
