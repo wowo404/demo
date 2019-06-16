@@ -9,9 +9,20 @@ import org.liu.model.ChannelProductReq;
 import org.liu.obj.Superior;
 
 public class Test {
+
+    private final static long DATACENTER_BIT = 8;
+    private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
+
 	public static void main(String[] args) {
 
-	    String str = "/a";
+        System.out.println(MAX_DATACENTER_NUM);
+
+        Date date = new Date(1480166465631L);
+        System.out.println(date);
+        System.out.println(System.currentTimeMillis());
+        System.out.println(System.currentTimeMillis() - 1480166465631L);
+
+        String str = "/a";
         System.out.println(str.startsWith("/"));
 
 	    int vv = 0;

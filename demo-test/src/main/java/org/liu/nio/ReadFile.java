@@ -14,7 +14,7 @@ public class ReadFile {
 	
 	public static void readFile() throws IOException {
 		
-		FileInputStream fis = new FileInputStream("/Users/liuzhangsheng/Documents/workspace/demo/src/main/resources/xml/table_css.html");
+		FileInputStream fis = new FileInputStream("/Users/liuzhangsheng/Documents/workspace/demo/demo-test/src/main/webapp/html/table_css.html");
 		FileChannel fc = fis.getChannel();
 		ByteBuffer buffer = ByteBuffer.allocate(1024);
 		//buffer.clear();//重设缓冲区，使它可以接受读入的数据
@@ -37,7 +37,7 @@ public class ReadFile {
 	
 	public static void writeFile() throws IOException {
 		String[] message = {"a", "1", ","};
-		FileOutputStream fos = new FileOutputStream("/Users/liuzhangsheng/Documents/workspace/demo/src/main/resources/xml/cope.html");
+		FileOutputStream fos = new FileOutputStream("/Users/liuzhangsheng/Documents/workspace/demo/demo-test/src/main/webapp/html/copy.html");
 		FileChannel fc1 = fos.getChannel();
 		ByteBuffer buffer1 = ByteBuffer.allocate(1024);
 		buffer1.clear();
@@ -51,7 +51,7 @@ public class ReadFile {
 	
 	public static void copyFile() throws IOException {
 		//read
-		FileInputStream fis = new FileInputStream("/Users/liuzhangsheng/Documents/workspace/demo/src/main/resources/xml/table_css.html");
+		FileInputStream fis = new FileInputStream("/Users/liuzhangsheng/Documents/workspace/demo/demo-test/src/main/webapp/html/table_css.html");
 		FileChannel fcin = fis.getChannel();
 		ByteBuffer buffer = ByteBuffer.allocate(1024);
 		buffer.clear();//重设缓冲区，使它可以接受读入的数据
@@ -62,7 +62,7 @@ public class ReadFile {
 		fis.close();
 		
 		//write
-		FileOutputStream fos = new FileOutputStream("/Users/liuzhangsheng/Documents/workspace/demo/src/main/resources/xml/cope.html");
+		FileOutputStream fos = new FileOutputStream("/Users/liuzhangsheng/Documents/workspace/demo/demo-test/src/main/webapp/html/copy.html");
 		FileChannel fcout = fos.getChannel();
 		buffer.flip();//让缓冲区可以将新读入的数据写入另一个通道。
 		fcout.write(buffer);
