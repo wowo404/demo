@@ -15,6 +15,16 @@ public class Test {
 
 	public static void main(String[] args) {
 
+        System.out.println(UUID.randomUUID().toString().replace("-", ""));
+        System.out.println("".split(",").length);
+        System.out.println(",".split(",").length);
+        System.out.println("1,".split(",").length);
+        System.out.println(",1".split(",").length);
+        System.out.println("1,1".split(",").length);
+
+        String img = "sfsd.jpg";
+        System.out.println(img.substring(img.lastIndexOf("\\.") + 1));
+
         System.out.println(MAX_DATACENTER_NUM);
 
         Date date = new Date(1480166465631L);

@@ -26,11 +26,22 @@
         <module>demo-activemq</module>
         <module>demo-activiti</module>
         <module>demo-kafka</module>
+        <module>demo-wechat-open</module>
+        <module>demo-wechat-mp</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

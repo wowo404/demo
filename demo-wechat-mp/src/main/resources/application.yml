@@ -1,0 +1,9 @@
+server:
+  port: 9410
+
+spring:
+  application:
+    name: demo-wechat-mp
+
+wechat:
+  token: fb2d785886b14c6194b41d3e7f558f22

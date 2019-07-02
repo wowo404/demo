@@ -1,5 +1,7 @@
 package org.liu.regexp;
 
+import java.util.regex.Pattern;
+
 /**
  * @author liuzhangsheng
  * @create 2018/10/25
@@ -7,7 +9,19 @@ package org.liu.regexp;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        name();
+        notContain();
+    }
+
+    public static void mobile(){
+        String reg = "^(13|14|15|16|17|18|19)[0-9]{9}$";
+        Pattern pattern = Pattern.compile(reg);
+        System.out.println(pattern.matcher("15058124996").matches());
+    }
+
+    public static void notContain(){
+        String reg = "^((?!#).)*$";
+        Pattern pattern = Pattern.compile(reg);
+        System.out.println(pattern.matcher("15058124996").matches());
     }
 
     /**

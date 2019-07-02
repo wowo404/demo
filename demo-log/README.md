@@ -4,4 +4,5 @@ log4j2
 logback
 slf4j
 common-logging
+jboss-logging
 jdk-log
