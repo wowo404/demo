@@ -28,6 +28,7 @@
         <module>demo-kafka</module>
         <module>demo-wechat-open</module>
         <module>demo-wechat-mp</module>
+        <module>demo-quickserver</module>
     </modules>
 
     <properties>

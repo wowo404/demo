@@ -12,24 +12,31 @@ public class FileReader {
 	
 	public static void main(String[] args) throws IOException {
 		FileReader fr = new FileReader();
+//		fr.read();
+		fr.read2();
 //		fr.saveFile();
 //		fr.bufferRead("src/main/resources/bank");
 //		String fullPath = FilenameUtils.getFullPath("C://A/B/C/A.txt");
 //		System.out.println(fullPath);
 //		System.out.println(new File(fullPath).exists());
 
-        File file = new File(SRC);
-        String name = file.getName();
-        String[] split = name.split("\\.");
-        for (String s : split) {
-            System.out.println(s);
-        }
-
     }
 	
 	public void read() throws IOException{
-		InputStream is = new FileInputStream(new File(SRC));
+		InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
 		byte[] buff = IOUtils.toByteArray(is, is.available());
+		String content = new String(buff, "UTF-8");
+		System.out.println(content);
+	}
+
+	public void read2() throws IOException{
+		InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
+		byte[] buff = new byte[is.available()];
+		int offset = 0;
+		int read;
+		while ((read = is.read(buff, offset, 512)) != -1){
+			offset += read;
+		}
 		String content = new String(buff, "UTF-8");
 		System.out.println(content);
 	}

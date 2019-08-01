@@ -48,7 +48,7 @@ public class TestReadProperties {
         System.out.println(new String(b));
 
         System.out.println("-----------------------------------------------------");
-        //2.就在xmlbeans-2.3.0.jar包的根目录下
+        //2.就在mvel2-2.2.8.Final.jar包的根目录下
 //        InputStream is2 = TestReadProperties.class.getResourceAsStream("/build.properties");
         InputStream is2 = Thread.currentThread().getContextClassLoader().getResourceAsStream("build.properties");
 
