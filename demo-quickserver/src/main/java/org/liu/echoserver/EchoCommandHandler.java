@@ -12,6 +12,17 @@ public class EchoCommandHandler implements ClientCommandHandler {
         if ("Quit".equals(command)) {
             clientHandler.sendClientMsg("Bye ;-)");
             clientHandler.closeConnection();
+        } else if ("hello".equalsIgnoreCase(command)){
+            EchoServerData data = (EchoServerData)clientHandler.getClientData();
+            data.setHelloCount(data.getHelloCount() + 1);
+            if (data.getHelloCount() == 1) {
+                clientHandler.sendClientMsg("Hello " + data.getUsername());
+            } else {
+                clientHandler.sendClientMsg("You told hello " + data.getHelloCount() + " times");
+            }
+        } else if ("What's interest?".equalsIgnoreCase(command)){
+            String interest = (String)clientHandler.getServer().getStoreObjects()[0];
+            clientHandler.sendClientMsg("Interest is : " + interest + "%");
         } else {
             clientHandler.sendClientMsg("Echo:" + command);
         }

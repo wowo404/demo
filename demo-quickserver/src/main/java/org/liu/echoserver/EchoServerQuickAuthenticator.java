@@ -16,6 +16,8 @@ public class EchoServerQuickAuthenticator extends QuickAuthenticator {
         }
         if (username.equals(password)) {
             sendString(clientHandler, "Auth ok");
+            EchoServerData data = (EchoServerData)clientHandler.getClientData();
+            data.setUsername(username);
             return true;
         } else {
             sendString(clientHandler, "Auth failed");
