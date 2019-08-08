@@ -29,6 +29,7 @@
         <module>demo-wechat-open</module>
         <module>demo-wechat-mp</module>
         <module>demo-quickserver</module>
+        <module>demo-database-mongodb</module>
     </modules>
 
     <properties>

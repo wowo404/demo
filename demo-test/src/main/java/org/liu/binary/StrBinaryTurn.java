@@ -146,6 +146,12 @@ public class StrBinaryTurn {
         System.out.println(bytes);
         byte[] bytes1 = "535953443A00F0".getBytes();
         System.out.println(bytes1);
+
+        byte[] temp = new byte[1];
+        temp[0] = 'a';
+        String str = "5a1919e63df83ce79df8b38f";
+        temp = str.getBytes();
+        System.out.println(temp);
     }
 
 }
