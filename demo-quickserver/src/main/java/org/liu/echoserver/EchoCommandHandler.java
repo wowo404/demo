@@ -9,6 +9,7 @@ import java.net.SocketTimeoutException;
 public class EchoCommandHandler implements ClientCommandHandler {
     @Override
     public void handleCommand(ClientHandler clientHandler, String command) throws SocketTimeoutException, IOException {
+        System.out.println("receive msg : " + command);
         if ("Quit".equals(command)) {
             clientHandler.sendClientMsg("Bye ;-)");
             clientHandler.closeConnection();
@@ -30,6 +31,8 @@ public class EchoCommandHandler implements ClientCommandHandler {
 
     @Override
     public void gotConnected(ClientHandler clientHandler) throws SocketTimeoutException, IOException {
+        //默认日志级别就是INFO
+        clientHandler.sendSystemMsg("New client : " + clientHandler.getSocket().getInetAddress().getHostAddress());
         clientHandler.sendClientMsg("++++++++++++++++++++");
         clientHandler.sendClientMsg("| Welcome to EchoServer v1.0 |");
         clientHandler.sendClientMsg("| Send 'Quit' to exit |");

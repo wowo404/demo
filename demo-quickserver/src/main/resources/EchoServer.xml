@@ -1,0 +1,28 @@
+<quickserver>
+    <name>EchoServer v1.0</name>
+    <port>4123</port>
+    <bind-address/>
+    <client-command-handler>org.liu.echoserver.EchoCommandHandler</client-command-handler>
+    <authenticator>org.liu.echoserver.EchoServerQuickAuthenticator</authenticator>
+    <client-data>org.liu.echoserver.EchoServerPoolableData</client-data>
+
+    <console-logging-level>INFO</console-logging-level>
+
+    <timeout>60000</timeout>
+    <timeout-msg>-ERR Timeout</timeout-msg>
+    <max-auth-try>5</max-auth-try>
+    <max-auth-try-msg>-ERR Max Auth Try Reached</max-auth-try-msg>
+    <max-connection>-1</max-connection>
+    <max-connection-msg>Server Busy\nMax Connection Reached</max-connection-msg>
+    <object-pool>
+        <max-active>-1</max-active>
+        <max-idle>15</max-idle>
+    </object-pool>
+
+    <qsadmin-server>
+        <name>EchoAdmin v1.0</name>
+        <port>4124</port>
+        <bind-address/>
+        <command-plugin>org.liu.echoserver.qsadmin.QSAdminCommandPlugin</command-plugin>
+    </qsadmin-server>
+</quickserver>

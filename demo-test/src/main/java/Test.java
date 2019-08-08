@@ -14,52 +14,72 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
 	public static void main(String[] args) {
+        test2();
+	}
 
+	public static void math(){
+        System.out.println(MAX_DATACENTER_NUM);
+        System.out.println(4 % 2);
+    }
+
+	public static void objectMethod(){
+        System.out.println(Test.class.getName());
+        System.out.println(clazzEqual(ChannelProductReq.class));
+    }
+
+	public static void uuid(){
         System.out.println(UUID.randomUUID().toString().replace("-", ""));
+    }
+
+    public static void substring(){
         System.out.println("".split(",").length);
         System.out.println(",".split(",").length);
         System.out.println("1,".split(",").length);
         System.out.println(",1".split(",").length);
         System.out.println("1,1".split(",").length);
+        String name = "中国银行杭州支行";
+        System.out.println(name.substring(0, name.length() - 1));
+    }
 
+    public static void index(){
         String img = "sfsd.jpg";
         System.out.println(img.substring(img.lastIndexOf("\\.") + 1));
+    }
 
-        System.out.println(MAX_DATACENTER_NUM);
-
+    public static void date(){
         Date date = new Date(1480166465631L);
         System.out.println(date);
         System.out.println(System.currentTimeMillis());
         System.out.println(System.currentTimeMillis() - 1480166465631L);
+    }
 
+    public static void startsWith(){
         String str = "/a";
         System.out.println(str.startsWith("/"));
+    }
 
-	    int vv = 0;
-	    vv |= 2;//等同于 vv = vv | 2，将vv和2转为二进制后的与运算，有一真为真，同假为假
+    public static void binaryOperating(){
+        int vv = 0;
+        vv |= 2;//等同于 vv = vv | 2，将vv和2转为二进制后的与运算，有一真为真，同假为假
         System.out.println(vv);
+    }
 
-	    String name = "中国银行杭州支行";
+    public static void format(){
+        String name = "中国银行杭州支行";
         System.out.println(String.format(name));
-        System.out.println(name.substring(0, name.length() - 1));
+    }
 
-        test2();
-
-		System.out.println(Test.class.getName());
-
-		System.out.println(4 % 2);
-		
-		System.out.println(clazzEqual(ChannelProductReq.class));
-		//值传递和引用传递
-		Boolean flag = false;
-		int a = 1;
-		Integer pkgA = 10;
+    public static void deliver(){
+        //值传递和引用传递
+        Boolean flag = false;
+        int a = 1;
+        Integer pkgA = 10;
         Superior superior = new Superior();
         superior.setId(100);
-		change(flag, 1, pkgA, superior);
-		System.out.println(flag + "--" + a + "--" + pkgA + "--" + superior.getId());
-	}
-	
+        change(flag, 1, pkgA, superior);
+        System.out.println(flag + "--" + a + "--" + pkgA + "--" + superior.getId());
+    }
+
 	public static void change(Boolean flag, int a, Integer pkgA, Superior superior) {
 		flag = true;
 		a = 2;
