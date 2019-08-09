@@ -11,5 +11,83 @@
 
     <artifactId>demo-log</artifactId>
 
+    <properties>
+        <slf4j.version>1.7.27</slf4j.version>
+        <log4j2.version>2.12.1</log4j2.version>
+    </properties>
+
+    <dependencies>
+        <!--参考文章：https://www.jianshu.com/p/7b5860be190f-->
+        <!--1.引入slf4j & logback日志包和slf4j -> logback桥接器；
+2.排除common-logging、log4j、log4j2日志包；
+3.引入jdk-logging -> slf4j、common-logging -> slf4j、log4j -> slf4j、log4j2 -> slf4j桥接器；
+4.排除slf4j -> jdk-logging、slf4j -> common-logging、slf4j -> log4j、slf4j -> log4j2桥接器。
+-->
+        <!--日志门面（日志的抽象层）：jcl，slf4j，jboss logging-->
+        <!--common-logging，apache的日志抽象框架，简称jcl：Jakarta Commons Logging-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!--slf4j及桥接器，slf4j：Simple Logging Facade for Java-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-to-slf4j</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <!--jboss logging-->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.4.1.Final</version>
+        </dependency>
+
+        <!--日志实现框架：jul，log4j，log4j2，logback-->
+        <!--java.util.logging，jdk的日志实现，通常简称jul-->
+        <!--log4j-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <!--log4j2-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <!--logback-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+    </dependencies>
 
 </project>
