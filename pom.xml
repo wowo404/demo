@@ -30,6 +30,7 @@
         <module>demo-wechat-mp</module>
         <module>demo-quickserver</module>
         <module>demo-database-mongodb</module>
+        <module>demo-log-jboss-logging-logback</module>
     </modules>
 
     <properties>

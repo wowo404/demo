@@ -56,7 +56,7 @@
             <artifactId>log4j-to-slf4j</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
-        <!--jboss logging-->
+        <!--jboss logging：通过测试，jboss logging和slf4j不冲突，不需要排除，也不需要另加桥接的包-->
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
