@@ -1,10 +1,13 @@
 package org.liu.random;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.text.RandomStringGenerator;
 
 public class TestRandom {
 
 	public static void main(String[] args) {
+		int nextInt = RandomUtils.nextInt(1000, 9999);
+		System.out.println(nextInt);
 		RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('0', '9').build();
 		for (int i = 0; i < 10; i++) {
 			Runnable runnable = new Runnable() {

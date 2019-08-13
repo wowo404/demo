@@ -1,5 +1,6 @@
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import com.google.common.collect.Lists;
@@ -14,12 +15,15 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
 	public static void main(String[] args) {
-        test2();
+        DecimalFormat format = new DecimalFormat("000");
+        String seq = format.format(159);
+        System.out.println(seq);
 	}
 
 	public static void math(){
         System.out.println(MAX_DATACENTER_NUM);
         System.out.println(4 % 2);
+        binaryOperating();
     }
 
 	public static void objectMethod(){
@@ -62,11 +66,31 @@ public class Test {
         int vv = 0;
         vv |= 2;//等同于 vv = vv | 2，将vv和2转为二进制后的与运算，有一真为真，同假为假
         System.out.println(vv);
+        int a = 0 & 1;
+        System.out.println(a);
     }
 
     public static void format(){
         String name = "中国银行杭州支行";
         System.out.println(String.format(name));
+
+        String fileName = "130181";
+        System.out.println("================  前补零方法一   =================");
+        DecimalFormat g1=new DecimalFormat("0000000");
+        String startZeroStr = g1.format(Integer.valueOf(fileName));
+        System.out.println("前补零方法一："+startZeroStr);
+
+        System.out.println("================  前补零方法二   =================");
+        startZeroStr = String.format("%07d",Integer.valueOf(fileName));
+        System.out.println("前补零方法二："+startZeroStr);
+
+        System.out.println("================  后补零方法一   =================");
+        DecimalFormat g2=new DecimalFormat("0.000000");
+        String endZeroStr = g2.format(Integer.valueOf(fileName));
+        System.out.println("后补零："+endZeroStr);
+        System.out.println("虽然后补零出现这种情况,带有小数点");
+        System.out.println("比如你要长度要在7位以内，可以这么做");
+        System.out.println("后补零转变后："+endZeroStr.replace(".","").substring(0,7));
     }
 
     public static void deliver(){

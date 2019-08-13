@@ -1,5 +1,9 @@
 package org.liu.binary;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 public class StrBinaryTurn {
 
     // 将Unicode字符串转换成bool型数组
@@ -141,17 +145,39 @@ public class StrBinaryTurn {
         return b;
     }
 
-    public static void main(String[] args) {
-        byte[] bytes = hexStringToByte("535953443A00F0");
-        System.out.println(bytes);
-        byte[] bytes1 = "535953443A00F0".getBytes();
-        System.out.println(bytes1);
+    /**
+     * 将字节数组前2字节转换为short整型数值
+     *
+     * @param bytes
+     * @return
+     */
+    public static short getShort(byte[] bytes) {
+        int i = 0xff00 & (bytes[0] << 8);
+        int j = 0xff & bytes[1];
+        return (short) (i | j);
+    }
 
-        byte[] temp = new byte[1];
-        temp[0] = 'a';
-        String str = "5a1919e63df83ce79df8b38f";
-        temp = str.getBytes();
-        System.out.println(temp);
+    public static short[] bytesToShort(byte[] bytes) {
+        if(bytes==null){
+            return null;
+        }
+        short[] shorts = new short[bytes.length/2];
+        ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
+        return shorts;
+    }
+    public static byte[] shortToBytes(short[] shorts) {
+        if(shorts==null){
+            return null;
+        }
+        byte[] bytes = new byte[shorts.length * 2];
+        ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().put(shorts);
+
+        return bytes;
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        byte[] bytes = "01".getBytes();
+        System.out.println(Integer.valueOf(new String(bytes)));
     }
 
 }

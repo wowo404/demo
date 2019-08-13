@@ -108,7 +108,7 @@ public class MemcachedDemo {
 
     public static void get() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
-        Object o = client.get("test-liu-1");
+        Object o = client.get("manufacture_configure_36475886");
         System.out.println("get from memcached:" + o);
 
         client.shutdown();

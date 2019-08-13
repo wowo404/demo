@@ -32,6 +32,7 @@
         <module>demo-database-mongodb</module>
         <module>demo-log-jboss-logging-logback</module>
         <module>demo-cache-memcached</module>
+        <module>demo-database-mysql</module>
     </modules>
 
     <properties>
