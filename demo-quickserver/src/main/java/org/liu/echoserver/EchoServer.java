@@ -14,7 +14,7 @@ import java.util.logging.SimpleFormatter;
 
 public class EchoServer {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
         String cmdHandler = "org.liu.echoserver.EchoCommandHandler";
         String authenticator = "org.liu.echoserver.EchoServerQuickAuthenticator";
         String authenticationHandler = "org.liu.echoserver.EchoClientAuthenticationHandler";
