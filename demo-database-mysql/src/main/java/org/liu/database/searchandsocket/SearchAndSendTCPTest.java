@@ -7,15 +7,42 @@ import java.net.Socket;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
 public class SearchAndSendTCPTest {
 
     private Map<String, String> prepareData = new HashMap<>();
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, IOException, InterruptedException {
         SearchAndSendTCPTest test = new SearchAndSendTCPTest();
-        test.prepareData();
-        System.out.println();
+//        test.run();
+        test.send("SYAL 1163647588612345678\r\n", "SYAD 1161510101012346541\r\n");
+    }
+
+    private void run() throws SQLException, ClassNotFoundException {
+        prepareData();
+
+        Set<Map.Entry<String, String>> entries = prepareData.entrySet();
+        CyclicBarrier cb = new CyclicBarrier(prepareData.size());
+        for (Map.Entry<String, String> entry : entries) {
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        cb.await();
+                        send(entry.getKey(), entry.getValue());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (BrokenBarrierException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+        }
     }
 
     private void prepareData() throws ClassNotFoundException, SQLException {
@@ -44,7 +71,7 @@ public class SearchAndSendTCPTest {
         connection.close();
     }
 
-    private void test() throws IOException, InterruptedException {
+    private void send(String account, String data) throws IOException, InterruptedException {
         Socket socket = new Socket("127.0.0.1", 28000);
 
         new Thread(new PrintThread(socket)).start();
@@ -53,7 +80,7 @@ public class SearchAndSendTCPTest {
 
         //以CRLF结尾，表示一条消息发送完了
         //登录
-        pw.write("SYAL 1163647588612345678\r\n");
+        pw.write(account);
         pw.flush();
 
         //心跳
@@ -63,7 +90,7 @@ public class SearchAndSendTCPTest {
         //pw.flush();
 
         //数据
-        String msg = "SYAD 1161510101012346541\r\n";
+        String msg = data;
 
         pw.write(msg);
         pw.flush();

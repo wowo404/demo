@@ -13,10 +13,10 @@ public class EchoSocketClient {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         EchoSocketClient client = new EchoSocketClient();
-        client.test();
+        client.testOneThread();
     }
 
-    private void testNoThread() throws IOException {
+    private void testOneThread() throws IOException {
         Socket socket = new Socket("127.0.0.1", 4123);
         //为什么接收input的消息，必须另起一个线程？？？？
         new Thread(new PrintThread(socket)).start();
@@ -36,9 +36,15 @@ public class EchoSocketClient {
         pw.write("hello");
         pw.write("\r\n");
         pw.flush();
+
+        pw.write("ok\r\n");
+        pw.flush();
+
+        pw.write("What's interest?\r\n");
+        pw.flush();
     }
 
-    private void testLocalServer() throws IOException {
+    private void testTwoThread() throws IOException {
         Socket socket = new Socket("127.0.0.1", 4123);
 
         new Thread(new SendThread(socket)).start();

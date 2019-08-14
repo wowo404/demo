@@ -1,15 +1,18 @@
 package org.liu.echoserver;
 
-import org.quickserver.net.server.ClientCommandHandler;
-import org.quickserver.net.server.ClientHandler;
+import org.quickserver.net.server.*;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
-public class EchoCommandHandler implements ClientCommandHandler {
+public class EchoCommandHandler implements ClientCommandHandler, ClientEventHandler {
     @Override
     public void handleCommand(ClientHandler clientHandler, String command) throws SocketTimeoutException, IOException {
-        System.out.println("receive msg : " + command);
+        System.out.println("EchoCommandHandler receive msg : " + command);
+        DataMode dataModeIn = clientHandler.getDataMode(DataType.IN);
+        System.out.println("dataModeIn:" + dataModeIn);
+        DataMode dataModeOut = clientHandler.getDataMode(DataType.OUT);
+        System.out.println("dataModeOut:" + dataModeOut);
         if ("Quit".equals(command)) {
             clientHandler.sendClientMsg("Bye ;-)");
             clientHandler.closeConnection();

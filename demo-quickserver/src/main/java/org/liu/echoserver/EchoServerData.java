@@ -9,4 +9,6 @@ import org.quickserver.net.server.ClientData;
 public class EchoServerData implements ClientData {
     private int helloCount;
     private String username;
+    private String lastAsked;
+    private byte password[];
 }
