@@ -3,23 +3,14 @@ package org.liu.math;
 public class MathTest {
 
     public static void main(String[] args) {
-        int one = 0xff00;
+        int one = 0x3A;
         System.out.println(one);
-        int two = 0x20;
+        int two = 0x00F0;
         System.out.println(two);
-        int three = 0xffd0;
+        int three = 0x00F1;
         System.out.println(three);
-        int four = 0x0020;
+        int four = 0xF0;
         System.out.println(four);
-//        int five = 63383837656339643131373562613337;
-        int six = 0x0D0A;
-        System.out.println(six);
-        int tween = 0x0f;
-        System.out.println(tween);
-
-        String username = "36475886";
-        System.out.println(username.getBytes().length);
-
     }
 
     /**

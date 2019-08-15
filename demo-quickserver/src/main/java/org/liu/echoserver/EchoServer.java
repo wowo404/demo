@@ -21,16 +21,19 @@ public class EchoServer {
         String data = "org.liu.echoserver.EchoServerPoolableData";
         String commandPlugin = "org.liu.echoserver.qsadmin.QSAdminCommandPlugin";
         String binaryHandler = "org.liu.echoserver.EchoClientBinaryHandler";
+        String clientExtendedEventHandler = "org.liu.echoserver.EchoClientExtendedEventHandler";
 
         QuickServer quickServer = new QuickServer(cmdHandler);
 
         quickServer.setPort(4123);
         quickServer.setName("Echo Server v1.0");
         //setClientAuthenticationHandler和setAuthenticator同时存在时，setClientAuthenticationHandler起效
-        quickServer.setAuthenticator(authenticator);
+//        quickServer.setAuthenticator(authenticator);
         quickServer.setClientAuthenticationHandler(authenticationHandler);
         quickServer.setClientData(data);
         quickServer.setClientBinaryHandler(binaryHandler);
+        quickServer.setClientExtendedEventHandler(clientExtendedEventHandler);
+        quickServer.setTimeout(60000);
 
         //日志配置
         File log = new File("./log/");
@@ -51,8 +54,8 @@ public class EchoServer {
             logger.addHandler(txtLog);
             quickServer.setAppLogger(logger);//设置应用的日志
 
-            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.IN);
-            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.OUT);
+//            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.IN);
+//            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.OUT);
         } catch (IOException e) {
             e.printStackTrace();
         }

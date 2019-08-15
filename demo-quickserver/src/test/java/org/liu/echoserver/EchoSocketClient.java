@@ -171,7 +171,12 @@ public class EchoSocketClient {
                     return;
                 }
                 try {
-                    BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    InputStream inputStream = socket.getInputStream();
+                    if (inputStream.available() <= 0) {
+                        System.out.println("没有数据可以读取");
+                        return;
+                    }
+                    BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                     br.lines().forEach(msg -> {
                         try {
                             if (msg.contains("Auth failed")) {
