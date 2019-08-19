@@ -21,6 +21,11 @@ public class EhcacheTest {
         System.setProperty("net.sf.ehcache.enableShutdownHook", "true");
     }
 
+    public static void main(String[] args) {
+        EhcacheTest test = new EhcacheTest();
+        test.testConfigByCode();
+    }
+
     public void testDefault() {
         CacheManager cacheManager = new CacheManager();
         //输出当前cacheManager正在使用的配置对应的Xml格式文本
@@ -41,8 +46,26 @@ public class EhcacheTest {
 
         CacheManager cacheManager = new CacheManager(configuration);
         Cache cache = cacheManager.getCache("liu");
+        //（1）新增元素
         cache.put(new Element("name", "lzs"));
-        System.out.println(cache.get("liu").getObjectKey() + "--" + cache.get("liu").getObjectValue());
+        //（2）获取元素
+        Element element = cache.get("name");
+        if (null != element) {
+            System.out.println(element.getObjectKey() + "--" + element.getObjectValue());
+        }
+        //（3）更新元素
+        cache.put(new Element("name", "zhang"));
+        element = cache.get("name");
+        if (null != element) {
+            System.out.println(element.getObjectKey() + "--" + element.getObjectValue());
+        }
+        //替换元素的时候只有Cache中已经存在对应key的元素时才会替换，否则不操作。
+        cache.replace(new Element("key", "value2"));
+        System.out.println(cache.get("key"));
+        //（4）删除元素
+        cache.remove("name");
+        System.out.println(cache.get("key"));
+
         cacheManager.shutdown();
     }
 
