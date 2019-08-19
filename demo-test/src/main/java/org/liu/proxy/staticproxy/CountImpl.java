@@ -1,4 +1,4 @@
-package com.liu.app.staticproxy;
+package org.liu.proxy.staticproxy;
 
 public class CountImpl implements Count {
 

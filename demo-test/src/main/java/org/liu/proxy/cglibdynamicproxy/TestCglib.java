@@ -1,4 +1,4 @@
-package com.liu.app.cglibdynamicproxy;
+package org.liu.proxy.cglibdynamicproxy;
 
 public class TestCglib {
     

@@ -1,10 +1,10 @@
-package com.liu.app.cglibdynamicproxy;
-
-import java.lang.reflect.Method;
+package org.liu.proxy.cglibdynamicproxy;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+
+import java.lang.reflect.Method;
 
 public class MyCglibProxy implements MethodInterceptor{
     

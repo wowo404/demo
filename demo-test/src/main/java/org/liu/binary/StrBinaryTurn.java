@@ -178,6 +178,7 @@ public class StrBinaryTurn {
     public static void main(String[] args) throws UnsupportedEncodingException {
         byte[] bytes = "01".getBytes();
         System.out.println(Integer.valueOf(new String(bytes)));
+        System.out.println(Integer.toBinaryString(50));
     }
 
 }

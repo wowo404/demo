@@ -1,4 +1,4 @@
-package com.liu.app.jdkdynamicproxy;
+package org.liu.proxy.jdkdynamicproxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

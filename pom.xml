@@ -33,6 +33,7 @@
         <module>demo-log-jboss-logging-logback</module>
         <module>demo-cache-memcached</module>
         <module>demo-database-mysql</module>
+        <module>demo-cache-ehcache</module>
     </modules>
 
     <properties>

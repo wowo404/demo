@@ -7,10 +7,10 @@ public class MathTest {
         System.out.println(one);
         int two = 0x00F0;
         System.out.println(two);
-        int three = 0x00F1;
-        System.out.println(three);
-        int four = 0xF0;
-        System.out.println(four);
+        char three = 0x01;
+        System.out.println(String.valueOf(three));
+        char four = 0x20;
+        System.out.println("这是空格" + four + "空格");
     }
 
     /**
