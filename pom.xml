@@ -34,6 +34,7 @@
         <module>demo-cache-memcached</module>
         <module>demo-database-mysql</module>
         <module>demo-cache-ehcache</module>
+        <module>demo-websocket</module>
     </modules>
 
     <properties>

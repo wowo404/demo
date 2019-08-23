@@ -1,11 +1,13 @@
 package org.liu.memcached;
 
 import net.rubyeye.xmemcached.GetsResponse;
+import net.rubyeye.xmemcached.KeyIterator;
 import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 
 import java.io.IOException;
-import java.util.Date;
+import java.net.InetSocketAddress;
+import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 public class MemcachedDemo {
@@ -19,7 +21,7 @@ public class MemcachedDemo {
     public static void add() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
         //add
-        boolean add = client.add("test-liu-1", 900, "ok");
+        boolean add = client.add("cilent_params_36475885_test", 900, "ok");
         System.out.println("add to memcached, result is:" + add);
 
         client.shutdown();
@@ -108,7 +110,7 @@ public class MemcachedDemo {
 
     public static void get() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
-        Object o = client.get("manufacture_configure_36475886");
+        Object o = client.get("cilent_params_36475886");
         System.out.println("get from memcached:" + o);
 
         client.shutdown();
@@ -116,8 +118,36 @@ public class MemcachedDemo {
 
     public static void delete() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
-        boolean delete = client.delete("test-liu-1");
+        boolean delete = client.delete("cilent_params_36475886");
         System.out.println("delete from memcached, result is:" + delete);
+
+        client.shutdown();
+    }
+
+    public static void getStats() throws InterruptedException, MemcachedException, TimeoutException, IOException {
+        MemcachedClient client = configuration.getXMClient();
+        Map<InetSocketAddress, Map<String, String>> stats = client.getStats();
+        Set<Map.Entry<InetSocketAddress, Map<String, String>>> entries = stats.entrySet();
+        for (Map.Entry<InetSocketAddress, Map<String, String>> entry : entries) {
+            InetSocketAddress address = entry.getKey();
+            Map<String, String> value = entry.getValue();
+            System.out.println("address is : " + address.getAddress().getHostAddress() + " --------value from map is---------");
+            Set<Map.Entry<String, String>> entrySet = value.entrySet();
+            for (Map.Entry<String, String> stringEntry : entrySet) {
+                System.out.println(stringEntry.getKey() + "---" + stringEntry.getValue());
+            }
+        }
+
+        client.shutdown();
+    }
+
+    public static void getAllKeys() throws InterruptedException, MemcachedException, TimeoutException, IOException {
+        MemcachedClient client = configuration.getXMClient();
+        InetSocketAddress address = new InetSocketAddress("192.168.17.230", 11211);
+        KeyIterator keyIterator = client.getKeyIterator(address);
+        while (keyIterator.hasNext()) {
+            System.out.println(keyIterator.next());
+        }
 
         client.shutdown();
     }
