@@ -24,7 +24,7 @@ import jp.ne.so_net.ga2.no_ji.jcom.ReleaseManager;
  * <br> 序号      |           时间                        	|   作者      |                          描述                                                         
  * <br> 0     | 2014年3月4日 下午2:02:08  	|  刘章盛     | 创建  
  */
-public class WordToPdf {
+public class JcomWordToPdf {
 
     private static final String docApp = "PDFMakerAPI.PDFMakerApp";
 
@@ -52,7 +52,7 @@ public class WordToPdf {
      */
     public static void main(String[] args) {
 
-        WordToPdf trans = new WordToPdf();
+        JcomWordToPdf trans = new JcomWordToPdf();
         trans.createPDF(docApp, "d:\\【1-3】【文档】易通贷抵押贷借款协议（每月等额还款）140218.docx",
                 "d:\\【1-3】【文档】易通贷抵押贷借款协议（每月等额还款）140217.pdf");
 

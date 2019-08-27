@@ -35,6 +35,7 @@
         <module>demo-database-mysql</module>
         <module>demo-cache-ehcache</module>
         <module>demo-websocket</module>
+        <module>demo-spring-websocket</module>
     </modules>
 
     <properties>
@@ -95,4 +96,5 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>
