@@ -19,6 +19,7 @@ public class SpringWebSocketConfig implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        //如果web.xml中DispatcherServlet的url-pattern是*.do，则这里配置的链接要加.do
         registry.addHandler(customWebSocketHandler, "/websocket/socketServer")
                 .addInterceptors(customHandshakeInterceptor).setAllowedOrigins("*");
 

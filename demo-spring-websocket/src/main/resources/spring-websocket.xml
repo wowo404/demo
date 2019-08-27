@@ -6,8 +6,15 @@
 
     <bean id="webSocketHandler" class="org.liu.websocket.handler.CustomWebSocketHandler"/>
 
-    <websocket:handlers>
-        <websocket:mapping path="/echo" handler="webSocketHandler"/>
+    <websocket:handlers allowed-origins="*">
+        <websocket:mapping path="/websocket/socketServer" handler="webSocketHandler"/>
+        <websocket:handshake-interceptors>
+            <bean class="org.liu.websocket.interceptor.CustomHandshakeInterceptor"/>
+        </websocket:handshake-interceptors>
+    </websocket:handlers>
+
+    <websocket:handlers allowed-origins="*">
+        <websocket:mapping path="/sockjs/socketServer" handler="webSocketHandler"/>
         <websocket:handshake-interceptors>
             <bean class="org.liu.websocket.interceptor.CustomHandshakeInterceptor"/>
         </websocket:handshake-interceptors>
