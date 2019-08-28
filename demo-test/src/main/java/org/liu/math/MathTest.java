@@ -1,16 +1,42 @@
 package org.liu.math;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+
 public class MathTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         int one = 0x3A;
         System.out.println(one);
         int two = 0x00F0;
         System.out.println(two);
         char three = 0x01;
-        System.out.println(String.valueOf(three));
+        System.out.println(three);
         char four = 0x20;
         System.out.println("这是空格" + four + "空格");
+
+        String twoRadio = Integer.toBinaryString(5);
+        System.out.println(twoRadio);
+        System.out.println(Integer.valueOf(twoRadio, 2));
+    }
+
+    //获取byte数组后再转二进制是错误的
+    public static void errorTransfer(){
+        String name = "a我";
+        byte[] bytes = name.getBytes();
+        System.out.println(bytes.length);
+        for (byte aByte : bytes) {
+            Byte b = (Byte)aByte;
+            System.out.println(b + "   ---   " + Integer.toHexString(b));
+            //Integer.toBinaryString(b.intValue())
+        }
+    }
+
+    //如何理解char：https://blog.csdn.net/QGJava/article/details/5726840
+    public static void charAndInt(){
+        //char的取值范围是[0, 65535],可以把这个范围的整数直接赋值给它
+        char tes = 65535;
+        System.out.println(tes);
     }
 
     /**

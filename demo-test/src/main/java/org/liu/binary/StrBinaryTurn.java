@@ -1,9 +1,14 @@
 package org.liu.binary;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
+/**
+ * 字节与二进制的关系
+ * https://blog.csdn.net/qq_29499107/article/details/80810076
+ * 1byte=8bit 八位（bit）二进制表示为一字节（byte）
+ * 1kb=1024byte
+ * .
+ * .
+ * .
+ */
 public class StrBinaryTurn {
 
     // 将Unicode字符串转换成bool型数组
@@ -121,64 +126,11 @@ public class StrBinaryTurn {
         return result;
     }
 
-    /**
-     * 16进制字符串转换成字节数组
-     */
-    public static byte[] hexStringToByte(String hex) {
-        int len = (hex.length() / 2);
-        byte[] result = new byte[len];
-        char[] achar = hex.toCharArray();
-        for (int i = 0; i < len; i++) {
-            int pos = i * 2;
-            result[i] = (byte) (toByte(achar[pos]) << 4 | toByte(achar[pos + 1]));
-        }
-        return result;
-    }
-    /**
-     * 将16进制字符转换为字节
-     *
-     * @param c
-     * @return
-     */
-    public static byte toByte(char c) {
-        byte b = (byte) "0123456789ABCDEF".indexOf(c);
-        return b;
-    }
-
-    /**
-     * 将字节数组前2字节转换为short整型数值
-     *
-     * @param bytes
-     * @return
-     */
-    public static short getShort(byte[] bytes) {
-        int i = 0xff00 & (bytes[0] << 8);
-        int j = 0xff & bytes[1];
-        return (short) (i | j);
-    }
-
-    public static short[] bytesToShort(byte[] bytes) {
-        if(bytes==null){
-            return null;
-        }
-        short[] shorts = new short[bytes.length/2];
-        ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
-        return shorts;
-    }
-    public static byte[] shortToBytes(short[] shorts) {
-        if(shorts==null){
-            return null;
-        }
-        byte[] bytes = new byte[shorts.length * 2];
-        ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().put(shorts);
-
-        return bytes;
-    }
-
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        byte[] bytes = "01".getBytes();
-        System.out.println(Integer.valueOf(new String(bytes)));
-        System.out.println(Integer.toBinaryString(50));
+    public static void main(String[] args) {
+        StrBinaryTurn turn = new StrBinaryTurn();
+        String binstr = turn.StrToBinstr("a我");
+        System.out.println(binstr);
+        System.out.println(turn.BinstrToStr(binstr));
     }
 
 }

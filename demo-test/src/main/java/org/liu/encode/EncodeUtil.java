@@ -22,7 +22,7 @@ public class EncodeUtil {
 	}
 	
 	public static String[] getEncoding(String str) {
-        String[] encodeList = {"GB2312", "ISO-8859-1", "UTF-8", "GBK", "gb 18030", "Big5", "UTF-16LE", "Shift_JIS", "EUC-JP", "ISO-2002-JP"};
+        String[] encodeList = {"GB2312", "ISO-8859-1", "UTF-8", "GBK", "GB18030", "Big5", "UTF-16LE", "Shift_JIS", "EUC-JP", "ISO-2022-JP"};
         String[] arr = new String[10];
         for (int i = 0; i < encodeList.length; i++) {
             try {
