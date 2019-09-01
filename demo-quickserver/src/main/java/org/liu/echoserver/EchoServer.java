@@ -4,6 +4,7 @@ import org.quickserver.net.AppException;
 import org.quickserver.net.server.DataMode;
 import org.quickserver.net.server.DataType;
 import org.quickserver.net.server.QuickServer;
+import org.quickserver.util.xmlreader.QuickServerConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.logging.SimpleFormatter;
 
 public class EchoServer {
 
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, AppException {
         String cmdHandler = "org.liu.echoserver.EchoCommandHandler";
         String authenticator = "org.liu.echoserver.EchoServerQuickAuthenticator";
         String authenticationHandler = "org.liu.echoserver.EchoClientAuthenticationHandler";
@@ -23,17 +24,25 @@ public class EchoServer {
         String binaryHandler = "org.liu.echoserver.EchoClientBinaryHandler";
         String clientExtendedEventHandler = "org.liu.echoserver.EchoClientExtendedEventHandler";
 
-        QuickServer quickServer = new QuickServer(cmdHandler);
+        QuickServerConfig config = new QuickServerConfig();
+        config.setPort(4123);
+        config.setName("Echo Server v1.0 4123");
+        config.setClientAuthenticationHandler(new EchoClientAuthenticationHandler());
+        config.setClientData(new EchoServerPoolableData());
+        config.setClientBinaryHandler(new EchoClientBinaryHandler());
 
-        quickServer.setPort(4123);
-        quickServer.setName("Echo Server v1.0");
+        QuickServer quickServer = new QuickServer(cmdHandler);
+        quickServer.initServer(config);
+
+//        quickServer.setPort(4123);
+//        quickServer.setName("Echo Server v1.0");
         //setClientAuthenticationHandler和setAuthenticator同时存在时，setClientAuthenticationHandler起效
 //        quickServer.setAuthenticator(authenticator);
-        quickServer.setClientAuthenticationHandler(authenticationHandler);
-        quickServer.setClientData(data);
-        quickServer.setClientBinaryHandler(binaryHandler);
-        quickServer.setClientExtendedEventHandler(clientExtendedEventHandler);
-        quickServer.setTimeout(60000);
+//        quickServer.setClientAuthenticationHandler(authenticationHandler);
+//        quickServer.setClientData(data);
+//        quickServer.setClientBinaryHandler(binaryHandler);
+//        quickServer.setClientExtendedEventHandler(clientExtendedEventHandler);
+//        quickServer.setTimeout(60000);//默认就是60000
 
         //日志配置
         File log = new File("./log/");
@@ -76,6 +85,10 @@ public class EchoServer {
             //admin server的用户名密码：Admin/QsAdm1n
             quickServer.startQSAdminServer();
             quickServer.startServer();
+
+            config.setPort(4223);
+            QuickServer quickServer2 = new QuickServer(cmdHandler);
+            quickServer2.initServer(config);
         } catch (AppException e) {
             e.printStackTrace();
         } catch (Exception e) {
