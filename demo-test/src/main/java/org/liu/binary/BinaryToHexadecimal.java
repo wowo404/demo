@@ -18,6 +18,7 @@ public class BinaryToHexadecimal {
         byte sum = sum(bytes);
         System.out.println(Integer.toHexString(sum));
         //0x7e 0x03 0x06 0x00 0x04 0x02 0x01 0x03 0x02 0x01校验和 0x7e
+        hexToTen();
     }
 
     public static byte sum(byte[] bytes){
@@ -57,6 +58,7 @@ public class BinaryToHexadecimal {
 
     /**
      * 将字节流转成十六进制字符串
+     * 这是另一篇文章，有三种方式：https://blog.csdn.net/worm0527/article/details/69939307/
      * @param src
      * @return
      */
@@ -74,6 +76,28 @@ public class BinaryToHexadecimal {
             stringBuilder.append(hv);
         }
         return stringBuilder.toString();
+    }
+
+    //？？？直接输出就可以十六进制转十进制，为什么要这么转？？？？
+    public static void hexToTen(){
+        String str = "0123456789ABCDEF";
+        int data = 0xee; //十六进制数
+        System.out.println(data);
+        int scale = 10; //转化目标进制
+
+        String s = "";
+        while(data > 0){
+            if(data < scale){
+                s = str.charAt(data) + s;
+                data = 0;
+            }else{
+                int r = data%scale;
+                s = str.charAt(r) + s;
+                data  = (data-r)/scale;
+            }
+        }
+
+        System.out.println(s);
     }
 
 }
