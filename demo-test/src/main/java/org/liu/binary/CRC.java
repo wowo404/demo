@@ -1,5 +1,9 @@
 package org.liu.binary;
 
+/**
+ * 这是一篇从二进制出发的理论相关的获取CRC相关的文章
+ * https://www.cnblogs.com/DyLoder/p/10206555.html
+ */
 public class CRC {
 
     public static void main(String[] args) {
