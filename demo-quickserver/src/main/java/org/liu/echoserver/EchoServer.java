@@ -24,24 +24,24 @@ public class EchoServer {
         String binaryHandler = "org.liu.echoserver.EchoClientBinaryHandler";
         String clientExtendedEventHandler = "org.liu.echoserver.EchoClientExtendedEventHandler";
 
-        QuickServerConfig config = new QuickServerConfig();
-        config.setPort(4123);
-        config.setName("Echo Server v1.0 4123");
-        config.setClientAuthenticationHandler(new EchoClientAuthenticationHandler());
-        config.setClientData(new EchoServerPoolableData());
-        config.setClientBinaryHandler(new EchoClientBinaryHandler());
+//        QuickServerConfig config = new QuickServerConfig();
+//        config.setPort(4123);
+//        config.setName("Echo Server v1.0 4123");
+//        config.setClientAuthenticationHandler(new EchoClientAuthenticationHandler());
+//        config.setClientData(new EchoServerPoolableData());
+//        config.setClientBinaryHandler(new EchoClientBinaryHandler());
 
         QuickServer quickServer = new QuickServer(cmdHandler);
-        quickServer.initServer(config);
+//        quickServer.initServer(config);
 
-//        quickServer.setPort(4123);
-//        quickServer.setName("Echo Server v1.0");
+        quickServer.setPort(4123);
+        quickServer.setName("Echo Server v1.0");
         //setClientAuthenticationHandler和setAuthenticator同时存在时，setClientAuthenticationHandler起效
 //        quickServer.setAuthenticator(authenticator);
-//        quickServer.setClientAuthenticationHandler(authenticationHandler);
-//        quickServer.setClientData(data);
-//        quickServer.setClientBinaryHandler(binaryHandler);
-//        quickServer.setClientExtendedEventHandler(clientExtendedEventHandler);
+        quickServer.setClientAuthenticationHandler(authenticationHandler);
+        quickServer.setClientData(data);
+        quickServer.setClientBinaryHandler(binaryHandler);
+        quickServer.setClientExtendedEventHandler(clientExtendedEventHandler);
 //        quickServer.setTimeout(60000);//默认就是60000
 
         //日志配置
@@ -86,9 +86,9 @@ public class EchoServer {
             quickServer.startQSAdminServer();
             quickServer.startServer();
 
-            config.setPort(4223);
-            QuickServer quickServer2 = new QuickServer(cmdHandler);
-            quickServer2.initServer(config);
+//            config.setPort(4223);
+//            QuickServer quickServer2 = new QuickServer(cmdHandler);
+//            quickServer2.initServer(config);
         } catch (AppException e) {
             e.printStackTrace();
         } catch (Exception e) {

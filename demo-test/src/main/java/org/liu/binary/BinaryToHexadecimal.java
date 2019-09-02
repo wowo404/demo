@@ -6,19 +6,24 @@ public class BinaryToHexadecimal {
 
     private static String hexString = "0123456789ABCDEF";
     public static void main(String[] args) {
-        String encode = encode("~");
-        System.out.println(encode);
         //案例一：命令为停止，发送数据，起始符+TLV数据为7E000000，计算出的校验和为00，最终数据为7E000000007E
         //案例二：命令为读取采集模快，返回数据，起始符+TLV数据为7E030600040201030201，计算出的校验和为16，最终数据为7E030600040201030201167E
-        String ori = decode("030600040201030201");
-        System.out.println(ori + "---" + ori.length());
+        String hex = "7E030600040201030201167E";
+        String ori = decode(hex);
+        System.out.println(ori + "--" + ori.length());
         byte[] bytes = ori.getBytes();
+        int length = 6;
+        byte[] value = new byte[length];
+        for(int i = 4; i < 4 + length; i++){
+            value[i - 4] = bytes[i];
+        }
+        System.out.println(bytesToHexString(value));
         System.out.println(bytesToHexString(bytes));
+        System.out.println(bytesToHex(bytes));
         //计算校验和FCS
         byte sum = sum(bytes);
         System.out.println(Integer.toHexString(sum));
         //0x7e 0x03 0x06 0x00 0x04 0x02 0x01 0x03 0x02 0x01校验和 0x7e
-        hexToTen();
     }
 
     public static byte sum(byte[] bytes){
@@ -69,13 +74,31 @@ public class BinaryToHexadecimal {
         }
         for (int i = 0; i < src.length; i++ ) {
             int v = src[i] & 0xFF;
-            String hv = Integer.toHexString(v);
+            String hv = Integer.toHexString(v).toUpperCase();
             if (hv.length() < 2) {
                 stringBuilder.append(0);
             }
             stringBuilder.append(hv);
         }
         return stringBuilder.toString();
+    }
+
+    private static char[] HEX_VOCABLE = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+    /**
+     * 字节数组转16进制字符串
+     *
+     * @param bs
+     * @return
+     */
+    public static String bytesToHex(byte[] bs) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bs) {
+            int high = (b >> 4) & 0x0f;
+            int low = b & 0x0f;
+            sb.append(HEX_VOCABLE[high]);
+            sb.append(HEX_VOCABLE[low]);
+        }
+        return sb.toString();
     }
 
     //？？？直接输出就可以十六进制转十进制，为什么要这么转？？？？

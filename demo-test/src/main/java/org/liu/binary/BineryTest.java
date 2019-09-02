@@ -4,14 +4,20 @@ import java.io.UnsupportedEncodingException;
 
 public class BineryTest {
     public static void main(String[] args) throws UnsupportedEncodingException {
-        binary();
-//        hex();
+        intAndRadix();
+//        charAndRadix();
+//        byteAndRadix();
 //        charAndInt();
     }
 
-    //用int表示一个二进制数据
+    //int也可以用二进制，八进制，十进制，十六进制来表示
     //char也能表示一个二进制数据，对应编码表中的字符，0-127就可以直接查ASCII表，其他的要查Unicode表
-    public static void binary(){
+    public static void intAndRadix(){
+        int zeroTwo = 0b01111110;
+        int zeroEight = 0176;
+        int zeroTen = 126;
+        int zeroSixteen = 0x7E;
+        System.out.println("十六进制：" + zeroSixteen + ",十进制：" + zeroTen + "，八进制：" + zeroEight + "，二进制：" + zeroTwo);
         int one = 0b00000000;//0
         char oneChar = 0b00000000;
         System.out.println(one + "--" + oneChar);
@@ -25,15 +31,25 @@ public class BineryTest {
         char fourChar = 0b0111111100000000;
         int fourCharToInt = fourChar;//char和int可以直接转换的
         System.out.println(four + "--" + fourChar + "--" + fourCharToInt);
-        int five = 0b01111111111111111111111111111111;//2147483647
-        int fiv8 = 0b10000000000000000000000000000000;//-2147483648
+        int five = 0b01111111111111111111111111111111;//2147483647，这是用int来表示的最大的二进制
+        int fiv8 = 0b10000000000000000000000000000000;//-2147483648，这是用int来表示的最小的二进制
         char fiveChar = (char) five;//一个超过0-65535范围的数字可以强制转成char，但显示为空或者是乱码
         System.out.println(five + "--" + fiveChar);
+        int length = 0x0A00;
+        System.out.println(length);
     }
 
-    //用int表示一个十六进制的数据
-    public static void hex(){
+    //char也可以用二进制，八进制，十进制，十六进制来表示
+    public static void charAndRadix(){
+        char zeroTwo = 0b01111110;
+        char zeroEight = 0176;
+        char zeroTen = 126;
+        char zeroSixteen = 0x7E;
+        //这样打印就会打印出char在Unicode表中对应的字符
+        System.out.println("十六进制：" + zeroSixteen + ",十进制：" + zeroTen + "，八进制：" + zeroEight + "，二进制：" + zeroTwo);
         //十六进制2位
+        int zero = 0x7E;
+        System.out.println(zero);
         int one = 0x3A;//58
         char oneChar = 0x3A;//:
         System.out.println(one + "--" + oneChar);
@@ -50,6 +66,19 @@ public class BineryTest {
         int six = 0x27FFF;//163839
         char sixChar = (char) 0x27FFF;//翿
         System.out.println(six + "--" + sixChar);
+    }
+
+    //byte也可以用数字的二进制，八进制，十进制，十六进制表示
+    public static void byteAndRadix(){
+        byte zeroSixteen = 0x7E;
+        byte zeroTen = 126;
+        byte zeroEight = 0176;
+        byte zeroTwo = 0b01111110;
+        System.out.println("十六进制：" + zeroSixteen + ",十进制：" + zeroTen + "，八进制：" + zeroEight + "，二进制：" + zeroTwo);
+        byte[] b = "~".getBytes();
+        if (b[0] == 126) {//这是相等的
+            System.out.println(true);
+        }
     }
 
     //如何理解char：https://blog.csdn.net/QGJava/article/details/5726840
