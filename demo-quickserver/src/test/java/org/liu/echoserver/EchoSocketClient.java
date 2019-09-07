@@ -22,25 +22,27 @@ public class EchoSocketClient {
         new Thread(new PrintThread(socket)).start();
         PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
         pw.write("liu");
-        pw.write("\r\n");
+//        pw.write("\r\n");
         pw.flush();
 
         pw.write("liu");
-        pw.write("\r\n");
+//        pw.write("\r\n");
         pw.flush();
 
         pw.write("hello");
-        pw.write("\r\n");
+//        pw.write("\r\n");
         pw.flush();
 
         pw.write("hello");
-        pw.write("\r\n");
+//        pw.write("\r\n");
         pw.flush();
 
-        pw.write("ok\r\n");
+        pw.write("ok");
+//        pw.write("\r\n");
         pw.flush();
 
-        pw.write("What's interest?\r\n");
+        pw.write("What's interest?");
+//        pw.write("\r\n");
         pw.flush();
     }
 

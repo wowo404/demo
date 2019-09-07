@@ -14,9 +14,9 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
-        long start = System.currentTimeMillis();
-        Thread.sleep(2300);
-        System.out.println((System.currentTimeMillis() - start)/1000);
+        String msg = "7E000000007E";
+        String substring = msg.substring(8, msg.length() - 4);
+        System.out.println(substring);
     }
 
     public static void math() {

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeoutException;
 public class MemcachedDemo {
 
     public static void main(String[] args) throws InterruptedException, MemcachedException, TimeoutException, IOException {
+        add();
         get();
     }
 
@@ -21,6 +22,21 @@ public class MemcachedDemo {
     public static void add() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
         //add
+        List<TestMemcachedPO> list = new ArrayList<>();
+        TestMemcachedPO po = new TestMemcachedPO();
+        po.setId(1);
+        po.setName("liu");
+        po.setBirthday(new Date());
+
+        TestMemcachedPO po1 = new TestMemcachedPO();
+        po1.setId(2);
+        po1.setName("zhang");
+        po1.setBirthday(new Date());
+
+        list.add(po);
+        list.add(po1);
+        client.add("test_add_list", 1000, list);
+
         boolean add = client.add("cilent_params_36475885_test", 900, "ok");
         System.out.println("add to memcached, result is:" + add);
 
@@ -110,8 +126,8 @@ public class MemcachedDemo {
 
     public static void get() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
-        Object o = client.get("cilent_params_36475886");
-        System.out.println("get from memcached:" + o);
+        List<TestMemcachedPO> list = client.get("test_add_list");
+        System.out.println("get from memcached:" + list);
 
         client.shutdown();
     }

@@ -1,37 +1,70 @@
 package org.liu.binary;
 
+import com.google.common.primitives.Bytes;
+
 import java.io.ByteArrayOutputStream;
 
 public class BinaryToHexadecimal {
 
     private static String hexString = "0123456789ABCDEF";
+
     public static void main(String[] args) {
+        String serialNum = "87654321";
+        String encode = encode(serialNum);//转成十六进制表示的字符串
+        System.out.println(encode);
         //案例一：命令为停止，发送数据，起始符+TLV数据为7E000000，计算出的校验和为00，最终数据为7E000000007E
         //案例二：命令为读取采集模快，返回数据，起始符+TLV数据为7E030600040201030201，计算出的校验和为16，最终数据为7E030600040201030201167E
-        String hex = "7E030600040201030201167E";
-        String ori = decode(hex);
+        //案例三：命令为读取采集模块序列号，返回数据，起始符+TLV数据为7E020800A4FFFFFFA4FFFFFFAE7E
+        String ori = decode("020800" + encode);//加上TL转成原生的字符串
         System.out.println(ori + "--" + ori.length());
         byte[] bytes = ori.getBytes();
-        int length = 6;
-        byte[] value = new byte[length];
-        for(int i = 4; i < 4 + length; i++){
-            value[i - 4] = bytes[i];
-        }
-        System.out.println(bytesToHexString(value));
-        System.out.println(bytesToHexString(bytes));
         System.out.println(bytesToHex(bytes));
+        byte[] testB = "中".getBytes();
+        System.out.println(bytesToHex(testB));
         //计算校验和FCS
         byte sum = sum(bytes);
-        System.out.println(Integer.toHexString(sum));
-        //0x7e 0x03 0x06 0x00 0x04 0x02 0x01 0x03 0x02 0x01校验和 0x7e
+        System.out.println(Integer.toBinaryString(sum));//11111111111111111111111110101110
+        System.out.println(Integer.toHexString(sum));//ffffffae
+        byte[] dateTime = hexStringToByte("20190904185401");
+        System.out.println(dateTime);
+        System.out.println(bytesToHex(dateTime));
+        byte[] temp = new byte[]{0x02, 0x22};
+        String s = bytesToHex(temp);
+        System.out.println(s);
     }
 
-    public static byte sum(byte[] bytes){
+    public static void get0x10(){
+        String serialNum = "87654321";
+        byte sum1 = sum(serialNum.getBytes());//这个sum是以序列号来做的，不带TL两部分数据
+        byte[] checksum = getChecksum(sum1);
+        System.out.println(bytesToHex(checksum));//A4FFFFFFA4FFFFFF
+
+        String tl = decode("020800");//加上TL转成原生的字符串
+        byte[] tlBytes = tl.getBytes();
+        byte[] concat = Bytes.concat(tlBytes, checksum);
+
+        //计算校验和FCS
+        byte sum = sum(concat);
+
+        byte[] fcs = new byte[]{sum};
+        byte[] concat1 = Bytes.concat(concat, fcs);
+    }
+
+    public static byte sum(byte[] bytes) {
         byte result = 0;
         for (byte aByte : bytes) {
             result += aByte;
         }
         return result;
+    }
+
+    public static byte[] getChecksum(byte code) {
+        byte[] bytes = new byte[8];
+        for (int i = 0; i < 8; i++) {
+            int b = code >> i * 8;
+            bytes[i] = (byte) b;
+        }
+        return bytes;
     }
 
     /*
@@ -64,6 +97,7 @@ public class BinaryToHexadecimal {
     /**
      * 将字节流转成十六进制字符串
      * 这是另一篇文章，有三种方式：https://blog.csdn.net/worm0527/article/details/69939307/
+     *
      * @param src
      * @return
      */
@@ -72,7 +106,7 @@ public class BinaryToHexadecimal {
         if (src == null || src.length <= 0) {
             return null;
         }
-        for (int i = 0; i < src.length; i++ ) {
+        for (int i = 0; i < src.length; i++) {
             int v = src[i] & 0xFF;
             String hv = Integer.toHexString(v).toUpperCase();
             if (hv.length() < 2) {
@@ -83,7 +117,8 @@ public class BinaryToHexadecimal {
         return stringBuilder.toString();
     }
 
-    private static char[] HEX_VOCABLE = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+    private static char[] HEX_VOCABLE = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
     /**
      * 字节数组转16进制字符串
      *
@@ -100,23 +135,46 @@ public class BinaryToHexadecimal {
         }
         return sb.toString();
     }
+    /**
+     * 将16进制字符转换为字节
+     *
+     * @param c
+     * @return
+     */
+    public static byte toByte(char c) {
+        byte b = (byte) "0123456789ABCDEF".indexOf(c);
+        return b;
+    }
+    /**
+     * 16进制字符串转换成字节数组
+     */
+    public static byte[] hexStringToByte(String hex) {
+        int len = (hex.length() / 2);
+        byte[] result = new byte[len];
+        char[] achar = hex.toCharArray();
+        for (int i = 0; i < len; i++) {
+            int pos = i * 2;
+            result[i] = (byte) (toByte(achar[pos]) << 4 | toByte(achar[pos + 1]));
+        }
+        return result;
+    }
 
     //？？？直接输出就可以十六进制转十进制，为什么要这么转？？？？
-    public static void hexToTen(){
+    public static void hexToTen() {
         String str = "0123456789ABCDEF";
         int data = 0xee; //十六进制数
         System.out.println(data);
         int scale = 10; //转化目标进制
 
         String s = "";
-        while(data > 0){
-            if(data < scale){
+        while (data > 0) {
+            if (data < scale) {
                 s = str.charAt(data) + s;
                 data = 0;
-            }else{
-                int r = data%scale;
+            } else {
+                int r = data % scale;
                 s = str.charAt(r) + s;
-                data  = (data-r)/scale;
+                data = (data - r) / scale;
             }
         }
 

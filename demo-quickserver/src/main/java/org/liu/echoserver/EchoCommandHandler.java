@@ -27,6 +27,9 @@ public class EchoCommandHandler implements ClientCommandHandler, ClientEventHand
         } else if ("What's interest?".equalsIgnoreCase(command)){
             String interest = (String)clientHandler.getServer().getStoreObjects()[0];
             clientHandler.sendClientMsg("Interest is : " + interest + "%");
+        } else if ("throw".equalsIgnoreCase(command)){
+            //抛出异常就是直接关闭连接
+            throw new RuntimeException("throw by hand");
         } else {
             clientHandler.sendClientMsg("Echo:" + command);
         }

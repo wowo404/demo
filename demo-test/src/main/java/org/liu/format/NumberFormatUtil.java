@@ -1,4 +1,4 @@
-package org.liu.numberformat;
+package org.liu.format;
 
 import java.text.ChoiceFormat;
 import java.text.ParsePosition;

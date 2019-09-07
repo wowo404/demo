@@ -42,6 +42,7 @@ public class EchoClientAuthenticationHandler extends QuickAuthenticationHandler 
             if (validate(clientData.getUsername(), clientData.getPassword())) {
                 handler.sendClientMsg("Auth OK");
                 clientData.setPassword(null);
+                handler.sendClientMsg("Now, You can do the next operation!");
                 return AuthStatus.SUCCESS;
             } else {
                 return AuthStatus.FAILURE;

@@ -1,9 +1,11 @@
 package org.liu.commonslang3;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.RandomStringGenerator;
+import org.liu.binary.BinaryTest;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
+        subarray();
         String s1 = "abcdefg";
         System.out.println(s1.substring(0, s1.length() - 4) + "****");
 
@@ -48,6 +51,20 @@ public class TestCommonsLang3 {
 
         System.out.println(RandomStringUtils.random(5, true, true));
 
+    }
+
+    private static void subarray() {
+        int[] ints = new int[3];
+        byte[] temp = new byte[]{0x00, 0x01, 0x02, 0x03, 0x04, 0x05};
+        for (int i = 0, j = 1; i < temp.length; i += 2, j += 2) {
+            byte[] singleEigenvalue = new byte[]{0x00, 0x00, temp[i], temp[j]};
+            int toInt = BinaryTest.byteArrayToInt(singleEigenvalue);
+            ints[i / 2] = toInt;
+            System.out.println(toInt);
+        }
+        System.out.println(ints);
+        byte[] subarray = ArrayUtils.subarray(temp, 2, temp.length);
+        System.out.println(subarray);
     }
 
     private static void substring(List<String> idList, String id) {
