@@ -35,6 +35,7 @@
         <module>demo-database-mysql</module>
         <module>demo-cache-ehcache</module>
         <module>demo-spring-websocket</module>
+        <module>demo-spring-rabbitmq</module>
     </modules>
 
     <properties>
