@@ -11,7 +11,7 @@ import java.util.*;
 public class TestCollection {
 
     public static void main(String[] args) {
-        testRetry();
+        test();
     }
 
     public static void testRetry(){
@@ -44,6 +44,9 @@ public class TestCollection {
     }
 
     public static void test(){
+        Map<Integer, Integer> map = new HashMap<>();
+        System.out.println(map.get(0));
+
         List<Integer> list = Arrays.asList(1, null, 2);
         for (Integer integer : list) {
             System.out.println(integer);

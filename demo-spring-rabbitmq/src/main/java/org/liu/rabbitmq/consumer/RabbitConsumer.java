@@ -15,10 +15,17 @@ public class RabbitConsumer {
     }
 
     /**
+     * 直接在rabbitMQ的管理网站上发送消息时
      * 如果请求的properties中没有设置contentType为application/json，就会使用默认的byte[]接收
      */
     public void consume(byte[] msg){
+        log.info("thread id:{}", Thread.currentThread().getId());
         log.info("receive byte message:{}", new String(msg));
+    }
+
+    public void myConsume(String msg){
+        log.info("thread id:{}", Thread.currentThread().getId());
+        log.info("receive byte message:{}", msg);
     }
 
 }

@@ -29,10 +29,13 @@
 
     <rabbit:queue id="settingsInfoQueue" name="${mq.queue.settingsInfo}"/>
 
+    <rabbit:queue id="myQueue" name="${mq.queue.my}"/>
+
     <rabbit:direct-exchange name="${mq.direct.exchange}">
         <rabbit:bindings>
             <rabbit:binding queue="commandQueue" key="${mq.routingkey.command}"/>
             <rabbit:binding queue="settingsInfoQueue" key="${mq.routingkey.settingsInfo}"/>
+            <rabbit:binding queue="myQueue" key="${mq.routingkey.my}"/>
         </rabbit:bindings>
     </rabbit:direct-exchange>
 
@@ -41,8 +44,14 @@
         <property name="defaultListenerMethod" value="consume"/>
     </bean>
 
+    <bean id="myMessageListenerAdapter" class="org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter" >
+        <constructor-arg ref="rabbitConsumer" />
+        <property name="defaultListenerMethod" value="myConsume"/>
+    </bean>
+
     <rabbit:listener-container connection-factory="connectionFactory" concurrency="20">
         <rabbit:listener queues="settingsInfoQueue" ref="messageListenerAdapter" />
+        <rabbit:listener queues="myQueue" ref="myMessageListenerAdapter" />
     </rabbit:listener-container>
 
     <bean id="rabbitConsumer" class="org.liu.rabbitmq.consumer.RabbitConsumer"/>

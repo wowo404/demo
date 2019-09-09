@@ -42,6 +42,14 @@ public class BinaryTest {
 
     public static void main(String[] args) {
         charAndRadix();
+        int x = 0x032a;
+        System.out.println(x);
+        int a = 158;
+        System.out.println(Integer.toHexString(a));
+        System.out.println(Integer.toBinaryString(a));
+        int b = 0b10010001;
+        int c = 0x07e3;
+        System.out.println(c);
     }
 
     public static void shortAndRadix(){
