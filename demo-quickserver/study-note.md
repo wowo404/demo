@@ -17,3 +17,24 @@ addClient()---ClientPool持有一个list保存每一个待运行的ClientHandler
 ClientThread.run()---133行从pool中拿到一个client，137调用executeClient()，
 executeClient()---107行调用run()
 ```
+
+## 从stacktrace更容易看出调用轨迹
+``
+[StackTrace: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.ObjectInputStream$PeekInputStream.read(ObjectInputStream.java:2313)
+	at java.io.ObjectInputStream$PeekInputStream.readFully(ObjectInputStream.java:2326)
+	at java.io.ObjectInputStream$BlockDataInputStream.readShort(ObjectInputStream.java:2797)
+	at java.io.ObjectInputStream.readStreamHeader(ObjectInputStream.java:802)
+	at java.io.ObjectInputStream.<init>(ObjectInputStream.java:299)
+	at org.quickserver.net.server.impl.BlockingClientHandler.setInputStream(BlockingClientHandler.java:57)
+	at org.quickserver.net.server.impl.BlockingClientHandler.updateInputOutputStreams(BlockingClientHandler.java:506)
+	at org.quickserver.net.server.impl.BasicClientHandler.prepareForRun(BasicClientHandler.java:644)
+	at org.quickserver.net.server.impl.BlockingClientHandler.run(BlockingClientHandler.java:156)
+	at org.quickserver.util.pool.thread.ClientThread.executeClient(ClientThread.java:107)
+	at org.quickserver.util.pool.thread.ClientThread.run(ClientThread.java:137)
+]
+``
