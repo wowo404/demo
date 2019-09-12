@@ -12,8 +12,9 @@ public class FileReader {
 	
 	public static void main(String[] args) throws IOException {
 		FileReader fr = new FileReader();
+		fr.filter();
 //		fr.read();
-		fr.read2();
+//		fr.read2();
 //		fr.saveFile();
 //		fr.bufferRead("src/main/resources/bank");
 //		String fullPath = FilenameUtils.getFullPath("C://A/B/C/A.txt");
@@ -21,6 +22,30 @@ public class FileReader {
 //		System.out.println(new File(fullPath).exists());
 
     }
+
+    public void filter() throws IOException {
+		String path = "D:\\projects\\manufacture\\";
+		File dir = new File(path);
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		String fileName = "manufacture.properties";
+		File file = new File(path + File.separator + fileName);
+		if (!file.exists()) {
+			boolean newFile = file.createNewFile();
+			System.out.println(newFile);
+		}
+		FilenameFilter filter = (dir1, name) -> {
+			if (name.startsWith("manufacture")){
+				return true;
+			}
+			return false;
+		};
+		File[] files = dir.listFiles(filter);
+		for (File file1 : files) {
+			System.out.println(file1.getName());
+		}
+	}
 	
 	public void read() throws IOException{
 		InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));

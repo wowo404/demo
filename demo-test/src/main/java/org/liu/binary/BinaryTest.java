@@ -1,9 +1,23 @@
 package org.liu.binary;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.nio.ByteBuffer;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class BinaryTest {
+
+    public static void main(String[] args) {
+        int a = 0x032A;
+        System.out.println(a);
+        byte b = 0x30;
+        if (a == 0x30) {
+            System.out.println(true);
+        }
+    }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示
     //char也能表示一个二进制数据，对应编码表中的字符，0-127就可以直接查ASCII表，其他的要查Unicode表
@@ -40,19 +54,70 @@ public class BinaryTest {
         System.out.println(Integer.toBinaryString(a));
     }
 
-    public static void main(String[] args) {
-        charAndRadix();
-        int x = 0x032a;
-        System.out.println(x);
-        int a = 158;
-        System.out.println(Integer.toHexString(a));
-        System.out.println(Integer.toBinaryString(a));
-        int b = 0b10010001;
-        int c = 0x07e3;
-        System.out.println(c);
+    public static void longAndRadix() {
+        long zeroTwo = 0b01010101;
+        long zeroEight = 0176;
+        long zeroTen = 2147483648L;//超过2147483647就必须加L
+        long zeroSixteen = 0x74984;
+        System.out.println("十六进制：" + zeroSixteen + ",十进制：" + zeroTen + "，八进制：" + zeroEight + "，二进制：" + zeroTwo);
     }
 
-    public static void shortAndRadix(){
+    private static final BigDecimal EIGENVALUE_DIVIDEND = new BigDecimal("32768.0");
+
+    public static BigDecimal parseIntEigenvalue(int intEigenvalue, double range) {
+        //得到的数据*量程/32768.0
+        BigDecimal calculate = new BigDecimal(intEigenvalue, MathContext.DECIMAL64);
+        return calculate.multiply(new BigDecimal(range)).divide(EIGENVALUE_DIVIDEND, 10, RoundingMode.HALF_UP);
+    }
+
+    public static byte[] double2Bytes(double d) {
+        long value = Double.doubleToRawLongBits(d);
+        byte[] byteRet = new byte[8];
+        for (int i = 0; i < 8; i++) {
+            byteRet[i] = (byte) ((value >> 8 * i) & 0xff);
+        }
+        return byteRet;
+    }
+
+    public static double bytes2Double(byte[] arr) {
+        long value = 0;
+        for (int i = 0; i < 8; i++) {
+            value |= ((long) (arr[i] & 0xff)) << (8 * i);
+        }
+        return Double.longBitsToDouble(value);
+    }
+
+    public static double getDoubleWhenBytesLengthEquals4(byte[] bytes) {
+        byte[] temp = new byte[8];
+        temp[0] = 0x00;
+        temp[1] = 0x00;
+        temp[2] = 0x00;
+        temp[3] = 0x00;
+        temp[4] = bytes[0];
+        temp[5] = bytes[1];
+        temp[6] = bytes[2];
+        temp[7] = bytes[3];
+        return getDouble(temp);
+    }
+
+    public static double getDouble(byte[] bytes) {
+        long l = getLong(bytes);
+        System.out.println(l);
+        return Double.longBitsToDouble(l);
+    }
+
+    public static long getLong(byte[] bytes) {
+        return (0xff00000000000000L & ((long) bytes[0] << 56)
+                | (0xff000000000000L & ((long) bytes[1] << 48))
+                | (0xff0000000000L & ((long) bytes[2] << 40))
+                | (0xff00000000L & ((long) bytes[3] << 32))
+                | (0xff000000L & ((long) bytes[4] << 24))
+                | (0xff0000L & ((long) bytes[5] << 16))
+                | (0xff00L & ((long) bytes[6] << 8))
+                | (0xffL & (long) bytes[7]));
+    }
+
+    public static void shortAndRadix() {
         short zeroTwo = 0b111111111111111;
         short zeroEight = 0176;
         short zeroTen = 32767;
@@ -64,7 +129,7 @@ public class BinaryTest {
         System.out.println(Integer.toBinaryString(minShort));
     }
 
-    public static void floatAndRadix(){
+    public static void floatAndRadix() {
         Float zero = -12.5f;
         float zeroTwo = 0b11000001010010000000000000000000;
         float zeroEight = 0176;
@@ -74,7 +139,7 @@ public class BinaryTest {
         System.out.println(zero.equals(zeroTwo));//???
     }
 
-    public static void doubleAndRadix(){
+    public static void doubleAndRadix() {
         //1100 0001 0100 1000 0000 0000 0000 0000
         double zeroTwo = 0b11000001010010000000000000000000;
         double zeroEight = 0176;
@@ -143,12 +208,6 @@ public class BinaryTest {
                 (b[2] & 0xFF) << 8 |
                 (b[1] & 0xFF) << 16 |
                 (b[0] & 0xFF) << 24;
-    }
-
-    //WARNING:此方法不行
-    public static int byteToInt2(byte[] b) {
-        return (((int) b[0]) << 24) + (((int) b[1]) << 16)
-                + (((int) b[2]) << 8) + b[3];
     }
 
     public static byte[] intToByteArray(int a) {

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeoutException;
 public class MemcachedDemo {
 
     public static void main(String[] args) throws InterruptedException, MemcachedException, TimeoutException, IOException {
-        add();
+//        add();
         get();
     }
 
@@ -126,8 +126,8 @@ public class MemcachedDemo {
 
     public static void get() throws InterruptedException, MemcachedException, TimeoutException, IOException {
         MemcachedClient client = configuration.getXMClient();
-        List<TestMemcachedPO> list = client.get("test_add_list");
-        System.out.println("get from memcached:" + list);
+        Object obj = client.get("manufacture_configure_00000145");
+        System.out.println("get from memcached:" + obj);
 
         client.shutdown();
     }

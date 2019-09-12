@@ -17,6 +17,8 @@ public class Test {
         String msg = "7E000000007E";
         String substring = msg.substring(8, msg.length() - 4);
         System.out.println(substring);
+        String s = ",12,343,";
+        System.out.println(s.replaceFirst(",", ""));
     }
 
     public static void math() {

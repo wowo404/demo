@@ -31,6 +31,35 @@ public class BinaryToHexadecimal {
         byte[] temp = new byte[]{0x02, 0x22};
         String s = bytesToHex(temp);
         System.out.println(s);
+        get0x02();
+    }
+
+    public static void get0x02(){
+        byte[] bytes = transferDateTime("20190909125959");
+        for (byte aByte : bytes) {
+            String s = Integer.toHexString(aByte);
+            System.out.println(s);
+        }
+        int a = 45;
+        System.out.println(Integer.toHexString(a));
+
+    }
+
+    public static byte[] transferDateTime(String dateTime) {
+        int year = Integer.parseInt(dateTime.substring(0, 4));
+        byte[] yearBytes = BinaryTest.intToByteArray(year);
+        byte[] yearBytesTwo = new byte[2];
+        yearBytesTwo[0] = yearBytes[3];
+        yearBytesTwo[1] = yearBytes[2];
+        byte[] surplusBytes = new byte[5];
+        String otherStr = dateTime.substring(4);
+        for (int i = 0, j = 1; i < otherStr.length(); i += 2, j+=2) {
+            String other = otherStr.charAt(i) + "" + otherStr.charAt(j);
+            int otherInt = Integer.parseInt(other);
+            byte[] otherBytes = BinaryTest.intToByteArray(otherInt);
+            surplusBytes[i / 2] = otherBytes[3];
+        }
+        return Bytes.concat(yearBytesTwo, surplusBytes);
     }
 
     public static void get0x10(){

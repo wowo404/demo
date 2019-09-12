@@ -130,12 +130,6 @@ public class ByteArrayConverter {
             float f = 100550550.0011f;
             byte[] byteArray = getByteArray(f);
             System.out.println(getFloat(byteArray, 0));
-            float t = 1004550550.0021f;
-            System.out.println(t);
-            BigDecimal bigDecimal = new BigDecimal("1004550550.0021");
-            System.out.println(bigDecimal);
-            double d = 1004550550.0021;
-            System.out.println(d);
         } else if (args[0].equals("long")) {
             long l = Long.MIN_VALUE;
             while (l < Long.MAX_VALUE) {

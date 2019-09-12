@@ -31,7 +31,25 @@ public class TestFastJson {
 //        requestData.setDigest("b");
 //        System.out.println(JSON.toJSONString(requestData));
 
-        testIncludeNull();
+        parseWaveform();
+    }
+
+    private static void parseWaveform() {
+        TLVRealtimeDomainWaveform waveform = new TLVRealtimeDomainWaveform();
+        waveform.setDateTime("20190912121212");
+        Integer[] temp = {1, 12, 13, 454};
+        waveform.setSourceValueArray(temp);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(3);
+        list.add(21);
+        waveform.setList(list);
+        String string = JSON.toJSONString(waveform);
+        JSONObject jsonObject = JSON.parseObject(string);
+        String sourceValueArray = jsonObject.getString("sourceValueArray");
+        System.out.println(sourceValueArray);
+        String list1 = jsonObject.getString("list");
+        System.out.println(list1);
     }
 
     private static void parseArea() throws IOException {

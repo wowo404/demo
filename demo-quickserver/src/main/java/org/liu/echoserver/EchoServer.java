@@ -63,8 +63,6 @@ public class EchoServer {
             logger.addHandler(txtLog);
             quickServer.setAppLogger(logger);//设置应用的日志
 
-//            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.IN);
-//            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.OUT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,9 +79,6 @@ public class EchoServer {
         quickServer.getQSAdminServer().getServer().setLoggingLevel(Level.FINEST);
 
         try {
-            //TODO:开启这两行后就直接连不上tcp服务器了？？？
-//            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.IN);
-//            quickServer.setDefaultDataMode(DataMode.BINARY, DataType.OUT);
 
             quickServer.getQSAdminServer().setCommandPlugin(commandPlugin);
             //admin server的用户名密码：Admin/QsAdm1n
