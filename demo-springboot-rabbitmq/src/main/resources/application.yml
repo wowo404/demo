@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  rabbitmq:
+    host: 192.168.17.230
+    port: 5672
+    username: user_test
+    password: user_test
+    virtual-host: manufacture
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1s

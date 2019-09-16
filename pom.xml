@@ -36,6 +36,7 @@
         <module>demo-cache-ehcache</module>
         <module>demo-spring-websocket</module>
         <module>demo-spring-rabbitmq</module>
+        <module>demo-springboot-rabbitmq</module>
     </modules>
 
     <properties>

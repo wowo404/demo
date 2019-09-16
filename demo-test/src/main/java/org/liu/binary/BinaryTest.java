@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int a = 0x032A;
+        int a = 0x39cb;
         System.out.println(a);
         byte b = 0x30;
         if (a == 0x30) {
