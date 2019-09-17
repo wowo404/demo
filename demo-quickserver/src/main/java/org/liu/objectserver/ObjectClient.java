@@ -11,6 +11,10 @@ public class ObjectClient {
         BufferedInputStream bis  = new BufferedInputStream(socket.getInputStream());
         BufferedOutputStream bos  = new BufferedOutputStream(socket.getOutputStream());
 
+        Hello hello = (Hello) readObject(bis);
+        System.out.println("receive hello," + hello.getServerName());
+
+//        System.out.println(readInputStream(bis));
 
         DataTransport dataTransport = new DataTransport();
         dataTransport.setId(1);
@@ -19,8 +23,6 @@ public class ObjectClient {
         writeObject(dataTransport, bos);
 
         System.out.println("----------write object over-------");
-        Hello hello = (Hello) readObject(bis);
-        System.out.println("receive hello," + hello.getServerName());
 
         dataTransport = (DataTransport) readObject(bis);
         System.out.println(dataTransport.getCallback());

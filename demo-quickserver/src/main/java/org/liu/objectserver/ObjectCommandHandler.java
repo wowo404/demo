@@ -9,6 +9,6 @@ import java.net.SocketTimeoutException;
 public class ObjectCommandHandler implements ClientCommandHandler {
     @Override
     public void handleCommand(ClientHandler clientHandler, String s) throws SocketTimeoutException, IOException {
-        System.out.println("receive message:" + s);
+        System.out.println("receive string message:" + s);
     }
 }

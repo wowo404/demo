@@ -17,8 +17,9 @@ public class ObjectServer {
         config.setClientObjectHandler(new ObjectHandler());//Object
 
         DefaultDataMode defaultDataMode = new DefaultDataMode();
-        defaultDataMode.setDataMode(DataMode.OBJECT, DataType.IN);
-        defaultDataMode.setDataMode(DataMode.OBJECT, DataType.OUT);
+        //object模式真是垃圾。。。这里设置会导致整个服务连接都连不上来
+//        defaultDataMode.setDataMode(DataMode.OBJECT, DataType.IN);
+//        defaultDataMode.setDataMode(DataMode.OBJECT, DataType.OUT);
 
         config.setDefaultDataMode(defaultDataMode);
         config.setConsoleLoggingLevel("FINEST");
