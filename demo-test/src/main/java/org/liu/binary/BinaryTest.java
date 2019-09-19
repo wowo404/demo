@@ -11,12 +11,8 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int a = 0x39cb;
-        System.out.println(a);
-        byte b = 0x30;
-        if (a == 0x30) {
-            System.out.println(true);
-        }
+        int x = 0x0d;
+        System.out.println(x);
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示
