@@ -31,7 +31,6 @@
         <module>demo-spring-websocket</module>
         <module>demo-spring-rabbitmq</module>
         <module>demo-springboot-rabbitmq</module>
-        <module>demo-database-influxdb</module>
     </modules>
 
     <properties>
