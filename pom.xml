@@ -8,7 +8,6 @@
     <modules>
         <module>demo-test</module>
         <module>demo-log</module>
-        <module>demo-database</module>
         <module>demo-netty</module>
         <module>demo-mina</module>
         <module>demo-view</module>
@@ -17,7 +16,6 @@
         <module>demo-drools</module>
         <module>demo-easymock</module>
         <module>demo-hessian</module>
-        <module>demo-cache</module>
         <module>demo-office</module>
         <module>demo-designpatterns</module>
         <module>demo-algorithm</module>
@@ -29,11 +27,7 @@
         <module>demo-wechat-open</module>
         <module>demo-wechat-mp</module>
         <module>demo-quickserver</module>
-        <module>demo-database-mongodb</module>
         <module>demo-log-jboss-logging-logback</module>
-        <module>demo-cache-memcached</module>
-        <module>demo-database-mysql</module>
-        <module>demo-cache-ehcache</module>
         <module>demo-spring-websocket</module>
         <module>demo-spring-rabbitmq</module>
         <module>demo-springboot-rabbitmq</module>

@@ -1,5 +1,6 @@
 package org.liu.random;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.text.RandomStringGenerator;
 
@@ -19,6 +20,13 @@ public class TestRandom {
 			};
 			new Thread(runnable).start();
 		}
+	}
+
+	private static void random(){
+		RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+		System.out.println(generator.generate(5, 5));
+
+		System.out.println(RandomStringUtils.random(5, true, true));
 	}
 
 }

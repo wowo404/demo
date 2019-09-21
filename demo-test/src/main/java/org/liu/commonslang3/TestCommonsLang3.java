@@ -1,10 +1,7 @@
 package org.liu.commonslang3;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.text.RandomStringGenerator;
 import org.liu.binary.BinaryTest;
 
 import java.util.List;
@@ -16,41 +13,24 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
-        subarray();
-        String s1 = "abcdefg";
-        System.out.println(s1.substring(0, s1.length() - 4) + "****");
+        countMatches();
 
-        int a = RandomUtils.nextInt(100000, 999999);
+    }
 
-        System.out.println(String.valueOf(a));
+    private static void countMatches() {
+        String ip = "192.168.100.1";
+        System.out.println(StringUtils.countMatches(ip, "."));
+    }
 
-        System.out.println("4.0".compareTo("1.0.4"));
-
-        String s = StringUtils.join("account", "ssss", "data", 2);
-        System.out.println(s);
-
-        String passwd = StringUtils.join("1", "0000").substring(0, 5).concat("15058124996");
-        System.out.println(passwd);
-
-        String abbreviate = StringUtils.abbreviate("1", "0", 3, 3);
-        System.out.println(abbreviate);
-
-        String substring = StringUtils.substring("my.img", "my.img".indexOf("."));
-        System.out.println(substring);
-
-        System.out.println("-----" + "/a/b/s.jpeg".split("\\.")[1]);
-
-        split();
-        convert();
-
+    private static void endsWithAny() {
         boolean ends = StringUtils.endsWithAny("my.img", ".img2", "pdf");
         System.out.println(ends);
+    }
 
-        RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
-        System.out.println(generator.generate(5, 5));
-
-        System.out.println(RandomStringUtils.random(5, true, true));
-
+    //替换--很高级的方法
+    private static void abbreviate() {
+        String abbreviate = StringUtils.abbreviate("1", "0", 3, 3);
+        System.out.println(abbreviate);
     }
 
     private static void subarray() {

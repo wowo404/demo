@@ -1,5 +1,6 @@
 package org.liu.regexp;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -9,7 +10,32 @@ import java.util.regex.Pattern;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        notContain();
+        domain();
+    }
+
+    public static void domain(){
+        String url = "http://anotherbug.blog.chinajavaworld.org.cn/entry/4545/0/";
+        Pattern p = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(?:com\\.cn|net\\.cn|org\\.cn|com|net|org|cn|biz|info|cc|tv)",Pattern.CASE_INSENSITIVE);
+
+        Matcher matcher = p.matcher(url);
+        matcher.find();
+        System.out.println(matcher.group());
+    }
+
+    public static void ip(){
+        String ip = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
+        Pattern compile = Pattern.compile(ip);
+        System.out.println(compile.matcher("192.168.100.1").matches());
+        System.out.println(compile.matcher("").matches());
+        System.out.println(compile.matcher("192.168.1.1").matches());
+        System.out.println(compile.matcher("256.2.3.4").matches());
+        System.out.println(compile.matcher("1.2.3.4").matches());
+        System.out.println(compile.matcher("1.2.3.4.5").matches());
+        System.out.println(compile.matcher("1.2.3.4.").matches());
+        System.out.println(compile.matcher("0.0.0.0").matches());
+        System.out.println(compile.matcher("1.0.0.0").matches());
+        System.out.println(compile.matcher("1.0.0.").matches());
+        System.out.println(compile.matcher("192.168.0.0").matches());
     }
 
     public static void mobile(){
