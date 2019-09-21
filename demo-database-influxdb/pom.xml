@@ -1,44 +1,25 @@
-<?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>org.demo</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>demo-database-influxdb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <modules>
-        <module>demo-test</module>
-        <module>demo-log</module>
-        <module>demo-netty</module>
-        <module>demo-mina</module>
-        <module>demo-view</module>
-        <module>demo-mybatis</module>
-        <module>demo-jaxws</module>
-        <module>demo-drools</module>
-        <module>demo-easymock</module>
-        <module>demo-hessian</module>
-        <module>demo-office</module>
-        <module>demo-designpatterns</module>
-        <module>demo-algorithm</module>
-        <module>demo-shiro</module>
-        <module>demo-sms</module>
-        <module>demo-activemq</module>
-        <module>demo-springboot-activiti</module>
-        <module>demo-kafka</module>
-        <module>demo-wechat-open</module>
-        <module>demo-wechat-mp</module>
-        <module>demo-quickserver</module>
-        <module>demo-log-jboss-logging-logback</module>
-        <module>demo-spring-websocket</module>
-        <module>demo-spring-rabbitmq</module>
-        <module>demo-springboot-rabbitmq</module>
-        <module>demo-database-influxdb</module>
-    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -86,11 +67,10 @@
                     <version>3.7.1</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.1.1</version>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.0.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
