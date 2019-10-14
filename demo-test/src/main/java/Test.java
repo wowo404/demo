@@ -14,11 +14,16 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
-        String msg = "7E000000007E";
-        String substring = msg.substring(8, msg.length() - 4);
-        System.out.println(substring);
-        String s = ",12,343,";
-        System.out.println(s.replaceFirst(",", ""));
+        String[] valueArray = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23".split(",");
+        String[] newContentArray = new String[valueArray.length / 4 + 1];
+        for (int i = 0; i < valueArray.length; i++) {
+            if (i % 4 == 0) {
+                newContentArray[i / 4] = valueArray[i];
+            }
+        }
+        System.out.println(newContentArray);
+        boolean a = Boolean.parseBoolean("true");
+        System.out.println(a);
     }
 
     public static void math() {

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class TLVRealtimeDomainWaveform implements Serializable {
@@ -14,4 +15,5 @@ public class TLVRealtimeDomainWaveform implements Serializable {
     private Integer packageNum;//包号（两个字节）
     private Integer[] sourceValueArray;//原始值，字节数据采用整型数占用2字节，int16_t
     private List<Integer> list;
+    private Set<Integer> tunnelCodeList;
 }

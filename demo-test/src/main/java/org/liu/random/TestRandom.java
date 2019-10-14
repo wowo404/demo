@@ -8,6 +8,7 @@ public class TestRandom {
 
 	public static void main(String[] args) {
 		int nextInt = RandomUtils.nextInt(1000, 9999);
+
 		System.out.println(nextInt);
 		RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('0', '9').build();
 		for (int i = 0; i < 10; i++) {

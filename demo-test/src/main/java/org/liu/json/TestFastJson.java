@@ -1,6 +1,7 @@
 package org.liu.json;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.io.IOUtils;
@@ -31,7 +32,22 @@ public class TestFastJson {
 //        requestData.setDigest("b");
 //        System.out.println(JSON.toJSONString(requestData));
 
-        parseWaveform();
+        parseWarningArgs();
+    }
+
+    private static void parseWarningArgs(){
+        NoDataUploadWarningArgs args = new NoDataUploadWarningArgs();
+        args.setRepeatInterval(12);
+        System.out.println(JSON.toJSONString(args));
+    }
+
+    private static void parseTaskArgs(){
+        TrendDataProcessTaskArgs args = new TrendDataProcessTaskArgs();
+        args.setExecuteInterval(5);
+        args.setExecuteIntervalUnit(1);
+        args.setCollectionName("trend_five_minutes");
+        args.setIsNeedSplitCollectionById(true);
+        System.out.println(JSON.toJSONString(args));
     }
 
     private static void parseWaveform() {
@@ -39,17 +55,30 @@ public class TestFastJson {
         waveform.setDateTime("20190912121212");
         Integer[] temp = {1, 12, 13, 454};
         waveform.setSourceValueArray(temp);
+
         List<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(3);
         list.add(21);
         waveform.setList(list);
+
+        Set<Integer> set = new HashSet<>();
+        set.add(1);
+        set.add(2);
+        waveform.setTunnelCodeList(set);
+
         String string = JSON.toJSONString(waveform);
         JSONObject jsonObject = JSON.parseObject(string);
         String sourceValueArray = jsonObject.getString("sourceValueArray");
         System.out.println(sourceValueArray);
         String list1 = jsonObject.getString("list");
         System.out.println(list1);
+
+        JSONArray tunnelCodeList = jsonObject.getJSONArray("tunnelCodeList");
+        System.out.println(tunnelCodeList);
+        Integer[] a = new Integer[tunnelCodeList.size()];
+        Integer[] integers = tunnelCodeList.toArray(a);
+        System.out.println(integers);
     }
 
     private static void parseArea() throws IOException {

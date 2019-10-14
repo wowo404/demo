@@ -2,9 +2,11 @@ package org.liu.filereader;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.RandomUtils;
 
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.util.Arrays;
 
 public class FileReader {
 
@@ -12,11 +14,22 @@ public class FileReader {
 	
 	public static void main(String[] args) throws IOException {
 		FileReader fr = new FileReader();
-		fr.filter();
+//		fr.filter();
 //		fr.read();
 //		fr.read2();
 //		fr.saveFile();
-//		fr.bufferRead("src/main/resources/bank");
+		String content = fr.bufferRead("D:\\home\\manufacture\\file\\2019\\09\\24\\00000145-7-20190924000001.txt");
+		content = content.replaceFirst("," ,"");
+		String[] split = content.split(",");
+		String[] a = new String[split.length];
+		for (int i = 0; i < split.length; i++) {
+			double temp = Double.parseDouble(split[i]) / 10 + RandomUtils.nextDouble(0.1, 2.0);
+			a[i] = String.valueOf(temp == 0 ? 1 : temp);
+		}
+		String path = "D:\\home\\manufacture\\file\\2019\\09\\24\\00000145-7-20190924000001-test.txt";
+		File file = new File(path);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+		writer.write(Arrays.toString(a));
 //		String fullPath = FilenameUtils.getFullPath("C://A/B/C/A.txt");
 //		System.out.println(fullPath);
 //		System.out.println(new File(fullPath).exists());
@@ -66,15 +79,15 @@ public class FileReader {
 		System.out.println(content);
 	}
 	
-	public void bufferRead(String path) throws IOException {
-		BufferedReader br = new BufferedReader(new java.io.FileReader(path + "/P0046000/sm2PublicKey.key"));
+	public static String bufferRead(String path) throws IOException {
+		BufferedReader br = new BufferedReader(new java.io.FileReader(path));
 		String line = null;
 		StringBuffer sb = new StringBuffer();
 		while ((line = br.readLine()) != null) {
 			sb.append(line);
 		}
 		br.close();
-		System.out.println(sb.toString());
+		return sb.toString();
 	}
 
 	public void fileName(){

@@ -11,8 +11,15 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int x = 0x0d;
-        System.out.println(x);
+        int a = 0x003F;
+        System.out.println(a);
+        int i = Integer.parseInt("10000000", 2);
+        System.out.println(i);
+        System.out.println(Integer.toHexString(i));
+        byte c = (byte) i;
+        System.out.println(c);
+        byte b = Byte.parseByte("10010001", 2);
+        System.out.println(b);
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示

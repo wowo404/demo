@@ -4,6 +4,7 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -149,8 +150,19 @@ public class TestDate {
 	}
 
 	public static void main(String[] args) {
+		System.out.println(new Date(1568368363095L));
+        long time = parse("2019-09-13 17:55:00", COMMON_PATTERN).getTime();
+        System.out.println(time);
 
-        System.out.println(new Date().getTime() / 1000);
+		long time2 = parse("2019-09-13 17:50:00", COMMON_PATTERN).getTime();
+		System.out.println(time2);
+
+		long interval = time2 - time;
+		System.out.println(interval);//1000*60*5
+
+		System.out.println(interval / (12 * 60 * 60 * 1000));
+
+		System.out.println(new Date().getTime() / 1000);
         System.out.println(System.currentTimeMillis() / 1000);
 
         Date day = getSameDayInAppointMonth(new Date(), 3);

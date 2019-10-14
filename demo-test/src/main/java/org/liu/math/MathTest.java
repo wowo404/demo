@@ -5,7 +5,13 @@ import java.io.UnsupportedEncodingException;
 public class MathTest {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        hexStringToString("030600040201030201");
+        System.out.println(Math.pow(2, 15));
+    }
+
+    private static int calculate(int n) {
+        if (n == 0)
+            return 1;
+        return 2 * calculate(n - 1);
     }
 
     //获取byte数组后再转二进制是错误的

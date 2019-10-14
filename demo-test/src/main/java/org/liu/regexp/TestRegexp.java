@@ -14,6 +14,8 @@ public class TestRegexp {
     }
 
     public static void domain(){
+        System.out.println("sfd".indexOf(""));
+        System.out.println("监测点123".indexOf("点1"));
         String url = "http://anotherbug.blog.chinajavaworld.org.cn/entry/4545/0/";
         Pattern p = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(?:com\\.cn|net\\.cn|org\\.cn|com|net|org|cn|biz|info|cc|tv)",Pattern.CASE_INSENSITIVE);
 

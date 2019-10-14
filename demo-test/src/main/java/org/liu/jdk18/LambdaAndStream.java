@@ -1,12 +1,11 @@
 package org.liu.jdk18;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -364,6 +363,27 @@ public class LambdaAndStream {
 		List<String> range = IntStream.range(0, 1000000009).boxed().map(i -> i + "").collect(Collectors.toList());
 //		range.forEach(t -> System.out.println(t));
 		range.size();
+	}
+
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	private static class InnerDCSData {
+		private String serialNum;
+		private String id;
+		private String value;
+	}
+
+	public void listToMap(){
+		List<InnerDCSData> list = new ArrayList<>();
+		list.add(new InnerDCSData("a-123", "1", "32.65"));
+		list.add(new InnerDCSData("a-123", "2", "50.65"));
+		list.add(new InnerDCSData("b-123", "3", "60.65"));
+		Map<String, String> data = list.stream().collect(Collectors.toMap(InnerDCSData::getId, InnerDCSData::getValue));
+		for (Map.Entry<String, String> entry : data.entrySet()) {
+			System.out.println(entry.getKey() + "---" + entry.getValue());
+		}
 	}
 	
 	public static void main(String[] args) {
