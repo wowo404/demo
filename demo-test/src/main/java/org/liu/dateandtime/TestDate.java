@@ -149,6 +149,13 @@ public class TestDate {
 		return i;
 	}
 
+	public static Date formatSecondsToZero(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.SECOND, 0);
+		return calendar.getTime();
+	}
+
 	public static void main(String[] args) {
 		System.out.println(new Date(1568368363095L));
         long time = parse("2019-09-13 17:55:00", COMMON_PATTERN).getTime();
@@ -170,6 +177,7 @@ public class TestDate {
 
         Date date = addDay(new Date(), 10);
         System.out.println(format(date, COMMON_PATTERN));
+		System.out.println(formatSecondsToZero(new Date()));
 
     }
 

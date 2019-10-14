@@ -58,10 +58,6 @@ public class TestJDK18 {
                 new Person("b", new BigDecimal("200")));
         BigDecimal sum = list.parallelStream().map(p -> p.getAge()).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
         System.out.println(sum);
-        List<String> nameList = list.parallelStream().map(p -> p.getName()).collect(Collectors.toList());
-        nameList.forEach(s -> {
-            System.out.println(s);
-        });
     }
 
     /**
@@ -155,7 +151,7 @@ public class TestJDK18 {
 
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
-        test.countSpecific();
+        test.collectBigDecimal();
     }
 
     static class Person {

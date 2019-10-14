@@ -12,3 +12,17 @@ spring:
       retry:
         enabled: true
         initial-interval: 1s
+
+file:
+  upload:
+    config:
+      imageUrl: http://47.96.77.229:9300/file/upload?action=upload
+      imagePath:
+      imageFieldName: file
+      imageMaxSize: 10485760
+      imageAllowFiles:
+        - .png
+        - .jpg
+        - .jpeg
+        - .gif
+        - .bmp

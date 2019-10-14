@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" > -->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <title>政银保合作信息公共服务平台</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        console.log("test");
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://127.0.0.1:9300/user/login",
+                dataType: "text",
+                async: true,
+                type: 'POST',
+                cache: false,
+                crossDomain: true,
+                data: {username: 'superAdmin', password: '123456', kaptcha: '123456'},
+                success: function (data) {
+                    console.log(data.respCode);
+                    console.log(data.respDesc);
+                    console.log(data.respData)
+                }
+            });
+            $.post('http://127.0.0.1:9300/user/login', {
+                username: 'superAdmin',
+                password: '123456',
+                kaptcha: '123456'
+            }, function (data) {
+                console.log(data.respCode);
+                console.log(data.respDesc);
+                console.log(data.respData)
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="app"></div>
+</body>
+</html>
