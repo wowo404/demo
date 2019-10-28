@@ -1,6 +1,7 @@
 package org.liu.nio;
 
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -37,6 +38,17 @@ public class NIOServer {
                     }
                     if (key.isReadable()) {
                         // ...read messages...
+                        SocketChannel channel = (SocketChannel) key.channel();
+                        ByteBuffer buffer = ByteBuffer.allocate(1024);
+                        while (true) {
+                            int read = channel.read(buffer);
+                            if (read <= 0) {
+                                break;
+                            }
+                            buffer.flip();
+                            //将buffer中的内容写入文件或者其他地方
+                            //也可以向client写入内容
+                        }
                     }
                 }
             }

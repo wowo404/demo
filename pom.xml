@@ -22,15 +22,9 @@
         <module>demo-shiro</module>
         <module>demo-sms</module>
         <module>demo-activemq</module>
-        <module>demo-springboot-activiti</module>
         <module>demo-kafka</module>
-        <module>demo-wechat-open</module>
-        <module>demo-wechat-mp</module>
         <module>demo-quickserver</module>
         <module>demo-log-jboss-logging-logback</module>
-        <module>demo-spring-websocket</module>
-        <module>demo-spring-rabbitmq</module>
-        <module>demo-springboot-rabbitmq</module>
         <module>demo-json</module>
     </modules>
 
