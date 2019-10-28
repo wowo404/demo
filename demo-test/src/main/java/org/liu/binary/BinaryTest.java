@@ -11,8 +11,11 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int a = 0x003F;
-        System.out.println(a);
+        int a = 0x01;
+        System.out.println(Integer.toHexString(Integer.reverse(a)));
+        String s = Integer.toHexString(Integer.reverseBytes(a));
+        System.out.println(s.substring(0, 4));
+
         int i = Integer.parseInt("10000000", 2);
         System.out.println(i);
         System.out.println(Integer.toHexString(i));

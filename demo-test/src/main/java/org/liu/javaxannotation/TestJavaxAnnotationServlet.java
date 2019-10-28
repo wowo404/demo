@@ -1,7 +1,5 @@
 package org.liu.javaxannotation;
 
-import com.alibaba.fastjson.JSONObject;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.ServletException;
@@ -60,10 +58,7 @@ public class TestJavaxAnnotationServlet extends HttpServlet {
         Object sessionModel = req.getSession().getAttribute("sessionModel");
         System.out.println(sessionModel);
         PrintWriter writer = resp.getWriter();
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", name);
-        jsonObject.put("age", age);
-        jsonObject.put("timestamp", new Date());
-        writer.print(jsonObject.toJSONString());
+        String json = "{'name':'" + name + "','age':'" + age + "','timestamp':'" + new Date() + "'}";
+        writer.print(json);
     }
 }

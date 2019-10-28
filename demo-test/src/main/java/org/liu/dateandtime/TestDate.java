@@ -157,11 +157,11 @@ public class TestDate {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(new Date(1568368363095L));
-        long time = parse("2019-09-13 17:55:00", COMMON_PATTERN).getTime();
+		System.out.println(new Date(1571724444532L));
+        long time = parse("2019-10-24 19:09:14", COMMON_PATTERN).getTime();
         System.out.println(time);
 
-		long time2 = parse("2019-09-13 17:50:00", COMMON_PATTERN).getTime();
+		long time2 = parse("2019-10-23 16:45:00", COMMON_PATTERN).getTime();
 		System.out.println(time2);
 
 		long interval = time2 - time;

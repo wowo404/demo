@@ -1,6 +1,6 @@
 package org.liu.reflect;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
@@ -88,9 +88,9 @@ public class BeanConverterUtil {
             } else if(obj.getClass().isPrimitive() || obj.getClass() == String.class){
                 //无需改动value
             }
-            JsonProperty jsonProperty = field.getAnnotation(JsonProperty.class);
+            JSONField jsonProperty = field.getAnnotation(JSONField.class);
             if (null != jsonProperty) {
-                name = jsonProperty.value();
+                name = jsonProperty.name();
             }
             map.put(name, value);
         }

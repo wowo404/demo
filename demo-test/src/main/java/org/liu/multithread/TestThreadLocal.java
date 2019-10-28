@@ -15,11 +15,8 @@ public class TestThreadLocal {
             byte[] newBytes = new byte[]{0x09,0x33,0x48};
             byte[] concat = Bytes.concat(bytes, newBytes);
             localData.set(concat);
-            if (i == 99) {
-                System.out.println(concat.length);
-            }
         }
-
+        System.out.println(localData.get().length);
     }
 
 }

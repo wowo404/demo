@@ -1,6 +1,6 @@
 package org.liu.atomic;
 
-import org.liu.json.BaseReq;
+import org.liu.model.Monkey;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -18,9 +18,8 @@ public class TestAtomic {
         System.out.println(atomicInteger.getAndIncrement());
         System.out.println(atomicInteger.get());
 
-        AtomicReference<BaseReq> reference = new AtomicReference<>(null);
+        AtomicReference<Monkey> reference = new AtomicReference<>(null);
         System.out.println(reference.get());
-
     }
 
 

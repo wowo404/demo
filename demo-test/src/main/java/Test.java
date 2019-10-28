@@ -1,6 +1,5 @@
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
-import org.liu.enums.ServiceName;
 import org.liu.model.ChannelProductReq;
 import org.liu.obj.Superior;
 
@@ -125,7 +124,6 @@ public class Test {
     }
 
     public void test1() {
-        System.out.println(ServiceName.directSignClient.name());
 
         Map<String, String> map = System.getenv();
         for (Iterator<String> itr = map.keySet().iterator(); itr.hasNext(); ) {
