@@ -3,10 +3,9 @@ package org.demo.json;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.io.IOUtils;
-import org.liu.obj.Junior;
-import org.liu.obj.Superior;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +31,24 @@ public class TestFastJson {
 //        requestData.setDigest("b");
 //        System.out.println(JSON.toJSONString(requestData));
 
-        parseWarningArgs();
+        testGenericParadigm();
+    }
+
+    private static void testGenericParadigm() {
+        SimpleCommandReq req = new SimpleCommandReq();
+        req.setDataType(1);
+        req.setCmdContent("{'a':1,'b':'b'}");
+
+        CommandDTO<SimpleCommandReq> commandDTO = new CommandDTO<>();
+        commandDTO.setGatewayType(1);
+        commandDTO.setData(req);
+
+        String jsonString = JSON.toJSONString(commandDTO);
+        System.out.println(jsonString);
+
+        CommandDTO<SimpleCommandReq> dto = JSON.parseObject(jsonString, new TypeReference<CommandDTO<SimpleCommandReq>>(){});
+        System.out.println(dto.getData().getCmdContent());
+
     }
 
     private static void parseWarningArgs(){
@@ -117,21 +133,6 @@ public class TestFastJson {
             ratio.setPartnerId(i);
             System.out.println(ratio);
         }
-    }
-
-    private static void testJsonFromSon() {
-        Junior junior = new Junior();
-        junior.setId(1);
-        junior.setName("test");
-        junior.setBirthday(new Date());
-        junior.setGender("man");
-
-        test(junior);
-    }
-
-    private static void test(Superior superior) {
-        String jsonString = JSON.toJSONString(superior);
-        System.out.println(jsonString);
     }
 
     private static void testPriceModel() {

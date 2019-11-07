@@ -1,4 +1,4 @@
-package org.demo.mina;
+package org.demo.mina.timeserver;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IdleStatus;
