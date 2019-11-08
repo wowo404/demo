@@ -11,18 +11,7 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int a = 0x01;
-        System.out.println(Integer.toHexString(Integer.reverse(a)));
-        String s = Integer.toHexString(Integer.reverseBytes(a));
-        System.out.println(s.substring(0, 4));
-
-        int i = Integer.parseInt("10000000", 2);
-        System.out.println(i);
-        System.out.println(Integer.toHexString(i));
-        byte c = (byte) i;
-        System.out.println(c);
-        byte b = Byte.parseByte("10010001", 2);
-        System.out.println(b);
+        intAndRadix();
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示
@@ -52,12 +41,7 @@ public class BinaryTest {
         int fiv8 = 0b10000000000000000000000000000000;//-2147483648，这是用int来表示的最小的二进制
         char fiveChar = (char) five;//一个超过0-65535范围的数字可以强制转成char，但显示为空或者是乱码
         System.out.println(five + "--" + fiveChar);
-        int a = 0x0409;
-//        a = 255;
-        System.out.println(a);
-        System.out.println(Integer.toHexString(1033));
-        a = 0x11223344;
-        System.out.println(Integer.toBinaryString(a));
+        System.out.println(0xfffd);
     }
 
     public static void longAndRadix() {
@@ -124,6 +108,8 @@ public class BinaryTest {
     }
 
     public static void shortAndRadix() {
+        byte[] bytes = new byte[]{(byte) 0xff, (byte) 0xff};
+        System.out.println(ByteArrayConverter.getShort( bytes, 0));
         short zeroTwo = 0b111111111111111;
         short zeroEight = 0176;
         short zeroTen = 32767;

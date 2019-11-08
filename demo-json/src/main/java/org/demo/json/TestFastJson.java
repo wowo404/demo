@@ -51,6 +51,10 @@ public class TestFastJson {
 
     }
 
+    private static void genericParadigm(){
+
+    }
+
     private static void parseWarningArgs(){
         NoDataUploadWarningArgs args = new NoDataUploadWarningArgs();
         args.setRepeatInterval(12);

@@ -10,7 +10,7 @@ import java.util.Map;
 public class FFTTest {
 
     public static void main(String[] args) throws IOException {
-        test1();
+        test3();
     }
 
     public static void test3() throws IOException {
@@ -27,7 +27,7 @@ public class FFTTest {
     }
 
     private static String[] getFileData() throws IOException {
-        String content = FileReader.bufferRead("D:\\home\\manufacture\\file\\2019\\09\\23\\00000145-7-20190923155139.txt");
+        String content = FileReader.bufferRead("D:\\home\\manufacture\\file\\2019\\11\\01\\1234567800000002-7-20191101145544.txt");
         content = content.replaceFirst(",", "");
         String[] split = content.split(",");
         return split;

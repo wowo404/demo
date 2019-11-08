@@ -23,6 +23,9 @@ public class Test {
         System.out.println(newContentArray);
         boolean a = Boolean.parseBoolean("true");
         System.out.println(a);
+        Date now = new Date();
+        date(now);
+        System.out.println(now);
     }
 
     public static void math() {
@@ -55,11 +58,10 @@ public class Test {
         System.out.println(img.substring(img.lastIndexOf("\\.") + 1));
     }
 
-    public static void date() {
+    public static void date(Date test) {
         Date date = new Date(1480166465631L);
         System.out.println(date);
-        System.out.println(System.currentTimeMillis());
-        System.out.println(System.currentTimeMillis() - 1480166465631L);
+        test = date;
     }
 
     public static void startsWith() {
