@@ -162,10 +162,20 @@ public class TestJavaLambdaExpression {
 		Arrays.sort(players,
 				(String s1, String s2) -> (s1.charAt(s1.length() - 1) - s2
 						.charAt(s2.length() - 1)));
+
+		List<String> friends = Arrays.asList("CSS", "HTML", "Oracle", "Dart");
+
+		//same but reverse
+		System.out.println("\nsort reverse:");
+		Comparator<String> comp = (aName, bName) -> aName.compareTo(bName);
+
+		friends.stream().sorted(comp.reversed())
+				.forEach(System.out::println);
 	}
 
 	public static void main(String[] args) {
-
+		TestJavaLambdaExpression test = new TestJavaLambdaExpression();
+		test.test5();
 	}
 
 }

@@ -149,6 +149,12 @@ public class TestJDK18 {
                 .collect(Collectors.toList());
     }
 
+    public void avg(){
+        Stream.of(new BigDecimal("1.2"), new BigDecimal("3.7"))
+                .mapToDouble(BigDecimal::doubleValue).average()
+                .ifPresent(System.out::println);
+    }
+
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
         test.collectBigDecimal();

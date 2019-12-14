@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.io.IOUtils;
+import org.demo.json.req.TLVCommandReq;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,22 +47,24 @@ public class TestFastJson {
         String jsonString = JSON.toJSONString(commandDTO);
         System.out.println(jsonString);
 
-        CommandDTO<SimpleCommandReq> dto = JSON.parseObject(jsonString, new TypeReference<CommandDTO<SimpleCommandReq>>(){});
-        System.out.println(dto.getData().getCmdContent());
+        String json = "{\"data\":{\"samplingRateArgs\":{\"autoUploadWaveformInterval\":10,\"isAutoUploadEigenvalue\":0,\"isAutoUploadWaveform\":1},\"serialNum\":\"0000000000000145\",\"type\":\"07\"},\"gatewaySerialNum\":\"0000000000000145\",\"gatewayType\":2}";
+        CommandDTO<TLVCommandReq> dto = JSON.parseObject(json, new TypeReference<CommandDTO<TLVCommandReq>>() {
+        });
+        System.out.println(dto.getData().getSamplingRateArgs().getIsAutoUploadWaveform());
 
     }
 
-    private static void genericParadigm(){
+    private static void genericParadigm() {
 
     }
 
-    private static void parseWarningArgs(){
+    private static void parseWarningArgs() {
         NoDataUploadWarningArgs args = new NoDataUploadWarningArgs();
         args.setRepeatInterval(12);
         System.out.println(JSON.toJSONString(args));
     }
 
-    private static void parseTaskArgs(){
+    private static void parseTaskArgs() {
         TrendDataProcessTaskArgs args = new TrendDataProcessTaskArgs();
         args.setExecuteInterval(5);
         args.setExecuteIntervalUnit(1);

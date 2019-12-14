@@ -26,6 +26,8 @@ public class TestCommonsCollections {
             });
             System.out.println("-----------------");
         }
+        queue.removeIf(animal -> animal.getId() == 9);
+        System.out.println(queue.size());
     }
 
     public static void multiKeyMap(){

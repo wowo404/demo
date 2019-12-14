@@ -14,15 +14,21 @@ public class TestCountDownLatch {
         int len = 10;
         CountDownLatch countDownLatch = new CountDownLatch(len);
         for (int i = 0; i < len; i++) {
+            int finalI = i;
             new Thread(() -> {
-                System.out.println("线程：" + Thread.currentThread().getName() + "，开始处理业务");
                 try {
+                    System.out.println("线程：" + Thread.currentThread().getName() + "，开始处理业务");
                     Thread.sleep(4 * 1000L);//模拟业务处理时间4秒
+                    if (finalI == 4) {
+                        System.out.println("i == 4,return");
+                        return;
+                    }
+                    System.out.println("线程：" + Thread.currentThread().getName() + "，处理完毕");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                } finally {
+                    countDownLatch.countDown();
                 }
-                System.out.println("线程：" + Thread.currentThread().getName() + "，处理完毕");
-                countDownLatch.countDown();
             }).start();//一定不要忘记调用start方法
         }
         //主线程阻塞，直到CountDownLatch的所有子线程完成

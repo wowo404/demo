@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
+        int a = 0x0115;
+        System.out.println(a);
         intAndRadix();
     }
 
@@ -42,6 +44,8 @@ public class BinaryTest {
         char fiveChar = (char) five;//一个超过0-65535范围的数字可以强制转成char，但显示为空或者是乱码
         System.out.println(five + "--" + fiveChar);
         System.out.println(0xfffd);
+        int length = 0x000000c9;
+        System.out.println(length);
     }
 
     public static void longAndRadix() {

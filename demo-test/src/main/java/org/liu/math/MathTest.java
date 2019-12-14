@@ -5,7 +5,8 @@ import java.io.UnsupportedEncodingException;
 public class MathTest {
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        System.out.println(Math.pow(2, 15));
+        int a = 0xffff;
+        System.out.println(a);
     }
 
     private static int calculate(int n) {

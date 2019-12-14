@@ -276,15 +276,16 @@ public class LambdaAndStream {
 		collected1.add(2);
 		collected1.add(4);
 		collected1 = Stream.of(collected0, collected1)
-				.flatMap(num -> num.stream()).collect(Collectors.toList());
+				.flatMap(Collection::stream).collect(Collectors.toList());
 		System.out.println(collected1);// 1,3,5,2,4
 		
-		Stream.of(collected0,collected1).flatMap(num -> {
+		collected1 = Stream.of(collected0,collected1).flatMap(num -> {
 			if(num.size() > 3)
 				return num.stream();
 			else
 				return null;
-		});
+		}).collect(Collectors.toList());
+		System.out.println(collected1);
 	}
 
 	/**
@@ -396,7 +397,7 @@ public class LambdaAndStream {
 		//		ls.test6();
 		//		ls.test7();
 		//		ls.test8();
-		ls.generateCollectionTest();
+		ls.test10();
 	}
 
 }
