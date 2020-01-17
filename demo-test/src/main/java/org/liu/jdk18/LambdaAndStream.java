@@ -386,6 +386,17 @@ public class LambdaAndStream {
 			System.out.println(entry.getKey() + "---" + entry.getValue());
 		}
 	}
+
+	public void maxValueInMap(){
+		Map<String, Integer> map = new HashMap<>();
+		map.put("1", 1);
+		map.put("2", 2);
+		map.put("3", 3);
+		map.put("4", 4);
+		map.put("5", 5);
+		Integer value = map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
+		System.out.println(value);
+	}
 	
 	public static void main(String[] args) {
 		LambdaAndStream ls = new LambdaAndStream();
@@ -397,7 +408,8 @@ public class LambdaAndStream {
 		//		ls.test6();
 		//		ls.test7();
 		//		ls.test8();
-		ls.test10();
+//		ls.test10();
+		ls.maxValueInMap();
 	}
 
 }

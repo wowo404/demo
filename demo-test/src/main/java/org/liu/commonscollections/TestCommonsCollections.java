@@ -10,7 +10,7 @@ import org.liu.model.Animal;
 public class TestCommonsCollections {
 
     public static void main(String[] args) {
-        queue();
+        multiKeyMap();
     }
 
     public static void queue(){
@@ -45,6 +45,8 @@ public class TestCommonsCollections {
         multiKeyMap.forEach((key, value) -> {
             System.out.println(key + " ----- " + value);
         });
+        boolean containsKey = multiKeyMap.containsKey("1", "a");
+        System.out.println(containsKey);
     }
 
 }

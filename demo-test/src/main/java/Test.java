@@ -12,23 +12,35 @@ public class Test {
     private final static long DATACENTER_BIT = 8;
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println(6%5);
-        String[] valueArray = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23".split(",");
-        String[] newContentArray = new String[valueArray.length / 4 + 1];
-        for (int i = 0; i < valueArray.length; i++) {
-            if (i % 4 == 0) {
-                newContentArray[i / 4] = valueArray[i];
+    public static String transferWarningDurationTime(Long durationTime) {
+        String newTime = "";
+        long surplusMillis = durationTime;
+        if (surplusMillis >= 86400000) {//1天
+            newTime += (surplusMillis / 86400000) + "天";
+            surplusMillis = surplusMillis % 86400000;
+        }
+        if (surplusMillis >= 3600000) {//1小时
+            newTime += (surplusMillis / 3600000) + "小时";
+            surplusMillis = surplusMillis % 3600000;
+        }
+        if (surplusMillis >= 60000) {//1分钟
+            newTime += (surplusMillis / 60000) + "分钟";
+            surplusMillis = surplusMillis % 60000;
+        }
+        if (durationTime < 3600000) {
+            if (surplusMillis >= 1000) {//1秒
+                newTime += (surplusMillis / 1000) + "秒";
+                surplusMillis = surplusMillis % 1000;
             }
         }
-
-        System.out.println(newContentArray);
-        boolean a = Boolean.parseBoolean("true");
-        System.out.println(a);
-        Date now = new Date();
-        date(now);
-        System.out.println(now);
+        return newTime;
     }
+
+    public static void main(String[] args) {
+        String s = transferWarningDurationTime(1576839497000L - Long.parseLong("1576839418028"));
+        System.out.println(s);
+    }
+
 
     public static void math() {
         System.out.println(MAX_DATACENTER_NUM);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int a = 0x0115;
+        int a = 0x0f9f;
         System.out.println(a);
         intAndRadix();
     }
