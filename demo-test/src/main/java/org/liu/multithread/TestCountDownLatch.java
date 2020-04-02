@@ -1,6 +1,9 @@
 package org.liu.multithread;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 倒数计数器
@@ -10,12 +13,16 @@ import java.util.concurrent.CountDownLatch;
  */
 public class TestCountDownLatch {
 
+    private ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10,
+            0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>());
+
     public void test() throws InterruptedException {
         int len = 10;
         CountDownLatch countDownLatch = new CountDownLatch(len);
         for (int i = 0; i < len; i++) {
             int finalI = i;
-            new Thread(() -> {
+            executor.submit(() -> {
                 try {
                     System.out.println("线程：" + Thread.currentThread().getName() + "，开始处理业务");
                     Thread.sleep(4 * 1000L);//模拟业务处理时间4秒
@@ -29,7 +36,7 @@ public class TestCountDownLatch {
                 } finally {
                     countDownLatch.countDown();
                 }
-            }).start();//一定不要忘记调用start方法
+            });//一定不要忘记调用start方法
         }
         //主线程阻塞，直到CountDownLatch的所有子线程完成
         countDownLatch.await();

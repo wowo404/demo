@@ -32,7 +32,25 @@ public class TestFastJson {
 //        requestData.setDigest("b");
 //        System.out.println(JSON.toJSONString(requestData));
 
-        testGenericParadigm();
+//        testGenericParadigm();
+
+        String[] arrOneLevel = {"a", "b", "c"};
+        System.out.println(JSON.toJSONString(arrOneLevel));
+
+        List<String[]> listArr = new ArrayList<>();
+        listArr.add(arrOneLevel);
+        listArr.add(new String[]{"d","e"});
+        System.out.println(JSON.toJSONString(listArr));
+
+        String[][] arr = new String[2][1];
+        arr[0] = new String[]{"1", "a1", "a2", "a3", "a4"};
+        arr[1] = new String[]{"2", "b1", "b2", "b3", "b4"};
+        System.out.println(JSON.toJSONString(arr));
+
+        int[][] a = new int[2][1];
+        a[0] = new int[]{1, 2};
+        a[1] = new int[]{3, 4};
+        System.out.println(JSON.toJSONString(a));
     }
 
     private static void testGenericParadigm() {

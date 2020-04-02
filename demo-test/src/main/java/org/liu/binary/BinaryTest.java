@@ -1,5 +1,7 @@
 package org.liu.binary;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -11,9 +13,14 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        int a = 0x0f9f;
+        int a = 0x0013;
         System.out.println(a);
-        intAndRadix();
+//        intAndRadix();
+        System.out.println(Short.MAX_VALUE);
+        double atan2 = Math.atan2(7.0, -7.0);
+        System.out.println(atan2);
+        double angle = atan2 * 180 / Math.PI;
+        System.out.println(angle);
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示

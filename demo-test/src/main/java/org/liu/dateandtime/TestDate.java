@@ -157,18 +157,18 @@ public class TestDate {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(format(new Date(1576836000000L), COMMON_PATTERN));
-		System.out.println(format(new Date(1573693980000L), COMMON_PATTERN));
-        long time = parse("2019-12-19 00:00:00", COMMON_PATTERN).getTime();
+//		System.out.println(format(new Date(1576836000000L), COMMON_PATTERN));
+//		System.out.println(format(new Date(1573693980000L), COMMON_PATTERN));
+        long time = parse("2020-01-08 17:15:00", COMMON_PATTERN).getTime();
         System.out.println(time);
 
-		long time2 = parse("2019-12-17 17:55:00", COMMON_PATTERN).getTime();
+		long time2 = parse("2020-01-08 17:18:59", COMMON_PATTERN).getTime();
 		System.out.println(time2);
 
 		long interval = time2 - time;
-		System.out.println(interval);//1000*60*5
+		System.out.println(interval);
 
-		System.out.println(interval / (12 * 60 * 60 * 1000));
+		System.out.println(interval / (24 * 60 * 60 * 1000L));
 
 		System.out.println(new Date().getTime() / 1000);
         System.out.println(System.currentTimeMillis() / 1000);

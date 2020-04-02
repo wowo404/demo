@@ -12,7 +12,7 @@ import java.util.*;
 public class TestCollection {
 
     public static void main(String[] args) {
-        treeSet();
+        treeMap();
     }
 
     public static void sort(){
@@ -71,6 +71,22 @@ public class TestCollection {
         table.put(1, null);
         for (Map.Entry<Integer, Integer> entry : table.entrySet()) {
             System.out.println(entry.getKey() + " ---- " + entry.getValue());
+        }
+    }
+
+    public static void treeMap(){
+        Map<String, String> treeMap = new TreeMap<>();
+        treeMap.put("20200112110400-1-2", "abc2");
+        treeMap.put("20200112110400-1-3", "abc3");
+        treeMap.put("20200112110400-2-0", "abcd0");
+        treeMap.put("20200112110400-2-1", "abcd1");
+        treeMap.put("20200112110400-1-0", "abc0");
+        treeMap.put("20200112110400-2-3", "abcd4");
+        treeMap.put("20200112110400-1-1", "abc1");
+        treeMap.put("20200112110400-2-2", "abcd2");
+
+        for (Map.Entry<String, String> entry : treeMap.entrySet()) {
+            System.out.println(entry.getKey() + " -- " + entry.getValue());
         }
     }
 

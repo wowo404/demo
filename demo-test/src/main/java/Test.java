@@ -37,10 +37,15 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        String s = transferWarningDurationTime(1576839497000L - Long.parseLong("1576839418028"));
-        System.out.println(s);
+        f();
     }
 
+    public static void f() {
+        String[] a = new String[2];
+        Object[] b = a;
+        a[0] = "hi";
+        b[1] = Integer.valueOf(42);
+    }
 
     public static void math() {
         System.out.println(MAX_DATACENTER_NUM);
