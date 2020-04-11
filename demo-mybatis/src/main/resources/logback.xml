@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--https://www.cnblogs.com/nananana/p/8371805.html-->
+<configuration debug="true" scan="true" scanPeriod="100 seconds">
+    <!--ConsoleAppender 用于在屏幕上输出日志-->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} [%file : %line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="trace">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>

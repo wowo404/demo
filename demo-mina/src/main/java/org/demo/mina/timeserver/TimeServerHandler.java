@@ -9,6 +9,7 @@ import java.util.Date;
 public class TimeServerHandler extends IoHandlerAdapter {
     @Override
     public void sessionIdle(IoSession session, IdleStatus status) throws Exception {
+
         System.out.println("IDLE" + session.getIdleCount(status));
     }
 

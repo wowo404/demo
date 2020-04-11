@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="org.liu.demo.mybatis.UserDao">
+    <cache/>
+    <select id="countAll" resultType="int">
+        select count(*) from user;
+    </select>
+    
+    <select id="selectAll" resultType="org.liu.demo.mybatis.User">
+        select * from user order by username asc
+    </select>
+    
+    <insert id="insert" parameterType="org.liu.demo.mybatis.User">
+    	<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+    		SELECT SEQ_ID_USER.NEXTVAL as id FROM DUAL
+    	</selectKey>
+        insert into user(id,username,password,age,enabled) values(#{id},#{username},#{password},#{age},#{enabled})
+    </insert>
+    
+    <update id="update" parameterType="org.liu.demo.mybatis.User">
+        update user set username=#{username},password=#{password},age=#{age},enabled=#{enabled} where username=#{username}
+    </update>
+    
+    <delete id="delete" parameterType="int">
+        delete from user where username=#{username}
+    </delete>
+    
+    <select id="findByUserName" parameterType="String" resultType="org.liu.demo.mybatis.User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="testForeach" parameterType="map" resultType="org.liu.demo.mybatis.User">
+    	select * from user where username in 
+    	<foreach collection="nameList" item="item" index="index" open="(" separator="," close=")">
+    	#{item}
+    	</foreach>
+    </select>
+
+    <select id="findById" resultType="org.liu.demo.mybatis.User" useCache="true">
+        select * from user where id = #{id}
+    </select>
+</mapper>

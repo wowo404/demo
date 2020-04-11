@@ -14,6 +14,8 @@
  */
 package org.liu.demo.mybatis;
 
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -36,4 +38,7 @@ public interface UserDao {
     
     public User findByUserName(String userName);
 
+    List<User> testForeach(@Param("nameList") List<String> nameList);
+
+    User findById(Integer id);
 }

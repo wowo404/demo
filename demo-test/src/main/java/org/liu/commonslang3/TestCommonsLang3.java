@@ -13,13 +13,18 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
-        countMatches();
+        removeFirst();
 
     }
 
     private static void countMatches() {
         String ip = "192.168.100.1";
         System.out.println(StringUtils.countMatches(ip, "."));
+    }
+
+    private static void removeFirst(){
+        String removeFirst = StringUtils.removeFirst("data:image/png;base64,iVBORw0K", "data:image/.*;base64,");
+        System.out.println(removeFirst);
     }
 
     private static void endsWithAny() {
