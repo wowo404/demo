@@ -27,6 +27,7 @@
         <module>demo-log-jboss-logging-logback</module>
         <module>demo-json</module>
         <module>demo-rabbitmq</module>
+        <module>demo-junit5</module>
     </modules>
 
     <properties>
