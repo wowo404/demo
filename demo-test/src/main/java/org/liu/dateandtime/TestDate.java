@@ -159,10 +159,10 @@ public class TestDate {
 	public static void main(String[] args) {
 //		System.out.println(format(new Date(1576836000000L), COMMON_PATTERN));
 //		System.out.println(format(new Date(1573693980000L), COMMON_PATTERN));
-        long time = parse("2020-01-08 17:15:00", COMMON_PATTERN).getTime();
+        long time = parse("2020-03-17 18:35:00", COMMON_PATTERN).getTime();
         System.out.println(time);
 
-		long time2 = parse("2020-01-08 17:18:59", COMMON_PATTERN).getTime();
+		long time2 = parse("2020-04-16 18:35:00", COMMON_PATTERN).getTime();
 		System.out.println(time2);
 
 		long interval = time2 - time;
@@ -179,7 +179,6 @@ public class TestDate {
         Date date = addDay(new Date(), 10);
         System.out.println(format(date, COMMON_PATTERN));
 		System.out.println(formatSecondsToZero(new Date()));
-
     }
 
 }
