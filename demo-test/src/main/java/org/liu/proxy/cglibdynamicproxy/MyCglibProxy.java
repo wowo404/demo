@@ -14,6 +14,7 @@ public class MyCglibProxy implements MethodInterceptor{
         this.target = target;
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(this.target.getClass());
+        enhancer.setInterfaces(null);
         // 回调代理方法
         enhancer.setCallback(this);
         // 创建代理对象
@@ -22,8 +23,12 @@ public class MyCglibProxy implements MethodInterceptor{
 
     @Override
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-        proxy.invokeSuper(obj, args);
-        return null;
+        System.out.println("do something before invoke target");
+        //下面两种调用方式都是正确的
+        Object result = proxy.invokeSuper(obj, args);
+//        Object result = method.invoke(target, args);
+        System.out.println("do something after invoke target");
+        return result;
     }
 
 }

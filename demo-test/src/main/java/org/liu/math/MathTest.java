@@ -16,4 +16,23 @@ public class MathTest {
 
     }
 
+    public static void split(){
+        int a = 111;
+        //分成5份
+        int b = a / 5;
+        System.out.println(b);
+        int nextStartIndex = 0;
+        for (int i = 1; i < 6; i++) {
+            int c = i == 5 ? a : b * i;
+            int start = nextStartIndex;
+            System.out.println("第" + i + "次循环，start==" + start);
+            for(int j = start; j < c; j++){
+
+            }
+
+            System.out.println("第" + i + "次循环，ent==" + (c - 1));
+            nextStartIndex = c;
+        }
+    }
+
 }

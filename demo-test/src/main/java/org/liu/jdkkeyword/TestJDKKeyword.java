@@ -32,6 +32,7 @@ public class TestJDKKeyword {
     public void testFinalInt(int a){
         a = 2;
         System.out.println(a);
+        //keyInt = 6;编译错误
         System.out.println(keyInt);
     }
 
