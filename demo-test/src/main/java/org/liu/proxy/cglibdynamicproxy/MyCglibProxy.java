@@ -25,8 +25,8 @@ public class MyCglibProxy implements MethodInterceptor{
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
         System.out.println("do something before invoke target");
         //下面两种调用方式都是正确的
-        Object result = proxy.invokeSuper(obj, args);
-//        Object result = method.invoke(target, args);
+        Object result = proxy.invokeSuper(obj, args);//proxy.invoke调用是错误的
+//        Object result = method.invoke(target, args);//注意这种调用方式，不能用局部变量obj代替成员变量target
         System.out.println("do something after invoke target");
         return result;
     }
