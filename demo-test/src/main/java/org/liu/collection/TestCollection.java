@@ -4,6 +4,7 @@ import org.liu.model.Animal;
 import org.liu.obj.Superior;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author liuzhangsheng
@@ -12,7 +13,28 @@ import java.util.*;
 public class TestCollection {
 
     public static void main(String[] args) {
-        treeMap();
+//        treeMap();
+        Animal animal = new Animal();
+        animal.setId(1);
+
+        Animal animal2 = new Animal();
+        animal2.setId(2);
+
+        Animal animal3 = new Animal();
+        animal3.setId(3);
+
+        List<Animal> list = new ArrayList<>();
+        list.add(animal2);
+        list.add(animal);
+        list.add(animal3);
+
+        List<Integer> collect = list.stream().mapToInt(Animal::getId).boxed().collect(Collectors.toList());
+
+
+        boolean b = collect.removeAll(Arrays.asList(1, 2));
+        for (Integer integer : collect) {
+            System.out.println(integer);
+        }
     }
 
     public static void sort(){

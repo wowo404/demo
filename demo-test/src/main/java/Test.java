@@ -3,6 +3,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.liu.model.ChannelProductReq;
 import org.liu.obj.Superior;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -37,7 +38,10 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        f();
+        String filePath = "D:/home/manufacture/file/2019\\11\\22\\0000000000000145-8-20191122165539.txt.fft";
+        String fileName = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
+        System.out.println(fileName);
+//        f();
     }
 
     public static void f() {

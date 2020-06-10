@@ -13,7 +13,13 @@ public class MathTest {
 
         double sqrt = Math.sqrt(0.09766 * 0.09766 + 10240 * 10240);
         System.out.println(sqrt);
+    }
 
+    public static void atan2(){
+        double atan2 = Math.atan2(7.0, -7.0);
+        System.out.println(atan2);
+        double angle = atan2 * 180 / Math.PI;
+        System.out.println(angle);
     }
 
     public static void split(){

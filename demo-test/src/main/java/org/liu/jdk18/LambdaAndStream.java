@@ -381,6 +381,8 @@ public class LambdaAndStream {
 		list.add(new InnerDCSData("a-123", "1", "32.65"));
 		list.add(new InnerDCSData("a-123", "2", "50.65"));
 		list.add(new InnerDCSData("b-123", "3", "60.65"));
+		//这个方法更加便捷
+//		Map<String, List<InnerDCSData>> collect = list.stream().collect(Collectors.groupingBy(InnerDCSData::getId));
 		Map<String, String> data = list.stream().collect(Collectors.toMap(InnerDCSData::getId, InnerDCSData::getValue));
 		for (Map.Entry<String, String> entry : data.entrySet()) {
 			System.out.println(entry.getKey() + "---" + entry.getValue());

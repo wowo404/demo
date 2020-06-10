@@ -2,6 +2,24 @@ package org.liu.basic;
 
 public class JavaGrammar {
 
+    public static void main(String[] args) {
+        testSwitch();
+    }
+
+    public static void testSwitch(){
+        int i = 0;
+        switch (i) {
+            case 0:
+            case 1:
+            case 2:
+                System.out.println("匹配012");
+                break;
+            case 3:
+                System.out.println("匹配3");
+                break;
+        }
+    }
+
     public static void testRetry(){
         retry:
         for (int i = 0; i < 3; i++) {
