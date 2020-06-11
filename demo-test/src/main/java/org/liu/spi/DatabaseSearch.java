@@ -2,7 +2,7 @@ package org.liu.spi;
 
 import java.util.List;
 
-public class DatebaseSearch implements Search {
+public class DatabaseSearch implements Search {
 
 	@Override
 	public List<Object> search(String key) {

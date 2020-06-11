@@ -37,7 +37,7 @@ public class Test {
         return newTime;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         String filePath = "D:/home/manufacture/file/2019\\11\\22\\0000000000000145-8-20191122165539.txt.fft";
         String fileName = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
         System.out.println(fileName);

@@ -17,4 +17,8 @@ public class SearchFactory {
 		return search;
 	}
 
+	public static void main(String[] args) {
+		newSearch();
+	}
+
 }
