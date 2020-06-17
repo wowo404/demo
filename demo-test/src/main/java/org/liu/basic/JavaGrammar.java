@@ -3,7 +3,27 @@ package org.liu.basic;
 public class JavaGrammar {
 
     public static void main(String[] args) {
-        testSwitch();
+        int size = tableSizeFor(33);
+        System.out.println(size);
+    }
+
+    //返回大于或等于cap的2的倍数的那个值
+    static final int tableSizeFor(int cap) {
+        int n = cap - 1;
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        return (n < 0) ? 1 : n + 1;
+    }
+
+    public static void testIntAnd(){
+        System.out.println(Integer.toBinaryString(1));//00000001
+        System.out.println(Integer.toBinaryString(2));//00000010
+        int a = 1 & 2;
+        System.out.println(a);
+        System.out.println(Integer.toBinaryString(a));//00000000
     }
 
     public static void testSwitch(){

@@ -38,10 +38,20 @@ public class Test {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        String filePath = "D:/home/manufacture/file/2019\\11\\22\\0000000000000145-8-20191122165539.txt.fft";
-        String fileName = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
-        System.out.println(fileName);
-//        f();
+        System.out.println(plus());
+    }
+
+    public static int plus() {
+        int j = 0;
+        int a = j++ + 10;
+        System.out.println(a);//输出10
+        int b = 0;
+        boolean flag = b++ == 1 ? true : false;
+        System.out.println(flag);//输出false
+
+        int i = 0;
+//        return ++i;
+        return i++;//这里i++没有起作用，返回的还是0
     }
 
     public static void f() {
@@ -74,6 +84,9 @@ public class Test {
         System.out.println("1,1".split(",").length);
         String name = "中国银行杭州支行";
         System.out.println(name.substring(0, name.length() - 1));
+        String filePath = "D:/home/manufacture/file/2019\\11\\22\\0000000000000145-8-20191122165539.txt.fft";
+        String fileName = filePath.substring(filePath.lastIndexOf(File.separator) + 1);
+        System.out.println(fileName);
     }
 
     public static void index() {

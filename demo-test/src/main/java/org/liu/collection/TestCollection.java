@@ -13,7 +13,12 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-//        treeMap();
+        Map<Integer, Integer> map = new HashMap<>();
+        Integer put = map.put(1, 10);
+        System.out.println(put);
+    }
+
+    public static void removeAll(){
         Animal animal = new Animal();
         animal.setId(1);
 

@@ -6,6 +6,9 @@ import java.math.RoundingMode;
 public class MathTest {
 
     public static void main(String[] args) {
+        int a = 6 >> 1;
+        System.out.println(a);
+
         double atan2 = Math.atan2(0.09766, 10240);
         BigDecimal result = BigDecimal.valueOf(atan2).setScale(8, RoundingMode.HALF_UP).stripTrailingZeros();
         System.out.println(result.toPlainString());
