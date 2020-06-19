@@ -1,5 +1,6 @@
 package org.liu.commonsbean;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.liu.model.Animal;
 import org.liu.model.Monkey;
 
@@ -8,7 +9,9 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +22,29 @@ import java.util.Map;
  */
 public class TestBeanUtils {
 
-    public static void main(String[] args) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public static void main(String[] args) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
+        Monkey monkey = new Monkey();
+        monkey.setColor("red");
+        monkey.setAge(11);
+
+        Monkey monkey1 = new Monkey();
+        monkey1.setColor("green");
+        monkey1.setAge(12);
+
+        List<Monkey> list = new ArrayList<>();
+        list.add(monkey);
+        list.add(monkey1);
+
+        List<Monkey> o = (List<Monkey>) BeanUtils.cloneBean(list);
+        System.out.println(o);
+
+        Map<String, String> describe = BeanUtils.describe(monkey);//map中包含了一个class
+        for (Map.Entry<String, String> entry : describe.entrySet()) {
+            System.out.println(entry.getKey() + " -- " + entry.getValue());
+        }
+    }
+
+    public static void run(){
         System.out.println(TestBeanUtils.class.getSimpleName());
         Monkey monkey = new Monkey();
         monkey.setColor("red");

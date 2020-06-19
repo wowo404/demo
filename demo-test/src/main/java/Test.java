@@ -161,7 +161,7 @@ public class Test {
         return false;
     }
 
-    public void test1() {
+    public static void test1() {
 
         Map<String, String> map = System.getenv();
         for (Iterator<String> itr = map.keySet().iterator(); itr.hasNext(); ) {

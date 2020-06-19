@@ -50,6 +50,9 @@ public class NIOServer {
                             //也可以向client写入内容
                         }
                     }
+                    if (key.isWritable()) {
+
+                    }
                 }
             }
         } catch (Throwable e) {

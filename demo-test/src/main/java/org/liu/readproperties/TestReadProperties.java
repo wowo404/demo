@@ -9,7 +9,7 @@ import java.util.Properties;
 public class TestReadProperties {
 
     public static void main(String[] args) throws IOException {
-        readFromJar();
+        readSystemProperties();
     }
 
     public static void readSystemProperties(){
