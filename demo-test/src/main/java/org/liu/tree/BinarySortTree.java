@@ -17,7 +17,7 @@ public class BinarySortTree {
      * @param value
      * @return 新增时返回null，覆盖时返回原value
      */
-    public Object insert(Integer key, Object value) {
+    public Object add(Integer key, Object value) {
         if (null == key || null == value) {
             throw new IllegalArgumentException();
         }
@@ -77,29 +77,46 @@ public class BinarySortTree {
             if (key > node.key) {
                 node = node.right;
             } else if (key.equals(node.key)) {
-                Node newNode = null;
-                //找回右子树中的最小节点
-                Node min = findMin(node.right);
-                if (null != min) {
-                    min.parent = node.parent;
-                    min.left = node.left;
-                    if (null == min.right) min.right = node.right;
-                    newNode = min;
-                } else {
-                    //找出左子树中的最大节点
-                    Node max = findMax(node.left);
-                    if (null != max) {
-                        max.parent = node.parent;
-                        if (null == max.left) max.left = node.left;
-                        max.right = node.right;
-                        newNode = max;
+                if (node.parent.left.equals(node)) {//删除的是node.parent左侧树的结点
+                    if (null == node.left && null == node.right) {//没有叶子，直接删除就可以，放最后操作
+                        node.parent.left = null;
+                    } else if (null == node.right) {//被删除节点没有右子树
+                        node.parent.left = node.left;//把被删除节点的左子树提上来就可以
+                    } else if (null == node.left) {//被删除节点没有左子树
+                        node.parent.left = node.right;//把被删除节点的右子树提上来就可以
+                    } else {
+                        if (null != node.right.left) {
+                            //被提升节点的左子节点怎么办??
+                            Node max = findMax(node.left);
+                            node.right.left.parent = max;
+                            max.right = node.right.left;
+                            node.right.left = node.left;//被提升节点的左子节点要修改为被删除节点的左子节点
+                        }
+                        node.left.parent = node.right;
+                        node.right.parent = node.parent;
+                        node.parent.left = node.right;
+                    }
+                } else if (node.parent.right.equals(node)) {//删除的是node.parent右侧树的结点
+                    if (null == node.left && null == node.right) {//没有叶子，直接删除就可以，放最后操作
+                        node.parent.right = null;
+                    } else if (null == node.right) {//被删除节点没有右子树
+                        node.parent.right = node.left;//把被删除节点的左子树提上来就可以
+                    } else if (null == node.left) {//被删除节点没有左子树
+                        node.parent.right = node.right;//把被删除节点的右子树提上来就可以
+                    } else {
+                        if (null != node.right.left) {
+                            //被提升节点的左子节点怎么办??
+                            Node max = findMax(node.left);
+                            node.right.left.parent = max;
+                            max.right = node.right.left;
+                            node.right.left = node.left;//被提升节点的左子节点要修改为被删除节点的左子节点
+                        }
+                        node.left.parent = node.right;//被删除节点的左子节点的父节点修改为新的被提升的节点
+                        node.right.parent = node.parent;//被提升节点的父节点要修改为原被删除节点的父节点
+                        node.parent.right = node.right;//替换要放到最后
                     }
                 }
-                if (node.parent.left.equals(node)) {
-                    node.parent.left = newNode;
-                } else if (node.parent.right.equals(node)) {
-                    node.parent.right = newNode;
-                }
+
                 oldValue = node.value;
                 node = null;
             } else {
@@ -110,6 +127,14 @@ public class BinarySortTree {
             size--;
         }
         return oldValue;
+    }
+
+    private void rotateLeft(Node node){
+
+    }
+
+    private void rotateRight(Node node){
+
     }
 
     private Node findMax(Node node) {
@@ -159,6 +184,13 @@ public class BinarySortTree {
             }
         }
         return null;
+    }
+
+    /**
+     * @return 根节点的值
+     */
+    public Object rootValue(){
+        return root.value;
     }
 
     /**

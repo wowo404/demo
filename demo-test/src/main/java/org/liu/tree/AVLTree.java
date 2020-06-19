@@ -27,12 +27,12 @@ public class AVLTree {
         Node cNode = root;Object oldValue;
         while (true) {
             if (key > cNode.key) {
-                if (cNode.left == null){
-                    cNode.left = new Node(key, value);
-                    cNode.left.parent = cNode;
+                if (cNode.right == null) {
+                    cNode.right = new Node(key, value);
+                    cNode.right.parent = cNode;
                     break;
                 } else {
-                    cNode = cNode.left;
+                    cNode = cNode.right;
                 }
             } else if (key.equals(cNode.key)) {
                 if (!value.equals(oldValue = cNode.value)) {
@@ -40,12 +40,12 @@ public class AVLTree {
                     return oldValue;
                 }
             } else {
-                if (cNode.right == null) {
-                    cNode.right = new Node(key, value);
-                    cNode.right.parent = cNode;
+                if (cNode.left == null){
+                    cNode.left = new Node(key, value);
+                    cNode.left.parent = cNode;
                     break;
                 } else {
-                    cNode = cNode.right;
+                    cNode = cNode.left;
                 }
             }
         }
@@ -76,6 +76,13 @@ public class AVLTree {
     }
 
     /**
+     * @return 根节点的值
+     */
+    public Object rootValue(){
+        return root.value;
+    }
+
+    /**
      * @return 树的总节点数
      */
     public int size() {
@@ -88,6 +95,7 @@ public class AVLTree {
         private Integer key;
         private Object value;
         private int depth;//节点深度
+        private int balanceFactor;//平衡因子，左子树高度减去右子树高度，一颗平衡二叉树的平衡因子只能是-1，0，1
         private Node parent;
         private Node left;
         private Node right;

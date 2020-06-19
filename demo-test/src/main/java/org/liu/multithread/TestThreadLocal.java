@@ -1,22 +1,26 @@
 package org.liu.multithread;
 
-import com.google.common.primitives.Bytes;
-
 public class TestThreadLocal {
 
-    private static ThreadLocal<byte[]> localData = new ThreadLocal<>();
+    private ThreadLocal<Integer> localData = new ThreadLocal<>();
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            byte[] bytes = localData.get();
-            if (null == bytes) {
-                bytes = new byte[0];
-            }
-            byte[] newBytes = new byte[]{0x09,0x33,0x48};
-            byte[] concat = Bytes.concat(bytes, newBytes);
-            localData.set(concat);
+    public static void main(String[] args) throws InterruptedException {
+        TestThreadLocal local = new TestThreadLocal();
+        local.test();
+    }
+
+    public void test() throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            int finalI = i;
+            new Thread(){
+                @Override
+                public void run() {
+                    localData.set(finalI);
+                }
+            }.start();
         }
-        System.out.println(localData.get().length);
+        Thread.sleep(1000L);
+        System.out.println(localData.get());
     }
 
 }
