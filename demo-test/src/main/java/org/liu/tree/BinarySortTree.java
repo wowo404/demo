@@ -86,7 +86,7 @@ public class BinarySortTree {
                         node.parent.left = node.right;//把被删除节点的右子树提上来就可以
                     } else {
                         if (null != node.right.left) {
-                            //被提升节点的左子节点怎么办??
+                            //被提升节点的左子节点怎么办??挂到叔叔节点下最大的那个节点下
                             Node max = findMax(node.left);
                             node.right.left.parent = max;
                             max.right = node.right.left;
