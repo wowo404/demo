@@ -28,6 +28,7 @@
         <module>demo-json</module>
         <module>demo-rabbitmq</module>
         <module>demo-junit5</module>
+        <module>demo-tomcat</module>
     </modules>
 
     <properties>
