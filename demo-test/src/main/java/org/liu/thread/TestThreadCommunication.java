@@ -58,9 +58,9 @@ public class TestThreadCommunication {
             while (true) {
                 try {
                     synchronized (product) {
-                        if (product.isFlag()) {//产品已被消费，要重新生产
+                        if (product.isFlag()) {
                             System.out.println("产品还没被消费，不需要生产");
-                            product.wait();
+                            product.wait();//当前线程等待，并释放持有的product对象锁
                         } else {
                             product.setFlag(true);
                             product.setName("product" + i);
@@ -68,7 +68,7 @@ public class TestThreadCommunication {
                             i++;
                             Thread.sleep(1000L);//1s生产一个
                             //唤醒消费者
-                            product.notify();
+                            product.notify();//唤醒持有product锁的其他某一个线程
 
                         }
                     }
@@ -87,7 +87,7 @@ public class TestThreadCommunication {
     }
 
     public static void main(String[] args) {
-        Product product = new Product();
+        Product product = new Product();//product同时承担了锁的功能
 
         Thread producerThread = new Thread(new Producer(product));
         Thread consumerThread = new Thread(new Consumer(product));

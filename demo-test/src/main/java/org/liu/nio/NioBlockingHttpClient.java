@@ -8,25 +8,28 @@ import java.nio.channels.SocketChannel;
 
 public class NioBlockingHttpClient {
     private SocketChannel socketChannel;
-    private String host;
+    private static String host = "127.0.0.1";
+    private static int port = 8742;
 
 
     public static void main(String[] args) throws IOException {
-
-        for (String host: HttpConstant.HOSTS) {
-
-            NioBlockingHttpClient client = new NioBlockingHttpClient(host, HttpConstant.PORT);
-            client.request();
-
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                NioBlockingHttpClient client = null;
+                try {
+                    client = new NioBlockingHttpClient();
+                    client.request();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         }
-
     }
 
-    public NioBlockingHttpClient(String host, int port) throws IOException {
-        this.host = host;
+    public NioBlockingHttpClient() throws IOException {
         socketChannel = SocketChannel.open();
         socketChannel.socket().setSoTimeout(5000);
-        SocketAddress remote = new InetSocketAddress(this.host, port);
+        SocketAddress remote = new InetSocketAddress(host, port);
         this.socketChannel.connect(remote);
     }
 
@@ -34,7 +37,7 @@ public class NioBlockingHttpClient {
         PrintWriter pw = getWriter(socketChannel.socket());
         BufferedReader br = getReader(socketChannel.socket());
 
-        pw.write(HttpUtil.compositeRequest(host));
+        pw.write(HttpUtil.compositeRequest(host + ":" + port));
         pw.flush();
         String msg;
         while ((msg = br.readLine()) != null){

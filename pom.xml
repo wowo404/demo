@@ -29,6 +29,7 @@
         <module>demo-rabbitmq</module>
         <module>demo-junit5</module>
         <module>demo-tomcat</module>
+        <module>demo-netty-chat-server</module>
     </modules>
 
     <properties>

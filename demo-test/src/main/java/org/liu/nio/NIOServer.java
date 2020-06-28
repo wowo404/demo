@@ -6,11 +6,13 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class NIOServer {
 
-    private static final int port = 8080;
+    private static final int port = 8742;
 
     public static void main(String[] args) {
         Selector selector = null;
@@ -23,11 +25,12 @@ public class NIOServer {
             server.register(selector, SelectionKey.OP_ACCEPT); // 将 ServerSocketChannel 注册到 Selector 上
             while (true) {
                 selector.select();
-                for (Iterator<SelectionKey> i = selector.selectedKeys().iterator(); i.hasNext();) {
+                Iterator<SelectionKey> i = selector.selectedKeys().iterator();
+                while (i.hasNext()) {
                     SelectionKey key = i.next();
                     i.remove();
                     if (key.isConnectable()) {
-                        ((SocketChannel)key.channel()).finishConnect();
+                        ((SocketChannel) key.channel()).finishConnect();
                     }
                     if (key.isAcceptable()) {
                         // accept connection
@@ -35,6 +38,7 @@ public class NIOServer {
                         client.configureBlocking(false);
                         client.socket().setTcpNoDelay(true);
                         client.register(selector, SelectionKey.OP_READ); // 将 SocketChannel 注册到 Selector 上
+                        System.out.println(Thread.currentThread().getId() + ":" + client.getRemoteAddress());
                     }
                     if (key.isReadable()) {
                         // ...read messages...
@@ -48,15 +52,21 @@ public class NIOServer {
                             buffer.flip();
                             //将buffer中的内容写入文件或者其他地方
                             //也可以向client写入内容
+                            System.out.println(Thread.currentThread().getId() + ":" +  new String(buffer.array()));
                         }
+                        channel.register(selector, SelectionKey.OP_WRITE);
                     }
                     if (key.isWritable()) {
-
+                        SocketChannel channel = (SocketChannel) key.channel();
+                        ByteBuffer byteBuffer = ByteBuffer.wrap((LocalDateTime.now() + "i got you message").getBytes());
+                        channel.write(byteBuffer);
+                        key.interestOps(SelectionKey.OP_READ);
                     }
                 }
             }
         } catch (Throwable e) {
-            throw new RuntimeException("Server failure: "+e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Server failure: " + e.getMessage());
         } finally {
             try {
                 selector.close();
