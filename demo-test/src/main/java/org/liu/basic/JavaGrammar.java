@@ -5,6 +5,9 @@ public class JavaGrammar {
     public static void main(String[] args) {
         int size = tableSizeFor(33);
         System.out.println(size);
+
+        int a  = 100 << 0;
+        System.out.println(a);
     }
 
     //返回大于或等于cap的2的倍数的那个值

@@ -24,7 +24,12 @@ public class NIOServer {
             server.configureBlocking(false); // 设置为非阻塞模式
             server.register(selector, SelectionKey.OP_ACCEPT); // 将 ServerSocketChannel 注册到 Selector 上
             while (true) {
-                selector.select();
+                selector.select();//select是阻塞方法
+                // select(timeout)是非阻塞式，即等待timeout时间后返回
+//                if (selector.select(2000) == 0) {
+//                    System.out.println("非阻塞式调用select，这里可以做些其他的事情");
+//                    continue;
+//                }
                 Iterator<SelectionKey> i = selector.selectedKeys().iterator();
                 while (i.hasNext()) {
                     SelectionKey key = i.next();
@@ -45,6 +50,7 @@ public class NIOServer {
                         SocketChannel channel = (SocketChannel) key.channel();
                         ByteBuffer buffer = ByteBuffer.allocate(1024);
                         while (true) {
+                            buffer.clear();
                             int read = channel.read(buffer);
                             if (read <= 0) {
                                 break;

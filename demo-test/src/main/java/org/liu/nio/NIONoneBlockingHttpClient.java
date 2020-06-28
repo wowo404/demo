@@ -29,11 +29,7 @@ public class NIONoneBlockingHttpClient {
 
         NIONoneBlockingHttpClient client = new NIONoneBlockingHttpClient();
 
-        for (String host : HttpConstant.HOSTS) {
-
-            client.request(host, HttpConstant.PORT);
-
-        }
+        client.request("127.0.0.1", 8742);
 
         client.select();
 
