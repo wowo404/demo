@@ -49,6 +49,9 @@ public class Test {
         boolean flag = b++ == 1 ? true : false;
         System.out.println(flag);//输出false
 
+        int c = 0;
+        if (c++ == 0) System.out.println(c);//idea有提示，if括号中永远为true这里输出了1，说明这个if虽然没有写大括号，但sout的那行代码跟if不是同一行代码
+
         int i = 0;
 //        return ++i;
         return i++;//这里i++没有起作用，返回的还是0

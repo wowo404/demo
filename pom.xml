@@ -30,6 +30,7 @@
         <module>demo-junit5</module>
         <module>demo-tomcat</module>
         <module>demo-netty-chat-server</module>
+        <module>demo-protobuf</module>
     </modules>
 
     <properties>
