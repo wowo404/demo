@@ -23,6 +23,7 @@ public class NIOServer {
             server.socket().bind(new InetSocketAddress(port)); // 绑定端口
             server.configureBlocking(false); // 设置为非阻塞模式
             server.register(selector, SelectionKey.OP_ACCEPT); // 将 ServerSocketChannel 注册到 Selector 上
+            //臭名昭著的Epoll Bug ,它会导致Selector空轮询，最终导致CPU100%.直到JDK1.7版本该问题仍旧存在
             while (true) {
                 selector.select();//select是阻塞方法
                 // select(timeout)是非阻塞式，即等待timeout时间后返回
@@ -42,6 +43,7 @@ public class NIOServer {
                         SocketChannel client = server.accept(); // 接受 TCP 连接
                         client.configureBlocking(false);
                         client.socket().setTcpNoDelay(true);
+                        client.socket().setKeepAlive(true);//保持长连接
                         client.register(selector, SelectionKey.OP_READ); // 将 SocketChannel 注册到 Selector 上
                         System.out.println(Thread.currentThread().getId() + ":" + client.getRemoteAddress());
                     }
