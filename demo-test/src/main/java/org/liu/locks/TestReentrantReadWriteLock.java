@@ -11,23 +11,21 @@ public class TestReentrantReadWriteLock {
 
     public static void main(String[] args) {
         TestReentrantReadWriteLock test = new TestReentrantReadWriteLock();
-        test.testReadWriteSameTime();
+        test.getReadLockWhenHoldWriteLock();
     }
 
     public void readLock() {
-        lock.readLock().lock();
-        System.out.println("start time:" + System.currentTimeMillis());
         for (int i = 0; i < 5; i++) {
+            lock.readLock().lock();
+            System.out.println(Thread.currentThread().getName() + ":正在进行读操作……");
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName() + ":正在进行读操作……");
+            System.out.println(Thread.currentThread().getName() + ":读操作完毕！");
+            lock.readLock().unlock();
         }
-        System.out.println(Thread.currentThread().getName() + ":读操作完毕！");
-        System.out.println("end time:" + System.currentTimeMillis());
-        lock.readLock().unlock();
     }
 
     public void testReadLock() {
@@ -38,19 +36,71 @@ public class TestReentrantReadWriteLock {
     }
 
     public void writeLock() {
-        lock.writeLock().lock();
-        System.out.println("start time:" + System.currentTimeMillis());
         for (int i = 0; i < 5; i++) {
+            lock.writeLock().lock();
+            System.out.println(Thread.currentThread().getName() + ":正在进行write操作……");
             try {
                 Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + ":write操作完毕！");
+            lock.writeLock().unlock();
+        }
+    }
+
+    public void getReadLockWhenHoldWriteLock() {
+        lock.writeLock().lock();
+        for (int i = 0; i < 5; i++) {
+            try {
+                if (i == 3) {
+                    lock.readLock().lock();//锁的降级
+                    System.out.println("持有写锁期间获取读锁");
+                }
+                Thread.sleep(20);
+                if (i == 3) {
+                    System.out.println("持有写锁期间释放已获取的读锁");
+                    lock.readLock().unlock();//必须释放
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println(Thread.currentThread().getName() + ":正在进行write操作……");
         }
         System.out.println(Thread.currentThread().getName() + ":write操作完毕！");
-        System.out.println("end time:" + System.currentTimeMillis());
         lock.writeLock().unlock();
+        lock.writeLock().lock();//这里要再次获取写锁的话，前面的所有锁必须已释放
+        System.out.println(Thread.currentThread().getName() + "再次获取写锁");
+        lock.writeLock().unlock();
+    }
+
+    public void getReadLockOrHoldWriteLockInDifferentThread() {
+        for (int i = 0; i < 5; i++) {
+            int finalI = i;
+            new Thread(() -> {
+                if (finalI == 3) {
+                    lock.readLock().lock();
+                    System.out.println(Thread.currentThread().getName() + ":获取读锁");
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + ":释放已获取的读锁");
+                    lock.readLock().unlock();
+                } else {
+                    lock.writeLock().lock();
+                    System.out.println(Thread.currentThread().getName() + ":正在进行write操作……");
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() + ":write操作完毕！");
+                    lock.writeLock().unlock();
+                }
+            }).start();
+        }
     }
 
     public void testWriteLock() {
@@ -60,7 +110,7 @@ public class TestReentrantReadWriteLock {
         }
     }
 
-    public void testReadWriteSameTime(){
+    public void testReadWriteSameTime() {
         //读写锁的实现必须确保写操作对读操作的内存影响。换句话说，一个获得了读锁的线程必须能看到前一个释放的写锁所更新的内容，读写锁之间为互斥
         ExecutorService service = Executors.newCachedThreadPool();
         service.execute(this::readLock);
