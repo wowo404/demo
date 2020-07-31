@@ -51,7 +51,7 @@ public class TestListenableFuture {
             public void onFailure(Throwable t) {
                 t.printStackTrace();
             }
-        });
+        }, Executors.newCachedThreadPool());
 
     }
 
