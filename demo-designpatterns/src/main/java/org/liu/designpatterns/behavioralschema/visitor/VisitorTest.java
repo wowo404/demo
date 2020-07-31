@@ -11,6 +11,7 @@ package org.liu.designpatterns.behavioralschema.visitor;
  */
 public class VisitorTest {
 
+	//这个示例更加完整清晰：https://www.jianshu.com/p/1f1049d0a0f4
 	public static void main(String[] args) {
 		//该模式适用场景：如果我们想为一个现有的类增加新功能，不得不考虑几个事情：
 		//1、新功能会不会与现有功能出现兼容性问题？

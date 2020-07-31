@@ -31,6 +31,8 @@
         <module>demo-tomcat</module>
         <module>demo-netty-chat-server</module>
         <module>demo-protobuf</module>
+        <module>demo-zookeeper</module>
+        <module>demo-paho</module>
     </modules>
 
     <properties>

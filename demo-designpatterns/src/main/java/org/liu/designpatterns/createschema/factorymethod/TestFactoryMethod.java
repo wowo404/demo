@@ -9,7 +9,7 @@ public class TestFactoryMethod {
 
 	public static void main(String[] args) {
 
-		AnimalFacoty af = new DogFactory();
+		AnimalFactory af = new DogFactory();
 		
 		Animal animal = af.getAnimal();
 		

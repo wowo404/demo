@@ -10,7 +10,7 @@ public class TestBuilder {
 
 		Builder b = new BuilderImpl();
 		
-		Director d = new Director(b);
+		Director d = new Director(b);//这里可以传入各种不同的Builder实现类
 		Product p = d.createProduct();
 		System.out.println(p);
 		

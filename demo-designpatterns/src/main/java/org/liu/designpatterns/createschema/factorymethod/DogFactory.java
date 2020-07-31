@@ -1,6 +1,6 @@
 package org.liu.designpatterns.createschema.factorymethod;
 
-public class DogFactory extends AnimalFacoty{
+public class DogFactory extends AnimalFactory{
 
 	@Override
 	Animal getAnimal() {

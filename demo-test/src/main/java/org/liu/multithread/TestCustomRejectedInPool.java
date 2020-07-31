@@ -15,7 +15,7 @@ import java.util.concurrent.*;
 public class TestCustomRejectedInPool {
 
     //    private ExecutorService threadPool = new ThreadPoolExecutor(1, 2, 5, TimeUnit.SECONDS, new LinkedBlockingDeque<>(3), new ThreadPoolExecutor.DiscardPolicy());
-    private ExecutorService threadPool = new ThreadPoolExecutor(1, 2, 5, TimeUnit.SECONDS, new LinkedBlockingDeque<>(3), new MyRejectedExecutionHandler());
+    private ExecutorService threadPool = new ThreadPoolExecutor(1, 2, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>(3), new MyRejectedExecutionHandler());
 //    private ExecutorService threadPool = Executors.newFixedThreadPool(2);
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

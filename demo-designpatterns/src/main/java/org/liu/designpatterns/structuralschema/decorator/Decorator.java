@@ -6,7 +6,7 @@ package org.liu.designpatterns.structuralschema.decorator;
  */
 public class Decorator implements Sourceable{
 
-	private Sourceable source;
+	private Sourceable source;//关键点，持有一个被装饰对象的抽象类或接口
 	
 	public Decorator(Sourceable source){
 		super();
