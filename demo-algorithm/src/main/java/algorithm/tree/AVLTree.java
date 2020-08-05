@@ -1,4 +1,4 @@
-package org.liu.tree;
+package algorithm.tree;
 
 import lombok.Getter;
 import lombok.Setter;

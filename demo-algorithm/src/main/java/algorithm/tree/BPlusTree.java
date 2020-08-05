@@ -1,4 +1,4 @@
-package org.liu.tree;
+package algorithm.tree;
 
 public class BPlusTree {
 }

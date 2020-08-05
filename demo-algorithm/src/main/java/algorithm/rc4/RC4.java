@@ -1,4 +1,4 @@
-package org.liu.algorithm;
+package algorithm.rc4;
 
 import java.util.UUID;
 

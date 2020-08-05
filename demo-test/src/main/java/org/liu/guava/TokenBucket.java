@@ -1,4 +1,4 @@
-package org.liu.algorithm;
+package org.liu.guava;
 
 import com.google.common.base.Preconditions;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class TokenBucket implements LifeCycle {
+public class TokenBucket {
     // 默认桶大小个数 即最大瞬间流量是64M
     private static final int DEFAULT_BUCKET_SIZE = 1024 * 1024 * 64;
 
@@ -99,7 +99,6 @@ public class TokenBucket implements LifeCycle {
         }
     }
 
-    @Override
     public void start() {
 
 // 初始化桶队列大小
@@ -114,13 +113,11 @@ public class TokenBucket implements LifeCycle {
 
     }
 
-    @Override
     public void stop() {
         isStart = false;
         scheduledExecutorService.shutdown();
     }
 
-    @Override
     public boolean isStarted() {
         return isStart;
     }

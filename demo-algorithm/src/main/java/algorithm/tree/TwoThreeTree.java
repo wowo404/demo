@@ -1,4 +1,4 @@
-package org.liu.tree;
+package algorithm.tree;
 
 /**
  * 2-3树
