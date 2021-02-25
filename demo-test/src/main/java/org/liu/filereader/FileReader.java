@@ -6,34 +6,29 @@ import org.apache.commons.lang3.RandomUtils;
 
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 
 public class FileReader {
 
 	public static final String SRC = "src/main/resources/pdf/contract_tpl.pdf";
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, URISyntaxException {
 		FileReader fr = new FileReader();
 //		fr.filter();
 //		fr.read();
 //		fr.read2();
 //		fr.saveFile();
-		String content = fr.bufferRead("D:\\home\\manufacture\\file\\2019\\09\\24\\00000145-7-20190924000001.txt");
-		content = content.replaceFirst("," ,"");
-		String[] split = content.split(",");
-		String[] a = new String[split.length];
-		for (int i = 0; i < split.length; i++) {
-			double temp = Double.parseDouble(split[i]) / 10 + RandomUtils.nextDouble(0.1, 2.0);
-			a[i] = String.valueOf(temp == 0 ? 1 : temp);
-		}
-		String path = "D:\\home\\manufacture\\file\\2019\\09\\24\\00000145-7-20190924000001-test.txt";
-		File file = new File(path);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-		writer.write(Arrays.toString(a));
+//		fr.getFileFromUrl();
+
 //		String fullPath = FilenameUtils.getFullPath("C://A/B/C/A.txt");
 //		System.out.println(fullPath);
 //		System.out.println(new File(fullPath).exists());
-
+		File file = new File("D:\\funny\\downloads\\abc\\f");
+		if (!file.exists()) {
+			file.mkdirs();
+		}
     }
 
     public void filter() throws IOException {
@@ -107,5 +102,12 @@ public class FileReader {
         is.close();
 //        fos.close();
     }
+
+    public void getFileFromUrl() throws URISyntaxException, IOException {
+		File file = new File(new URI("https://manman-note.oss-cn-beijing.aliyuncs.com/note-api/static/%E5%B0%8F%E6%9B%BC%E5%A4%B4%E5%83%8F.png"));
+		InputStream is = new FileInputStream(file);
+		FileUtils.copyInputStreamToFile(is, new File("D:\\funny\\downloads\\f.txt"));
+		is.close();
+	}
 
 }

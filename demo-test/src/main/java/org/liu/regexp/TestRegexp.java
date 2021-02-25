@@ -10,10 +10,30 @@ import java.util.regex.Pattern;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        domain();
+        match();
+    }
+
+    public static void match(){
+        password();
+    }
+
+    public static void password(){
+        String pwd = "2345esd_";
+        Pattern pattern = Pattern.compile("\\w{8,16}");
+        Matcher matcher = pattern.matcher(pwd);
+        boolean matches = matcher.matches();
+        System.out.println(matches);
+    }
+
+    public static void image(){
+        String src = "data:image/JPEG;base64";
+        if (src.matches("(data:image/)[a-zA-Z]+(;base64)")) {
+            System.out.println(src);
+        }
     }
 
     public static void domain(){
+        notContain();
         System.out.println("sfd".indexOf(""));
         System.out.println("监测点123".indexOf("点1"));
         String url = "http://anotherbug.blog.chinajavaworld.org.cn/entry/4545/0/";
@@ -47,9 +67,9 @@ public class TestRegexp {
     }
 
     public static void notContain(){
-        String reg = "^((?!#).)*$";
+        String reg = "^((?!@|\\$|#|a-z|0-9).)*$";
         Pattern pattern = Pattern.compile(reg);
-        System.out.println(pattern.matcher("15058124996").matches());
+        System.out.println(pattern.matcher("我是对方@").matches());
     }
 
     /**

@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        Map<Integer, Integer> map = new HashMap<>();
-        Integer put = map.put(1, 10);
-        System.out.println(put);
+        subList();
     }
 
     public static void removeAll(){
@@ -115,6 +113,17 @@ public class TestCollection {
         for (Map.Entry<String, String> entry : treeMap.entrySet()) {
             System.out.println(entry.getKey() + " -- " + entry.getValue());
         }
+    }
+
+    public static void subList(){
+        List<Integer> list = new ArrayList<>(5);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        List<Integer> subList = list.subList(0, 5);
+        System.out.println(subList);
     }
 
 }

@@ -1,6 +1,8 @@
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.liu.model.ChannelProductReq;
+import org.liu.model.CourseOutlineReq;
 import org.liu.obj.Superior;
 
 import java.io.File;
@@ -12,6 +14,28 @@ public class Test {
 
     private final static long DATACENTER_BIT = 8;
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Date now = new Date();
+        List<CourseOutlineReq> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            CourseOutlineReq req = new CourseOutlineReq();
+            req.setName("a" + i);
+            req.setStartBroadcastingTime(DateUtils.addDays(now, i));
+            req.setEndBroadcastingTime(DateUtils.addDays(now, i + 1));
+
+            list.add(req);
+        }
+
+        for (CourseOutlineReq courseOutlineReq : list) {
+            for (CourseOutlineReq outlineReq : list) {
+                if (courseOutlineReq.equals(outlineReq)) {
+                    System.out.println(outlineReq);
+                }
+            }
+        }
+    }
 
     public static String transferWarningDurationTime(Long durationTime) {
         String newTime = "";
@@ -37,8 +61,16 @@ public class Test {
         return newTime;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println(plus());
+    public static void replaceAll(){
+        String html = "<div><img data-local=\"wxfile://tmp_dd542a6ef31983c463f5bcf6a6986bed.jpg\" src=\"abc\"><p>dsfdf</p><img data-local=\"wxfile://tmp_ab543a6ef31983c463f5bcf6a6986bed.jpg\" src=\"abc\"></div>";
+        String s = html.replaceAll("data-local=\"wxfile://([a-z0-9_\\.]*)\"", "");
+        System.out.println(s);
+
+        String url = "http://manmanbj-note.oss-accelerate.aliyuncs.com/note-api/20201112/jpg/2304855594082205.jpg?Expires=1920526583&amp;OSSAccessKeyId=LTAI4GDL3L6KKcUP9jgX3d4y&amp;Signature=QdxpedbIkNMuK%2F7OOKdiaIf2o6Q%3D?dd";
+        String replaceAll = url.replaceAll("\\?.*", "");
+        System.out.println(replaceAll);
+        String substring = replaceAll.substring(replaceAll.lastIndexOf("/") + 1);
+        System.out.println(substring);
     }
 
     public static int plus() {

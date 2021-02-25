@@ -1,9 +1,14 @@
 package org.liu.jdk18;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.math.BigDecimal;
+import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -70,6 +75,8 @@ public class TestJDK18 {
         nameList.forEach(s -> {
             System.out.println(s);
         });
+        String collect = list.stream().map(person -> person.getName()).collect(Collectors.joining(","));
+        System.out.println(collect);
     }
 
     /**
@@ -155,9 +162,37 @@ public class TestJDK18 {
                 .ifPresent(System.out::println);
     }
 
+    public void toBytes(){
+        List<Long> deletedIdList = new ArrayList<>();
+        deletedIdList.add(1L);
+        deletedIdList.add(2L);
+        deletedIdList.add(3L);
+        deletedIdList.add(4L);
+        byte[][] bytes = deletedIdList.stream()
+                .map(id -> ByteBuffer.allocate(8).putLong(id).array())
+                .toArray(a -> new byte[deletedIdList.size()][]);
+        System.out.println(bytes);
+    }
+
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
-        test.collectBigDecimal();
+        test.collectToList();
+    }
+
+    static final class MyCollectors {
+
+        private MyCollectors() {}
+
+        public static Collector<Byte, ?, byte[]> toByteArray() {
+            return Collector.of(ByteArrayOutputStream::new, ByteArrayOutputStream::write, (baos1, baos2) -> {
+                try {
+                    baos2.writeTo(baos1);
+                    return baos1;
+                } catch (IOException e) {
+                    throw new UncheckedIOException(e);
+                }
+            }, ByteArrayOutputStream::toByteArray);
+        }
     }
 
     static class Person {

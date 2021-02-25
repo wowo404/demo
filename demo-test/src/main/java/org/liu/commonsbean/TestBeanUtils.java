@@ -44,6 +44,10 @@ public class TestBeanUtils {
         }
     }
 
+    public static void copyParentProperties(){
+
+    }
+
     public static void run(){
         System.out.println(TestBeanUtils.class.getSimpleName());
         Monkey monkey = new Monkey();

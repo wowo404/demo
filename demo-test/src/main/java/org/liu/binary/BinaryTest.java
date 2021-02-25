@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
+        byte b = 0x7e;
+        System.out.println(Byte.toString(b));
         System.out.println(Integer.toBinaryString(-128));
         System.out.println(Integer.toBinaryString(127));
         System.out.println(Integer.toBinaryString(-1));

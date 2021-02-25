@@ -42,8 +42,15 @@ public class TestInnerClass {
         sub.operationSub();
     }
 
-    public static void main(String[] args) {
+    private static class InnerClassPrivateProperty{
+        private int count = 0;
+    }
 
+    private void incr(InnerClassPrivateProperty inner){
+        inner.count++;
+    }
+
+    public static void main(String[] args) {
         TestInnerClass test = new TestInnerClass();
         //Sub sub = new Sub(); //static方法不能引用非静态变量this，没有使用static修饰的内部类不能直接创建对象
         test.new Sub();//正确的使用方法
@@ -51,6 +58,9 @@ public class TestInnerClass {
         Main main = new Main();//可以直接创建static内部类的对象
         main.operationSup();
 
+        InnerClassPrivateProperty property = new InnerClassPrivateProperty();
+        test.incr(property);
+        System.out.println(property.count);
     }
 
 }

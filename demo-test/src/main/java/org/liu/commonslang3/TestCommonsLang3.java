@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.liu.binary.BinaryTest;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
-        removeFirst();
+        join();
 
     }
 
@@ -108,6 +109,14 @@ public class TestCommonsLang3 {
                 "151393433158815744";
         String[] arr = batchNo.split("\n");
         System.out.println(arr.length);
+    }
+
+    public static void join(){
+        String[] params = {"appid=1", "secret=2", "js_code=3", "grant_type=4"};
+        Arrays.sort(params);
+        String signStr = StringUtils.join(params, "&");
+
+        System.out.println(signStr);
     }
 
 }

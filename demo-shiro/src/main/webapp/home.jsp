@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   ~ Copyright (c) 2013 Les Hazlewood and contributors
   ~
@@ -35,5 +36,11 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <shiro:lacksPermission name="user:edit">
+        <div><h2>I don't have edit user permission!</h2></div>
+    </shiro:lacksPermission>
+    <shiro:hasPermission name="user:add">
+        <div><h2>I can add user!</h2></div>
+    </shiro:hasPermission>
 </body>
 </html>

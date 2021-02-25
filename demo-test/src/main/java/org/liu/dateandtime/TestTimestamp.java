@@ -14,6 +14,8 @@ public class TestTimestamp {
 
         Timestamp timestamp = new Timestamp(new Date().getTime());
         System.out.println(timestamp);
+
+        System.out.println(new Date(1610640000));
     }
 
 }
