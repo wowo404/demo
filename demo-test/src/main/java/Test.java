@@ -1,8 +1,6 @@
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.liu.model.ChannelProductReq;
-import org.liu.model.CourseOutlineReq;
 import org.liu.obj.Superior;
 
 import java.io.File;
@@ -16,25 +14,13 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
+        String url = "http://msw.0797gzwz.com";
+        String replace = url.replace("http://", "");
+        int firstSlashIndex = replace.indexOf("/");
+        System.out.println(firstSlashIndex);
 
-        Date now = new Date();
-        List<CourseOutlineReq> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            CourseOutlineReq req = new CourseOutlineReq();
-            req.setName("a" + i);
-            req.setStartBroadcastingTime(DateUtils.addDays(now, i));
-            req.setEndBroadcastingTime(DateUtils.addDays(now, i + 1));
-
-            list.add(req);
-        }
-
-        for (CourseOutlineReq courseOutlineReq : list) {
-            for (CourseOutlineReq outlineReq : list) {
-                if (courseOutlineReq.equals(outlineReq)) {
-                    System.out.println(outlineReq);
-                }
-            }
-        }
+        String pathNotContainDomain = replace.substring(firstSlashIndex);
+        System.out.println(pathNotContainDomain);
     }
 
     public static String transferWarningDurationTime(Long durationTime) {
@@ -61,7 +47,7 @@ public class Test {
         return newTime;
     }
 
-    public static void replaceAll(){
+    public static void replaceAll() {
         String html = "<div><img data-local=\"wxfile://tmp_dd542a6ef31983c463f5bcf6a6986bed.jpg\" src=\"abc\"><p>dsfdf</p><img data-local=\"wxfile://tmp_ab543a6ef31983c463f5bcf6a6986bed.jpg\" src=\"abc\"></div>";
         String s = html.replaceAll("data-local=\"wxfile://([a-z0-9_\\.]*)\"", "");
         System.out.println(s);

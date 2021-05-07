@@ -1,6 +1,8 @@
 package org.liu.commonslang3;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.liu.binary.BinaryTest;
 
@@ -14,8 +16,12 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
-        join();
+        random();
 
+    }
+
+    private static void random(){
+        System.out.println(RandomStringUtils.randomAlphabetic(5));
     }
 
     private static void countMatches() {

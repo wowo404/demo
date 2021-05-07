@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.liu.model.SysDept;
+import org.liu.model.TreeSelect;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -366,6 +368,36 @@ public class LambdaAndStream {
 		range.size();
 	}
 
+	/**
+	 * 把一个包含父子关系的集合拷贝到另一个同样包含父子关系的集合中，两个集合是不一样的对象
+	 */
+	public void copyToNewObjectCollection(){
+		SysDept dept0 = new SysDept();
+		dept0.setDeptId(10L);
+		dept0.setDeptName("aa10");
+		List<SysDept> children = new ArrayList<>();
+		children.add(dept0);
+
+		SysDept dept = new SysDept();
+		dept.setDeptId(1L);
+		dept.setDeptName("a");
+		dept.setChildren(children);
+
+		SysDept dept1 = new SysDept();
+		dept1.setDeptId(2L);
+		dept1.setDeptName("b");
+		dept1.setChildren(children);
+
+		List<SysDept> list = new ArrayList<>();
+		list.add(dept);
+		list.add(dept1);
+
+		List<TreeSelect> collect = list.stream().map(TreeSelect::new).collect(Collectors.toList());
+
+		System.out.println(collect);
+
+	}
+
 	@Getter
 	@Setter
 	@NoArgsConstructor
@@ -411,7 +443,8 @@ public class LambdaAndStream {
 		//		ls.test7();
 		//		ls.test8();
 //		ls.test10();
-		ls.maxValueInMap();
+//		ls.maxValueInMap();
+		ls.copyToNewObjectCollection();
 	}
 
 }

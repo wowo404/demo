@@ -1,5 +1,6 @@
 package org.liu.collection;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.liu.model.Animal;
 import org.liu.obj.Superior;
 
@@ -13,7 +14,29 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        subList();
+        removeAll();
+    }
+
+    public static void removeDynamic(){
+        List<Animal> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            Animal animal = new Animal();
+            animal.setId(i);
+
+            list.add(animal);
+        }
+
+        for (int i = 0; i < 11; i++) {
+            if (list.size() == 0) continue;
+            int random = RandomUtils.nextInt(0, list.size());
+            System.out.println("size:" +  list.size() + ",random:" + random);
+            Animal randomAnimal = list.get(random);
+            if (null != randomAnimal) {
+                System.out.println(randomAnimal);
+                list.remove(random);
+            }
+        }
+        System.out.println(list);
     }
 
     public static void removeAll(){

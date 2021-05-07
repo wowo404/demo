@@ -7,6 +7,7 @@ package org.liu.enums;
 public class TestEnums {
 
     public static void main(String[] args) {
+        System.out.println(AnimalType.FLY.name());
     }
 
 }

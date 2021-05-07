@@ -24,8 +24,25 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        jsonNode();
+        jsonAndEnum();
 
+    }
+
+    /**
+     * originFormType字段时枚举类，如果mapper不配置ACCEPT_EMPTY_STRING_AS_NULL_OBJECT，则将空字符串转成枚举会报错
+     * @throws IOException
+     */
+    public static void jsonAndEnum() throws IOException {
+        String json = "{\n" +
+                "    \"pageNum\": 1,\n" +
+                "    \"pageSize\": 10,\n" +
+                "    \"fuzzyString\": \"\",\n" +
+                "    \"specInfo\": \"\",\n" +
+                "    \"originFormIds\": [],\n" +
+                "    \"originFormType\": \"\"\n" +
+                "}";
+        BarcodeQueryReq value = mapper.readValue(json, BarcodeQueryReq.class);
+        System.out.println(value);
     }
 
     public static void jsonToObject() throws IOException {
