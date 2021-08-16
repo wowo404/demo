@@ -14,6 +14,14 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
+        String str = "abc";
+        String[] split = str.split(",");
+        for (String s : split) {
+            System.out.println(s);
+        }
+    }
+
+    public static void splitURL(){
         String url = "http://msw.0797gzwz.com";
         String replace = url.replace("http://", "");
         int firstSlashIndex = replace.indexOf("/");

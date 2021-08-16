@@ -2,97 +2,103 @@ package org.liu.filereader;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.RandomUtils;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.net.URL;
+import java.util.Base64;
 
 public class FileReader {
 
-	public static final String SRC = "src/main/resources/pdf/contract_tpl.pdf";
-	
-	public static void main(String[] args) throws IOException, URISyntaxException {
-		FileReader fr = new FileReader();
+    public static final String SRC = "src/main/resources/pdf/contract_tpl.pdf";
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        FileReader fr = new FileReader();
 //		fr.filter();
 //		fr.read();
 //		fr.read2();
 //		fr.saveFile();
 //		fr.getFileFromUrl();
 
-//		String fullPath = FilenameUtils.getFullPath("C://A/B/C/A.txt");
-//		System.out.println(fullPath);
-//		System.out.println(new File(fullPath).exists());
-		File file = new File("D:\\funny\\downloads\\abc\\f");
-		if (!file.exists()) {
-			file.mkdirs();
-		}
+        fr.readFromUrl();
+    }
+
+    public void readFromUrl() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        BufferedImage bi = ImageIO.read(new URL("https://factory-img.jxminxun.com/FACTORY/132/20210814ce8be155-2d75-4e35-9ac5-d2ac0313b13e.jpg"));
+        ImageIO.write(bi, "jpg", baos);
+
+        byte[] bytes = baos.toByteArray();
+        String base64String = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(base64String);
     }
 
     public void filter() throws IOException {
-		String path = "D:\\projects\\manufacture\\";
-		File dir = new File(path);
-		if (!dir.isDirectory()) {
-			dir.mkdirs();
-		}
-		String fileName = "manufacture.properties";
-		File file = new File(path + File.separator + fileName);
-		if (!file.exists()) {
-			boolean newFile = file.createNewFile();
-			System.out.println(newFile);
-		}
-		FilenameFilter filter = (dir1, name) -> {
-			if (name.startsWith("manufacture")){
-				return true;
-			}
-			return false;
-		};
-		File[] files = dir.listFiles(filter);
-		for (File file1 : files) {
-			System.out.println(file1.getName());
-		}
-	}
-	
-	public void read() throws IOException{
-		InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
-		byte[] buff = IOUtils.toByteArray(is, is.available());
-		String content = new String(buff, "UTF-8");
-		System.out.println(content);
-	}
+        String path = "D:\\projects\\manufacture\\";
+        File dir = new File(path);
+        if (!dir.isDirectory()) {
+            dir.mkdirs();
+        }
+        String fileName = "manufacture.properties";
+        File file = new File(path + File.separator + fileName);
+        if (!file.exists()) {
+            boolean newFile = file.createNewFile();
+            System.out.println(newFile);
+        }
+        FilenameFilter filter = (dir1, name) -> {
+            if (name.startsWith("manufacture")) {
+                return true;
+            }
+            return false;
+        };
+        File[] files = dir.listFiles(filter);
+        for (File file1 : files) {
+            System.out.println(file1.getName());
+        }
+    }
 
-	public void read2() throws IOException{
-		InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
-		byte[] buff = new byte[is.available()];
-		int offset = 0;
-		int read;
-		while ((read = is.read(buff, offset, 512)) != -1){
-			offset += read;
-		}
-		String content = new String(buff, "UTF-8");
-		System.out.println(content);
-	}
-	
-	public static String bufferRead(String path) throws IOException {
-		BufferedReader br = new BufferedReader(new java.io.FileReader(path));
-		String line = null;
-		StringBuffer sb = new StringBuffer();
-		while ((line = br.readLine()) != null) {
-			sb.append(line);
-		}
-		br.close();
-		return sb.toString();
-	}
+    public void read() throws IOException {
+        InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
+        byte[] buff = IOUtils.toByteArray(is, is.available());
+        String content = new String(buff, "UTF-8");
+        System.out.println(content);
+    }
 
-	public void fileName(){
+    public void read2() throws IOException {
+        InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
+        byte[] buff = new byte[is.available()];
+        int offset = 0;
+        int read;
+        while ((read = is.read(buff, offset, 512)) != -1) {
+            offset += read;
+        }
+        String content = new String(buff, "UTF-8");
+        System.out.println(content);
+    }
+
+    public static String bufferRead(String path) throws IOException {
+        BufferedReader br = new BufferedReader(new java.io.FileReader(path));
+        String line = null;
+        StringBuffer sb = new StringBuffer();
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        br.close();
+        return sb.toString();
+    }
+
+    public void fileName() {
         File file = new File(SRC);
         String name = file.getName().substring(0, file.getName().lastIndexOf("."));
         System.out.println(name);
     }
 
     public void saveFile() throws IOException {
-	    //target
+        //target
 //        FileOutputStream fos = new FileOutputStream(new File("/Users/liuzhangsheng/Downloads/e.txt"));
         //source
         InputStream is = new FileInputStream(new File("/Users/liuzhangsheng/Downloads/a.txt"));
@@ -104,10 +110,10 @@ public class FileReader {
     }
 
     public void getFileFromUrl() throws URISyntaxException, IOException {
-		File file = new File(new URI("https://manman-note.oss-cn-beijing.aliyuncs.com/note-api/static/%E5%B0%8F%E6%9B%BC%E5%A4%B4%E5%83%8F.png"));
-		InputStream is = new FileInputStream(file);
-		FileUtils.copyInputStreamToFile(is, new File("D:\\funny\\downloads\\f.txt"));
-		is.close();
-	}
+        File file = new File(new URI("https://manman-note.oss-cn-beijing.aliyuncs.com/note-api/static/%E5%B0%8F%E6%9B%BC%E5%A4%B4%E5%83%8F.png"));
+        InputStream is = new FileInputStream(file);
+        FileUtils.copyInputStreamToFile(is, new File("D:\\funny\\downloads\\f.txt"));
+        is.close();
+    }
 
 }

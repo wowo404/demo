@@ -1,5 +1,7 @@
 package org.liu.image;
 
+import cn.hutool.core.util.IdUtil;
+
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -7,6 +9,7 @@ import javax.imageio.ImageWriter;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.*;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,7 +39,7 @@ public class ImageUtils {
      *
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 /*		// 1-缩放图像：
 		// 方法一：按比例缩放
 		ImageUtils.scale("e:/abc.jpg", "e:/abc_scale.jpg", 2, true);//测试OK
@@ -60,15 +63,20 @@ public class ImageUtils {
 		// 5-给图片添加文字水印：
 		// 方法一：
 		ImageUtils.pressText("我是水印文字", "e:/abc.jpg", "e:/abc_pressText.jpg",
-				"宋体", Font.BOLD, Color.white, 80, 0, 0, 0.5f);//测试OK
-		// 方法二：
-		ImageUtils.pressText2("下载We社区（银川小松鼠公司推广）", "C:/Users/liuzhsh/Desktop/blank.jpg", "C:/Users/liuzhsh/Desktop/test.jpg",
-				"黑体", Font.BOLD, Color.BLACK, 15, 0, 15, 0.5f);//测试OK
-*/
+				"宋体", Font.BOLD, Color.white, 80, 0, 0, 0.5f);//测试OK*/
+        // 方法二：
+//        ImageUtils.pressText2("下载We社区（银川小松鼠公司推广）", "C:/Users/liuzhsh/Desktop/blank.jpg", "C:/Users/liuzhsh/Desktop/test.jpg",
+//                "黑体", Font.BOLD, Color.BLACK, 15, 0, 15, 0.5f);//测试OK
+
 
         // 6-给图片添加图片水印：
-//		ImageUtils.pressImage("e:/abc2.jpg", "e:/abc.jpg", "e:/abc_pressImage.jpg", 0, 0, 0.5f);//测试OK
+//        ImageUtils.pressImage("E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode136.jpg",
+//                "E:\\work\\bashen\\information-collect\\需求版本2.0\\template-1080-920.jpg",
+//                "E:\\work\\bashen\\information-collect\\需求版本2.0\\target.jpg", 60, 1550, 1.0f);//测试OK
 //		mergeImage("C:/Users/liuzhsh/Desktop/6.jpg","C:/Users/liuzhsh/Desktop/blank.jpg","C:/Users/liuzhsh/Desktop/e.jpg","下载We社区（银川小松鼠公司推广）");
+//        setBorderRadius("E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode136.jpg",
+//                "E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode-act.jpg", 50);
+        pressImageAndText();
     }
 
     /**
@@ -470,8 +478,7 @@ public class ImageUtils {
             int height_biao = src_biao.getHeight(null);
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,
                     alpha));
-            g.drawImage(src_biao, (wideth - wideth_biao) / 2,
-                    (height - height_biao) / 2, wideth_biao, height_biao, null);
+            g.drawImage(src_biao, x, y, wideth_biao, height_biao, null);
             // 水印文件结束
             g.dispose();
             ImageIO.write((BufferedImage) image, "JPEG",
@@ -552,12 +559,12 @@ public class ImageUtils {
      * 压缩图片
      *
      * @param srcFilePath
-	 * @param dest 目标文件地址
-     * @param quality 参数qality是取值0~1范围内  代表压缩的程度
+     * @param dest        目标文件地址
+     * @param quality     参数qality是取值0~1范围内  代表压缩的程度
      * @return
      */
     public static void compressPictureByQuality(String srcFilePath, String dest, float quality) {
-		File srcFile = new File(srcFilePath);
+        File srcFile = new File(srcFilePath);
         if (!srcFile.exists()) {
             throw new RuntimeException("文件不存在");
         }
@@ -602,6 +609,59 @@ public class ImageUtils {
                 }
             }
         }
+    }
+
+    /**
+     * 把图片的直角转换成圆角
+     *
+     * @param srcFilePath
+     * @param destFilePath
+     * @param radius
+     * @throws IOException
+     */
+    public static void setBorderRadius(String srcFilePath, String destFilePath, int radius) throws IOException {
+        File srcFile = new File(srcFilePath);
+        BufferedImage srcImage = ImageIO.read(srcFile);
+        int width = srcImage.getWidth();
+        int height = srcImage.getHeight();
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+        g2d.setComposite(AlphaComposite.SrcOut);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//        g2d.fillRoundRect(0, 0, width, height, radius, radius);
+        g2d.fill(new RoundRectangle2D.Float(0, 0, width, height, radius, radius));
+        g2d.setBackground(Color.WHITE);
+        g2d.setComposite(AlphaComposite.SrcAtop);
+        g2d.drawImage(srcImage, 0, 0, width, height, null);
+        g2d.dispose();
+        ImageIO.write(image, "jpg", new File(destFilePath));
+    }
+
+    public static void pressImageAndText() throws IOException {
+        BufferedImage src = ImageIO.read(new File("E:\\work\\bashen\\information-collect\\需求版本2.0\\template-1080-1920.jpg"));
+        int width = src.getWidth();
+        int height = src.getHeight();
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = image.createGraphics();
+        g.drawImage(src, 0, 0, width, height, null);
+        // 水印文件
+//        BufferedImage pressImg = ImageIO.read(new File(URLUtil.toURI(qrcodeUrl)));
+        BufferedImage pressImg = ImageIO.read(new File("E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode136.jpg"));
+        int pressImgWidth = pressImg.getWidth();
+        int pressImgHeight = pressImg.getHeight();
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 1.0f));
+        g.drawImage(pressImg, 68, 1555, pressImgWidth, pressImgHeight, null);
+        // 水印文字
+        g.setColor(new Color(110, 108, 99));
+        g.setFont(new Font("黑体", Font.BOLD, 32));
+        g.drawString("长按识别二维码 开始体验家具门市网吧~", 370, 1620);
+        g.drawString("客服电话：", 370, 1740);
+        g.drawString("15012345678" + "  " + "陆大炮", 370, 1790);
+
+        g.dispose();
+        String destFilePath = "E:\\work\\bashen\\information-collect\\需求版本2.0\\" + IdUtil.fastUUID() + ".jpg";
+        File destFile = new File(destFilePath);
+        ImageIO.write(image, "JPEG", destFile);
     }
 
 }
