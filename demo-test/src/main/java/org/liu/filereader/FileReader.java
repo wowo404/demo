@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Base64;
 
 public class FileReader {
@@ -23,10 +24,24 @@ public class FileReader {
 //		fr.saveFile();
 //		fr.getFileFromUrl();
 
-        fr.readFromUrl();
+        fr.readImageFromUrl();
     }
 
-    public void readFromUrl() throws IOException {
+    public byte[] readFileFromUrl(String imageUrl) throws IOException {
+        URL url = new URL(imageUrl);
+        URLConnection con = url.openConnection();
+
+        // 得到URL的输入流
+        InputStream input = con.getInputStream();
+        int length = input.available();
+        // 设置数据缓冲
+        byte[] bs = new byte[length];
+        // 读取到的数据长度
+        input.read(bs, 0, length);
+        return bs;
+    }
+
+    public void readImageFromUrl() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         BufferedImage bi = ImageIO.read(new URL("https://factory-img.jxminxun.com/FACTORY/132/20210814ce8be155-2d75-4e35-9ac5-d2ac0313b13e.jpg"));
