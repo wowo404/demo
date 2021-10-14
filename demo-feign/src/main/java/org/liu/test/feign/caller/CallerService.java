@@ -14,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 public class CallerService {
 
+    /**
+     * 教程：https://www.jianshu.com/p/3d597e9d2d67/
+     */
     public void callRemote(){
         RemoteService service = Feign.builder()
                 .encoder(new JacksonEncoder())
