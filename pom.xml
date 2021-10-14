@@ -33,6 +33,7 @@
         <module>demo-protobuf</module>
         <module>demo-zookeeper</module>
         <module>demo-paho</module>
+        <module>demo-feign</module>
     </modules>
 
     <properties>
