@@ -10,16 +10,12 @@ import java.util.regex.Pattern;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        match();
-    }
-
-    public static void match(){
         password();
     }
 
     public static void password(){
-        String pwd = "2345esd_";
-        Pattern pattern = Pattern.compile("\\w{8,16}");
+        String pwd = "2345esdDGFG";
+        Pattern pattern = Pattern.compile("[0-9a-zA-Z]{8,16}");
         Matcher matcher = pattern.matcher(pwd);
         boolean matches = matcher.matches();
         System.out.println(matches);

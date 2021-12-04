@@ -76,7 +76,11 @@ public class ImageUtils {
 //		mergeImage("C:/Users/liuzhsh/Desktop/6.jpg","C:/Users/liuzhsh/Desktop/blank.jpg","C:/Users/liuzhsh/Desktop/e.jpg","下载We社区（银川小松鼠公司推广）");
 //        setBorderRadius("E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode136.jpg",
 //                "E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode-act.jpg", 50);
-        pressImageAndText();
+//        pressImageAndText();
+        BufferedImage image = generateImageWithText(150, 30, 15, "实木家具");
+        String destFilePath = "D:\\download\\gen1.jpg";
+        File destFile = new File(destFilePath);
+        ImageIO.write(image, "JPEG", destFile);
     }
 
     /**
@@ -664,4 +668,36 @@ public class ImageUtils {
         ImageIO.write(image, "JPEG", destFile);
     }
 
+    /**
+     * 生成图片，水印文字的大小根据图片来确定
+     *
+     * @param width
+     * @param height
+     * @param text
+     * @return
+     */
+    public static BufferedImage generateImageWithText(int width, int height, int fontSize, String text) {
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphic = image.createGraphics();
+        graphic.setColor(Color.WHITE);
+        graphic.fillRect(0, 0, width, height);
+        graphic.setColor(new Color(110, 108, 99));
+        graphic.setFont(new Font("黑体", Font.BOLD, fontSize));
+        int fontLength = getWatermarkLength(text, graphic);
+        int x = (width - fontLength) / 2;
+        int y = Math.max(fontSize, height / 2);
+        graphic.drawString(text, x, y);
+        return image;
+    }
+
+    /**
+     * 获取水印文字总长度
+     *
+     * @paramwaterMarkContent水印的文字
+     * @paramg
+     * @return水印文字总长度
+     */
+    public static int getWatermarkLength(String waterMarkContent, Graphics2D g) {
+        return g.getFontMetrics(g.getFont()).charsWidth(waterMarkContent.toCharArray(), 0, waterMarkContent.length());
+    }
 }
