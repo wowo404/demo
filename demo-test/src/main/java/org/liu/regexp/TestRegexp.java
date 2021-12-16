@@ -13,9 +13,22 @@ public class TestRegexp {
         password();
     }
 
+    /**
+     * 必须包含大写字母，小写字母，数字，6到20位：(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,20}
+     */
     public static void password(){
-        String pwd = "2345esdDGFG";
-        Pattern pattern = Pattern.compile("[0-9a-zA-Z]{8,16}");
+        /**
+         * 分开来注释一下：
+         * ^ 匹配一行的开头位置
+         * (?![0-9]*$) 预测该位置后面不全是数字，如果把*号换成+号，则不能以数字开头
+         * (?![a-zA-Z]+$) 预测该位置后面不全是字母
+         * [0-9A-Za-z] {8,16} 由8-16位数字或这字母组成
+         * $ 匹配行结尾位置
+         *
+         * 注：(?!xxxx) 是正则表达式的负向零宽断言一种形式，标识预该位置后不是xxxx字符
+         */
+        String pwd = "1qgjgfd3465";
+        Pattern pattern = Pattern.compile("(?![0-9]*$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}");
         Matcher matcher = pattern.matcher(pwd);
         boolean matches = matcher.matches();
         System.out.println(matches);
