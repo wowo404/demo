@@ -6,6 +6,22 @@ import java.math.RoundingMode;
 public class MathTest {
 
     public static void main(String[] args) {
+        System.out.println(1 % 10);
+        System.out.println(2 % 10);
+        System.out.println(3 % 10);
+        System.out.println(4 % 10);
+        System.out.println(5 % 10);
+        System.out.println(6 % 10);
+        System.out.println(7 % 10);
+        System.out.println(8 % 10);
+        System.out.println(9 % 10);
+        System.out.println(10 % 10);
+        System.out.println(11 % 10);
+        System.out.println(12 % 10);
+        System.out.println(1456 % 10);
+
+        System.out.println("---------");
+
         int a = 6 >> 1;
         System.out.println(a);
 

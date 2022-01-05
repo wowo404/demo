@@ -11,7 +11,7 @@ public class TestReentrantReadWriteLock {
 
     public static void main(String[] args) {
         TestReentrantReadWriteLock test = new TestReentrantReadWriteLock();
-        test.getReadLockWhenHoldWriteLock();
+        test.testReadWriteSameTime();
     }
 
     public void readLock() {
