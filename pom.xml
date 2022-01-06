@@ -36,6 +36,7 @@
         <module>demo-feign</module>
         <module>demo-objenesis</module>
         <module>demo-asm</module>
+        <module>demo-cglib</module>
     </modules>
 
     <properties>
