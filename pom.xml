@@ -37,6 +37,7 @@
         <module>demo-objenesis</module>
         <module>demo-asm</module>
         <module>demo-cglib</module>
+        <module>demo-aspectj</module>
     </modules>
 
     <properties>
