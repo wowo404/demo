@@ -36,7 +36,7 @@ public class CallerService {
     }
 
     public void callFileService(){
-        FileService fileService = Feign.builder().encoder(new FormEncoder()).target(FileService.class, "http://127.0.0.1:7414");
+        FileService fileService = Feign.builder().encoder(new FormEncoder()).decoder(new JacksonDecoder()).target(FileService.class, "http://127.0.0.1:7414");
 
         Response<Void> resp = fileService.upload(new File("D:\\data\\photos\\gen.jpg"));
         System.out.println("resultCode:" + resp.getCode());
