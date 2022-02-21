@@ -1,35 +1,50 @@
 package org.demo.json;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * https://www.cnblogs.com/guanbin-529/p/11488869.html
+ *
  * @author liuzhangsheng
  * @create 2018/10/24
  */
 public class TestJackson {
 
     private static ObjectMapper mapper = new ObjectMapper();
+
     static {
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.enable(JsonParser.Feature.ALLOW_SINGLE_QUOTES);
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
         mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+        mapper.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
     }
 
     public static void main(String[] args) throws IOException {
         jsonAndEnum();
+        testBigDecimal();
+    }
 
+    public static void testBigDecimal() throws JsonProcessingException {
+        PriceModel model = new PriceModel();
+        model.setPersonalPrice(new BigDecimal("1.0"));
+
+        String s = mapper.writeValueAsString(model);
+        System.out.println(s);
     }
 
     /**
      * originFormType字段时枚举类，如果mapper不配置ACCEPT_EMPTY_STRING_AS_NULL_OBJECT，则将空字符串转成枚举会报错
+     *
      * @throws IOException
      */
     public static void jsonAndEnum() throws IOException {

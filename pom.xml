@@ -38,6 +38,7 @@
         <module>demo-asm</module>
         <module>demo-cglib</module>
         <module>demo-aspectj</module>
+        <module>demo-jgit</module>
     </modules>
 
     <properties>

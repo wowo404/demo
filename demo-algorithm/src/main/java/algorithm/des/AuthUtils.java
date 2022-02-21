@@ -80,4 +80,9 @@ public class AuthUtils {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
+
+    public static void main(String[] args) {
+        AuthInfo authInfo = decodeToken("eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2tleSI6IjI2NV90ZXh0XzUwMV9TRUFfQ0hJTkVTRV8xNjQwMTA2NzI4MjE0In0.D-trcfMk0FZ7l12_-JEwVpILmu4JE5zlzopSyJRefRbV3yFUOTYT11n0kXvjTM2NI0Exy-49OyS8j-6AoNHJaA");
+        System.out.println(authInfo);
+    }
 }

@@ -1,5 +1,9 @@
 package org.liu.obj;
 
+import org.apache.commons.beanutils.BeanUtils;
+
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * main
  *
@@ -8,10 +12,21 @@ package org.liu.obj;
  */
 public class TestObj {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
         char a = 'a';
         TestObj test = new TestObj();
         char[] i = (char[])test.transferStringToBasicDataType(String.valueOf(a), char.class);
+        Junior junior = new Junior();
+        test.testObjectReference(junior);
+        System.out.println(junior.getId());
+        System.out.println(junior.getType());
+    }
+
+    public void testObjectReference(Junior junior) throws InvocationTargetException, IllegalAccessException {
+        Junior junior1 = new Junior();
+        junior1.setId(1);
+        BeanUtils.copyProperties(junior, junior1);
+        junior.setType(2);
     }
 
     public Object test(int i) {

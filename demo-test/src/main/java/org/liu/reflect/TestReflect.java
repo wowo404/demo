@@ -14,10 +14,10 @@ import org.liu.model.MonkeySons;
 
 public class TestReflect {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		TestReflect t = new TestReflect();
-		
-		Monkey monkey = new Monkey();
+
+        Monkey monkey = new Monkey();
 		monkey.setColor("red");
 		monkey.setId(1);
 		monkey.setName("gucci");

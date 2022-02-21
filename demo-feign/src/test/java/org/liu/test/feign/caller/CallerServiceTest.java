@@ -10,4 +10,9 @@ public class CallerServiceTest {
     public void callRemote() {
         callerService.callRemote();
     }
+
+    @Test
+    public void callFileService() {
+        callerService.callFileService();
+    }
 }

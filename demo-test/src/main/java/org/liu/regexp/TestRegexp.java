@@ -27,8 +27,10 @@ public class TestRegexp {
          *
          * 注：(?!xxxx) 是正则表达式的负向零宽断言一种形式，标识预该位置后不是xxxx字符
          */
-        String pwd = "1qgjgfd3465";
-        Pattern pattern = Pattern.compile("(?![0-9]*$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}");
+        String pwd = "1abggff";
+        String reg1 = "(?![0-9]*$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}";
+        String reg = "(?!^\\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]+$";
+        Pattern pattern = Pattern.compile(reg);
         Matcher matcher = pattern.matcher(pwd);
         boolean matches = matcher.matches();
         System.out.println(matches);

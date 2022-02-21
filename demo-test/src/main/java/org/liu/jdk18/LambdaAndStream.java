@@ -431,7 +431,17 @@ public class LambdaAndStream {
 		Integer value = map.entrySet().stream().max(Map.Entry.comparingByValue()).get().getValue();
 		System.out.println(value);
 	}
-	
+
+	//取某一个字段放入数组
+	public void toArray(){
+		List<InnerDCSData> list = new ArrayList<>();
+		list.add(new InnerDCSData("a-123", "1", "32.65"));
+		list.add(new InnerDCSData("a-123", "2", "50.65"));
+		list.add(new InnerDCSData("b-123", "3", "60.65"));
+		String[] strings = list.stream().map(InnerDCSData::getId).collect(Collectors.toList()).toArray(new String[]{});
+		System.out.println(strings);
+	}
+
 	public static void main(String[] args) {
 		LambdaAndStream ls = new LambdaAndStream();
 		//		ls.test1();
@@ -444,7 +454,8 @@ public class LambdaAndStream {
 		//		ls.test8();
 //		ls.test10();
 //		ls.maxValueInMap();
-		ls.copyToNewObjectCollection();
+//		ls.copyToNewObjectCollection();
+		ls.toArray();
 	}
 
 }
