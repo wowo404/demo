@@ -10,7 +10,14 @@ import java.util.regex.Pattern;
 public class TestRegexp {
 
     public static void main(String[] args) {
+        test();
         password();
+    }
+
+    public static void test(){
+        String str = "adf";
+        String reg = ".*([a-zA-Z].*)";
+        System.out.println(str.matches(reg));
     }
 
     /**
@@ -27,9 +34,11 @@ public class TestRegexp {
          *
          * 注：(?!xxxx) 是正则表达式的负向零宽断言一种形式，标识预该位置后不是xxxx字符
          */
-        String pwd = "1abggff";
+        String pwd = "@123QWER$";
         String reg1 = "(?![0-9]*$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}";
-        String reg = "(?!^\\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]+$";
+        String reg2 = "(?!^\\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]+$";
+        //至少包含数字跟字母，可以有字符
+        String reg = "(?!^[a-zA-Z]+$)(?!^\\d+$)[a-zA-Z0-9`~!@#$%^&*()_\\-=+]{8,18}";
         Pattern pattern = Pattern.compile(reg);
         Matcher matcher = pattern.matcher(pwd);
         boolean matches = matcher.matches();

@@ -11,8 +11,8 @@ public interface RemoteService {
     @RequestLine("GET /user/getByName?name={name}")
     String getByName(@Param(value = "name") String name);
 
-    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @Headers({"Content-Type: application/json", "Accept: application/json", "Authorization: {token}"})
     @RequestLine("POST /user/operateAccount")
-    Response<Void> operateAccount(OperateAccountReq req);
+    Response<Void> operateAccount(@Param("token") String token, OperateAccountReq req);
 
 }
