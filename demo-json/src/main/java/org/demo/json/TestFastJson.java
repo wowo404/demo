@@ -33,7 +33,21 @@ public class TestFastJson {
 //        System.out.println(JSON.toJSONString(requestData));
 
 //        testGenericParadigm();
+        testMessage();
 
+    }
+
+    private static void testMessage(){
+        String s = "{\"data\":{\"password\":\"$2a$10$GBB.pRGA5x8jrnJxVwet6eSUxMYI0RGrbLD2HnYKvech96IAm9ZHG\",\"nickName\":\"戴菲菲有限公司\",\"tenantId\":\"1654649478167\",\"phonenumber\":\"15058124996\",\"action\":\"tenant_add\",\"expireDate\":\"2022-06-30\",\"userType\":\"1\",\"userName\":\"15058124996\",\"userId\":\"1654845713326\",\"platform\":\"crm\",\"status\":\"0\"},\"id\":\"1535160305343139840\",\"type\":\"PLATFORM_SYNC\"}";
+//        Message message = JSON.parseObject(s, Message.class);
+//        System.out.println(message);
+        JSONObject jsonObject = JSON.parseObject(s);
+        System.out.println(jsonObject);
+        Message message = JSON.toJavaObject(jsonObject, Message.class);
+        System.out.println(message);
+    }
+
+    private static void testArray(){
         String[] arrOneLevel = {"a", "b", "c"};
         System.out.println(JSON.toJSONString(arrOneLevel));
 

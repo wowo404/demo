@@ -11,13 +11,14 @@ public class TestRegexp {
 
     public static void main(String[] args) {
         test();
-        password();
     }
 
     public static void test(){
-        String str = "adf";
-        String reg = ".*([a-zA-Z].*)";
+        String str = "crm";
+        String reg = "(?!^-)[0-9\\-]{6,16}";
         System.out.println(str.matches(reg));
+        String reg1 = "pl|erp|crm|sim";
+        System.out.println(str.matches(reg1));
     }
 
     /**

@@ -39,6 +39,7 @@
         <module>demo-cglib</module>
         <module>demo-aspectj</module>
         <module>demo-jgit</module>
+        <module>demo-web-servlet</module>
     </modules>
 
     <properties>
