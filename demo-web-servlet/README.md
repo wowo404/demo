@@ -23,3 +23,4 @@
 </Realm>
 ```
 - **注意：要把mysql的jar包放入${tomcat_home}/lib目录下**
+- 还有web.xml中的配置

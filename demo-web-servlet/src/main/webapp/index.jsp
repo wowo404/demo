@@ -4,17 +4,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Hello</title>
+    <title>Test</title>
 </head>
 <body>
-<%
-    int httpStatus = response.getStatus();
-    Object message = request.getAttribute("message");
-%>
-<h1>Hello,Servlet</h1>
-<span>状态码：<%=httpStatus%>，返回消息：<%=message%></span>
+<h1>Hello,Test</h1>
 <hr>
-<span><a href="/login.jsp">login</a></span><br>
-<span><a href="/index.jsp">back to index</a></span>
+<span><a href="/login.jsp">login</a></span>
+<span><a href="/admin/hello">adminHello</a></span>
+<span><a href="/hello">hello</a></span>
 </body>
 </html>
