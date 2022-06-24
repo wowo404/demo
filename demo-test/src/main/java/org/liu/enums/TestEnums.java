@@ -7,11 +7,17 @@ package org.liu.enums;
 public class TestEnums {
 
     public static void main(String[] args) {
-        LanguageEnum abc = LanguageEnum.valueOf("abc");
-        System.out.println(abc);
+        getConstants();
+        System.out.println(SelectionEnum.class.isAssignableFrom(AnimalType.class));
+    }
 
-        for (PartsAccountExportTemplateEnum value : PartsAccountExportTemplateEnum.values()) {
-            System.out.println(value);
+    private static void getConstants() {
+        AnimalType[] enumConstants = AnimalType.class.getEnumConstants();
+        for (AnimalType enumConstant : enumConstants) {
+            System.out.println(SelectionEnum.class.isAssignableFrom(enumConstant.getClass()));
+            System.out.println(enumConstant);
+            SelectionEnum selectionEnum = enumConstant;
+            System.out.println(selectionEnum.code());
         }
     }
 

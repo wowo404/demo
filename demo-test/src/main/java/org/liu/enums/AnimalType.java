@@ -3,7 +3,7 @@ package org.liu.enums;
 /**
  * Created by hello on 2017/11/9.
  */
-public enum AnimalType {
+public enum AnimalType implements SelectionEnum {
     FLY(0,"飞行动物"),LAND(1,"陆地动物"),SEA(2,"海洋动物");
     public Integer type;
     public String desc;
@@ -11,6 +11,7 @@ public enum AnimalType {
         this.type = type;
         this.desc = desc;
     }
+
     public static AnimalType create(Integer type){
         AnimalType[] arr = AnimalType.values();
         for (AnimalType animalType : arr) {
@@ -19,5 +20,10 @@ public enum AnimalType {
             }
         }
         return null;
+    }
+
+    @Override
+    public String code() {
+        return String.valueOf(type);
     }
 }

@@ -1,5 +1,6 @@
 package org.liu.binary;
 
+import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -302,5 +303,29 @@ public class BinaryTest {
         return Float.intBitsToFloat(l);
     }
 
+    /*
+     * 将16进制数字解码成字符串,适用于所有字符（包括中文）
+     */
+    public static String decode(String bytes) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length() / 2);
+        // 将每2位16进制整数组装成一个字节
+        for (int i = 0; i < bytes.length(); i += 2)
+            baos.write((hexString.indexOf(bytes.charAt(i)) << 4 | hexString
+                    .indexOf(bytes.charAt(i + 1))));
+        return new String(baos.toByteArray());
+    }
+
+    private static String hexString = "0123456789ABCDEF";
+
+    private static char[] HEX_VOCABLE = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+    public static String singleByteToHex(byte b){
+        StringBuilder sb = new StringBuilder();
+        int high = (b >> 4) & 0x0f;
+        int low = b & 0x0f;
+        sb.append(HEX_VOCABLE[high]);
+        sb.append(HEX_VOCABLE[low]);
+        return sb.toString();
+    }
 
 }
