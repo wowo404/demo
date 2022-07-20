@@ -439,7 +439,9 @@ public class LambdaAndStream {
 		list.add(new InnerDCSData("a-123", "2", "50.65"));
 		list.add(new InnerDCSData("b-123", "3", "60.65"));
 		String[] strings = list.stream().map(InnerDCSData::getId).collect(Collectors.toList()).toArray(new String[]{});
-		System.out.println(strings);
+		System.out.println(Arrays.toString(strings));
+		String[] array = list.stream().map(InnerDCSData::getSerialNum).toArray(num -> new String[list.size()]);
+		System.out.println(Arrays.toString(array));
 	}
 
 	public static void main(String[] args) {

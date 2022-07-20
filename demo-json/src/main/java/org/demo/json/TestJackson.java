@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * https://www.cnblogs.com/guanbin-529/p/11488869.html
@@ -30,8 +32,28 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        jsonAndEnum();
-        testBigDecimal();
+        testBeautifulToJson();
+    }
+
+    public static void testBeautifulToJson() throws JsonProcessingException {
+        InfoPublish publish = new InfoPublish();
+        publish.setPublishId(1L);
+        publish.setTitle("okokok");
+
+        CategoryOrPublishResp resp1 = new CategoryOrPublishResp();
+        resp1.setCategoryId(1L);
+        resp1.setCategoryName("a");
+//        resp1.setInfoPublish(publish);
+        CategoryOrPublishResp resp2 = new CategoryOrPublishResp();
+        resp2.setCategoryId(2L);
+        resp2.setCategoryName("b");
+//        resp1.setInfoPublish(publish);
+
+        List<CategoryOrPublishResp> list = new ArrayList<>();
+        list.add(resp1);
+        list.add(resp2);
+
+        System.out.println(mapper.writeValueAsString(list));
     }
 
     public static void testBigDecimal() throws JsonProcessingException {
