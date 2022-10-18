@@ -3,8 +3,6 @@ package org.liu.encode;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
-import org.apache.commons.codec.binary.Hex;
-
 /**
  * TODO:本功能还无效
  * @author liuzhangsheng
@@ -17,8 +15,6 @@ public class EncodeUtil {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.println(arr[i]);
 		}
-		String aa = "sdfsafasf323似懂非懂";
-		System.out.println(Hex.encodeHexString(aa.getBytes()));
 	}
 	
 	public static String[] getEncoding(String str) {

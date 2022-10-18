@@ -23,5 +23,9 @@ public class TestDigest {
 
         byte[] bytes = Hex.decodeHex(hexString);
         System.out.println(new String(bytes));
+
+        String sha256Hex = DigestUtils.sha256Hex("123456");
+        String hex = DigestUtils.sha256Hex(sha256Hex + "2019-08-15");
+        System.out.println(hex);//58e2c92c46485fdbc35fdcd0814d6c0f000cad5aa156848ca5edaf29406b7661
     }
 }

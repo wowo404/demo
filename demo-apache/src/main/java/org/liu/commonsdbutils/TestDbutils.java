@@ -1,18 +1,22 @@
 package org.liu.commonsdbutils;
 
-import cn.hutool.core.io.FileUtil;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author lzs
@@ -27,7 +31,7 @@ public class TestDbutils {
             "sys_logininfor", "sys_menu", "sys_notice", "sys_oper_log", "sys_post", "sys_role", "sys_role_dept", "sys_role_menu",
             "sys_tenant", "sys_user", "sys_user_address", "sys_user_post", "sys_user_role", "tv_qrcode", "wx_user"};
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException {
         MysqlDataSource dataSource = new MysqlDataSource();
         dataSource.setUrl("jdbc:mysql://124.71.75.172:33306/shop-sim?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true");
         dataSource.setUser("jxbs");
@@ -54,7 +58,7 @@ public class TestDbutils {
                     values.add(convert(entry.getValue()));
                 }
                 insertSql = insertSql + String.join(",", columns) + ") values (" + String.join(",", values) + ");";
-                FileUtil.appendLines(Collections.singletonList(insertSql), file, Charset.defaultCharset());
+                FileUtils.writeStringToFile(file, insertSql, Charset.defaultCharset(), true);
             }
         }
     }
@@ -82,7 +86,7 @@ public class TestDbutils {
             return value.toString();
         }
         if (value instanceof Boolean) {
-            return (Boolean)value ? "1" : "0";
+            return (Boolean) value ? "1" : "0";
         }
         return null;
     }

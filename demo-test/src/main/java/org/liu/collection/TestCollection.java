@@ -1,8 +1,7 @@
 package org.liu.collection;
 
-import org.apache.commons.lang3.RandomUtils;
+import cn.hutool.core.util.RandomUtil;
 import org.liu.model.Animal;
-import org.liu.obj.Superior;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ public class TestCollection {
         removeAll();
     }
 
-    public static void removeDynamic(){
+    public static void removeDynamic() {
         List<Animal> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Animal animal = new Animal();
@@ -28,8 +27,8 @@ public class TestCollection {
 
         for (int i = 0; i < 11; i++) {
             if (list.size() == 0) continue;
-            int random = RandomUtils.nextInt(0, list.size());
-            System.out.println("size:" +  list.size() + ",random:" + random);
+            int random = RandomUtil.randomInt(list.size());
+            System.out.println("size:" + list.size() + ",random:" + random);
             Animal randomAnimal = list.get(random);
             if (null != randomAnimal) {
                 System.out.println(randomAnimal);
@@ -39,7 +38,7 @@ public class TestCollection {
         System.out.println(list);
     }
 
-    public static void removeAll(){
+    public static void removeAll() {
         Animal animal = new Animal();
         animal.setId(1);
 
@@ -63,7 +62,7 @@ public class TestCollection {
         }
     }
 
-    public static void sort(){
+    public static void sort() {
         Animal animal = new Animal();
         animal.setId(1);
 
@@ -85,7 +84,7 @@ public class TestCollection {
         }
     }
 
-    public static void treeSet(){
+    public static void treeSet() {
         TreeSet<Integer> treeSet = new TreeSet<>();
         treeSet.add(4);
         treeSet.add(1);
@@ -95,7 +94,7 @@ public class TestCollection {
         System.out.println(treeSet.last());
     }
 
-    public static void test(){
+    public static void test() {
         Map<Integer, Integer> map = new HashMap<>();
         System.out.println(map.get(0));
 
@@ -122,7 +121,7 @@ public class TestCollection {
         }
     }
 
-    public static void treeMap(){
+    public static void treeMap() {
         Map<String, String> treeMap = new TreeMap<>();
         treeMap.put("20200112110400-1-2", "abc2");
         treeMap.put("20200112110400-1-3", "abc3");
@@ -138,7 +137,7 @@ public class TestCollection {
         }
     }
 
-    public static void subList(){
+    public static void subList() {
         List<Integer> list = new ArrayList<>(5);
         list.add(1);
         list.add(2);

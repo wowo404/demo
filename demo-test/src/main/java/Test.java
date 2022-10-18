@@ -1,5 +1,4 @@
-import com.google.common.collect.Lists;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.liu.model.ChannelProductReq;
 import org.liu.obj.Superior;
 
@@ -7,7 +6,6 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Test {
 
@@ -243,7 +241,7 @@ public class Test {
         BigDecimal rate = null;
         System.out.println(String.valueOf(rate));
 
-        System.out.println(StringUtils.substring("00" + "1", -3));
+        System.out.println(StrUtil.sub("00" + "1", 0, -3));
 
         List<Integer> list = Arrays.asList(1, 2);
         //this will throw exception
@@ -292,7 +290,8 @@ public class Test {
 
     public static void listContains() {
         String[] ip = {"123", "127.0.0.1", "0.0.0.0"};
-        ArrayList<String> list = Lists.newArrayList(ip);
+        ArrayList<String> list = new ArrayList<>();
+        Collections.addAll(list, ip);
         System.out.println(list.hashCode());
         boolean contains = list.contains("192.168.0.1");
         boolean contains1 = list.contains("127.0.0.1");
@@ -302,7 +301,7 @@ public class Test {
     }
 
     public static void endWithAny() {
-        boolean endsWithAny = StringUtils.endsWithAny("a.JPEG".toLowerCase(), "jpeg");
+        boolean endsWithAny = StrUtil.endWithAny("a.JPEG".toLowerCase(), "jpeg");
         System.out.println(endsWithAny);
     }
 

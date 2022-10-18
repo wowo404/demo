@@ -41,6 +41,8 @@
         <module>demo-jgit</module>
         <module>demo-web-servlet</module>
         <module>demo-jsqlparse</module>
+        <module>demo-apache</module>
+        <module>demo-google</module>
     </modules>
 
     <properties>
