@@ -13,12 +13,6 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
-        Date date = new Date(1654704000000L);
-        System.out.println(date);
-        date.setHours(23);
-        date.setMinutes(59);
-        date.setSeconds(59);
-        System.out.println(date.getTime());
     }
 
     public static boolean isNormalized(String path) {

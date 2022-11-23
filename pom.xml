@@ -43,6 +43,7 @@
         <module>demo-jsqlparse</module>
         <module>demo-apache</module>
         <module>demo-google</module>
+        <module>demo-mockito</module>
     </modules>
 
     <properties>

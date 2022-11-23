@@ -1,9 +1,9 @@
 package org.liu.image;
 
-import org.apache.commons.codec.binary.Base64;
 import sun.misc.BASE64Decoder;
 
 import java.io.*;
+import java.util.Base64;
 
 public class ImageBase64Util {
 
@@ -25,12 +25,12 @@ public class ImageBase64Util {
         } catch (IOException e) {
             throw new RuntimeException("图片转base64错误", e);
         }
-        return new String(Base64.encodeBase64(data));
+        return Base64.getEncoder().encodeToString(data);
     }
 
     /**
      *      * 对字节数组字符串进行Base64解码并生成图片
-     *          不能以data:image/png;base64,开头
+     * 不能以data:image/png;base64,开头
      *      * @param imgStr 图片数据
      *      * @param imgFilePath 保存图片全路径地址
      *      * @return

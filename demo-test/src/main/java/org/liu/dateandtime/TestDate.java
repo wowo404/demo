@@ -1,11 +1,7 @@
 package org.liu.dateandtime;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -81,12 +77,6 @@ public class TestDate {
 		return new SimpleDateFormat(pattern).format(source);
 	}
 
-	public static Integer minusWithDay(Date firstDate, Date anotherDate) {
-		long first = DateUtils.truncate(firstDate, Calendar.DAY_OF_MONTH).getTime();
-		long another = DateUtils.truncate(anotherDate, Calendar.DAY_OF_MONTH).getTime();
-		return (int) ((first - another) / (24 * 60 * 60 * 1000));
-	}
-
 	/**
 	 * 根据date获取range个月后的同一天，如果当天不存在，则获取这个月的最后一天
 	 */
@@ -121,7 +111,7 @@ public class TestDate {
 			System.out.println(dateIntervalContainStartDay(endTime, startTime).intValue());
 		}
 	}
-	
+
 	public static void queryStartProfitTimeAndEndProfitTime(){
 		Integer period = 6;//期数
         Date firstPeriodStartProfitTime = addDay(parse("2017-12-31 00:00:00", COMMON_PATTERN), 1);

@@ -1,6 +1,6 @@
 package org.liu.enums;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 public enum LanguageEnum {
 
@@ -15,11 +15,10 @@ public enum LanguageEnum {
     SPANISH;
 
     public static LanguageEnum resolve(String language) {
-        if (StringUtils.isEmpty(language)) {
+        if (StrUtil.isEmpty(language)) {
             return CHINESE;
         }
-        LanguageEnum lan = valueOf(language);
-        return lan == null ? CHINESE : lan;
+        return valueOf(language);
     }
 
 }

@@ -6,11 +6,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * https://www.cnblogs.com/guanbin-529/p/11488869.html
@@ -32,8 +36,46 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        testBeautifulToJson();
+        readJsonFile();
     }
+
+    public static void readJsonFile() throws IOException {
+        CollectionType collectionType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, ColumnConfig.class);
+        List<ColumnConfig> list = mapper.readValue(new File("D:\\data\\casen_data\\sys_configs.sql"), collectionType);
+        System.out.println(list);
+    }
+
+    public static void readJsonFileToJsonNode() throws IOException {
+        JsonNode jsonNode = mapper.readTree(new File("D:\\data\\casen_data\\sys_configs.sql"));
+        List<ColumnConfig> list = new ArrayList<>();
+        Iterator<JsonNode> elements = jsonNode.elements();
+        while (elements.hasNext()) {
+            JsonNode next = elements.next();
+            System.out.println(next);
+            ColumnConfig columnConfig = new ColumnConfig();
+            columnConfig.setName(next.get("name").asText());
+            if (next.get("table").isTextual()) {
+                columnConfig.setTable(next.get("table").asText());
+            } else if (next.get("table").isObject()) {
+                JsonNode table = next.get("table");
+                Map<String,String[]> map = mapper.treeToValue(table, Map.class);
+                columnConfig.setTable(map.toString());
+            }
+            if (next.has("nfmt")) {
+                columnConfig.setNfmt(next.get("nfmt").asText());
+            }
+            columnConfig.setType(next.get("type").asText());
+            columnConfig.setFlag(next.get("flag").asText());
+//            columnConfig.setMajor(next.get("major"));
+            if (next.has("exp")) {
+                columnConfig.setExp(next.get("exp").toString());
+            }
+
+            list.add(columnConfig);
+        }
+        System.out.println(list);
+    }
+
 
     public static void testBeautifulToJson() throws JsonProcessingException {
         InfoPublish publish = new InfoPublish();

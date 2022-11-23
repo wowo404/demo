@@ -1,5 +1,6 @@
 package org.liu.regexp;
 
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +11,7 @@ import java.util.regex.Pattern;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        test();
+        matchPosition();
     }
 
     public static void test(){
@@ -19,6 +20,25 @@ public class TestRegexp {
         System.out.println(str.matches(reg));
         String reg1 = "pl|erp|crm|sim";
         System.out.println(str.matches(reg1));
+    }
+
+    /**
+     * 用正则表达式匹配出每个<p></p>里面的第三个。（句号）然后替换成169号
+     */
+    public static void matchPosition(){
+        String text = "<p>1你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。</p>" +
+                "<p>2我很好。我很好，我很好，我很好。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。</p>";
+        String reg = "(<p>(?:.*?。){2}.*?)。(.*?</p>)";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            System.out.println(matcher.groupCount());
+            for (int i = 0; i < matcher.groupCount(); i++) {
+                System.out.println(matcher.group(i));
+            }
+        }
+        String replaceAll = text.replaceAll(reg, "$1(169号)$2");
+        System.out.println(replaceAll);
     }
 
     /**

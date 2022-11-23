@@ -3,8 +3,11 @@ package org.liu.commonslang3;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +19,12 @@ public class TestCommonsLang3 {
 
         random();
 
+    }
+
+    public static Integer minusWithDay(Date firstDate, Date anotherDate) {
+        long first = DateUtils.truncate(firstDate, Calendar.DAY_OF_MONTH).getTime();
+        long another = DateUtils.truncate(anotherDate, Calendar.DAY_OF_MONTH).getTime();
+        return (int) ((first - another) / (24 * 60 * 60 * 1000));
     }
 
     private static void random() {

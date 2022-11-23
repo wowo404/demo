@@ -1,10 +1,8 @@
 package org.liu.http;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
-import com.google.common.collect.ImmutableMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 从http request中获取电脑、浏览器相关信息
@@ -79,8 +77,10 @@ public class GetInfoFromRequest {
 		} else {
 			browser = "UnKnown, More-Info: " + userAgent;
 		}
-
-		return ImmutableMap.of("os", os, "browser", browser);
+		Map<String, String> hashMap = new HashMap<>();
+		hashMap.put("os", os);
+		hashMap.put("browser", browser);
+		return hashMap;
 	}
 
 }
