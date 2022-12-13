@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>demo-algorithm</artifactId>
+    <artifactId>demo-datastructuresandalgorithmanalysis</artifactId>
 
     <properties>
         <jwt.version>0.9.1</jwt.version>

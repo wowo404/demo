@@ -3,11 +3,21 @@ package org.liu.basic;
 public class JavaGrammar {
 
     public static void main(String[] args) {
-        int size = tableSizeFor(33);
-        System.out.println(size);
+        operator(0, 1, 0);
+        operator(0, 2, 2);
+        operator(1, 2, 3);
+    }
 
-        int a  = 100 << 0;
-        System.out.println(a);
+    /**
+     * 操作符
+     */
+    static void operator(int a, int b, int c) {
+        //此条件相当于(a == 0 && b == 1) || c == 2
+        if (a == 0 && b == 1 || c == 2) {
+            System.out.println("ok");
+        } else {
+            System.out.println("fuck");
+        }
     }
 
     //返回大于或等于cap的2的倍数的那个值
@@ -21,7 +31,7 @@ public class JavaGrammar {
         return (n < 0) ? 1 : n + 1;
     }
 
-    public static void testIntAnd(){
+    public static void testIntAnd() {
         System.out.println(Integer.toBinaryString(1));//00000001
         System.out.println(Integer.toBinaryString(2));//00000010
         int a = 1 & 2;
@@ -29,7 +39,7 @@ public class JavaGrammar {
         System.out.println(Integer.toBinaryString(a));//00000000
     }
 
-    public static void testSwitch(){
+    public static void testSwitch() {
         int i = 0;
         switch (i) {
             case 0:
@@ -43,7 +53,7 @@ public class JavaGrammar {
         }
     }
 
-    public static void testRetry(){
+    public static void testRetry() {
         retry:
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 5; j++) {

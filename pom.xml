@@ -18,7 +18,7 @@
         <module>demo-hessian</module>
         <module>demo-office</module>
         <module>demo-designpatterns</module>
-        <module>demo-algorithm</module>
+        <module>demo-datastructuresandalgorithmanalysis</module>
         <module>demo-shiro</module>
         <module>demo-sms</module>
         <module>demo-activemq</module>

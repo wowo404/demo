@@ -13,6 +13,9 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
+        String s = "{{}:{$ne:null}}";
+        String format = StrUtil.format(s, "test", "a");
+        System.out.println(format);
     }
 
     public static boolean isNormalized(String path) {

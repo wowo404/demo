@@ -1,8 +1,12 @@
 package org.liu.reflect;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +20,9 @@ public class TestReflect {
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		TestReflect t = new TestReflect();
+
+		t.testField();
+		t.testClass();
 
         Monkey monkey = new Monkey();
 		monkey.setColor("red");
@@ -56,10 +63,38 @@ public class TestReflect {
         Class<? extends Animal> aClass = t.getClass();
         Class<?> declaringClass = t.getClass().getDeclaringClass();
         Class<?> enclosingClass = t.getClass().getEnclosingClass();
+        Field[] declaredFields = t.getClass().getDeclaredFields();
         Field[] fields = t.getClass().getFields();
+        Method[] declaredMethods = t.getClass().getDeclaredMethods();
+        Method[] methods = t.getClass().getMethods();
+        Annotation[] annotations = t.getClass().getAnnotations();
+        Annotation[] declaredAnnotations = t.getClass().getDeclaredAnnotations();
+        AnnotatedType[] annotatedInterfaces = t.getClass().getAnnotatedInterfaces();
+        AnnotatedType annotatedSuperclass = t.getClass().getAnnotatedSuperclass();
 
         String s = JSON.toJSONString(t);
+        System.out.println(s);
 		return t;
 	}
+
+	public void testField(){
+        Field[] fields = Monkey.class.getFields();
+        Field[] declaredFields = Monkey.class.getDeclaredFields();
+        for (Field declaredField : declaredFields) {
+            Type genericType = declaredField.getGenericType();
+            Class<?> type = declaredField.getType();
+            boolean assignableFrom = Collection.class.isAssignableFrom(type);
+            System.out.println("Collection's sub class:" + assignableFrom + "-----" + type);
+            Class<?> declaringClass = declaredField.getDeclaringClass();
+            System.out.println();
+        }
+
+        System.out.println();
+    }
+
+    public void testClass(){
+        Class<? extends Collection> aClass = List.class.asSubclass(Collection.class);
+        System.out.println();
+    }
 
 }

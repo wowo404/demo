@@ -1,8 +1,10 @@
 package org.liu.model;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
 public class Monkey extends Animal implements Action, Serializable {
 
 	private String color;
