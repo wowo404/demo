@@ -1,10 +1,11 @@
 package org.liu.regexp;
 
 import cn.hutool.core.util.StrUtil;
-import org.liu.hutool.TestHutool;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 
 /**
  * @author liuzhangsheng
@@ -30,7 +31,7 @@ public class TestRegexp {
             int rightBracketCount = StrUtil.count(group, ")");
             int firstIndex = text.indexOf(group);
             if (leftBracketCount != rightBracketCount) {
-                int lastIndex = TestHutool.ordinalIndexOf(text, ")", leftBracketCount, firstIndex);
+                int lastIndex = ordinalIndexOf(text, ")", leftBracketCount, firstIndex);
                 System.out.println(firstIndex + " - " + lastIndex);
                 String complexText = text.substring(firstIndex, lastIndex + 1);
                 System.out.println(complexText);
@@ -57,11 +58,15 @@ public class TestRegexp {
         System.out.println("反对".matches(reg2));
         System.out.println("{$add:['salesAmountOfTaxFree2','salesAmountOfCommonTaxRate1']}".matches("\\{\\$[a-z]+:.+}"));
         System.out.println("{$salesAmountOfCommonTaxRate1}".matches("\\{\\$[a-z]+:.+}"));
+
+        System.out.println("2022年12月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("2022年1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("2022年报".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
     }
 
     public static void getMatchGroup() {
-        String text = "1000+绝对值({房地产本年完成投资额（万元）})/四舍五入({本年商品房销售面积（平方米）},2)";
-        Pattern pattern = Pattern.compile("\\{.*?}");
+        String text = "({$a}+{$b})*{余额}-{商品房}";
+        Pattern pattern = Pattern.compile("(?!\\{\\$.*?})\\{.*?}");
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             System.out.println(matcher.group());
@@ -196,6 +201,9 @@ public class TestRegexp {
 
         String reg1 = "^(?![0-9])[a-zA-Z0-9]*";
         System.out.println("1231abc".matches(reg1));
+
+        String reg2 = "^(?!\\+|\\*|/|%|\\)).*";
+        System.out.println(")1+2-3*4/5%6".matches(reg2));
     }
 
     public static void endWith() {
@@ -208,6 +216,9 @@ public class TestRegexp {
         String a = "^.*(?<!a)$";
         System.out.println("地bcd1234.".matches(a));
         System.out.println("地bcd1234.a".matches(a));
+
+        String notEndWithReg = "^.*(?<!\\+|-|\\*|/|%|\\()$";
+        System.out.println("1+2(".matches(notEndWithReg));
     }
 
     /**

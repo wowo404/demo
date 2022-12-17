@@ -15,6 +15,7 @@ public class InfixToSuffix {
     private Stack<Character> stack;
     private String input;
     private List<String> output;
+    private static final String reg = "[+\\-*/%()]";
 
     public InfixToSuffix(String input) {
         this.stack = new Stack<>();
@@ -28,9 +29,19 @@ public class InfixToSuffix {
             char opThis = input.charAt(i);
             switch (opThis) {
                 case '+':
-                case '-':
                     len = processNormalText(len, i);
                     processOperator(opThis, 1);
+                    break;
+                case '-':
+                    //兼容负数
+                    if (i == 0) {
+                        len++;
+                    } else if (Character.valueOf(input.charAt(i - 1)).toString().matches(reg)){
+                        len++;
+                    } else {
+                        len = processNormalText(len, i);
+                        processOperator(opThis, 1);
+                    }
                     break;
                 case '*':
                 case '/':
@@ -48,6 +59,9 @@ public class InfixToSuffix {
                     break;
                 default:
                     len++;
+                    if (i == input.length() - 1) {
+                        processNormalText(len, input.length());
+                    }
                     break;
             }
         }

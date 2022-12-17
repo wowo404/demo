@@ -13,7 +13,6 @@
         <module>demo-view</module>
         <module>demo-mybatis</module>
         <module>demo-jaxws</module>
-        <module>demo-drools</module>
         <module>demo-easymock</module>
         <module>demo-hessian</module>
         <module>demo-office</module>

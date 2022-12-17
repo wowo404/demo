@@ -1,6 +1,14 @@
 package org.liu.basic;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import org.liu.rpn.calculatecolumn.InfixToSuffix;
+import org.liu.rpn.calculatecolumn.SuffixCalculator;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @Author lzs
@@ -8,22 +16,88 @@ import lombok.Data;
  **/
 public class TestString {
 
-    public static void main(String[] args) {
-        String replace = "1000+绝对值({房地产本年完成投资额（万元）})/四舍五入({本年商品房销售面积（平方米）},2)";
-        int absIndex = replace.indexOf("绝对值");
-        int absEndIndex = replace.indexOf(")", absIndex);
-        System.out.println(absIndex);
-        System.out.println(absEndIndex);
-        System.out.println(replace.substring(absIndex, absEndIndex + 1));
+    private String formula = "绝对值(4.44+5.55-四舍五入(6.66,2)+绝对值(-7.77))/(四舍五入(8.88/绝对值(9.99+10.11)*四舍五入(11.223,2),2)+12.33)";
+    private static final String mathematicsExpressionReg = "[+\\-*/%0-9().]+";
 
-        int roundIndex = replace.indexOf("四舍五入");
-        int roundEndIndex = replace.indexOf(")", roundIndex);
-        System.out.println(roundIndex);
-        System.out.println(roundEndIndex);
-        System.out.println(replace.substring(roundIndex, roundEndIndex + 1));
+    public static void main(String[] args) {
+        TestString testString = new TestString();
+        testString.recursiveReplace();
     }
 
-    public static void test(){
+    public void recursiveReplace() {
+        while (StrUtil.containsAny(formula, "绝对值", "四舍五入")) {
+            TextModel textModel = new TextModel("绝对值");
+            calculateAndReplace(textModel);
+            textModel = new TextModel("四舍五入");
+            calculateAndReplace(textModel);
+        }
+    }
+
+    private void calculateAndReplace(TextModel textModel) {
+        //查找可以直接计算的函数
+        getCanCalculateFunction(textModel, 0);
+        if (null != textModel.getFunctionText()) {
+            InfixToSuffix infixToSuffix = new InfixToSuffix(textModel.getInnerFunctionText());
+            SuffixCalculator suffixCalculator = new SuffixCalculator(infixToSuffix.parse());
+            BigDecimal innerFunctionResult = suffixCalculator.calculate();//函数内部表达式计算结果
+            BigDecimal functionResult = getFunctionResult(textModel, innerFunctionResult);
+
+            //替换原始字符串
+            formula = formula.replace(textModel.getFunctionText(), functionResult.toPlainString());
+        }
+    }
+
+    private void getCanCalculateFunction(TextModel textModel, int startIndex) {
+        int firstIndex = formula.indexOf(textModel.getFunctionName(), startIndex);//函数在text中的起始索引
+        if (firstIndex == -1) {
+            return;
+        }
+        int firstRightBracketIndex = formula.indexOf(")", firstIndex);//从函数起始索引开始的第一个左括号的索引
+        String functionText = formula.substring(firstIndex, firstRightBracketIndex + 1);//截取函数字符串
+        int leftBracketCount = StrUtil.count(functionText, "(");
+        int rightBracketCount = StrUtil.count(functionText, ")");
+        if (leftBracketCount != rightBracketCount) {
+            getCanCalculateFunction(textModel, startIndex + textModel.getFunctionName().length());
+        } else {
+            textModel.setFunctionText(functionText);
+            textModel.setInnerFunctionText(getInnerFunctionText(functionText, textModel.getFunctionName()));
+        }
+    }
+
+    private BigDecimal getFunctionResult(TextModel textModel, BigDecimal innerFunctionResult) {
+        if (textModel.getFunctionName().equals("绝对值")) {
+            return innerFunctionResult.abs();
+        } else {
+            int lastIndexOfRightBracket = textModel.getFunctionText().lastIndexOf(")");
+            int lastIndexOfComma = textModel.getFunctionText().lastIndexOf(",");
+            String placeString = textModel.getFunctionText().substring(lastIndexOfComma + 1, lastIndexOfRightBracket);
+            return innerFunctionResult.setScale(Integer.parseInt(placeString), RoundingMode.HALF_UP);
+        }
+    }
+
+    @Getter
+    @Setter
+    private static class TextModel {
+        private String functionName;//函数中文名
+        private String functionText;//函数完整字符串
+        private String innerFunctionText;//函数内部的字符串
+
+        TextModel(String functionName) {
+            this.functionName = functionName;
+        }
+    }
+
+    private String getInnerFunctionText(String functionText, String functionName) {
+        String innerTextInFunction = functionText.replaceFirst(functionName + "\\(", "");
+        if (functionName.equals("绝对值")) {
+            innerTextInFunction = innerTextInFunction.substring(0, innerTextInFunction.length() - 1);
+        } else {
+            innerTextInFunction = innerTextInFunction.substring(0, innerTextInFunction.lastIndexOf(","));
+        }
+        return innerTextInFunction;
+    }
+
+    public static void test() {
         SearchConditionRelationalUnit unit = new SearchConditionRelationalUnit();
         String text = "{房地产本年完成投资额（万元）} 大于 1000 并且 {行业代码} 等于 6001 或者 {成立时间-年} 大于等于 2000 或者 {移动电话} 后缀 4996 并且 {运营状态} 等于 1 并且 {执行会计制度类别} 不等于 2";
         recursiveSubstring(text, unit, 0);

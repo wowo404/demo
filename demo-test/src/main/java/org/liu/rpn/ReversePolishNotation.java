@@ -9,7 +9,8 @@ package org.liu.rpn;
 public class ReversePolishNotation {
 
     public static void main(String[] args) {
-        String s = "3*(4+5)-6/(1+2%2)";
+//        String s = "3*(4+5)-6/(1+2%2)";
+        String s = "4+5";
         InToPost inToPost = new InToPost(s);
         String trans = inToPost.doTrans();
         System.out.println(trans);//345+*6122%+/-
