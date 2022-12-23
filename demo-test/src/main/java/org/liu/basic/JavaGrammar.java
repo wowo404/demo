@@ -3,9 +3,10 @@ package org.liu.basic;
 public class JavaGrammar {
 
     public static void main(String[] args) {
-        operator(0, 1, 0);
-        operator(0, 2, 2);
-        operator(1, 2, 3);
+        ClassCastModel castModel = new ClassCastModel();
+        castModel.setId(1L);
+        referenceArgs(castModel);
+        System.out.println(castModel);
     }
 
     /**
@@ -80,6 +81,13 @@ public class JavaGrammar {
             }
             if (tag) break;
         }
+    }
+
+    public static void referenceArgs(ClassCastModel castModel){
+        castModel.setId(2L);
+        castModel = new ClassCastModel();
+        castModel.setId(111L);
+        System.out.println(castModel);
     }
 
 }

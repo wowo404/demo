@@ -16,6 +16,7 @@ public class Test {
         String s = "{{}:{$ne:null}}";
         String format = StrUtil.format(s, "test", "a");
         System.out.println(format);
+        System.out.println(String.join(",", new HashSet<>()));
     }
 
     public static boolean isNormalized(String path) {

@@ -11,10 +11,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * https://www.cnblogs.com/guanbin-529/p/11488869.html
@@ -36,7 +33,7 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        readJsonFile();
+        listList();
     }
 
     public static void readJsonFile() throws IOException {
@@ -153,6 +150,14 @@ public class TestJackson {
         String json2 = "{\"message\":\"请求成功\",\"res\":{\"result\":\"击中规则\",\"Rule_final_decision\":\"复议\",\"rules\":[{\"rule_weight\":\"20\",\"rule_name\":\"朋友等关系银行不良\"},{\"rule_weight\":\"25\",\"rule_name\":\"银行不良\"}],\"Rule_final_weight\":\"45\"},\"orderNo\":\"170602170701919******\",\"code\":200}";
         DaShengBaseResponse daShengBaseResponse = mapper.readValue(json2, DaShengBaseResponse.class);
         System.out.println(daShengBaseResponse.getRes());
+    }
+
+    public static void listList() throws JsonProcessingException {
+        List<List<String>> list = new ArrayList<>();
+        list.add(Arrays.asList("a", "b"));
+        list.add(Arrays.asList("c", "d"));
+        String value = mapper.writeValueAsString(list);
+        System.out.println(value);
     }
 
 }

@@ -1,6 +1,5 @@
 package org.demo.jsqlparse;
 
-import com.google.common.collect.Sets;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.expression.Alias;
 import net.sf.jsqlparser.expression.Function;
@@ -15,10 +14,7 @@ import net.sf.jsqlparser.schema.Table;
 import net.sf.jsqlparser.statement.select.*;
 import net.sf.jsqlparser.util.SelectUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -94,7 +90,7 @@ public class Test {
         System.err.println(plainSelectLike); // SELECT * FROM test WHERE username LIKE '张%'
 
         // WHERE IN
-        Set<String> deptIds = Sets.newLinkedHashSet(); // 创建IN范围的元素集合
+        Set<String> deptIds = new LinkedHashSet<>(); // 创建IN范围的元素集合
         deptIds.add("0001");
         deptIds.add("0002");
         ItemsList itemsList = new ExpressionList(deptIds.stream().map(StringValue::new).collect(Collectors.toList())); // 把集合转变为JSQLParser需要的元素列表

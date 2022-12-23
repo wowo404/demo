@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        removeAll();
+        hashSet();
     }
 
     public static void removeDynamic() {
@@ -84,12 +84,36 @@ public class TestCollection {
         }
     }
 
+    public static void hashSet() {
+        HashSet<String> hashSet = new HashSet<>();
+        hashSet.add("base123");
+        hashSet.add("base01");
+        hashSet.add("a_company");
+        hashSet.add("census");
+        hashSet.forEach(System.out::println);
+        String first = hashSet.iterator().next();
+        System.out.println("---------");
+        System.out.println(first);
+        System.out.println("---------");
+        hashSet.remove(first);
+        hashSet.forEach(System.out::println);
+    }
+
+    public static void linkedHashSet() {
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("base123");
+        linkedHashSet.add("base01");
+        linkedHashSet.add("a_company");
+        linkedHashSet.add("census");
+        linkedHashSet.forEach(System.out::println);
+    }
+
     public static void treeSet() {
-        TreeSet<Integer> treeSet = new TreeSet<>();
-        treeSet.add(4);
-        treeSet.add(1);
-        treeSet.add(3);
-        treeSet.add(1);
+        TreeSet<String> treeSet = new TreeSet<>();
+        treeSet.add("base123");
+        treeSet.add("base01");
+        treeSet.add("a_company");
+        treeSet.add("census");
         treeSet.forEach(System.out::println);
         System.out.println(treeSet.last());
     }

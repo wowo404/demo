@@ -14,7 +14,7 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        test();
+        endWith();
     }
 
     public static void matchAbs() {
@@ -210,6 +210,9 @@ public class TestRegexp {
         String a = ".*地$";
         String s = "啊啊发地";
         System.out.println(s.matches(a));
+
+        String reg = "\\d{4,}$";
+        System.out.println("12344abc20221044".replaceFirst(reg, "t"));
     }
 
     public static void notEndWith() {
