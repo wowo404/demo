@@ -1,4 +1,4 @@
-package org.liu.demo.office;
+package org.liu.demo.pdf;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.ImageType;

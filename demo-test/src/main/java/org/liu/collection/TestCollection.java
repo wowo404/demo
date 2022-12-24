@@ -2,8 +2,10 @@ package org.liu.collection;
 
 import cn.hutool.core.util.RandomUtil;
 import org.liu.model.Animal;
+import org.liu.model.ChannelProductReq;
 
 import java.util.*;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -13,7 +15,32 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        hashSet();
+        sort();
+    }
+
+    public static void queue() {
+        ChannelProductReq req1 = new ChannelProductReq();
+        req1.setUserId("1");
+        req1.setPhone("111");
+
+        ChannelProductReq req2 = new ChannelProductReq();
+        req2.setUserId("1");
+        req2.setPhone("111");
+
+        System.out.println(req1.equals(req2));
+
+        LinkedBlockingQueue<ChannelProductReq> queue = new LinkedBlockingQueue<>();
+        queue.add(req1);
+        queue.add(req2);
+        queue.add(req1);
+
+        queue.forEach(System.out::println);
+
+        PriorityQueue<ChannelProductReq> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add(req1);
+        priorityQueue.add(req2);
+        priorityQueue.add(req2);
+        priorityQueue.forEach(System.out::println);
     }
 
     public static void removeDynamic() {
@@ -63,8 +90,8 @@ public class TestCollection {
     }
 
     public static void sort() {
-        Animal animal = new Animal();
-        animal.setId(1);
+        Animal animal1 = new Animal();
+        animal1.setId(1);
 
         Animal animal2 = new Animal();
         animal2.setId(2);
@@ -74,8 +101,10 @@ public class TestCollection {
 
         List<Animal> list = new ArrayList<>();
         list.add(animal2);
-        list.add(animal);
+        list.add(animal1);
         list.add(animal3);
+
+        list.forEach(System.out::println);
 
         list.sort(Comparator.comparingInt(Animal::getId));
 

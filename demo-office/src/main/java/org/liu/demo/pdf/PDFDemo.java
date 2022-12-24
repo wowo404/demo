@@ -1,4 +1,4 @@
-package org.liu.demo.office;
+package org.liu.demo.pdf;
 
 import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.PdfReader;

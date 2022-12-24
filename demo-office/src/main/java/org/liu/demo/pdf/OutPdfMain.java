@@ -12,7 +12,7 @@
  * accordance with the terms of the license agreement you entered into
  * with seaway.com.
  */
-package org.liu.demo.office;
+package org.liu.demo.pdf;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
