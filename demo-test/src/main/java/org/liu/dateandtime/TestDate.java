@@ -167,8 +167,10 @@ public class TestDate {
         System.out.println(format(day, COMMON_PATTERN));
 
         Date date = addDay(new Date(), 10);
+		System.out.println(date.getTime());
         System.out.println(format(date, COMMON_PATTERN));
 		System.out.println(formatSecondsToZero(new Date()));
+		System.out.println(Integer.MAX_VALUE);
     }
 
 }

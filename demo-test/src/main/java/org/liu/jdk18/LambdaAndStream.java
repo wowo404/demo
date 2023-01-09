@@ -259,6 +259,13 @@ public class LambdaAndStream {
 	 * peek
 	 */
 	public void test9() {
+		SysDept dept0 = new SysDept();
+		dept0.setDeptId(10L);
+		dept0.setDeptName("aa10");
+		List<SysDept> children = new ArrayList<>();
+		children.add(dept0);
+		children.stream().peek(dept -> dept.setEmail("test111")).forEach(System.out::println);
+
 		Stream.of("one", "two", "three", "four").filter(e -> e.length() > 3)
 				.peek(e -> System.out.println("Filtered value: " + e))
 				.map(String::toUpperCase)

@@ -1,5 +1,6 @@
 package org.liu.hutool;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 
@@ -15,6 +16,7 @@ public class TestHutool {
         System.out.println(ordinalIndexOf(text, "", 3, 19));
 
         System.out.println(StrUtil.format("123{},{}", "a", ""));
+        System.out.println(DateUtil.parse("202212", "yyyyMM"));
     }
 
 }

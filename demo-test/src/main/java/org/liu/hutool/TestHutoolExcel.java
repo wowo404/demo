@@ -4,6 +4,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.poi.excel.BigExcelWriter;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,7 +87,7 @@ public class TestHutoolExcel {
             "暤鈳漼姻膬襦噁摮癰軮渀酙帮璖諚淪它鼅蝢胓闉乿眯焪節穿汳皎鵊摷蔋聅鹮褻豎蝢琨蚤飳橪耻鵱箁駲毥磽犦懾蜃窠桿鱼鱗板绀俁搚栥聎輑嵕";
 
     public static void main(String[] args) {
-        read();
+        writeNormal();
     }
 
     public static void readBySax() {
@@ -115,15 +116,33 @@ public class TestHutoolExcel {
         return map;
     }
 
+    public static void writeNormal() {
+        List<String> list = new ArrayList<>();
+        for (int j = 0; j < 10; j++) {
+            list.add(RandomUtil.randomString(baseString, RandomUtil.randomInt(1, 10)));
+        }
+
+        ExcelWriter writer = ExcelUtil.getWriter("D:\\download\\test.xlsx");
+        writer.writeRow(list);
+        for (int j = 0; j < 10; j++) {
+            String s = list.get(j);
+            writer.setColumnWidth(j, s.length() * 2);
+        }
+
+        writer.flush();
+        writer.close();
+    }
+
     public static void write() {
         BigExcelWriter bigWriter = ExcelUtil.getBigWriter("D:\\download\\test.xlsx");
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 100; i++) {
             List<String> list = new ArrayList<>();
             for (int j = 0; j < 35; j++) {
-                list.add(RandomUtil.randomString(baseString, 3));
+                list.add(RandomUtil.randomString(baseString, RandomUtil.randomInt(1, 10)));
             }
             bigWriter.writeRow(list);
         }
+        bigWriter.autoSizeColumnAll();
         bigWriter.flush();
     }
 

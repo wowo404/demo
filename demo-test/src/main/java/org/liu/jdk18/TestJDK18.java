@@ -138,10 +138,11 @@ public class TestJDK18 {
                 (array1, array2) -> array1.addAll(array2)));
     }
 
+    //过滤重复对象（通过指定字段过滤）
     public void distinct(){
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100")),
                 new Person("b", new BigDecimal("200")), new Person("a", new BigDecimal("300")));
-        Set<String> set = new HashSet<>();
+        Set<String> set = new HashSet<>();//通过Set的add方法返回true/false来去除重复
         list.stream().filter(person -> set.add(person.getName())).forEach(person -> System.out.println(person.getName() + person.getAge()));
     }
 
