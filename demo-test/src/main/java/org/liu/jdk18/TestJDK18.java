@@ -1,5 +1,7 @@
 package org.liu.jdk18;
 
+import lombok.ToString;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -25,7 +27,7 @@ public class TestJDK18 {
     public void sort() {
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100"), 1),
                 new Person("b", new BigDecimal("200"), 3), new Person("b", new BigDecimal("200"), 2));
-        list.sort(Comparator.comparing(Person::getOrder));
+        list.sort(Comparator.comparing(Person::getOrder, Comparator.reverseOrder()));
         //另一种写法：(x,y) -> x.getOrder().compareTo(y.getOrder())
         //下面是idea的推荐
         //Reports Comparators defined as lambda expressions which could be expressed using methods like Comparator.comparing().
@@ -34,6 +36,10 @@ public class TestJDK18 {
         for (Person person : list) {
             System.out.println(person.getOrder());
         }
+        Optional<Person> max = list.stream().max((t1, t2) -> Math.min(t1.getOrder(), t2.getOrder()));
+        max.ifPresent(System.out::println);
+        Optional<Person> min = list.stream().max(Comparator.comparing(Person::getOrder));
+        min.ifPresent(System.out::println);
     }
 
     public void countSpecific() {
@@ -175,9 +181,21 @@ public class TestJDK18 {
         System.out.println(bytes);
     }
 
+    public void changeAndJoin(){
+        String value = Stream.of("a", "b").map(val -> "'" + val + "'").collect(Collectors.joining(","));
+        System.out.println(value);
+
+        List<String> codes = new ArrayList<>();
+        codes.add("a");
+        codes.add("b");
+        codes.add("c");
+        String value2 = codes.stream().map(val -> "'" + val + "'").collect(Collectors.joining(","));
+        System.out.println(value2);
+    }
+
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
-        test.collectToList();
+        test.changeAndJoin();
     }
 
     static final class MyCollectors {
@@ -196,6 +214,7 @@ public class TestJDK18 {
         }
     }
 
+    @ToString
     static class Person {
         private String name;
         private BigDecimal age;

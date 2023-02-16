@@ -1,8 +1,10 @@
 package org.liu.commonslang3;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Arrays;
@@ -17,7 +19,9 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
-        random();
+        System.out.println(NumberUtils.isCreatable("1"));
+        System.out.println(NumberUtils.isCreatable("1.1"));
+        System.out.println(NumberUtils.isCreatable("0.1"));
 
     }
 

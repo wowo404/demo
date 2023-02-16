@@ -13,10 +13,58 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
-        String s = "{{}:{$ne:null}}";
-        String format = StrUtil.format(s, "test", "a");
-        System.out.println(format);
-        System.out.println(String.join(",", new HashSet<>()));
+        calculate();
+    }
+
+    public static void calculate(){
+        List<List<Integer>> a = new ArrayList<>();
+        List<Integer> list1 = new ArrayList<>();
+        add(list1);
+        List<Integer> list2 = new ArrayList<>();
+        add(list2);
+        List<Integer> list3 = new ArrayList<>();
+        add(list3);
+        List<Integer> list4 = new ArrayList<>();
+        add(list4);
+        List<Integer> list5 = new ArrayList<>();
+        add(list5);
+        List<Integer> list6 = new ArrayList<>();
+        add(list6);
+
+        a.add(list1);
+        a.add(list2);
+        a.add(list3);
+        a.add(list4);
+        a.add(list5);
+        a.add(list6);
+
+        //(①-④)/④*100
+        List<Integer> result1 = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            Integer r1 = (a.get(0).get(i) - a.get(3).get(i)) / a.get(3).get(i) * 100;
+            result1.add(r1);
+        }
+        System.out.println(result1);
+        //(②-⑤)/⑤*100
+        List<Integer> result2 = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            Integer r1 = (a.get(1).get(i) - a.get(4).get(i)) / a.get(4).get(i) * 100;
+            result2.add(r1);
+        }
+        System.out.println(result2);
+        //(③-⑥)/⑥*100
+        List<Integer> result3 = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            Integer r1 = (a.get(2).get(i) - a.get(5).get(i)) / a.get(5).get(i) * 100;
+            result3.add(r1);
+        }
+        System.out.println(result3);
+    }
+
+    private static void add(List<Integer> list) {
+        for (int i = 1; i < 12; i++) {
+            list.add(i);
+        }
     }
 
     public static boolean isNormalized(String path) {

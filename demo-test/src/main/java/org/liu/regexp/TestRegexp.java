@@ -14,7 +14,7 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        endWith();
+        System.out.println(escapeExprSpecialWord("dd$ff[ff)fdf.$"));
     }
 
     public static void matchAbs() {
@@ -242,6 +242,36 @@ public class TestRegexp {
         System.out.println("ab123.".matches(reg));
         System.out.println("ab123-".matches(reg));
         System.out.println("ab12.3-".matches(reg));
+    }
+
+    public static void title() {
+        String reg = "[a-zA-Z0-9\\u3400-\\u9FFF]+";
+        System.out.println("我方；法a".matches(reg));
+    }
+
+    public static void isIntegerOrDouble() {
+        String reg = "(?!\\.)(\\d*|\\d*\\.\\d{0,2})";
+        System.out.println("2".matches(reg));
+        System.out.println("2.2".matches(reg));
+        System.out.println("2.2345".matches(reg));
+        System.out.println("233.2".matches(reg));
+        System.out.println("2.".matches(reg));
+        System.out.println(".1".matches(reg));
+        System.out.println(".".matches(reg));
+        System.out.println("..".matches(reg));
+        System.out.println("a.1".matches(reg));
+    }
+
+    public static String escapeExprSpecialWord(String keyword) {
+        if (null != keyword) {
+            String[] fbsArr = {"\\", "$", "(", ")", "*", "+", ".", "[", "]", "?", "^", "{", "}", "|"};
+            for (String key : fbsArr) {
+                if (keyword.contains(key)) {
+                    keyword = keyword.replace(key, "\\\\" + key);
+                }
+            }
+        }
+        return keyword;
     }
 
 }
