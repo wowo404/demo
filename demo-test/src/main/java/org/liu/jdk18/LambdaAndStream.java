@@ -489,6 +489,12 @@ public class LambdaAndStream {
 		System.out.println(Arrays.toString(array1));
     }
 
+    public void multiArray(){
+        String[] arr1 = {"a", "b"};
+        String[] arr2 = {"c", "d"};
+        Stream.of(arr1, arr2).forEach(System.out::println);//每一个元素是数组
+    }
+
     public static void main(String[] args) {
         LambdaAndStream ls = new LambdaAndStream();
 //				ls.test1();
@@ -507,7 +513,8 @@ public class LambdaAndStream {
 //		ls.toArray();
 //        ls.findFirst();
 //        ls.findAny();
-        ls.parallel();
+//        ls.parallel();
+        ls.multiArray();
     }
 
 }
