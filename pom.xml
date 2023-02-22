@@ -43,6 +43,7 @@
         <module>demo-apache</module>
         <module>demo-google</module>
         <module>demo-mockito</module>
+        <module>demo-chinese-word-segmentation</module>
     </modules>
 
     <properties>
