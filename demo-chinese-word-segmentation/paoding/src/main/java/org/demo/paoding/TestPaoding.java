@@ -23,8 +23,7 @@ public class TestPaoding {
     private static String seg(String text, int mode) {
         ANALYZER.setMode(mode);
         StringBuilder result = new StringBuilder();
-        try {
-            TokenStream stream = ANALYZER.tokenStream("", new StringReader(text));
+        try (TokenStream stream = ANALYZER.tokenStream("", new StringReader(text))) {
             stream.reset();
             CharTermAttribute termAtt = stream.addAttribute(CharTermAttribute.class);
             while (stream.incrementToken()) {

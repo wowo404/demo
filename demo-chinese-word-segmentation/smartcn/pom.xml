@@ -3,23 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>demo</artifactId>
+        <artifactId>demo-chinese-word-segmentation</artifactId>
         <groupId>org.demo</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>demo-chinese-word-segmentation</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>smartcn</artifactId>
 
-    <modules>
-        <module>hanlp</module>
-        <module>ikanalyzer</module>
-        <module>paoding</module>
-        <module>smartcn</module>
-        <module>mmseg4j</module>
-        <module>jcseg</module>
-        <module>jieba</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers-smartcn</artifactId>
+            <version>8.11.2</version>
+        </dependency>
+    </dependencies>
 
 </project>
