@@ -20,6 +20,10 @@
         <module>mmseg4j</module>
         <module>jcseg</module>
         <module>jieba</module>
+        <module>fnlp</module>
+        <module>stanford-corenlp</module>
+        <module>ansj</module>
+        <module>word</module>
     </modules>
 
 </project>
