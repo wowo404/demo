@@ -24,6 +24,7 @@
         <module>stanford-corenlp</module>
         <module>ansj</module>
         <module>word</module>
+        <module>ictclas4j</module>
     </modules>
 
 </project>

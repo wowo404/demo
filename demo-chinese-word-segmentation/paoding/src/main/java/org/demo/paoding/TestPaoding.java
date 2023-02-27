@@ -7,13 +7,16 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import java.io.StringReader;
 
 /**
+ * 如何使用看net.paoding.analysis.analyzer.PaodingAnalyzer#main(java.lang.String[])
+ *
  * @Author lzs
  * @Date 2023/2/21 14:56
  **/
 public class TestPaoding {
 
     public static void main(String[] args) {
-        String text = "要是有这样的姐姐操心就不会这么烦了";
+//        String text = "要是有这样的姐姐操心就不会这么烦了";
+        String text = "家具销售";
         System.out.println(seg(text, PaodingAnalyzer.MOST_WORDS_MODE));
         System.out.println(seg(text, PaodingAnalyzer.MAX_WORD_LENGTH_MODE));
     }

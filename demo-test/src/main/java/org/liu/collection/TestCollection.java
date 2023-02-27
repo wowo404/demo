@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        sort();
+        subtract();
     }
 
     public static void queue() {
@@ -199,6 +199,21 @@ public class TestCollection {
         list.add(5);
         List<Integer> subList = list.subList(0, 5);
         System.out.println(subList);
+    }
+
+    public static void subtract() {
+        Set<Integer> lanIdSet = new HashSet<>();
+        lanIdSet.add(1);
+        lanIdSet.add(2);
+        lanIdSet.add(6);
+        List<Integer> list = new ArrayList<>(5);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.removeIf(lanIdSet::contains);
+        System.out.println(list);
     }
 
 }
