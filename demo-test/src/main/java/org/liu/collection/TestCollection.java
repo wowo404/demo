@@ -138,7 +138,7 @@ public class TestCollection {
     }
 
     public static void treeSet() {
-        TreeSet<String> treeSet = new TreeSet<>();
+        TreeSet<String> treeSet = new TreeSet<>(Comparator.naturalOrder());
         treeSet.add("base123");
         treeSet.add("base01");
         treeSet.add("a_company");

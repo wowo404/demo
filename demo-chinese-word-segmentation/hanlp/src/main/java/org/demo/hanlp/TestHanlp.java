@@ -27,7 +27,7 @@ public class TestHanlp {
                 "3日晚Brace在总统府发表声明，尊重现执政当局的权威",
                 "我听到叮当叮当的声音，老张在打铁",
                 "家具销售",
-                "道路运输","家"};
+                "道路运输","家", "具", "销", "售"};
         for (String text : arr) {
             List<Term> terms = HanLP.newSegment().enableIndexMode(1).seg(text);
             System.out.println(terms);
