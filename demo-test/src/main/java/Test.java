@@ -13,6 +13,7 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println(System.currentTimeMillis());
         calculate();
     }
 

@@ -1,12 +1,14 @@
 package org.demo.hanlp;
 
 import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.corpus.tag.Nature;
 import com.hankcs.hanlp.seg.Dijkstra.DijkstraSegment;
 import com.hankcs.hanlp.seg.NShort.NShortSegment;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.tokenizer.*;
+import com.hankcs.hanlp.tokenizer.IndexTokenizer;
+import com.hankcs.hanlp.tokenizer.NLPTokenizer;
+import com.hankcs.hanlp.tokenizer.SpeedTokenizer;
+import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +29,7 @@ public class TestHanlp {
                 "3日晚Brace在总统府发表声明，尊重现执政当局的权威",
                 "我听到叮当叮当的声音，老张在打铁",
                 "家具销售",
-                "道路运输","家", "具", "销", "售"};
+                "道路运输", "互联网"};
         for (String text : arr) {
             List<Term> terms = HanLP.newSegment().enableIndexMode(1).seg(text);
             System.out.println(terms);
