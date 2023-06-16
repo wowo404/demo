@@ -5,6 +5,7 @@ import org.liu.obj.Superior;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.time.Instant;
 import java.util.*;
 
 public class Test {
@@ -13,7 +14,8 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println(System.currentTimeMillis());
+        System.out.println(System.currentTimeMillis() / 1000);
+        System.out.println(Instant.now());
         calculate();
     }
 

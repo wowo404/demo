@@ -41,4 +41,10 @@ public class Monkey extends Animal implements Action, Serializable {
 	public void run() {
 		System.out.println("Monkey climb tree");
 	}
+
+	public OriginFormTypeEnum getFormType(String id, List<SysDept> depts){
+		System.out.println(id);
+		System.out.println(depts);
+		return OriginFormTypeEnum.OTHER_STORAGE;
+	}
 }

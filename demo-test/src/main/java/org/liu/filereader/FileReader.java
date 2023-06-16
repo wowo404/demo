@@ -17,6 +17,9 @@ public class FileReader {
     public static final String SRC = "src/main/resources/pdf/contract_tpl.pdf";
 
     public static void main(String[] args) throws IOException, URISyntaxException {
+        File file = new File("E:\\work\\minxun\\发布\\生产--经济普查\\萍乡内网\\脚本");
+        System.out.println(file.getAbsolutePath());
+
         FileReader fr = new FileReader();
 //		fr.filter();
 //		fr.read();

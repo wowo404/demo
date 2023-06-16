@@ -18,6 +18,9 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
+        System.out.println(NumberUtils.isDigits("123466"));
+        System.out.println(NumberUtils.isDigits("123466sdf"));
+        System.out.println(NumberUtils.isDigits("123466-"));
         System.out.println(NumberUtils.isCreatable("1"));
         System.out.println(NumberUtils.isCreatable("1.1"));
         System.out.println(NumberUtils.isCreatable("0.1"));
