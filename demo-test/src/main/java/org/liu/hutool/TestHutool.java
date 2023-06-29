@@ -1,6 +1,7 @@
 package org.liu.hutool;
 
 import cn.hutool.core.codec.Base64;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.lang.TypeReference;
@@ -19,7 +20,22 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestHutool {
 
     public static void main(String[] args) {
-        test();
+        split();
+    }
+
+    public static void split(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+
+        List<List<String>> split = CollUtil.split(list, list.size() / 2);
+        for (List<String> stringList : split) {
+            System.out.println(stringList);
+        }
+
     }
 
     public static void test() {

@@ -14,6 +14,7 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
+        System.out.println(Arrays.toString("赣州市-章贡区-解放街道-解放路居委会".split("-")));
         System.out.println(System.currentTimeMillis() / 1000);
         System.out.println(Instant.now());
         calculate();
