@@ -8,33 +8,48 @@ import java.util.Collections;
  * 桶排序
  */
 public class BucketSort {
-    public static void bucketSort(int[] arr) {
-        int max = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-        for (int i = 0; i < arr.length; i++) {
-            max = Math.max(max, arr[i]);
-            min = Math.min(min, arr[i]);
+    public static void bucketSort(int[] array, int bucketSize) {
+        if (array.length == 0) {
+            return;
         }
-        //创建桶
-        int bucketNum = (max - min) / arr.length + 1;
-        ArrayList<ArrayList<Integer>> bucketArr = new ArrayList<>(bucketNum);
-        for (int i = 0; i < bucketNum; i++) {
-            bucketArr.add(new ArrayList<Integer>());
+
+        // 寻找数组中的最大值和最小值
+        int minValue = array[0];
+        int maxValue = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < minValue) {
+                minValue = array[i];
+            } else if (array[i] > maxValue) {
+                maxValue = array[i];
+            }
         }
-        //将每个元素放入桶
-        for (int i = 0; i < arr.length; i++) {
-            int num = (arr[i] - min) / (arr.length);
-            bucketArr.get(num).add(arr[i]);
+        int bucketCount = (int) Math.ceil((double) array.length / (double) bucketSize); // 计算桶的数量，使用向上取整的方法
+        ArrayList<ArrayList<Integer>> buckets = new ArrayList<>(bucketCount);
+        for (int i = 0; i < bucketCount; i++) {
+            buckets.add(new ArrayList<>());
         }
-        //对每个桶进行排序
-        for (int i = 0; i < bucketArr.size(); i++) {
-            Collections.sort(bucketArr.get(i));
+
+        // 将数组中的元素分配到各个桶中
+        for (int i = 0; i < array.length; i++) {
+            int bucketIndex = (array[i] - minValue) * (bucketCount - 1) / (maxValue - minValue);
+            System.out.println(array[i] + "，放入" + bucketIndex + "号桶");
+            buckets.get(bucketIndex).add(array[i]);
+        }
+
+        // 对每个桶中的元素进行排序，并将排序后的元素放回原数组
+        int currentIndex = 0;
+        for (int i = 0; i < bucketCount; i++) {
+            ArrayList<Integer> bucket = buckets.get(i);
+            Collections.sort(bucket);
+            for (int j = 0; j < bucket.size(); j++) {
+                array[currentIndex++] = bucket.get(j);
+            }
         }
     }
 
     public static void main(String[] args) {
-        int[] arr = {45,34,65,345,35,3,666,32,1,23,87};
-        bucketSort(arr);
+        int[] arr = {45, 34, 65, 345, 35, 3, 666, 32, 1, 23, 87};
+        bucketSort(arr, 3);
         System.out.println(Arrays.toString(arr));
     }
 
