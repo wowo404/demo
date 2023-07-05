@@ -1,5 +1,7 @@
 package algorithm.sort;
 
+import java.util.Arrays;
+
 /**
  * 冒泡排序
  *
@@ -7,16 +9,24 @@ package algorithm.sort;
  */
 public class BubbleSort {
 
-    public static void bubbleSort(int[] A) {
-        int temp;
-        for (int i = 0; i < A.length; i++) {
-            for (int j = i + 1; j < A.length; j++) {
-                if (A[i] > A[j]) {
-                    temp = A[j];
-                    A[j] = A[i];
-                    A[i] = temp;
+    public static void bubbleSort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            //这种方式不是冒泡排序，是选择排序
+//            for (int j = i + 1; j < arr.length; j++) {
+//                if (arr[i] > arr[j]) {
+//                    int temp = arr[j];
+//                    arr[j] = arr[i];
+//                    arr[i] = temp;
+//                }
+//            }
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
                 }
             }
+            System.out.println("第" + i + "轮排序结果：" + Arrays.toString(arr));
         }
     }
 
