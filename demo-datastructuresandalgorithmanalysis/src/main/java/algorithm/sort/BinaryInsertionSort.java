@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * 二分插入排序
+ * https://blog.csdn.net/Alian_1223/article/details/125844855
  *
  * @Author lzs
  * @Date 2023/7/5 17:15
