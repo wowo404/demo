@@ -33,7 +33,15 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        listList();
+        indicator();
+    }
+
+    public static void indicator() throws JsonProcessingException {
+        MetadataIndicator indicator = new MetadataIndicator();
+        indicator.setNameEnglish("industryCode");
+        indicator.setDataType(1);
+        indicator.setDataLength(5);
+        System.out.println(mapper.writeValueAsString(indicator));
     }
 
     public static void readJsonFile() throws IOException {

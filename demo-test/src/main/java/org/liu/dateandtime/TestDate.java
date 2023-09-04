@@ -149,7 +149,9 @@ public class TestDate {
 	public static void main(String[] args) {
 //		System.out.println(format(new Date(1576836000000L), COMMON_PATTERN));
 //		System.out.println(format(new Date(1573693980000L), COMMON_PATTERN));
-        long time = parse("2020-03-17 18:35:00", COMMON_PATTERN).getTime();
+		Date parse = parse("1970-01-01 00:00:00", COMMON_PATTERN);
+		System.out.println(parse.getTimezoneOffset());
+		long time = parse.getTime();
         System.out.println(time);
 
 		long time2 = parse("2020-04-16 18:35:00", COMMON_PATTERN).getTime();
@@ -171,6 +173,9 @@ public class TestDate {
         System.out.println(format(date, COMMON_PATTERN));
 		System.out.println(formatSecondsToZero(new Date()));
 		System.out.println(Integer.MAX_VALUE);
+		System.out.println(new Date(1));
+		System.out.println(System.currentTimeMillis());
+		System.out.println(Date.UTC(2023, 7, 28, 15, 46, 50));
     }
 
 }

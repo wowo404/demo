@@ -29,7 +29,8 @@ public class MD5 {
     }
 
     public static void main(String[] args) throws Exception {
-        testProductRequest();
+        System.out.println(encrypt("abc_123!@#$%^&*()"));
+        System.out.println(md5("abc_123!@#$%^&*()"));
     }
 
     public static void testProductRequest() throws Exception {
@@ -46,6 +47,23 @@ public class MD5 {
         String str = StrUtil.join("", "algorithm", "RSA", "channelCode", "QLZD", "data", data,
                 "service", "openapi-service", "timestamp", timestamp, salt);
         System.out.println("sign:" + encrypt(str).toUpperCase());
+    }
+
+    public static String md5(String sourceStr) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(sourceStr.getBytes());
+        byte b[] = md.digest();
+        int i;
+        StringBuffer buf = new StringBuffer("");
+        for (int offset = 0; offset < b.length; offset++) {
+            i = b[offset];
+            if (i < 0)
+                i += 256;
+            if (i < 16)
+                buf.append("0");
+            buf.append(Integer.toHexString(i));
+        }
+        return buf.toString();
     }
 
 }

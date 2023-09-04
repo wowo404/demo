@@ -1,5 +1,8 @@
 package org.liu.basic;
 
+import org.liu.model.Animal;
+import org.liu.model.Monkey;
+
 public class JavaGrammar {
 
     public static void main(String[] args) {

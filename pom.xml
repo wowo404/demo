@@ -45,6 +45,7 @@
         <module>demo-mockito</module>
         <module>demo-chinese-word-segmentation</module>
         <module>demo-gaode</module>
+        <module>demo-javassist</module>
     </modules>
 
     <properties>
@@ -105,5 +106,16 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>securecentral</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>securecentral</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>
