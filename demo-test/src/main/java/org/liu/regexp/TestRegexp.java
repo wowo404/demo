@@ -14,7 +14,7 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        System.out.println(escapeExprSpecialWord("dd$ff[ff)fdf.$"));
+        password();
     }
 
     public static void matchAbs() {
@@ -106,7 +106,7 @@ public class TestRegexp {
          *
          * 注：(?!xxxx) 是正则表达式的负向零宽断言一种形式，标识预该位置后不是xxxx字符
          */
-        String pwd = "@123QWER$";
+        String pwd = "1234@tyuiop";
         String reg1 = "(?![0-9]*$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}";
         String reg2 = "(?!^\\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]+$";
         //至少包含数字跟字母，可以有字符
@@ -115,6 +115,12 @@ public class TestRegexp {
         Matcher matcher = pattern.matcher(pwd);
         boolean matches = matcher.matches();
         System.out.println(matches);
+
+        //至少一个大写字母，一个小写字母，一个数字
+        String reg3 = "(?=.*[a-zA-Z])(?=.*[`~!@#$%^&*()_\\-=+\\[\\]{};:'\"\\\\|,<.>/?])(?=.*\\d)[\\s\\S]{8,18}";
+        System.out.println("1234adcd".matches(reg3));
+        System.out.println("1234adCD".matches(reg3));
+        System.out.println("1234adc!".matches(reg3));
     }
 
     public static void image() {
@@ -155,6 +161,11 @@ public class TestRegexp {
         String reg = "^(13|14|15|16|17|18|19)[0-9]{9}$";
         Pattern pattern = Pattern.compile(reg);
         System.out.println(pattern.matcher("15058124996").matches());
+    }
+
+    public static void containMany(){
+        String reg = "(?=[1a!]).*";
+        System.out.println("1!abcd".matches(reg));
     }
 
     public static void notContain() {
