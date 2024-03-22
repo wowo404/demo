@@ -21,6 +21,7 @@ public class TestMap {
         map.put(CollectionPrefix.departmentDataTax, "我答复答复");
         map.put(CollectionPrefix.countDataAccommodationFood, "我答复答复");
         map.put(CollectionPrefix.baseDataCompany1011, "我答复答复");
+        map.put(CollectionPrefix.baseDataCompany1011, null);
         System.out.println(map);
     }
 

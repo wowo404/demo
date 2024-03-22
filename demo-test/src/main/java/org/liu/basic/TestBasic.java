@@ -18,7 +18,7 @@ public class TestBasic {
     public static void orAdd() {
         List<List<Integer>> data = new ArrayList<>();
 
-        List<Integer> list1 = Arrays.asList(0, 0, 0);
+        List<Integer> list1 = Arrays.asList(1, 0, 0);
         List<Integer> list2 = Arrays.asList(0, 1, 0);
         List<Integer> list3 = Arrays.asList(0, 0, 0);
         data.add(list1);
@@ -30,6 +30,12 @@ public class TestBasic {
             flag |= list.contains(1);
         }
         System.out.println(flag);
+
+        boolean flagTwo = true;
+        for (List<Integer> list : data) {
+            flagTwo &= list.contains(1);
+        }
+        System.out.println(flagTwo);
     }
 
     public static void bigDecimal() {

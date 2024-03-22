@@ -46,6 +46,8 @@
         <module>demo-chinese-word-segmentation</module>
         <module>demo-gaode</module>
         <module>demo-javassist</module>
+        <module>demo-caffeine</module>
+        <module>demo-itextpdf7</module>
     </modules>
 
     <properties>

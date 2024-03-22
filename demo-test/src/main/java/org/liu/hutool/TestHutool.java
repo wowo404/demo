@@ -8,11 +8,16 @@ import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.SecureUtil;
 import cn.hutool.json.JSONUtil;
 import org.liu.model.AjaxResult;
 import org.liu.model.Animal;
 
+import javax.crypto.SecretKey;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +26,13 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 
 public class TestHutool {
 
-    public static void main(String[] args) {
-        test();
+    public static void main(String[] args) throws MalformedURLException {
+        testImg();
+    }
+
+    public static void testImg() throws MalformedURLException {
+        BufferedImage image = ImgUtil.read(new URL("http://124.71.114.75:9008/nkrlzyfiletest/commonFile/1770411696997814300/1770411708450406400.jpg"));
+        ImgUtil.write(image, new File("E:\\downloads\\a.jpg"));
     }
 
     public static void split() {
@@ -37,10 +47,10 @@ public class TestHutool {
         for (List<String> stringList : split) {
             System.out.println(stringList);
         }
-
     }
 
     public static void test() {
+        System.out.println(DateUtil.parse("20211", "yyyyMM"));
         System.out.println(Math.abs(-7.77));
         System.out.println(NumberUtil.isNumber("+123.564"));
 
@@ -49,6 +59,16 @@ public class TestHutool {
 
         System.out.println(StrUtil.format("123{},{},{},{}", "a", "", "", true));
         System.out.println(DateUtil.parse("202212", "yyyyMM"));
+        System.out.println(StrUtil.fillAfter("abc", '1', 5));
+
+        SecretKey secretKey = SecureUtil.generateKey("aes");
+        System.out.println(secretKey.getAlgorithm());
+        System.out.println(java.util.Base64.getEncoder().encodeToString(secretKey.getEncoded()));
+        byte[] keyBytes = java.util.Base64.getDecoder().decode("uZSgFbNAZQ/aVLPg+vo9Rw==");
+        String encryptBase64 = SecureUtil.aes(keyBytes).encryptBase64("刘123abc李奎炯嚄");
+        String decryptStr = SecureUtil.aes(keyBytes).decryptStr(encryptBase64);
+        System.out.println("aes加密后：" + encryptBase64);
+        System.out.println("aes解密后：" + decryptStr);
     }
 
     public static void json() {

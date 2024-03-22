@@ -14,10 +14,14 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
-        System.out.println(Arrays.toString("赣州市-章贡区-解放街道-解放路居委会".split("-")));
+        System.out.println(Arrays.toString("赣州市-章贡区-解放街道-解放路居委会/a".split("/")));
         System.out.println(System.currentTimeMillis() / 1000);
         System.out.println(Instant.now());
+        System.out.println(Integer.MAX_VALUE);
+        System.out.println(Long.MAX_VALUE);
         calculate();
+        Integer a = 1;
+        String b = "中";
     }
 
     public static void calculate(){

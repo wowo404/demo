@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        subtract();
+        subList();
     }
 
     public static void queue() {
@@ -197,6 +197,7 @@ public class TestCollection {
         list.add(3);
         list.add(4);
         list.add(5);
+        list.add(6);
         List<Integer> subList = list.subList(0, 5);
         System.out.println(subList);
     }

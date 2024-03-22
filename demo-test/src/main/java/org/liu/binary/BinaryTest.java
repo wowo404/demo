@@ -20,6 +20,7 @@ public class BinaryTest {
         System.out.println(a);
         byte neOne = 0b00000001;
         System.out.println(neOne);
+        leadingZeros();
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示
@@ -326,6 +327,12 @@ public class BinaryTest {
         sb.append(HEX_VOCABLE[high]);
         sb.append(HEX_VOCABLE[low]);
         return sb.toString();
+    }
+
+    public static void leadingZeros(){
+        int num = 0b00101000; // 二进制字面量，等于十进制的 40
+        int leadingZeros = Integer.numberOfLeadingZeros(num);
+        System.out.println("数字" + num + "的前导0的数量为：" + leadingZeros); // 输出: 26
     }
 
 }

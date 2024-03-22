@@ -14,7 +14,7 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        password();
+        test();
     }
 
     public static void matchAbs() {
@@ -62,6 +62,7 @@ public class TestRegexp {
         System.out.println("2022年12月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
         System.out.println("2022年1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
         System.out.println("2022年报".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("remove_prefix[444]".matches("remove_prefix\\[\\d+]"));
     }
 
     public static void getMatchGroup() {
