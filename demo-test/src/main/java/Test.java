@@ -22,6 +22,7 @@ public class Test {
         calculate();
         Integer a = 1;
         String b = "中";
+        System.out.println(44 / 30);
     }
 
     public static void calculate(){

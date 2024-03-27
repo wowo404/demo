@@ -48,6 +48,7 @@
         <module>demo-javassist</module>
         <module>demo-caffeine</module>
         <module>demo-itextpdf7</module>
+        <module>demo-minio</module>
     </modules>
 
     <properties>
