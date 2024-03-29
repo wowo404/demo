@@ -49,6 +49,7 @@
         <module>demo-caffeine</module>
         <module>demo-itextpdf7</module>
         <module>demo-minio</module>
+        <module>demo-fastdfs</module>
     </modules>
 
     <properties>
