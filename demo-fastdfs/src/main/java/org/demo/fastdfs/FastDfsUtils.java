@@ -12,9 +12,16 @@ import java.io.IOException;
  **/
 public class FastDfsUtils {
 
+    static {
+        try {
+            ClientGlobal.initByProperties("fastdfs-client.properties");
+        } catch (IOException | MyException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String upload(String filePath, String tagName, String tagValue) throws IOException, MyException {
 //        ClientGlobal.init("fastdfs-client.conf");//文件后缀不一样
-        ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getTrackerServer();
         StorageClient1 storageClient1 = new StorageClient1(trackerServer, null);
@@ -27,7 +34,6 @@ public class FastDfsUtils {
     }
 
     public static void delete(String fileId) throws IOException, MyException {
-        ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getTrackerServer();
         StorageClient1 storageClient1 = new StorageClient1(trackerServer, null);
@@ -40,7 +46,6 @@ public class FastDfsUtils {
     }
 
     public static void get(String fileId) throws IOException, MyException {
-        ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getTrackerServer();
         StorageClient1 storageClient1 = new StorageClient1(trackerServer, null);
@@ -49,7 +54,6 @@ public class FastDfsUtils {
     }
 
     public static void metadata(String fileId) throws IOException, MyException {
-        ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getTrackerServer();
         StorageClient1 storageClient1 = new StorageClient1(trackerServer, null);
@@ -60,7 +64,6 @@ public class FastDfsUtils {
     }
 
     public static void download(String fileId, String dest) throws IOException, MyException {
-        ClientGlobal.initByProperties("fastdfs-client.properties");
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getTrackerServer();
         StorageClient1 storageClient1 = new StorageClient1(trackerServer, null);

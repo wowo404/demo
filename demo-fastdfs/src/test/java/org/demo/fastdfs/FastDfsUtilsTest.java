@@ -15,21 +15,21 @@ class FastDfsUtilsTest {
 
     @Test
     void delete() throws IOException, MyException {
-        FastDfsUtils.delete("group1/M00/00/00/wKgAMGYGdv6AbOtKAAB0JWPy5HU11.jpeg");
+        FastDfsUtils.delete("group1/M00/00/00/wKgAMGYGhsuAVyk4AAB0JWPy5HU57.jpeg");
     }
 
     @Test
     void get() throws IOException, MyException {
-        FastDfsUtils.get("group1/M00/00/00/wKgAMGYGdv6AbOtKAAB0JWPy5HU11.jpeg");
+        FastDfsUtils.get("group1/M00/00/00/wKgAMGYGhsuAVyk4AAB0JWPy5HU57.jpeg");
     }
 
     @Test
     void metadata() throws IOException, MyException {
-        FastDfsUtils.metadata("group1/M00/00/00/wKgAMGYGdv6AbOtKAAB0JWPy5HU11.jpeg");
+        FastDfsUtils.metadata("group1/M00/00/00/wKgAMGYGhsuAVyk4AAB0JWPy5HU57.jpeg");
     }
 
     @Test
     void download() throws IOException, MyException {
-        FastDfsUtils.download("group1/M00/00/00/wKgAMGYGdv6AbOtKAAB0JWPy5HU11.jpeg", "E:\\downloads\\a.jpeg");
+        FastDfsUtils.download("group1/M00/00/00/wKgAMGYGhsuAVyk4AAB0JWPy5HU57.jpeg", "E:\\downloads\\a.jpeg");
     }
 }
