@@ -9,3 +9,6 @@ itextpdf7的license是GNU AGPLv3，个人开发者可用，如果项目嵌入带
 以下是替代品
 https://github.com/LibrePDF/OpenPDF/
 openPDF是在itext4版本上fork出来的，itext4使用的是GNU GPL协议，允许商用
+
+# 注意事项
+- 特殊字符，如：\u59d3\u540d\uff1a\u4e9a\u5386\u514b\u65af\u30fb\u725b\u903c

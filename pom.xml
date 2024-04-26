@@ -50,6 +50,7 @@
         <module>demo-itextpdf7</module>
         <module>demo-minio</module>
         <module>demo-fastdfs</module>
+        <module>demo-cassandra</module>
     </modules>
 
     <properties>
