@@ -64,11 +64,12 @@ public class TicketForm {
         //照片
         Image image;
         try {
-            image = new Image(ImageDataFactory.create("E:\\data\\photos\\edb08a90abab84f15c10e7a63f2b0c88.jpeg"));
+            image = new Image(ImageDataFactory.create("E:\\data\\photos\\商品图2.0\\chandao_bug.png"));
         } catch (MalformedURLException e) {
             throw new RuntimeException("生成报名表pdf时，读取照片失败");
         }
-        image.setWidth(UnitValue.createPercentValue(100));
+//        image.setWidth(UnitValue.createPercentValue(100));
+        image.scaleToFit(112, 163);
         Cell cell23 = new Cell(7, 1).add(image);
         cell23.setBorder(Border.NO_BORDER);
         table.addCell(cell23);
@@ -95,7 +96,7 @@ public class TicketForm {
         table.addCell(cell);
         cell = createKeyCell("考试地点");
         table.addCell(cell);
-        cell = createValueCell("江西省赣州市南康区金融中心市民服务中心2栋101室", 1, 3);
+        cell = createValueCell("江西省赣州市南康区", 1, 3);
         table.addCell(cell);
         cell = createKeyCell("考场号");
         table.addCell(cell);
@@ -128,22 +129,22 @@ public class TicketForm {
 
     private static List createList() throws MalformedURLException {
         List list = new List()
-                .setSymbolIndent(1)
+                .setSymbolIndent(3f)
                 .setListSymbol("")
-                .setFont(songFont);
-        ListItem blank = new ListItem("");
-        blank.setHeight(15f);
+                .setFont(songFont)
+                .setFontSize(8f)
+                .setBackgroundColor(customColor)
+                .setMarginTop(15f);
         ListItem notification = new ListItem("考生须知");
         notification.setTextAlignment(TextAlignment.CENTER).setBold().setFontSize(13f);
-        Image image = new Image(ImageDataFactory.create("E:\\data\\photos\\edb08a90abab84f15c10e7a63f2b0c88.jpeg"));
-        System.out.println("图片高" + image.getImageHeight());
-        System.out.println("图片宽" + image.getImageWidth());
-        image.scaleToFit(150, 105);
-        ListItem imageItem = new ListItem(image);
-        imageItem.setFixedPosition(430, 620, UnitValue.createPercentValue(100));
+//        Image image = new Image(ImageDataFactory.create("E:\\data\\photos\\edb08a90abab84f15c10e7a63f2b0c88.jpeg"));
+//        System.out.println("图片高" + image.getImageHeight());
+//        System.out.println("图片宽" + image.getImageWidth());
+//        image.scaleToFit(150, 105);
+//        ListItem imageItem = new ListItem(image);
+//        imageItem.setFixedPosition(430, 620, UnitValue.createPercentValue(100));
 //        list.add("\u59d3\u540d\uff1a\u4e9a\u5386\u514b\u65af\u30fb\u725b\u903c")
-        list.add(blank)
-                .add(notification)
+        list.add(notification)
                 .add("1.考生必须持准考证和有效身份证件(身份证，军人、武警人员证件，护照等)入场，证件不全者不得入场。")
                 .add("2.考生须在每场考试(含笔试和面试)开考前30分钟入场。开始考试30分钟以后，考生不得入场。")
                 .add("3.考生只准携带必要的文具入场，如2B铅笔(涂黑答题卡用)、签字笔、橡皮，禁止携带各种文字材料或通讯工具等。考场内不得擅自相互借用文具。")

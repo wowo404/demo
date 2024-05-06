@@ -1,7 +1,10 @@
 package org.liu.hutool;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.convert.NumberChineseFormatter;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
@@ -10,8 +13,10 @@ import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.json.JSONUtil;
+import org.liu.enums.AnimalType;
 import org.liu.model.AjaxResult;
 import org.liu.model.Animal;
+import org.liu.model.Monkey;
 
 import javax.crypto.SecretKey;
 import java.awt.image.BufferedImage;
@@ -20,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
@@ -27,7 +33,26 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestHutool {
 
     public static void main(String[] args) throws MalformedURLException {
-        testImg();
+        beanCopy();
+    }
+
+    public static void beanCopy() {
+        Animal animal = new Animal();
+        animal.setId(1);
+        animal.setAge(11);
+        animal.setAnimalType(AnimalType.LAND);
+        Monkey monkey = new Monkey();
+        monkey.setColor("red");
+        monkey.setBirthday(new Date());
+        BeanUtil.copyProperties(animal, monkey, CopyOptions.create().ignoreNullValue());
+        System.out.println(monkey);
+    }
+
+    public static void testNumberChineseFormatter() {
+        String format = NumberChineseFormatter.format(12, false);
+        System.out.println(format);
+        format = NumberChineseFormatter.formatThousand(123, false);
+        System.out.println(format);
     }
 
     public static void testImg() throws MalformedURLException {

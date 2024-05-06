@@ -1,9 +1,12 @@
 package org.liu.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 
+@Data
 @Entity
 public class Monkey extends Animal implements Action, Serializable {
 
