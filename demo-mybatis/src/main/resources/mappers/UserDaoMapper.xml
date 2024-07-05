@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="org.liu.demo.mybatis.UserDao">
     <cache/>
+
     <select id="countAll" resultType="int">
         select count(*) from user;
     </select>
@@ -11,14 +12,11 @@
     </select>
     
     <insert id="insert" parameterType="org.liu.demo.mybatis.User">
-    	<selectKey keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
-    		SELECT SEQ_ID_USER.NEXTVAL as id FROM DUAL
-    	</selectKey>
-        insert into user(id,username,password,age,enabled) values(#{id},#{username},#{password},#{age},#{enabled})
+        insert into user(username,password,age,enabled,gis) values(#{username},#{password},#{age},#{enabled},#{gis})
     </insert>
     
     <update id="update" parameterType="org.liu.demo.mybatis.User">
-        update user set username=#{username},password=#{password},age=#{age},enabled=#{enabled} where username=#{username}
+        update user set username=#{username},password=#{password},age=#{age},enabled=#{enabled},gis=#{gis} where username=#{username}
     </update>
     
     <delete id="delete" parameterType="int">
@@ -38,5 +36,12 @@
 
     <select id="findById" resultType="org.liu.demo.mybatis.User" useCache="true">
         select * from user where id = #{id}
+    </select>
+
+    <select id="listByAge" resultType="org.liu.demo.mybatis.User">
+        select * from user where age &gt;= #{age}
+        <if test="null != page">
+            limit #{page.size}
+        </if>
     </select>
 </mapper>

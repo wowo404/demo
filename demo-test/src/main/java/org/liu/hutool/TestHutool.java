@@ -5,6 +5,7 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.NumberChineseFormatter;
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
@@ -12,6 +13,7 @@ import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.extra.pinyin.PinyinUtil;
 import cn.hutool.json.JSONUtil;
 import org.liu.enums.AnimalType;
 import org.liu.model.AjaxResult;
@@ -33,7 +35,12 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestHutool {
 
     public static void main(String[] args) throws MalformedURLException {
-        beanCopy();
+        test();
+    }
+
+    public static void pinyin(){
+        char firstLetter = PinyinUtil.getFirstLetter('刘');
+        System.out.println(String.valueOf(firstLetter).toUpperCase());
     }
 
     public static void beanCopy() {
@@ -75,6 +82,9 @@ public class TestHutool {
     }
 
     public static void test() {
+        System.out.println(DateUtil.endOfMonth(new Date()));
+        System.out.println(DateUtil.format(new Date(), DatePattern.UTC_WITH_XXX_OFFSET_FORMAT));
+        System.out.println(DateUtil.format(new Date(), DatePattern.UTC_WITH_ZONE_OFFSET_FORMAT));
         System.out.println(DateUtil.parse("20211", "yyyyMM"));
         System.out.println(Math.abs(-7.77));
         System.out.println(NumberUtil.isNumber("+123.564"));

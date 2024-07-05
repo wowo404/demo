@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 /**
+ * QRCode的官网：https://www.qrcode.com/zh/
+ * 注意：如果“QR码”是qrcode发明公司的注册商标，如果要使用则要标明注册商标句“xxx公司注册商标”
+ *
  * @author Abel.lin
  * @description
  * @date 2016年7月10日 下午4:41:41

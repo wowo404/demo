@@ -21,14 +21,29 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.11</version>
-            <scope>runtime</scope>
+            <version>8.0.28</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.4.6</version>
         </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-typehandlers-jsr310</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.locationtech.jts</groupId>
+            <artifactId>jts-core</artifactId>
+            <version>1.19.0</version>
+        </dependency>
+        <!--次包没有引入的必要，如果是使用jackson要写专门的序列号器和反序列化器-->
+<!--        <dependency>-->
+<!--            <groupId>org.locationtech.jts.io</groupId>-->
+<!--            <artifactId>jts-io-common</artifactId>-->
+<!--            <version>1.19.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>

@@ -1,5 +1,8 @@
 package org.liu.dateandtime;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -146,6 +149,16 @@ public class TestDate {
 		return calendar.getTime();
 	}
 
+	private static String parseStartTime(String startTime) {
+		if (startTime.contains("+")) {
+			startTime = startTime.substring(0, startTime.indexOf("+"));
+		}
+		if (startTime.contains(".")) {
+			startTime = startTime.substring(0, startTime.indexOf("."));
+		}
+		return startTime;
+	}
+
 	public static void main(String[] args) {
 //		System.out.println(format(new Date(1576836000000L), COMMON_PATTERN));
 //		System.out.println(format(new Date(1573693980000L), COMMON_PATTERN));
@@ -176,6 +189,18 @@ public class TestDate {
 		System.out.println(new Date(1));
 		System.out.println(System.currentTimeMillis());
 		System.out.println(Date.UTC(2023, 7, 28, 15, 46, 50));
-    }
+
+		Date onlyTime = parse("12:12:12", "HH:mm:ss");
+		System.out.println(onlyTime);
+		String format = DateUtil.format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
+		System.out.println(format);
+
+		System.out.println(DateUtil.parse(parseStartTime("2024-07-04T15:36:16.000918+08:00"),"yyyy-MM-dd'T'HH:mm:ss"));
+
+//		DateTime parse1 = DateUtil.parse("2024-07-04T15:36:16.000918+08:00", "YYYY-MM-DD'T'hh:mm:ss");
+//		System.out.println(parse1);
+//		DateTime parse2 = DateUtil.parse("2024-07-04T20:50:30.5311753+08:00", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
+//		System.out.println(parse2);
+	}
 
 }

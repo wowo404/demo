@@ -125,6 +125,11 @@
             <version>5.8.15</version>
         </dependency>
         <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
@@ -141,6 +146,12 @@
         <!--http://jffmpeg.sourceforge.net/-->
         <!--ffmpeg-java是另一个基于ffmpeg的java版本的包-->
         <!--http://fmj-sf.net/ffmpeg-java/getting_started.php-->
+        <!--ULID：UUID的替代品-->
+        <dependency>
+            <groupId>de.huxhorn.sulky</groupId>
+            <artifactId>de.huxhorn.sulky.ulid</artifactId>
+            <version>8.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>

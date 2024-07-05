@@ -6,6 +6,7 @@ import java.math.RoundingMode;
 public class MathTest {
 
     public static void main(String[] args) {
+        System.out.println(new BigDecimal("10.123").setScale(1, RoundingMode.CEILING));
         System.out.println(1 % 10);
         System.out.println(2 % 10);
         System.out.println(3 % 10);
