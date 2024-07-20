@@ -193,6 +193,29 @@ public class TestJDK18 {
         System.out.println(value2);
     }
 
+    /**
+     * 稍微复杂些的分组，要从pojo中提取指定字段进行处理
+     * 此示例：按category分组，从Person中提取name和order属性以逗号分割的形式存储到HashSet<String>中
+     */
+    public void group(){
+        // 假设这是你的原始数据列表
+        List<Person> list = new ArrayList<>();
+        // ... 向list中添加DataA对象 ...
+
+        // 使用Stream API对list进行分组
+        Map<Integer, HashSet<String>> groupedByIndustryCode = list.stream()
+                .collect(Collectors.groupingBy(
+                        Person::getCategory, // 分组键
+                        Collectors.mapping(
+                                dataA -> dataA.getName() + "," + dataA.getOrder(), // 映射函数
+                                Collectors.toCollection(HashSet::new) // 收集器，用于创建HashSet
+                        )
+                ));
+
+        // 打印结果
+        groupedByIndustryCode.forEach((key, value) -> System.out.println("key: " + key + ", value: " + value));
+    }
+
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
         test.changeAndJoin();
@@ -219,6 +242,7 @@ public class TestJDK18 {
         private String name;
         private BigDecimal age;
         private Integer order;
+        private Integer category;
 
         public Person(String name, BigDecimal age) {
             this.name = name;
@@ -253,6 +277,14 @@ public class TestJDK18 {
 
         public void setOrder(Integer order) {
             this.order = order;
+        }
+
+        public Integer getCategory() {
+            return category;
+        }
+
+        public void setCategory(Integer category) {
+            this.category = category;
         }
     }
 
