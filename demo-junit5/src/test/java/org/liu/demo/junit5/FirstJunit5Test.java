@@ -8,23 +8,23 @@ public class FirstJunit5Test {
 
     @BeforeEach
     @DisplayName("每条用例开始时执行")
-    void start(){
+    void start() {
     }
 
     @AfterEach
     @DisplayName("每条用例结束时执行")
-    void end(){
+    void end() {
     }
 
     @Test
-    void firstTest(){
+    void firstTest() {
         assertEquals(2, 1 + 1);
     }
 
     @Test
     @Disabled("这条用例暂时跑不过，忽略!")
-    void myFailTest(){
-        assertEquals(1,2);
+    void myFailTest() {
+        assertEquals(1, 2);
     }
 
     @Test
