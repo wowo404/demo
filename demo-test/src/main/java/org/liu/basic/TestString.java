@@ -22,6 +22,9 @@ public class TestString {
     public static void main(String[] args) {
         TestString testString = new TestString();
         testString.recursiveReplace();
+        System.out.println("🤦🏼‍♂️".length());
+        System.out.println("Å".equals("Å"));
+        System.out.println("a b c".replaceAll(" ", ""));
     }
 
     public void recursiveReplace() {

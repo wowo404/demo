@@ -1,5 +1,8 @@
 package org.liu.jdk18;
 
+import lombok.ToString;
+
+@ToString
 public class Person {
 	
 	private String firstName, lastName, job, gender;

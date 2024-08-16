@@ -40,6 +40,7 @@ public class TestReflection {
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception {
+        setNullValue();
 //        getClassName();
 //        one();
 //        two();
@@ -57,8 +58,16 @@ public class TestReflection {
         System.out.println("=======================================================");
         eleven();
     }
-    
-    public static void getClassName(){
+
+    public static void setNullValue() throws Exception{
+        Person p = new Person();
+        p.setAge(1);
+        p.setGender("1");
+        p.getClass().getMethod("setGender", String.class).invoke(p, new Object[]{null});
+        System.out.println(p);
+    }
+
+    public static void getClassName() {
         /***通过一个对象获得完整的包名和类名***/
         Person p = new Person();
         System.out.println("1--" + p.getClass().getName());

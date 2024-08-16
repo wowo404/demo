@@ -87,12 +87,23 @@ public class TestHutoolExcel {
             "暤鈳漼姻膬襦噁摮癰軮渀酙帮璖諚淪它鼅蝢胓闉乿眯焪節穿汳皎鵊摷蔋聅鹮褻豎蝢琨蚤飳橪耻鵱箁駲毥磽犦懾蜃窠桿鱼鱗板绀俁搚栥聎輑嵕";
 
     public static void main(String[] args) {
-        writeNormal();
+        readAll();
+    }
+
+    public static void readAll(){
+        ExcelReader reader = ExcelUtil.getReader("E:\\downloads\\41.xlsx", 0);
+        List<List<Object>> data = reader.read();
+        for (List<Object> row : data) {
+            System.out.println(row);
+        }
     }
 
     public static void readBySax() {
         long start = System.currentTimeMillis();
-        ExcelUtil.readBySax("D:\\download\\test.xlsx", 0, new MyRowHandler(0, 1, 1000));
+        ExcelUtil.readBySax("E:\\downloads\\11.xlsx", 0,
+                (sheetIndex, rowIndex, rowCells) -> {
+                    System.out.println(rowCells);
+                });
         System.out.println(System.currentTimeMillis() - start);
     }
 

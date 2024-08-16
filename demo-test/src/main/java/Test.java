@@ -14,6 +14,8 @@ public class Test {
     private final static long MAX_DATACENTER_NUM = -1L ^ (-1L << DATACENTER_BIT);
 
     public static void main(String[] args) throws InterruptedException {
+        String replace = "类型（地区，革命老区市，毗邻地市，中部省域副中心城市，分县）".replace("类型（", "").replace("）", "").replace("，", "\",\"");
+        System.out.println(replace);
         System.out.println(Arrays.toString("赣州市-章贡区-解放街道-解放路居委会/a".split("/")));
         System.out.println(System.currentTimeMillis() / 1000);
         System.out.println(Instant.now());
@@ -24,6 +26,7 @@ public class Test {
         String b = "中";
         System.out.println(44 / 30);
         System.out.println("".split(","));
+        System.out.println("-".equals("—"));
     }
 
     public static void calculate(){

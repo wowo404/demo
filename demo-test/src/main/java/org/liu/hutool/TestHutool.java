@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.codec.Base64;
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.convert.NumberChineseFormatter;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
@@ -36,9 +37,15 @@ public class TestHutool {
 
     public static void main(String[] args) throws MalformedURLException {
         test();
+        testConvert();
     }
 
-    public static void pinyin(){
+    public static void testConvert() {
+        String a = null;
+        System.out.println(Convert.convert(String.class, a));
+    }
+
+    public static void pinyin() {
         char firstLetter = PinyinUtil.getFirstLetter('刘');
         System.out.println(String.valueOf(firstLetter).toUpperCase());
     }
