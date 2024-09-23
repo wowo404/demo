@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        subList();
+        listToArray();
     }
 
     public static void queue() {
@@ -215,6 +215,17 @@ public class TestCollection {
         list.add(5);
         list.removeIf(lanIdSet::contains);
         System.out.println(list);
+    }
+
+    public static void listToArray(){
+        List<Integer> list = new ArrayList<>(5);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Object[] arr1 = list.toArray();
+        System.out.println(Arrays.toString(arr1));
+        Integer[] arr2 = list.toArray(new Integer[0]);
+        System.out.println(Arrays.toString(arr2));
     }
 
 }

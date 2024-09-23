@@ -27,6 +27,10 @@ public class Test {
         System.out.println(44 / 30);
         System.out.println("".split(","));
         System.out.println("-".equals("—"));
+        String st = "东山街道办事处坪塘";
+        System.out.println(st.matches("^.+街道办事处.+$"));
+        int index = st.indexOf("街道办事处");
+        System.out.println(st.substring(index + 5));
     }
 
     public static void calculate(){
