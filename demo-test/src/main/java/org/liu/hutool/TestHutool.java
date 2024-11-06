@@ -11,12 +11,15 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.img.ImgUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.lang.TypeReference;
+import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.extra.pinyin.PinyinUtil;
 import cn.hutool.json.JSONUtil;
 import org.liu.enums.AnimalType;
+import org.liu.enums.SelectionEnum;
+import org.liu.model.Action;
 import org.liu.model.AjaxResult;
 import org.liu.model.Animal;
 import org.liu.model.Monkey;
@@ -30,14 +33,21 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 
 public class TestHutool {
 
     public static void main(String[] args) throws MalformedURLException {
-        test();
-        testConvert();
+        testClassUtil();
+    }
+
+    public static void testClassUtil(){
+        Set<Class<?>> classes = ClassUtil.scanPackageBySuper("org.liu.model", Action.class);
+        System.out.println(classes);
+        classes = ClassUtil.scanPackageBySuper("org.liu.enums", SelectionEnum.class);
+        System.out.println(classes);
     }
 
     public static void testConvert() {

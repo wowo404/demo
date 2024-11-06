@@ -91,7 +91,8 @@ public class TestHutoolExcel {
     }
 
     public static void readAll(){
-        ExcelReader reader = ExcelUtil.getReader("E:\\downloads\\41.xlsx", 0);
+        String path = "E:\\BaiduSyncdisk\\work\\minxun\\经济普查\\大屏\\20240718改版\\五经普指标及导入数据\\经济普查表格0902.xlsx";
+        ExcelReader reader = ExcelUtil.getReader(path, 12);
         List<List<Object>> data = reader.read();
         for (List<Object> row : data) {
             System.out.println(row);

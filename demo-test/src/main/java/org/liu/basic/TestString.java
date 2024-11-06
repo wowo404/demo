@@ -25,6 +25,18 @@ public class TestString {
         System.out.println("🤦🏼‍♂️".length());
         System.out.println("Å".equals("Å"));
         System.out.println("a b c".replaceAll(" ", ""));
+
+        isAlphabetic();
+    }
+
+    public static void isAlphabetic(){
+        System.out.println("-----------------------");
+        String text = "a哦，.;-=123来BV";
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            boolean tag = Character.isUpperCase(c) || Character.isLowerCase(c) || Character.isDigit(c);
+            System.out.println("index：" + i+ "，字符：" + c + "，是否字母或数字：" + tag);
+        }
     }
 
     public void recursiveReplace() {

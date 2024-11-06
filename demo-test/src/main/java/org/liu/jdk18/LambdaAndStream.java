@@ -288,11 +288,12 @@ public class LambdaAndStream {
         children.add(dept0);
         children.stream().peek(dept -> dept.setEmail("test111")).forEach(System.out::println);
 
-        Stream.of("one", "two", "three", "four").filter(e -> e.length() > 3)
+        List<String> list = Stream.of("one", "two", "three", "four").filter(e -> e.length() > 3)
                 .peek(e -> System.out.println("Filtered value: " + e))
                 .map(String::toUpperCase)
                 .peek(e -> System.out.println("Mapped value: " + e))
                 .collect(Collectors.toList());
+        System.out.println(list);
     }
 
     /**
@@ -392,14 +393,14 @@ public class LambdaAndStream {
         System.out.println(sumAll.flatMap(x -> Optional.of(x.toUpperCase())));//Optional[HELLO WORLD !]
     }
 
-	/**
-	 * 并行流
-	 */
-	public void parallel(){
-		new Random().ints().limit(50).parallel().forEach(i->{
-			System.out.println(Thread.currentThread().getName() + "--->" + i);
-		});
-	}
+    /**
+     * 并行流
+     */
+    public void parallel() {
+        new Random().ints().limit(50).parallel().forEach(i -> {
+            System.out.println(Thread.currentThread().getName() + "--->" + i);
+        });
+    }
 
     /**
      * 生成集合
@@ -411,7 +412,7 @@ public class LambdaAndStream {
     }
 
     /**
-	 * 调用构造方法
+     * 调用构造方法
      * 把一个包含父子关系的集合拷贝到另一个同样包含父子关系的集合中，两个集合是不一样的对象
      */
     public void copyToNewObjectCollection() {
@@ -486,14 +487,42 @@ public class LambdaAndStream {
         System.out.println(Arrays.toString(strings));
         String[] array = list.stream().map(InnerDCSData::getSerialNum).toArray(num -> new String[list.size()]);
         System.out.println(Arrays.toString(array));
-		String[] array1 = list.stream().map(InnerDCSData::getSerialNum).toArray(String[]::new);//最简洁的方式
-		System.out.println(Arrays.toString(array1));
+        String[] array1 = list.stream().map(InnerDCSData::getSerialNum).toArray(String[]::new);//最简洁的方式
+        System.out.println(Arrays.toString(array1));
     }
 
-    public void multiArray(){
+    public void multiArray() {
         String[] arr1 = {"a", "b"};
         String[] arr2 = {"c", "d"};
         Stream.of(arr1, arr2).forEach(System.out::println);//每一个元素是数组
+    }
+
+    public void splitStringToSet() {
+//        Person person1 = new Person("a,b,c");
+//        Person person2 = new Person("c,d");
+        Person person1 = new Person();
+        Person person2 = new Person();
+        List<Person> list = new ArrayList<>();
+        list.add(person1);
+        list.add(person2);
+
+        LinkedHashSet<String> collect = list.stream().filter(val -> null != val.getHobbies())
+                .map(val -> val.getHobbies().split(","))
+                .collect(LinkedHashSet::new, (r, t) -> r.addAll(Arrays.asList(t)), AbstractCollection::addAll);
+        System.out.println(collect);
+    }
+
+    public void collectListItemToList(){
+        Person person1 = new Person();
+        person1.setSonNames(Arrays.asList("a", "b"));
+        Person person2 = new Person();
+        person2.setSonNames(Arrays.asList("c", "d"));
+        List<Person> list = new ArrayList<>();
+        list.add(person1);
+        list.add(person2);
+
+        ArrayList<Object> collect = list.stream().map(Person::getSonNames).collect(ArrayList::new, ArrayList::addAll, AbstractCollection::addAll);
+        System.out.println(collect);
     }
 
     public static void main(String[] args) {
@@ -515,7 +544,9 @@ public class LambdaAndStream {
 //        ls.findFirst();
 //        ls.findAny();
 //        ls.parallel();
-        ls.listToMap();
+//        ls.listToMap();
+//        ls.splitStringToSet();
+        ls.collectListItemToList();
     }
 
 }

@@ -8,7 +8,6 @@ import java.io.UncheckedIOException;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.util.*;
-import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -20,22 +19,30 @@ import java.util.stream.Stream;
  */
 public class TestJDK18 {
 
-    public void create(){
+    public void create() {
 
     }
 
     public void sort() {
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100"), 1),
-                new Person("b", new BigDecimal("200"), 3), new Person("b", new BigDecimal("200"), 2));
-        list.sort(Comparator.comparing(Person::getOrder, Comparator.reverseOrder()));
+                new Person("b", new BigDecimal("200"), 3),
+                new Person("b", new BigDecimal("50"), 2),
+                new Person("c", new BigDecimal("400")),
+                new Person("c", new BigDecimal("600"), 0),
+                new Person("d", new BigDecimal("0")));
+        list.sort(Comparator.comparing(Person::getOrder, Comparator.nullsLast(Integer::compareTo)));
+//        list.sort(Comparator.comparing(Person::getOrder, Comparator.reverseOrder()));
         //另一种写法：(x,y) -> x.getOrder().compareTo(y.getOrder())
         //下面是idea的推荐
         //Reports Comparators defined as lambda expressions which could be expressed using methods like Comparator.comparing().
         //Some comparators like (person1, person2) -> person1.getName().compareTo(person2.getName()) could be simplified like this: Comparator.comparing(Person::getName).
         //Also suggests to replace chain comparisons with Comparator.thenComparing(), e.g. int res = o1.first.compareTo(o2.first); if(res == 0) res = o1.second.compareTo(o2.second); if(res == 0) res = o1.third - o2.third; return res; will be replaced with objs.sort(Comparator.comparing((Obj o) -> o.first).thenComparing(o -> o.second).thenComparingInt(o -> o.third)
-        for (Person person : list) {
-            System.out.println(person.getOrder());
-        }
+        list.forEach(System.out::println);
+    }
+
+    public void minOrMax() {
+        List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100"), 1),
+                new Person("b", new BigDecimal("200"), 3), new Person("b", new BigDecimal("200"), 2));
         Optional<Person> max = list.stream().max((t1, t2) -> Math.min(t1.getOrder(), t2.getOrder()));
         max.ifPresent(System.out::println);
         Optional<Person> min = list.stream().max(Comparator.comparing(Person::getOrder));
@@ -140,20 +147,23 @@ public class TestJDK18 {
         Stream<String> s1 = Stream.of("aa", "ab", "c", "ad");
 
         System.out.println(s1.parallel().collect(() -> new ArrayList<String>(),
-                (array, s) -> {if (predicate.test(s)) array.add(s); },
+                (array, s) -> {
+                    if (predicate.test(s)) array.add(s);
+                },
                 (array1, array2) -> array1.addAll(array2)));
     }
 
     //过滤重复对象（通过指定字段过滤）
-    public void distinct(){
+    public void distinct() {
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100")),
                 new Person("b", new BigDecimal("200")), new Person("a", new BigDecimal("300")));
         Set<String> set = new HashSet<>();//通过Set的add方法返回true/false来去除重复
         list.stream().filter(person -> set.add(person.getName())).forEach(person -> System.out.println(person.getName() + person.getAge()));
+        System.out.println(set);
     }
 
     //peek
-    public void peek(){
+    public void peek() {
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100")),
                 new Person("b", new BigDecimal("200")), new Person("a", new BigDecimal("300")));
         list.stream().filter(e -> e.getAge().compareTo(new BigDecimal("150")) > 0)
@@ -163,13 +173,13 @@ public class TestJDK18 {
                 .collect(Collectors.toList());
     }
 
-    public void avg(){
+    public void avg() {
         Stream.of(new BigDecimal("1.2"), new BigDecimal("3.7"))
                 .mapToDouble(BigDecimal::doubleValue).average()
                 .ifPresent(System.out::println);
     }
 
-    public void toBytes(){
+    public void toBytes() {
         List<Long> deletedIdList = new ArrayList<>();
         deletedIdList.add(1L);
         deletedIdList.add(2L);
@@ -181,7 +191,7 @@ public class TestJDK18 {
         System.out.println(bytes);
     }
 
-    public void changeAndJoin(){
+    public void changeAndJoin() {
         String value = Stream.of("a", "b").map(val -> "'" + val + "'").collect(Collectors.joining(","));
         System.out.println(value);
 
@@ -197,7 +207,7 @@ public class TestJDK18 {
      * 稍微复杂些的分组，要从pojo中提取指定字段进行处理
      * 此示例：按category分组，从Person中提取name和order属性以逗号分割的形式存储到HashSet<String>中
      */
-    public void group(){
+    public void group() {
         // 假设这是你的原始数据列表
         List<Person> list = new ArrayList<>();
         // ... 向list中添加DataA对象 ...
@@ -218,12 +228,13 @@ public class TestJDK18 {
 
     public static void main(String[] args) {
         TestJDK18 test = new TestJDK18();
-        test.changeAndJoin();
+        test.sort();
     }
 
     static final class MyCollectors {
 
-        private MyCollectors() {}
+        private MyCollectors() {
+        }
 
         public static Collector<Byte, ?, byte[]> toByteArray() {
             return Collector.of(ByteArrayOutputStream::new, ByteArrayOutputStream::write, (baos1, baos2) -> {

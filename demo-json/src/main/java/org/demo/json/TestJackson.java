@@ -33,7 +33,13 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        indicator();
+        data();
+    }
+
+    public static void data() throws IOException {
+        String text = "{\"condition\": \"isFifthCensusDataProcessLocation\",\"how\": \"\",\"target\": \"countyDataProcessLocation,townDataProcessLocation,villageDataProcessLocation\"}";
+        DataProcessFormula dataProcessFormula = mapper.readValue(text, DataProcessFormula.class);
+        System.out.println(dataProcessFormula);
     }
 
     public static void indicator() throws JsonProcessingException {
