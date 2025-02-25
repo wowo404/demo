@@ -63,6 +63,11 @@ public class TestRegexp {
         System.out.println("2022年1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
         System.out.println("2022年报".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
         System.out.println("remove_prefix[444]".matches("remove_prefix\\[\\d+]"));
+        //正则表达式：匹配整数或浮点数，可以为负数
+        String regex = "^-?\\d+(\\.\\d+)?$";
+        System.out.println("-123.456".matches(regex));
+        System.out.println("-123".matches(regex));
+        System.out.println("123".matches(regex));
     }
 
     public static void getMatchGroup() {

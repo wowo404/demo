@@ -10,6 +10,8 @@ import java.util.List;
 @Entity
 public class Monkey extends Animal implements Action, Serializable {
 
+	public boolean good = true;
+
 	private String color;
 
 	private List<MonkeySons> sons;

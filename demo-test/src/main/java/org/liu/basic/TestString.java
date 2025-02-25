@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.liu.rpn.calculatecolumn.InfixToSuffix;
 import org.liu.rpn.calculatecolumn.SuffixCalculator;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -25,6 +26,10 @@ public class TestString {
         System.out.println("🤦🏼‍♂️".length());
         System.out.println("Å".equals("Å"));
         System.out.println("a b c".replaceAll(" ", ""));
+
+        String imageDirectory = "E:\\work\\minxun\\经济普查\\定南县\\dingnan";
+        String location = imageDirectory.substring(imageDirectory.lastIndexOf(File.separator) + 1);
+        System.out.println(location);
 
         isAlphabetic();
     }

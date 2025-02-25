@@ -1,15 +1,17 @@
 package org.liu.hutool;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.poi.excel.BigExcelWriter;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import cn.hutool.poi.word.Word07Writer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.*;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author lzs
@@ -86,15 +88,32 @@ public class TestHutoolExcel {
             "想庁肷靄吻嗩庘夭谵簣斬榔鰬篸澩拠裭雉橒鉷荌趒抩僝稟十唖崷曮脄岌塍猁坄饁輹憴狗幅掗胍召磎纣觃办旝禡緈勗锍电夐娗腹鸈愋乽樹溎织妫溾謥覠崧辄偎灀岧龜矼劤栖" +
             "暤鈳漼姻膬襦噁摮癰軮渀酙帮璖諚淪它鼅蝢胓闉乿眯焪節穿汳皎鵊摷蔋聅鹮褻豎蝢琨蚤飳橪耻鵱箁駲毥磽犦懾蜃窠桿鱼鱗板绀俁搚栥聎輑嵕";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         readAll();
     }
 
-    public static void readAll(){
-        String path = "E:\\BaiduSyncdisk\\work\\minxun\\经济普查\\大屏\\20240718改版\\五经普指标及导入数据\\经济普查表格0902.xlsx";
-        ExcelReader reader = ExcelUtil.getReader(path, 12);
+    public static void writeWord() {
+        Word07Writer writer = new Word07Writer();
+
+// 添加段落（标题）
+        writer.addText(new Font("方正小标宋简体", Font.PLAIN, 22), "我是第一部分", "我是第二部分");
+// 添加段落（正文）
+        writer.addText(new Font("宋体", Font.PLAIN, 22), "我是正文第一部分", "我是正文第二部分");
+// 写出到文件
+        writer.flush(FileUtil.file("e:/wordWrite.docx"));
+// 关闭
+        writer.close();
+    }
+
+    public static void readAll() {
+        String path = "E:\\BaiduSyncdisk\\work\\minxun\\经济普查\\大屏\\20240718改版\\赣州地图可视化\\赣州经开区可视化.xlsx";
+        ExcelReader reader = ExcelUtil.getReader(path, 0);
         List<List<Object>> data = reader.read();
         for (List<Object> row : data) {
+            String content = row.get(3).toString();
+            if (content.contains("\n")) {
+                System.out.println(Arrays.toString(content.split("\n")));
+            }
             System.out.println(row);
         }
     }

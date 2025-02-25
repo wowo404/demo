@@ -31,6 +31,9 @@ public class Test {
         System.out.println(st.matches("^.+街道办事处.+$"));
         int index = st.indexOf("街道办事处");
         System.out.println(st.substring(index + 5));
+        System.out.println("2023年报".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("2023年报1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("2023年1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
     }
 
     public static void calculate(){

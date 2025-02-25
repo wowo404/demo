@@ -18,6 +18,12 @@ public class TestCommonsLang3 {
 
     public static void main(String[] args) {
 
+        System.out.println(NumberUtils.isParsable("-123466"));
+        System.out.println(NumberUtils.isParsable("-123.466"));
+        System.out.println(NumberUtils.isParsable("123"));
+        System.out.println(NumberUtils.isParsable("123.466"));
+        System.out.println(NumberUtils.isParsable("123.466a"));
+        System.out.println(NumberUtils.isParsable("123.466="));
         System.out.println(NumberUtils.isDigits("123466"));
         System.out.println(NumberUtils.isDigits("123466sdf"));
         System.out.println(NumberUtils.isDigits("123466-"));

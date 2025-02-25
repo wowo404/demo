@@ -6,23 +6,20 @@ import org.liu.model.Monkey;
 import org.liu.model.MonkeySons;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedType;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.util.*;
 
 public class TestReflect {
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException {
         TestReflect t = new TestReflect();
 
         t.testField();
-        Monkey monkey = new Monkey();
-        monkey.setColor("red");
-        monkey.setId(1);
-        monkey.setName("gucci");
-        t.test(monkey);
+//        Monkey monkey = new Monkey();
+//        monkey.setColor("red");
+//        monkey.setId(1);
+//        monkey.setName("gucci");
+//        t.test(monkey);
     }
 
     public void convert() {
@@ -79,16 +76,28 @@ public class TestReflect {
         return t;
     }
 
-    public void testField() {
+    public void testField() throws IllegalAccessException {
+        Monkey monkey = new Monkey();
         Field[] fields = Monkey.class.getFields();
+        System.out.println("getFields:" + Arrays.toString(fields));
         Field[] declaredFields = Monkey.class.getDeclaredFields();
+        System.out.println("getDeclaredFields:" + Arrays.toString(declaredFields));
         for (Field declaredField : declaredFields) {
-            Type genericType = declaredField.getGenericType();
+            System.out.println("------------------------");
+            System.out.println("名称：" + declaredField.getName());
+            System.out.println("修饰符：" + Modifier.toString(declaredField.getModifiers()));
+            System.out.println("是否static：" + Modifier.isStatic(declaredField.getModifiers()));
+            System.out.println("类型：" + declaredField.getType());
+            System.out.println("是否可访问：" + declaredField.isAccessible());
+            System.out.println("是否合成字段：" + declaredField.isSynthetic());
+            System.out.println("通用类型：" + declaredField.getGenericType());
             Class<?> type = declaredField.getType();
             boolean assignableFrom = Collection.class.isAssignableFrom(type);
             System.out.println("Collection's sub class:" + assignableFrom + "-----" + type);
-            Class<?> declaringClass = declaredField.getDeclaringClass();
-            System.out.println();
+            System.out.println("定义在哪个类型中？：" + declaredField.getDeclaringClass());
+            declaredField.setAccessible(true);
+            Object fieldValue = declaredField.get(monkey);
+            System.out.println("字段值：" + fieldValue);
         }
 
         System.out.println();
