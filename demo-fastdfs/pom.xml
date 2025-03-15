@@ -12,10 +12,16 @@
     <artifactId>demo-fastdfs</artifactId>
 
     <dependencies>
+        <!-- 此官方源无法从maven中央仓库下载，只能下载到本地安装-->
+        <!--        <dependency>
+                    <groupId>org.csource</groupId>
+                    <artifactId>fastdfs-client-java</artifactId>
+                    <version>1.32-SNAPSHOT</version>
+                </dependency>-->
         <dependency>
-            <groupId>org.csource</groupId>
+            <groupId>io.github.rui8832</groupId>
             <artifactId>fastdfs-client-java</artifactId>
-            <version>1.32-SNAPSHOT</version>
+            <version>1.30-20230328</version>
         </dependency>
 
         <dependency>

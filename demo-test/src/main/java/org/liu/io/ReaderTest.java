@@ -1,6 +1,6 @@
 package org.liu.io;
 
-import org.apache.commons.lang3.ArrayUtils;
+import cn.hutool.core.util.ArrayUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +22,7 @@ public class ReaderTest {
         int readLength;
         while ((readLength = reader.read(buff, 0, buff.length)) != -1) {
             if (readLength < 8192) {
-                char[] subarray = ArrayUtils.subarray(buff, 0, readLength);
+                char[] subarray = ArrayUtil.sub(buff, 0, readLength);
                 System.out.println(new String(subarray));
             } else {
                 System.out.println(new String(buff));
@@ -38,7 +38,7 @@ public class ReaderTest {
         int readLength;
         while ((readLength = reader.read(buff, 0, buff.length)) != -1) {
             if (readLength < 8192) {
-                char[] subarray = ArrayUtils.subarray(buff, 0, readLength);
+                char[] subarray = ArrayUtil.sub(buff, 0, readLength);
                 System.out.println(new String(subarray));
             } else {
                 System.out.println(new String(buff));

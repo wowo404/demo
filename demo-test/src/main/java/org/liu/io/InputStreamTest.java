@@ -1,6 +1,6 @@
 package org.liu.io;
 
-import org.apache.commons.lang3.ArrayUtils;
+import cn.hutool.core.util.ArrayUtil;
 
 import java.io.*;
 
@@ -20,7 +20,7 @@ public class InputStreamTest {
         int readLength;
         while ((readLength = is.read(buff, 0, buff.length)) != -1) {
             if (readLength < 4096) {
-                byte[] subarray = ArrayUtils.subarray(buff, 0, readLength);
+                byte[] subarray = ArrayUtil.sub(buff, 0, readLength);
                 System.out.println(new String(subarray));
             } else {
                 System.out.println(new String(buff));
@@ -37,7 +37,7 @@ public class InputStreamTest {
         int readLength;
         while ((readLength = is.read(buff, 0, buff.length)) != -1) {
             if (readLength < 8192) {
-                byte[] subarray = ArrayUtils.subarray(buff, 0, readLength);
+                byte[] subarray = ArrayUtil.sub(buff, 0, readLength);
                 System.out.println(new String(subarray));
             } else {
                 System.out.println(new String(buff));
@@ -54,7 +54,7 @@ public class InputStreamTest {
         int readLength;
         while ((readLength = dis.read(buff, 0, buff.length)) != -1) {
             if (readLength < 8192) {
-                byte[] subarray = ArrayUtils.subarray(buff, 0, readLength);
+                byte[] subarray = ArrayUtil.sub(buff, 0, readLength);
                 System.out.println(new String(subarray));
             } else {
                 System.out.println(new String(buff));

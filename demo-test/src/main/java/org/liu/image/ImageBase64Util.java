@@ -1,7 +1,5 @@
 package org.liu.image;
 
-import sun.misc.BASE64Decoder;
-
 import java.io.*;
 import java.util.Base64;
 
@@ -37,10 +35,9 @@ public class ImageBase64Util {
      *     
      */
     public static void generateImage(String imgStr, String imgFilePath) {
-        BASE64Decoder decoder = new BASE64Decoder();
         try {
             // Base64解码
-            byte[] b = decoder.decodeBuffer(imgStr);
+            byte[] b = Base64.getDecoder().decode(imgStr);
             for (int i = 0; i < b.length; ++i) {
                 if (b[i] < 0) {// 调整异常数据
                     b[i] += 256;
