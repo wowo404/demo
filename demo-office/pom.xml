@@ -33,11 +33,11 @@
             <version>5.4.3</version>
         </dependency>
         <!--WARNING:远程仓库中只有源码包，没有编译包，奇怪！！！！！编译包是下载后放入本地maven仓库的-->
-        <dependency>
-            <groupId>jcom</groupId>
-            <artifactId>jcom</artifactId>
-            <version>2.2.4</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>jcom</groupId>-->
+        <!--            <artifactId>jcom</artifactId>-->
+        <!--            <version>2.2.4</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.poi</groupId>

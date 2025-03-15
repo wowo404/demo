@@ -3,8 +3,8 @@ package org.liu.basic;
 import cn.hutool.core.bean.BeanUtil;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @Author lzs
@@ -24,7 +24,7 @@ public class ClassCastTest {
         ClassCastModel model = new ClassCastModel();
         model.setId(1L);
         model.setModels(new ClassCastInnerModel[]{innerModel});
-        model.setModelList(Arrays.asList(innerModel));
+        model.setModelList(List.of(innerModel));
 
         Object models = BeanUtil.getFieldValue(model, "models");
         //转成object数组

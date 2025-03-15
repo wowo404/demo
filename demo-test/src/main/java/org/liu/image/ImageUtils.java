@@ -137,10 +137,10 @@ public class ImageUtils {
             // 计算比例
             if ((bi.getHeight() > height) || (bi.getWidth() > width)) {
                 if (bi.getHeight() > bi.getWidth()) {
-                    ratio = (new Integer(height)).doubleValue()
+                    ratio = (Integer.valueOf(height)).doubleValue()
                             / bi.getHeight();
                 } else {
-                    ratio = (new Integer(width)).doubleValue() / bi.getWidth();
+                    ratio = (Integer.valueOf(width)).doubleValue() / bi.getWidth();
                 }
                 AffineTransformOp op = new AffineTransformOp(
                         AffineTransform.getScaleInstance(ratio, ratio), null);

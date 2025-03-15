@@ -171,10 +171,10 @@ public class TestZXing {
         // 计算比例
         if ((srcImage.getHeight() > height) || (srcImage.getWidth() > width)) {
             if (srcImage.getHeight() > srcImage.getWidth()) {
-                ratio = (new Integer(height)).doubleValue()
+                ratio = (Integer.valueOf(height)).doubleValue()
                         / srcImage.getHeight();
             } else {
-                ratio = (new Integer(width)).doubleValue()
+                ratio = (Integer.valueOf(width)).doubleValue()
                         / srcImage.getWidth();
             }
             AffineTransformOp op = new AffineTransformOp(

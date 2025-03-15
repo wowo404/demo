@@ -29,11 +29,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.io.*;
-import java.net.URL;
-import java.security.*;
-import java.security.cert.*;
 import javax.net.ssl.*;
+import java.io.*;
+import java.security.KeyStore;
+import java.security.MessageDigest;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 /**
  * 一、获得目标机器有效证书
@@ -42,7 +43,7 @@ import javax.net.ssl.*;
  * java InstallCert my.hoolai.com
  * 例如：java InstalCert smtp.zhangsan.com:465 admin
  * 如果不加参数password和host的端口号，上面的获取证书程序中默认给的端口号是：443，密码是:changeit
- *
+ * <p>
  * 3、根据运行提示信息，输入1，回车，在当前目录下生成名为： jssecacerts 的证书
  * 将证书放置到$JAVA_HOME/jre/lib/security目录下， 切记该JDK的jre是工程所用的环境！！！
  * 或者：
@@ -58,7 +59,7 @@ import javax.net.ssl.*;
  * 如上，之前的工具类中默认命名别名是加上"-1"。使用InstallCert设置的密码需要跟cacerts文件中的密码一致，
  * 如果修改过密码，就需要修改InstallCert类中对应的密码字符串，否则会有下面这个异常：
  * java.security.UnrecoverableKeyException: Password verification failed
- *
+ * <p>
  * 二、忽略证书信任问题
  * 在X509ExtendedTrustManager和HostnameVerifier中忽略证书
  */
@@ -78,12 +79,12 @@ public class InstallCert {
             return;
         }
         File file = new File("jssecacerts");
-        if (file.isFile() == false) {
+        if (!file.isFile()) {
             char SEP = File.separatorChar;
             File dir = new File(System.getProperty("java.home") + SEP
                     + "lib" + SEP + "security");
             file = new File(dir, "jssecacerts");
-            if (file.isFile() == false) {
+            if (!file.isFile()) {
                 file = new File(dir, "cacerts");
             }
         }
@@ -96,12 +97,12 @@ public class InstallCert {
         TrustManagerFactory tmf =
                 TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         tmf.init(ks);
-        X509TrustManager defaultTrustManager = (X509TrustManager)tmf.getTrustManagers()[0];
+        X509TrustManager defaultTrustManager = (X509TrustManager) tmf.getTrustManagers()[0];
         SavingTrustManager tm = new SavingTrustManager(defaultTrustManager);
-        context.init(null, new TrustManager[] {tm}, null);
+        context.init(null, new TrustManager[]{tm}, null);
         SSLSocketFactory factory = context.getSocketFactory();
         System.out.println("Opening connection to " + host + ":" + port + "...");
-        SSLSocket socket = (SSLSocket)factory.createSocket(host, port);
+        SSLSocket socket = (SSLSocket) factory.createSocket(host, port);
         socket.setSoTimeout(10000);
         try {
             System.out.println("Starting SSL handshake...");
@@ -128,8 +129,8 @@ public class InstallCert {
         for (int i = 0; i < chain.length; i++) {
             X509Certificate cert = chain[i];
             System.out.println
-                    (" " + (i + 1) + " Subject " + cert.getSubjectDN());
-            System.out.println("   Issuer  " + cert.getIssuerDN());
+                    (" " + (i + 1) + " Subject " + cert.getSubjectX500Principal());
+            System.out.println("   Issuer  " + cert.getIssuerX500Principal());
             sha1.update(cert.getEncoded());
             System.out.println("   sha1    " + toHexString(sha1.digest()));
             md5.update(cert.getEncoded());
@@ -140,7 +141,7 @@ public class InstallCert {
         String line = reader.readLine().trim();
         int k;
         try {
-            k = (line.length() == 0) ? 0 : Integer.parseInt(line) - 1;
+            k = (line.isEmpty()) ? 0 : Integer.parseInt(line) - 1;
         } catch (NumberFormatException e) {
             System.out.println("KeyStore not changed");
             return;
@@ -158,7 +159,9 @@ public class InstallCert {
                 ("Added certificate to keystore 'jssecacerts' using alias '"
                         + alias + "'");
     }
+
     private static final char[] HEXDIGITS = "0123456789abcdef".toCharArray();
+
     private static String toHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 3);
         for (int b : bytes) {
@@ -169,19 +172,23 @@ public class InstallCert {
         }
         return sb.toString();
     }
+
     private static class SavingTrustManager implements X509TrustManager {
         private final X509TrustManager tm;
         private X509Certificate[] chain;
+
         SavingTrustManager(X509TrustManager tm) {
             this.tm = tm;
         }
+
         public X509Certificate[] getAcceptedIssuers() {
             throw new UnsupportedOperationException();
         }
-        public void checkClientTrusted(X509Certificate[] chain, String authType)
-                throws CertificateException {
+
+        public void checkClientTrusted(X509Certificate[] chain, String authType) {
             throw new UnsupportedOperationException();
         }
+
         public void checkServerTrusted(X509Certificate[] chain, String authType)
                 throws CertificateException {
             this.chain = chain;

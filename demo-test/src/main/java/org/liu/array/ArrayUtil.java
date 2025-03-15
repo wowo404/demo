@@ -1,8 +1,6 @@
 package org.liu.array;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author liuzhangsheng
@@ -11,15 +9,18 @@ import java.util.Map;
 public class ArrayUtil {
 
     public static void main(String[] args) {
-        ArrayUtil test = new ArrayUtil();
-        test.union();
-
-        Map<Integer, Integer> map = new HashMap<>();
-        System.out.println(map.get(1));
+        readTwo();
     }
 
-    public void arrayCopy(){
-        int[] src = new int[]{1,2,3,4,5,6};
+    public static void readTwo() {
+        int[] src = new int[]{1, 2, 3, 4, 5, 6};
+        for (int i = 0, j = 1; i < src.length - 1; i += 2, j += 2) {
+            System.out.println(src[i] + " -- " + src[j]);
+        }
+    }
+
+    public void arrayCopy() {
+        int[] src = new int[]{1, 2, 3, 4, 5, 6};
         int[] target = new int[3];
         System.arraycopy(src, 3, target, 0, 3);
         for (int i : src) {
@@ -31,9 +32,9 @@ public class ArrayUtil {
         }
     }
 
-    public void union(){
-        int[] one = new int[]{1,2,3};
-        int[] two = new int[]{4,5,6};
+    public void union() {
+        int[] one = new int[]{1, 2, 3};
+        int[] two = new int[]{4, 5, 6};
         int[] union = Arrays.copyOf(one, one.length + two.length);
         System.arraycopy(two, 0, union, one.length, two.length);
         for (int i : union) {

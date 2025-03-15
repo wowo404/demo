@@ -31,7 +31,7 @@ public class CallerService {
         OperateAccountReq req = new OperateAccountReq();
         req.setUserId(1L);
         req.setAmount(new BigDecimal("102.356"));
-        Response<Void> resp = service.operateAccount(req);
+        Response<Void> resp = service.operateAccount("", req);
         System.out.println("resultCode:" + resp.getCode());
     }
 

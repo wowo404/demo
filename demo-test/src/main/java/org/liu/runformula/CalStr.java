@@ -1,8 +1,8 @@
 /*
  * Project: seaway-p2p-biz-mgr
- * 
+ *
  * File Created at 2014年1月13日 下午3:34:53
- * 
+ *
  * Copyright 2012 seaway.com Corporation Limited.
  * All rights reserved.
  *
@@ -24,19 +24,19 @@ public class CalStr {
     private String src;
 
     /**
-    * constructor
-    *
-    * @param src the string(expression) to calculate
-    */
+     * constructor
+     *
+     * @param src the string(expression) to calculate
+     */
     public CalStr(String src) {
         this.src = src;
     }
 
     /**
-    * calculate to get the result
-    *
-    * @return(double)result
-    */
+     * calculate to get the result
+     *
+     * @return(double)result
+     */
     public double getResult() {
         String postfix = getPostfix();
         Stack stk = new Stack();
@@ -59,42 +59,42 @@ public class CalStr {
     }
 
     /**
-    * test if the character is an operator,such +,-,*,/
-    *
-    * @param op the character to test
-    * @returntrue if op is an operator otherwise false
-    */
+     * test if the character is an operator,such +,-,*,/
+     *
+     * @param op the character to test
+     * @returntrue if op is an operator otherwise false
+     */
     private boolean isOperator(char op) {
         return (op == '+' || op == '-' || op == '*' || op == '/');
     }
 
     /**
-    * calculate an expression such (a op b)
-    *
-    * @param a number 1
-    * @param b number 2
-    * @param op the operator
-    * @return(double)(a op b)
-    */
+     * calculate an expression such (a op b)
+     *
+     * @param a  number 1
+     * @param b  number 2
+     * @param op the operator
+     * @return(double)(a op b)
+     */
     public double calculate(double a, double b, char op) {
         switch (op) {
-        case '+':
-            return a + b;
-        case '-':
-            return a - b;
-        case '*':
-            return a * b;
-        case '/':
-            return a / b;
+            case '+':
+                return a + b;
+            case '-':
+                return a - b;
+            case '*':
+                return a * b;
+            case '/':
+                return a / b;
         }
         return -1;
     }
 
     /**
-    * convert the suffix to postfix
-    *
-    * @return the postfix as a string
-    */
+     * convert the suffix to postfix
+     *
+     * @return the postfix as a string
+     */
     private String getPostfix() {
         Stack stk = new Stack();
         String postfix = new String();
@@ -107,40 +107,38 @@ public class CalStr {
                     postfix += src.charAt(i++);
                 } while ((i < src.length()) && (Character.isDigit(src.charAt(i))));
                 postfix += " ";
-            }
-
-            else {
+            } else {
                 switch (op = src.charAt(i++)) {
-                case '(':
-                    stk.push("(");
-                    break;
+                    case '(':
+                        stk.push("(");
+                        break;
 
-                case ')':
-                    while (stk.peek() != "(") {
-                        String tmp = (String) stk.pop();
-                        postfix += tmp;
-                        if (tmp.length() == 1 && isOperator(tmp.charAt(0)))
-                            postfix += " ";
-                    }
-                    stk.pop();
-                    postfix += " ";
-                    break;
+                    case ')':
+                        while (stk.peek() != "(") {
+                            String tmp = (String) stk.pop();
+                            postfix += tmp;
+                            if (tmp.length() == 1 && isOperator(tmp.charAt(0)))
+                                postfix += " ";
+                        }
+                        stk.pop();
+                        postfix += " ";
+                        break;
 
-                case '+':
-                case '-':
-                    while ((!stk.empty()) && (stk.peek() != "(")) {
-                        postfix += stk.pop() + " ";
-                    }
-                    stk.push(String.valueOf(new Character(op)));
-                    break;
+                    case '+':
+                    case '-':
+                        while ((!stk.empty()) && (stk.peek() != "(")) {
+                            postfix += stk.pop() + " ";
+                        }
+                        stk.push(String.valueOf(Character.valueOf(op)));
+                        break;
 
-                case '*':
-                case '/':
-                    while ((!stk.empty()) && ((stk.peek() == "*") || (stk.peek() == "/"))) {
-                        postfix += stk.pop() + " ";
-                    }
-                    stk.push(String.valueOf(new Character(op)));
-                    break;
+                    case '*':
+                    case '/':
+                        while ((!stk.empty()) && ((stk.peek() == "*") || (stk.peek() == "/"))) {
+                            postfix += stk.pop() + " ";
+                        }
+                        stk.push(String.valueOf(Character.valueOf(op)));
+                        break;
                 }
             }
         }
@@ -151,10 +149,10 @@ public class CalStr {
     }
 
     /**
-    * main function
-    *
-    * @param args
-    */
+     * main function
+     *
+     * @param args
+     */
     public static void main(String args[]) {
         System.out.println(new CalStr("((1.5+6.000)*9+9.36)*(8+9-8*8+8*7)").getResult());
     }

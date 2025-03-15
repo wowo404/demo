@@ -1,7 +1,6 @@
 package org.liu.image;
 
 import org.apache.commons.codec.binary.Base64;
-import sun.misc.BASE64Decoder;
 
 import java.io.*;
 
@@ -30,17 +29,16 @@ public class ImageBase64Util {
 
     /**
      *      * 对字节数组字符串进行Base64解码并生成图片
-     *          不能以data:image/png;base64,开头
+     * 不能以data:image/png;base64,开头
      *      * @param imgStr 图片数据
      *      * @param imgFilePath 保存图片全路径地址
      *      * @return
      *     
      */
     public static void generateImage(String imgStr, String imgFilePath) {
-        BASE64Decoder decoder = new BASE64Decoder();
         try {
             // Base64解码
-            byte[] b = decoder.decodeBuffer(imgStr);
+            byte[] b = Base64.decodeBase64(imgStr);
             for (int i = 0; i < b.length; ++i) {
                 if (b[i] < 0) {// 调整异常数据
                     b[i] += 256;
