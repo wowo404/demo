@@ -1,9 +1,10 @@
 package org.liu.readproperties;
 
-import org.apache.commons.io.IOUtils;
+import cn.hutool.core.io.IoUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 public class TestReadProperties {
@@ -12,16 +13,16 @@ public class TestReadProperties {
         readFromClassPath();
     }
 
-    public static void readSystemProperties(){
+    public static void readSystemProperties() {
         Properties properties = System.getProperties();
-        properties.forEach((k,v) -> {
+        properties.forEach((k, v) -> {
             System.out.println(k + "   ---   " + v);
         });
     }
 
     public static void readFromClassPath() throws IOException {
         InputStream stream = TestReadProperties.class.getResourceAsStream("/bank/P0046000/sm2PublicKey.key");
-        String content = IOUtils.toString(stream, "utf-8");
+        String content = IoUtil.read(stream, Charset.defaultCharset());
         System.out.println(content);
     }
 
@@ -36,7 +37,7 @@ public class TestReadProperties {
     //jar中的文件就是classpath文件
     public static void readFromJar() throws IOException {
         InputStream stream = TestReadProperties.class.getResourceAsStream("/META-INF/NOTICE.txt");
-        String content = IOUtils.toString(stream, "utf-8");
+        String content = IoUtil.read(stream, Charset.defaultCharset());
         System.out.println(content);
 
         //1.在commons-codec-1.6.jar!\org\apache\commons\codec\language\bm目录下

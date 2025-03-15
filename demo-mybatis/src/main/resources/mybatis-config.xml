@@ -8,6 +8,10 @@
         <setting name="cacheEnabled" value="true"/>
     </settings>
 
+    <typeHandlers>
+        <typeHandler handler="org.liu.demo.mybatis.GeometryTypeHandler" javaType="org.locationtech.jts.geom.Geometry" jdbcType="BINARY"/>
+    </typeHandlers>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>

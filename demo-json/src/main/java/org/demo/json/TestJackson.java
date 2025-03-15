@@ -6,9 +6,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.*;
 
 /**
  * https://www.cnblogs.com/guanbin-529/p/11488869.html
@@ -30,8 +33,80 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        jsonAndEnum();
-        testBigDecimal();
+        data();
+    }
+
+    public static void data() throws IOException {
+        String text = "{\"condition\": \"isFifthCensusDataProcessLocation\",\"how\": \"\",\"target\": \"countyDataProcessLocation,townDataProcessLocation,villageDataProcessLocation\"}";
+        DataProcessFormula dataProcessFormula = mapper.readValue(text, DataProcessFormula.class);
+        System.out.println(dataProcessFormula);
+    }
+
+    public static void indicator() throws JsonProcessingException {
+        MetadataIndicator indicator = new MetadataIndicator();
+        indicator.setNameEnglish("industryCode");
+        indicator.setDataType(1);
+        indicator.setDataLength(5);
+        System.out.println(mapper.writeValueAsString(indicator));
+    }
+
+    public static void readJsonFile() throws IOException {
+        CollectionType collectionType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, ColumnConfig.class);
+        List<ColumnConfig> list = mapper.readValue(new File("D:\\data\\casen_data\\sys_configs.sql"), collectionType);
+        System.out.println(list);
+    }
+
+    public static void readJsonFileToJsonNode() throws IOException {
+        JsonNode jsonNode = mapper.readTree(new File("D:\\data\\casen_data\\sys_configs.sql"));
+        List<ColumnConfig> list = new ArrayList<>();
+        Iterator<JsonNode> elements = jsonNode.elements();
+        while (elements.hasNext()) {
+            JsonNode next = elements.next();
+            System.out.println(next);
+            ColumnConfig columnConfig = new ColumnConfig();
+            columnConfig.setName(next.get("name").asText());
+            if (next.get("table").isTextual()) {
+                columnConfig.setTable(next.get("table").asText());
+            } else if (next.get("table").isObject()) {
+                JsonNode table = next.get("table");
+                Map<String,String[]> map = mapper.treeToValue(table, Map.class);
+                columnConfig.setTable(map.toString());
+            }
+            if (next.has("nfmt")) {
+                columnConfig.setNfmt(next.get("nfmt").asText());
+            }
+            columnConfig.setType(next.get("type").asText());
+            columnConfig.setFlag(next.get("flag").asText());
+//            columnConfig.setMajor(next.get("major"));
+            if (next.has("exp")) {
+                columnConfig.setExp(next.get("exp").toString());
+            }
+
+            list.add(columnConfig);
+        }
+        System.out.println(list);
+    }
+
+
+    public static void testBeautifulToJson() throws JsonProcessingException {
+        InfoPublish publish = new InfoPublish();
+        publish.setPublishId(1L);
+        publish.setTitle("okokok");
+
+        CategoryOrPublishResp resp1 = new CategoryOrPublishResp();
+        resp1.setCategoryId(1L);
+        resp1.setCategoryName("a");
+//        resp1.setInfoPublish(publish);
+        CategoryOrPublishResp resp2 = new CategoryOrPublishResp();
+        resp2.setCategoryId(2L);
+        resp2.setCategoryName("b");
+//        resp1.setInfoPublish(publish);
+
+        List<CategoryOrPublishResp> list = new ArrayList<>();
+        list.add(resp1);
+        list.add(resp2);
+
+        System.out.println(mapper.writeValueAsString(list));
     }
 
     public static void testBigDecimal() throws JsonProcessingException {
@@ -89,6 +164,14 @@ public class TestJackson {
         String json2 = "{\"message\":\"请求成功\",\"res\":{\"result\":\"击中规则\",\"Rule_final_decision\":\"复议\",\"rules\":[{\"rule_weight\":\"20\",\"rule_name\":\"朋友等关系银行不良\"},{\"rule_weight\":\"25\",\"rule_name\":\"银行不良\"}],\"Rule_final_weight\":\"45\"},\"orderNo\":\"170602170701919******\",\"code\":200}";
         DaShengBaseResponse daShengBaseResponse = mapper.readValue(json2, DaShengBaseResponse.class);
         System.out.println(daShengBaseResponse.getRes());
+    }
+
+    public static void listList() throws JsonProcessingException {
+        List<List<String>> list = new ArrayList<>();
+        list.add(Arrays.asList("a", "b"));
+        list.add(Arrays.asList("c", "d"));
+        String value = mapper.writeValueAsString(list);
+        System.out.println(value);
     }
 
 }

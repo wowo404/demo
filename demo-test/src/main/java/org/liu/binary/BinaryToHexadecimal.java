@@ -1,7 +1,5 @@
 package org.liu.binary;
 
-import com.google.common.primitives.Bytes;
-
 import java.io.ByteArrayOutputStream;
 
 public class BinaryToHexadecimal {
@@ -34,7 +32,7 @@ public class BinaryToHexadecimal {
         get0x02();
     }
 
-    public static void get0x02(){
+    public static void get0x02() {
         byte[] bytes = transferDateTime("20190909125959");
         for (byte aByte : bytes) {
             String s = Integer.toHexString(aByte);
@@ -53,16 +51,16 @@ public class BinaryToHexadecimal {
         yearBytesTwo[1] = yearBytes[2];
         byte[] surplusBytes = new byte[5];
         String otherStr = dateTime.substring(4);
-        for (int i = 0, j = 1; i < otherStr.length(); i += 2, j+=2) {
+        for (int i = 0, j = 1; i < otherStr.length(); i += 2, j += 2) {
             String other = otherStr.charAt(i) + "" + otherStr.charAt(j);
             int otherInt = Integer.parseInt(other);
             byte[] otherBytes = BinaryTest.intToByteArray(otherInt);
             surplusBytes[i / 2] = otherBytes[3];
         }
-        return Bytes.concat(yearBytesTwo, surplusBytes);
+        return concat(yearBytesTwo, surplusBytes);
     }
 
-    public static void get0x10(){
+    public static void get0x10() {
         String serialNum = "87654321";
         byte sum1 = sum(serialNum.getBytes());//这个sum是以序列号来做的，不带TL两部分数据
         byte[] checksum = getChecksum(sum1);
@@ -70,13 +68,13 @@ public class BinaryToHexadecimal {
 
         String tl = decode("020800");//加上TL转成原生的字符串
         byte[] tlBytes = tl.getBytes();
-        byte[] concat = Bytes.concat(tlBytes, checksum);
+        byte[] concat = concat(tlBytes, checksum);
 
         //计算校验和FCS
         byte sum = sum(concat);
 
         byte[] fcs = new byte[]{sum};
-        byte[] concat1 = Bytes.concat(concat, fcs);
+        byte[] concat1 = concat(concat, fcs);
     }
 
     public static byte sum(byte[] bytes) {
@@ -164,6 +162,7 @@ public class BinaryToHexadecimal {
         }
         return sb.toString();
     }
+
     /**
      * 将16进制字符转换为字节
      *
@@ -174,6 +173,7 @@ public class BinaryToHexadecimal {
         byte b = (byte) "0123456789ABCDEF".indexOf(c);
         return b;
     }
+
     /**
      * 16进制字符串转换成字节数组
      */
@@ -208,6 +208,20 @@ public class BinaryToHexadecimal {
         }
 
         System.out.println(s);
+    }
+
+    public static byte[] concat(byte[]... arrays) {
+        int length = 0;
+        for (byte[] array : arrays) {
+            length += array.length;
+        }
+        byte[] result = new byte[length];
+        int pos = 0;
+        for (byte[] array : arrays) {
+            System.arraycopy(array, 0, result, pos, array.length);
+            pos += array.length;
+        }
+        return result;
     }
 
 }

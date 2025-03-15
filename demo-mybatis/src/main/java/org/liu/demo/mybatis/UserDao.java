@@ -1,8 +1,8 @@
 /*
  * Project: mybatis-demo
- * 
+ *
  * File Created at 2013年12月3日 下午12:21:09
- * 
+ *
  * Copyright 2012 seaway.com Corporation Limited.
  * All rights reserved.
  *
@@ -21,22 +21,26 @@ import java.util.List;
 /**
  * TODO：类型描述
  * <br>----------------------------------------------------变更记录--------------------------------------------------
- * <br> 序号      |           时间                        	|   作者      |                          描述                                                         
- * <br> 0     | 2013年12月3日 下午12:21:09  	|  刘章盛     | 创建  
+ * <br> 序号      |           时间                        	|   作者      |                          描述
+ * <br> 0     | 2013年12月3日 下午12:21:09  	|  刘章盛     | 创建
  */
 public interface UserDao {
-    
-    public int insert(User user);
-    
-    public int update(User user);
-    
-    public int delete(String userName);
-    
-    public List<User> selectAll();
-    
-    public int countAll();
-    
-    public User findByUserName(String userName);
+
+    int insert(User user);
+
+    int update(User user);
+
+    int delete(String userName);
+
+    List<User> selectAll();
+
+    List<User> listByAge(Integer age);
+
+    Page<User> listByAge(Page<User> page, Integer age);
+
+    int countAll();
+
+    User findByUserName(String userName);
 
     List<User> testForeach(@Param("nameList") List<String> nameList);
 

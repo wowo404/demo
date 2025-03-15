@@ -40,30 +40,31 @@ public class ImageUtils {
      * @param args
      */
     public static void main(String[] args) throws IOException {
-/*		// 1-缩放图像：
-		// 方法一：按比例缩放
-		ImageUtils.scale("e:/abc.jpg", "e:/abc_scale.jpg", 2, true);//测试OK
-		// 方法二：按高度和宽度缩放
-		ImageUtils.scale2("e:/abc.jpg", "e:/abc_scale2.jpg", 500, 300, true);//测试OK
+        // 1-缩放图像：
+        // 方法一：按比例缩放
+//		ImageUtils.scale("e:/abc.jpg", "e:/abc_scale.jpg", 2, true);//测试OK
+        // 方法二：按高度和宽度缩放
+//        ImageUtils.scale2("D:\\data\\photos\\spring-logo.png", "D:\\data\\photos\\spring-logo2.png", 120, 120, true);//测试OK
+        scale3("D:\\data\\photos\\spring-logo.png", "D:\\data\\photos\\spring-logo3.png", 120, 120);
 
-		// 2-切割图像：
-		// 方法一：按指定起点坐标和宽高切割
-		ImageUtils.cut("e:/abc.jpg", "e:/abc_cut.jpg", 0, 0, 400, 400);//测试OK
-		// 方法二：指定切片的行数和列数
-		ImageUtils.cut2("e:/abc.jpg", "e:/", 2, 2);//测试OK
-		// 方法三：指定切片的宽度和高度
-		ImageUtils.cut3("e:/abc.jpg", "e:/", 300, 300);//测试OK
+        // 2-切割图像：
+        // 方法一：按指定起点坐标和宽高切割
+//		ImageUtils.cut("e:/abc.jpg", "e:/abc_cut.jpg", 0, 0, 400, 400);//测试OK
+        // 方法二：指定切片的行数和列数
+//		ImageUtils.cut2("e:/abc.jpg", "e:/", 2, 2);//测试OK
+        // 方法三：指定切片的宽度和高度
+//		ImageUtils.cut3("e:/abc.jpg", "e:/", 300, 300);//测试OK
 
-		// 3-图像类型转换：
-		ImageUtils.convert("e:/abc.jpg", "GIF", "e:/abc_convert.gif");//测试OK
+        // 3-图像类型转换：
+//		ImageUtils.convert("e:/abc.jpg", "GIF", "e:/abc_convert.gif");//测试OK
 
-		// 4-彩色转黑白：
-		ImageUtils.gray("e:/abc.jpg", "e:/abc_gray.jpg");//测试OK
+        // 4-彩色转黑白：
+//		ImageUtils.gray("e:/abc.jpg", "e:/abc_gray.jpg");//测试OK
 
-		// 5-给图片添加文字水印：
-		// 方法一：
-		ImageUtils.pressText("我是水印文字", "e:/abc.jpg", "e:/abc_pressText.jpg",
-				"宋体", Font.BOLD, Color.white, 80, 0, 0, 0.5f);//测试OK*/
+        // 5-给图片添加文字水印：
+        // 方法一：
+//		ImageUtils.pressText("我是水印文字", "e:/abc.jpg", "e:/abc_pressText.jpg",
+//				"宋体", Font.BOLD, Color.white, 80, 0, 0, 0.5f);//测试OK
         // 方法二：
 //        ImageUtils.pressText2("下载We社区（银川小松鼠公司推广）", "C:/Users/liuzhsh/Desktop/blank.jpg", "C:/Users/liuzhsh/Desktop/test.jpg",
 //                "黑体", Font.BOLD, Color.BLACK, 15, 0, 15, 0.5f);//测试OK
@@ -77,10 +78,11 @@ public class ImageUtils {
 //        setBorderRadius("E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode136.jpg",
 //                "E:\\work\\bashen\\information-collect\\需求版本2.0\\qrcode-act.jpg", 50);
 //        pressImageAndText();
-        BufferedImage image = generateImageWithText(150, 30, 15, "实木家具");
-        String destFilePath = "D:\\download\\gen1.jpg";
-        File destFile = new File(destFilePath);
-        ImageIO.write(image, "JPEG", destFile);
+
+//        BufferedImage image = generateImageWithText(150, 30, 15, "实木家具");
+//        String destFilePath = "D:\\download\\gen1.jpg";
+//        File destFile = new File(destFilePath);
+//        ImageIO.write(image, "JPEG", destFile);
     }
 
     /**
@@ -167,6 +169,30 @@ public class ImageUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void scale3(String srcImagePath, String result, int height, int width) throws IOException {
+        String formatName = getFormatName(srcImagePath);
+        Image src = ImageIO.read(new File(srcImagePath));
+        int currentWidth = src.getWidth(null);
+        int currentHeight = src.getHeight(null);
+        if (currentWidth > width) {
+            currentWidth = width;
+        }
+        if (currentHeight > height) {
+            currentHeight = height;
+        }
+        Image image = src.getScaledInstance(currentWidth, currentHeight, Image.SCALE_SMOOTH);
+        BufferedImage tag = new BufferedImage(currentWidth, currentHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics g = tag.getGraphics();
+        g.drawImage(image, 0, 0, null); // 绘制缩小后的图
+        g.dispose();
+
+        ImageIO.write(tag, formatName, new File(result));
+    }
+
+    private static String getFormatName(String srcImagePath) {
+        return srcImagePath.substring(srcImagePath.lastIndexOf(".") + 1);
     }
 
     /**

@@ -1,7 +1,7 @@
 package org.liu.basic;
 
 import cn.hutool.core.bean.BeanUtil;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import cn.hutool.core.util.StrUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,12 +29,12 @@ public class ClassCastTest {
         Object models = BeanUtil.getFieldValue(model, "models");
         //转成object数组
         Object[] objects = (Object[]) models;
-        System.out.println(ToStringBuilder.reflectionToString(objects));
+        System.out.println(StrUtil.join(",", objects));
 
         Object modelList = BeanUtil.getFieldValue(model, "modelList");
         //转成Collection
         Collection<Object> collection = (Collection<Object>) modelList;
-        System.out.println(ToStringBuilder.reflectionToString(collection));
+        System.out.println(StrUtil.join(",", collection));
     }
 
 }

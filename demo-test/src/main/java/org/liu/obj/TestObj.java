@@ -1,6 +1,6 @@
 package org.liu.obj;
 
-import org.apache.commons.beanutils.BeanUtils;
+import cn.hutool.core.bean.BeanUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -25,7 +25,7 @@ public class TestObj {
     public void testObjectReference(Junior junior) throws InvocationTargetException, IllegalAccessException {
         Junior junior1 = new Junior();
         junior1.setId(1);
-        BeanUtils.copyProperties(junior, junior1);
+        BeanUtil.copyProperties(junior, junior1);
         junior.setType(2);
     }
 

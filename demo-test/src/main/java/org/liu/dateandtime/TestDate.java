@@ -1,11 +1,10 @@
 package org.liu.dateandtime;
 
-import org.apache.commons.lang3.time.DateUtils;
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -81,12 +80,6 @@ public class TestDate {
 		return new SimpleDateFormat(pattern).format(source);
 	}
 
-	public static Integer minusWithDay(Date firstDate, Date anotherDate) {
-		long first = DateUtils.truncate(firstDate, Calendar.DAY_OF_MONTH).getTime();
-		long another = DateUtils.truncate(anotherDate, Calendar.DAY_OF_MONTH).getTime();
-		return (int) ((first - another) / (24 * 60 * 60 * 1000));
-	}
-
 	/**
 	 * 根据date获取range个月后的同一天，如果当天不存在，则获取这个月的最后一天
 	 */
@@ -121,7 +114,7 @@ public class TestDate {
 			System.out.println(dateIntervalContainStartDay(endTime, startTime).intValue());
 		}
 	}
-	
+
 	public static void queryStartProfitTimeAndEndProfitTime(){
 		Integer period = 6;//期数
         Date firstPeriodStartProfitTime = addDay(parse("2017-12-31 00:00:00", COMMON_PATTERN), 1);
@@ -156,10 +149,22 @@ public class TestDate {
 		return calendar.getTime();
 	}
 
+	private static String parseStartTime(String startTime) {
+		if (startTime.contains("+")) {
+			startTime = startTime.substring(0, startTime.indexOf("+"));
+		}
+		if (startTime.contains(".")) {
+			startTime = startTime.substring(0, startTime.indexOf("."));
+		}
+		return startTime;
+	}
+
 	public static void main(String[] args) {
 //		System.out.println(format(new Date(1576836000000L), COMMON_PATTERN));
 //		System.out.println(format(new Date(1573693980000L), COMMON_PATTERN));
-        long time = parse("2020-03-17 18:35:00", COMMON_PATTERN).getTime();
+		Date parse = parse("1970-01-01 00:00:00", COMMON_PATTERN);
+		System.out.println(parse.getTimezoneOffset());
+		long time = parse.getTime();
         System.out.println(time);
 
 		long time2 = parse("2020-04-16 18:35:00", COMMON_PATTERN).getTime();
@@ -177,8 +182,25 @@ public class TestDate {
         System.out.println(format(day, COMMON_PATTERN));
 
         Date date = addDay(new Date(), 10);
+		System.out.println(date.getTime());
         System.out.println(format(date, COMMON_PATTERN));
 		System.out.println(formatSecondsToZero(new Date()));
-    }
+		System.out.println(Integer.MAX_VALUE);
+		System.out.println(new Date(1));
+		System.out.println(System.currentTimeMillis());
+		System.out.println(Date.UTC(2023, 7, 28, 15, 46, 50));
+
+		Date onlyTime = parse("12:12:12", "HH:mm:ss");
+		System.out.println(onlyTime);
+		String format = DateUtil.format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
+		System.out.println(format);
+
+		System.out.println(DateUtil.parse(parseStartTime("2024-07-04T15:36:16.000918+08:00"),"yyyy-MM-dd'T'HH:mm:ss"));
+
+//		DateTime parse1 = DateUtil.parse("2024-07-04T15:36:16.000918+08:00", "YYYY-MM-DD'T'hh:mm:ss");
+//		System.out.println(parse1);
+//		DateTime parse2 = DateUtil.parse("2024-07-04T20:50:30.5311753+08:00", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXX");
+//		System.out.println(parse2);
+	}
 
 }

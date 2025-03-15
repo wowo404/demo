@@ -1,7 +1,11 @@
 package org.liu.regexp;
 
+import cn.hutool.core.util.StrUtil;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 
 /**
  * @author liuzhangsheng
@@ -13,18 +17,91 @@ public class TestRegexp {
         test();
     }
 
-    public static void test(){
+    public static void matchAbs() {
+//        String text = "绝对值({$a+绝对值($b+($c*$g))})-绝对值($d)*(绝对值($e)+$f)";
+//        String text = "绝对值($d)*(绝对值($e)+$f)-绝对值({$a+绝对值($b+($c*$g))})";
+//        String text = "绝对值({$d})*(绝对值({$e})+{$f})-绝对值({$a}+绝对值({$b}+({$c}*{$g})))+绝对值({$h}+绝对值({$i}+({$j}*{$k})))";
+        String text = "四舍五入($d,1)*(四舍五入($e,2)+$f)-四舍五入({$a}+四舍五入($b+($c*$g),4),3)+四舍五入({$h}+四舍五入($i+($j*$k),6),5)";
+        String reg = "四舍五入\\(.*?\\)";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            String group = matcher.group();
+            int leftBracketCount = StrUtil.count(group, "(");
+            int rightBracketCount = StrUtil.count(group, ")");
+            int firstIndex = text.indexOf(group);
+            if (leftBracketCount != rightBracketCount) {
+                int lastIndex = ordinalIndexOf(text, ")", leftBracketCount, firstIndex);
+                System.out.println(firstIndex + " - " + lastIndex);
+                String complexText = text.substring(firstIndex, lastIndex + 1);
+                System.out.println(complexText);
+
+            } else {
+                int lastIndex = firstIndex + group.length();
+                System.out.println(text.substring(firstIndex, lastIndex));
+            }
+        }
+    }
+
+    public static void test() {
+        String functionCommandReg = "\\{#abs\\d+}|\\{#round\\d+}";
+        System.out.println("{#abs0}".matches(functionCommandReg));
+        System.out.println("{#round20}".matches(functionCommandReg));
+
         String str = "crm";
         String reg = "(?!^-)[0-9\\-]{6,16}";
         System.out.println(str.matches(reg));
         String reg1 = "pl|erp|crm|sim";
         System.out.println(str.matches(reg1));
+
+        String reg2 = "[+\\-*/%]";
+        System.out.println("反对".matches(reg2));
+        System.out.println("{$add:['salesAmountOfTaxFree2','salesAmountOfCommonTaxRate1']}".matches("\\{\\$[a-z]+:.+}"));
+        System.out.println("{$salesAmountOfCommonTaxRate1}".matches("\\{\\$[a-z]+:.+}"));
+
+        System.out.println("2022年12月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("2022年1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("2022年报".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        System.out.println("remove_prefix[444]".matches("remove_prefix\\[\\d+]"));
+        //正则表达式：匹配整数或浮点数，可以为负数
+        String regex = "^-?\\d+(\\.\\d+)?$";
+        System.out.println("-123.456".matches(regex));
+        System.out.println("-123".matches(regex));
+        System.out.println("123".matches(regex));
+    }
+
+    public static void getMatchGroup() {
+        String text = "({$a}+{$b})*{余额}-{商品房}";
+        Pattern pattern = Pattern.compile("(?!\\{\\$.*?})\\{.*?}");
+        Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+    }
+
+    /**
+     * 用正则表达式匹配出每个<p></p>里面的第三个。（句号）然后替换成169号
+     */
+    public static void matchPosition() {
+        String text = "<p>1你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。</p>" +
+                "<p>2我很好。我很好，我很好，我很好。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。你好吗你好吗,你好吗,你好吗。</p>";
+        String reg = "(<p>(?:.*?。){2}.*?)。(.*?</p>)";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(text);
+        if (matcher.find()) {
+            System.out.println(matcher.groupCount());
+            for (int i = 0; i < matcher.groupCount(); i++) {
+                System.out.println(matcher.group(i));
+            }
+        }
+        String replaceAll = text.replaceAll(reg, "$1(169号)$2");
+        System.out.println(replaceAll);
     }
 
     /**
      * 必须包含大写字母，小写字母，数字，6到20位：(?=.*[0-9].*)(?=.*[A-Z].*)(?=.*[a-z].*).{6,20}
      */
-    public static void password(){
+    public static void password() {
         /**
          * 分开来注释一下：
          * ^ 匹配一行的开头位置
@@ -35,7 +112,7 @@ public class TestRegexp {
          *
          * 注：(?!xxxx) 是正则表达式的负向零宽断言一种形式，标识预该位置后不是xxxx字符
          */
-        String pwd = "@123QWER$";
+        String pwd = "1234@tyuiop";
         String reg1 = "(?![0-9]*$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}";
         String reg2 = "(?!^\\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]+$";
         //至少包含数字跟字母，可以有字符
@@ -44,28 +121,33 @@ public class TestRegexp {
         Matcher matcher = pattern.matcher(pwd);
         boolean matches = matcher.matches();
         System.out.println(matches);
+
+        //至少一个大写字母，一个小写字母，一个数字
+        String reg3 = "(?=.*[a-zA-Z])(?=.*[`~!@#$%^&*()_\\-=+\\[\\]{};:'\"\\\\|,<.>/?])(?=.*\\d)[\\s\\S]{8,18}";
+        System.out.println("1234adcd".matches(reg3));
+        System.out.println("1234adCD".matches(reg3));
+        System.out.println("1234adc!".matches(reg3));
     }
 
-    public static void image(){
+    public static void image() {
         String src = "data:image/JPEG;base64";
         if (src.matches("(data:image/)[a-zA-Z]+(;base64)")) {
             System.out.println(src);
         }
     }
 
-    public static void domain(){
-        notContain();
+    public static void domain() {
         System.out.println("sfd".indexOf(""));
         System.out.println("监测点123".indexOf("点1"));
         String url = "http://anotherbug.blog.chinajavaworld.org.cn/entry/4545/0/";
-        Pattern p = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(?:com\\.cn|net\\.cn|org\\.cn|com|net|org|cn|biz|info|cc|tv)",Pattern.CASE_INSENSITIVE);
+        Pattern p = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(?:com\\.cn|net\\.cn|org\\.cn|com|net|org|cn|biz|info|cc|tv)", Pattern.CASE_INSENSITIVE);
 
         Matcher matcher = p.matcher(url);
         matcher.find();
         System.out.println(matcher.group());
     }
 
-    public static void ip(){
+    public static void ip() {
         String ip = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
         Pattern compile = Pattern.compile(ip);
         System.out.println(compile.matcher("192.168.100.1").matches());
@@ -81,27 +163,132 @@ public class TestRegexp {
         System.out.println(compile.matcher("192.168.0.0").matches());
     }
 
-    public static void mobile(){
+    public static void mobile() {
         String reg = "^(13|14|15|16|17|18|19)[0-9]{9}$";
         Pattern pattern = Pattern.compile(reg);
         System.out.println(pattern.matcher("15058124996").matches());
     }
 
-    public static void notContain(){
-        String reg = "^((?!@|\\$|#|a-z|0-9).)*$";
+    public static void containMany(){
+        String reg = "(?=[1a!]).*";
+        System.out.println("1!abcd".matches(reg));
+    }
+
+    public static void notContain() {
+        String reg = "^((?!@|\\$|#|[a-z]|[0-9]).)*$";
         Pattern pattern = Pattern.compile(reg);
         System.out.println(pattern.matcher("我是对方@").matches());
+        System.out.println(pattern.matcher("我是对方").matches());
+        System.out.println(pattern.matcher("我$").matches());
+        System.out.println(pattern.matcher("我#").matches());
+        System.out.println(pattern.matcher("我1a").matches());
+        System.out.println(pattern.matcher("我a").matches());
+
+        String a = "((?!地).)*";
+        String str = "址a12地3bc";
+        System.out.println(str.matches(a));
+
+        String re = "^((?!\\{|\\}|\\[|\\]|并且|或者|包含|不包含|前缀|非前缀|后缀|非后缀|为空|不为空|等于|不等于|大于|大于等于|小于|小于等于).)*$";
+        System.out.println("df[er".matches(re));
+        System.out.println("df]wer".matches(re));
+        System.out.println("df{wer".matches(re));
+        System.out.println("df}wer".matches(re));
+        System.out.println("df并且wer".matches(re));
+        System.out.println("df或者wer".matches(re));
+        System.out.println("df包含wer".matches(re));
+        System.out.println("df不包含wer".matches(re));
+    }
+
+    public static void startWith() {
+        String reg = "^备.*";
+        String str = "备份abc124！@#";
+        System.out.println(str.matches(reg));
+    }
+
+    public static void notStartWith() {
+        String reg = "^((?!ssr://)(?!vmess://)(?!http://)).*";
+        String str = "aaa://反对";
+        Pattern pattern = Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(str);
+        System.out.println(matcher.matches());
+
+        String a = "^(?!a).*";
+        String s = "地bcd1234.";
+        System.out.println(s.matches(a));
+
+        String reg1 = "^(?![0-9])[a-zA-Z0-9]*";
+        System.out.println("1231abc".matches(reg1));
+
+        String reg2 = "^(?!\\+|\\*|/|%|\\)).*";
+        System.out.println(")1+2-3*4/5%6".matches(reg2));
+    }
+
+    public static void endWith() {
+        String a = ".*地$";
+        String s = "啊啊发地";
+        System.out.println(s.matches(a));
+
+        String reg = "\\d{4,}$";
+        System.out.println("12344abc20221044".replaceFirst(reg, "t"));
+    }
+
+    public static void notEndWith() {
+        String a = "^.*(?<!a)$";
+        System.out.println("地bcd1234.".matches(a));
+        System.out.println("地bcd1234.a".matches(a));
+
+        String notEndWithReg = "^.*(?<!\\+|-|\\*|/|%|\\()$";
+        System.out.println("1+2(".matches(notEndWithReg));
     }
 
     /**
      * 名字：英文名字，中文名字，可以包含·或者•，但不能开头和结尾
      * 示例：justing·liu，justing，艾哈迈德·买买提，李三
      */
-    public static void name(){
+    public static void name() {
         //TODO:还不完善，中间两个点也能匹配，如：a··b
         String reg1 = "^[a-zA-Z]+([·•]*[a-zA-Z]+)*$|^[\\u3400-\\u9FFF]+([·•]*[\\u3400-\\u9FFF]+)*$";
         String content = "艾哈迈德·买买提·买买提";
         System.out.println(content.matches(reg1));
+    }
+
+    public static void name2() {
+        String reg = "^(?![-.])[0-9a-zA-Z-.]*(?<![.])$";
+        System.out.println("ab123".matches(reg));
+        System.out.println("-ab123".matches(reg));
+        System.out.println("ab123.".matches(reg));
+        System.out.println("ab123-".matches(reg));
+        System.out.println("ab12.3-".matches(reg));
+    }
+
+    public static void title() {
+        String reg = "[a-zA-Z0-9\\u3400-\\u9FFF]+";
+        System.out.println("我方；法a".matches(reg));
+    }
+
+    public static void isIntegerOrDouble() {
+        String reg = "(?!\\.)(\\d*|\\d*\\.\\d{0,2})";
+        System.out.println("2".matches(reg));
+        System.out.println("2.2".matches(reg));
+        System.out.println("2.2345".matches(reg));
+        System.out.println("233.2".matches(reg));
+        System.out.println("2.".matches(reg));
+        System.out.println(".1".matches(reg));
+        System.out.println(".".matches(reg));
+        System.out.println("..".matches(reg));
+        System.out.println("a.1".matches(reg));
+    }
+
+    public static String escapeExprSpecialWord(String keyword) {
+        if (null != keyword) {
+            String[] fbsArr = {"\\", "$", "(", ")", "*", "+", ".", "[", "]", "?", "^", "{", "}", "|"};
+            for (String key : fbsArr) {
+                if (keyword.contains(key)) {
+                    keyword = keyword.replace(key, "\\\\" + key);
+                }
+            }
+        }
+        return keyword;
     }
 
 }

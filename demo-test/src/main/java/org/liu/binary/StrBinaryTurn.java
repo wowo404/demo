@@ -1,5 +1,9 @@
 package org.liu.binary;
 
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 字节与二进制的关系
  * https://blog.csdn.net/qq_29499107/article/details/80810076
@@ -25,12 +29,23 @@ public class StrBinaryTurn {
 
     // 将字符串转换成二进制字符串，以空格相隔
     private String StrToBinstr(String str) {
-        char[] strChar = str.toCharArray();
-        String result = "";
-        for (int i = 0; i < strChar.length; i++) {
-            result += Integer.toBinaryString(strChar[i]) + " ";
+        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+        List<String> list = new ArrayList<>();
+        for (byte aByte : bytes) {
+            list.add(Integer.toBinaryString(aByte));
         }
-        return result;
+        System.out.println(list);
+        System.out.println("---------");
+        //11101001 10111011 10111111 11000011 10101011
+        //下面这种方式的转换结果跟上面不一样，why？
+        //在java语言中，char是以UTF-16编码方式存储的
+        char[] strChar = str.toCharArray();
+        StringBuilder result = new StringBuilder();
+        for (char c : strChar) {
+            result.append(Integer.toBinaryString(c)).append(" ");
+        }
+        //10011110 11111111 11101011
+        return result.toString();
     }
 
     // 将二进制字符串转换成Unicode字符串
@@ -128,7 +143,7 @@ public class StrBinaryTurn {
 
     public static void main(String[] args) {
         StrBinaryTurn turn = new StrBinaryTurn();
-        String binstr = turn.StrToBinstr("a我");
+        String binstr = turn.StrToBinstr("黿ë");
         System.out.println(binstr);
         System.out.println(turn.BinstrToStr(binstr));
     }

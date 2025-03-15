@@ -13,12 +13,11 @@
         <module>demo-view</module>
         <module>demo-mybatis</module>
         <module>demo-jaxws</module>
-        <module>demo-drools</module>
         <module>demo-easymock</module>
         <module>demo-hessian</module>
         <module>demo-office</module>
         <module>demo-designpatterns</module>
-        <module>demo-algorithm</module>
+        <module>demo-datastructuresandalgorithmanalysis</module>
         <module>demo-shiro</module>
         <module>demo-sms</module>
         <module>demo-activemq</module>
@@ -38,11 +37,24 @@
         <module>demo-aspectj</module>
         <module>demo-jgit</module>
         <module>demo-web-servlet</module>
+        <module>demo-jsqlparse</module>
+        <module>demo-apache</module>
+        <module>demo-google</module>
+        <module>demo-mockito</module>
+        <module>demo-chinese-word-segmentation</module>
+        <module>demo-gaode</module>
+        <module>demo-javassist</module>
+        <module>demo-caffeine</module>
+        <module>demo-itextpdf7</module>
+        <module>demo-minio</module>
+        <module>demo-fastdfs</module>
+        <module>demo-cassandra</module>
     </modules>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -105,5 +117,16 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>securecentral</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>securecentral</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

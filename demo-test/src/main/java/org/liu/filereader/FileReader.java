@@ -1,7 +1,7 @@
 package org.liu.filereader;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.IoUtil;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -17,6 +17,9 @@ public class FileReader {
     public static final String SRC = "src/main/resources/pdf/contract_tpl.pdf";
 
     public static void main(String[] args) throws IOException, URISyntaxException {
+        File file = new File("E:\\work\\minxun\\发布\\生产--经济普查\\萍乡内网\\脚本\\");
+        System.out.println(file.getAbsolutePath());
+
         FileReader fr = new FileReader();
 //		fr.filter();
 //		fr.read();
@@ -24,7 +27,7 @@ public class FileReader {
 //		fr.saveFile();
 //		fr.getFileFromUrl();
 
-        fr.readImageFromUrl();
+//        fr.readImageFromUrl();
     }
 
     public byte[] readFileFromUrl(String imageUrl) throws IOException {
@@ -78,7 +81,7 @@ public class FileReader {
 
     public void read() throws IOException {
         InputStream is = new FileInputStream(new File("D:\\work\\workspace-idea\\demo\\demo-test\\src\\main\\resources\\test.el"));
-        byte[] buff = IOUtils.toByteArray(is, is.available());
+        byte[] buff = IoUtil.readBytes(is);
         String content = new String(buff, "UTF-8");
         System.out.println(content);
     }
@@ -116,8 +119,11 @@ public class FileReader {
         //target
 //        FileOutputStream fos = new FileOutputStream(new File("/Users/liuzhangsheng/Downloads/e.txt"));
         //source
-        InputStream is = new FileInputStream(new File("/Users/liuzhangsheng/Downloads/a.txt"));
-        FileUtils.copyInputStreamToFile(is, new File("/Users/liuzhangsheng/Downloads/f.txt"));
+        File source = new File("/Users/liuzhangsheng/Downloads/a.txt");
+        File dest = new File("/Users/liuzhangsheng/Downloads/f.txt");
+        FileUtil.copy(source, dest, true);
+        InputStream is = new FileInputStream(source);
+//        FileUtils.copyInputStreamToFile(is, dest);
 //        byte[] buffer = IOUtils.toByteArray(is, is.available());
 //        fos.write(buffer);
         is.close();
@@ -126,8 +132,10 @@ public class FileReader {
 
     public void getFileFromUrl() throws URISyntaxException, IOException {
         File file = new File(new URI("https://manman-note.oss-cn-beijing.aliyuncs.com/note-api/static/%E5%B0%8F%E6%9B%BC%E5%A4%B4%E5%83%8F.png"));
+        File dest = new File("D:\\funny\\downloads\\f.txt");
+        FileUtil.copy(file, dest, true);
         InputStream is = new FileInputStream(file);
-        FileUtils.copyInputStreamToFile(is, new File("D:\\funny\\downloads\\f.txt"));
+//        FileUtils.copyInputStreamToFile(is, dest);
         is.close();
     }
 

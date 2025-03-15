@@ -1,10 +1,11 @@
 package org.liu.collection;
 
-import org.apache.commons.lang3.RandomUtils;
+import cn.hutool.core.util.RandomUtil;
 import org.liu.model.Animal;
-import org.liu.obj.Superior;
+import org.liu.model.ChannelProductReq;
 
 import java.util.*;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -14,10 +15,35 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        removeAll();
+        listToArray();
     }
 
-    public static void removeDynamic(){
+    public static void queue() {
+        ChannelProductReq req1 = new ChannelProductReq();
+        req1.setUserId("1");
+        req1.setPhone("111");
+
+        ChannelProductReq req2 = new ChannelProductReq();
+        req2.setUserId("1");
+        req2.setPhone("111");
+
+        System.out.println(req1.equals(req2));
+
+        LinkedBlockingQueue<ChannelProductReq> queue = new LinkedBlockingQueue<>();
+        queue.add(req1);
+        queue.add(req2);
+        queue.add(req1);
+
+        queue.forEach(System.out::println);
+
+        PriorityQueue<ChannelProductReq> priorityQueue = new PriorityQueue<>();
+        priorityQueue.add(req1);
+        priorityQueue.add(req2);
+        priorityQueue.add(req2);
+        priorityQueue.forEach(System.out::println);
+    }
+
+    public static void removeDynamic() {
         List<Animal> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Animal animal = new Animal();
@@ -28,8 +54,8 @@ public class TestCollection {
 
         for (int i = 0; i < 11; i++) {
             if (list.size() == 0) continue;
-            int random = RandomUtils.nextInt(0, list.size());
-            System.out.println("size:" +  list.size() + ",random:" + random);
+            int random = RandomUtil.randomInt(list.size());
+            System.out.println("size:" + list.size() + ",random:" + random);
             Animal randomAnimal = list.get(random);
             if (null != randomAnimal) {
                 System.out.println(randomAnimal);
@@ -39,7 +65,7 @@ public class TestCollection {
         System.out.println(list);
     }
 
-    public static void removeAll(){
+    public static void removeAll() {
         Animal animal = new Animal();
         animal.setId(1);
 
@@ -63,9 +89,9 @@ public class TestCollection {
         }
     }
 
-    public static void sort(){
-        Animal animal = new Animal();
-        animal.setId(1);
+    public static void sort() {
+        Animal animal1 = new Animal();
+        animal1.setId(1);
 
         Animal animal2 = new Animal();
         animal2.setId(2);
@@ -75,8 +101,10 @@ public class TestCollection {
 
         List<Animal> list = new ArrayList<>();
         list.add(animal2);
-        list.add(animal);
+        list.add(animal1);
         list.add(animal3);
+
+        list.forEach(System.out::println);
 
         list.sort(Comparator.comparingInt(Animal::getId));
 
@@ -85,17 +113,41 @@ public class TestCollection {
         }
     }
 
-    public static void treeSet(){
-        TreeSet<Integer> treeSet = new TreeSet<>();
-        treeSet.add(4);
-        treeSet.add(1);
-        treeSet.add(3);
-        treeSet.add(1);
+    public static void hashSet() {
+        HashSet<String> hashSet = new HashSet<>();
+        hashSet.add("base123");
+        hashSet.add("base01");
+        hashSet.add("a_company");
+        hashSet.add("census");
+        hashSet.forEach(System.out::println);
+        String first = hashSet.iterator().next();
+        System.out.println("---------");
+        System.out.println(first);
+        System.out.println("---------");
+        hashSet.remove(first);
+        hashSet.forEach(System.out::println);
+    }
+
+    public static void linkedHashSet() {
+        LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add("base123");
+        linkedHashSet.add("base01");
+        linkedHashSet.add("a_company");
+        linkedHashSet.add("census");
+        linkedHashSet.forEach(System.out::println);
+    }
+
+    public static void treeSet() {
+        TreeSet<String> treeSet = new TreeSet<>(Comparator.naturalOrder());
+        treeSet.add("base123");
+        treeSet.add("base01");
+        treeSet.add("a_company");
+        treeSet.add("census");
         treeSet.forEach(System.out::println);
         System.out.println(treeSet.last());
     }
 
-    public static void test(){
+    public static void test() {
         Map<Integer, Integer> map = new HashMap<>();
         System.out.println(map.get(0));
 
@@ -122,7 +174,7 @@ public class TestCollection {
         }
     }
 
-    public static void treeMap(){
+    public static void treeMap() {
         Map<String, String> treeMap = new TreeMap<>();
         treeMap.put("20200112110400-1-2", "abc2");
         treeMap.put("20200112110400-1-3", "abc3");
@@ -138,15 +190,42 @@ public class TestCollection {
         }
     }
 
-    public static void subList(){
+    public static void subList() {
         List<Integer> list = new ArrayList<>(5);
         list.add(1);
         list.add(2);
         list.add(3);
         list.add(4);
         list.add(5);
+        list.add(6);
         List<Integer> subList = list.subList(0, 5);
         System.out.println(subList);
+    }
+
+    public static void subtract() {
+        Set<Integer> lanIdSet = new HashSet<>();
+        lanIdSet.add(1);
+        lanIdSet.add(2);
+        lanIdSet.add(6);
+        List<Integer> list = new ArrayList<>(5);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.removeIf(lanIdSet::contains);
+        System.out.println(list);
+    }
+
+    public static void listToArray(){
+        List<Integer> list = new ArrayList<>(5);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        Object[] arr1 = list.toArray();
+        System.out.println(Arrays.toString(arr1));
+        Integer[] arr2 = list.toArray(new Integer[0]);
+        System.out.println(Arrays.toString(arr2));
     }
 
 }

@@ -20,6 +20,9 @@ public class BinaryTest {
         System.out.println(a);
         byte neOne = 0b00000001;
         System.out.println(neOne);
+        leadingZeros();
+        intAndRadix();
+        byteAndRadix();
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示
@@ -52,6 +55,16 @@ public class BinaryTest {
         System.out.println(0xfffd);
         int length = 0x000000c9;
         System.out.println(length);
+        Short a1 = 0b0011;
+        int a = 0b0001;//1
+        int b = 0b0010;//2
+        int c = 0b0100;//4
+        int d = 0b1000;//8
+        int e = 0b0011;//3
+        int f = 0b0111;//7
+        int g = 0b1111;//15
+        int h = 0b0110;//6
+        System.out.println(a + "," + b + "," + g + "," + h);
     }
 
     public static void longAndRadix() {
@@ -119,7 +132,7 @@ public class BinaryTest {
 
     public static void shortAndRadix() {
         byte[] bytes = new byte[]{(byte) 0xff, (byte) 0xff};
-        System.out.println(ByteArrayConverter.getShort( bytes, 0));
+        System.out.println(ByteArrayConverter.getShort(bytes, 0));
         short zeroTwo = 0b111111111111111;
         short zeroEight = 0176;
         short zeroTen = 32767;
@@ -191,6 +204,16 @@ public class BinaryTest {
         if (b[0] == 126) {//这是相等的
             System.out.println(true);
         }
+        byte a = 0b1010;
+        System.out.println((extractSpecialBit(a, (byte) 0b0001)));
+        System.out.println(extractSpecialBit(a, (byte) 0b0010));
+        System.out.println(extractSpecialBit(a, (byte) 0b0100));
+        System.out.println(extractSpecialBit(a, (byte) 0b1000));
+        System.out.println(Integer.toBinaryString(a));
+    }
+
+    public static byte extractSpecialBit(byte val, byte whichBit){
+        return (byte) ((val & whichBit) > 0 ? 1 : 0);
     }
 
     //如何理解char：https://blog.csdn.net/QGJava/article/details/5726840
@@ -319,13 +342,19 @@ public class BinaryTest {
 
     private static char[] HEX_VOCABLE = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    public static String singleByteToHex(byte b){
+    public static String singleByteToHex(byte b) {
         StringBuilder sb = new StringBuilder();
         int high = (b >> 4) & 0x0f;
         int low = b & 0x0f;
         sb.append(HEX_VOCABLE[high]);
         sb.append(HEX_VOCABLE[low]);
         return sb.toString();
+    }
+
+    public static void leadingZeros() {
+        int num = 0b00101000; // 二进制字面量，等于十进制的 40
+        int leadingZeros = Integer.numberOfLeadingZeros(num);
+        System.out.println("数字" + num + "的前导0的数量为：" + leadingZeros); // 输出: 26
     }
 
 }

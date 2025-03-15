@@ -1,9 +1,16 @@
 package org.liu.model;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.List;
 
+@Data
+@Entity
 public class Monkey extends Animal implements Action, Serializable {
+
+	public boolean good = true;
 
 	private String color;
 
@@ -38,5 +45,11 @@ public class Monkey extends Animal implements Action, Serializable {
 	@Override
 	public void run() {
 		System.out.println("Monkey climb tree");
+	}
+
+	public OriginFormTypeEnum getFormType(String id, List<SysDept> depts){
+		System.out.println(id);
+		System.out.println(depts);
+		return OriginFormTypeEnum.OTHER_STORAGE;
 	}
 }
