@@ -1,8 +1,5 @@
 package org.liu.basic;
 
-import org.liu.model.Animal;
-import org.liu.model.Monkey;
-
 public class JavaGrammar {
 
     public static void main(String[] args) {
@@ -10,6 +7,7 @@ public class JavaGrammar {
         castModel.setId(1L);
         referenceArgs(castModel);
         System.out.println(castModel);
+        tableSizeFor();
     }
 
     /**
@@ -25,14 +23,19 @@ public class JavaGrammar {
     }
 
     //返回大于或等于cap的2的倍数的那个值
-    static final int tableSizeFor(int cap) {
+    static void tableSizeFor() {
+        int cap = 256000;
         int n = cap - 1;
-        n |= n >>> 1;
+        System.out.println(n >>> 1);//127999
+        System.out.println(n >>> 2);//63999
+        n |= n >>> 1;//等价于n = n | n >>> 1
+        System.out.println(n);
         n |= n >>> 2;
         n |= n >>> 4;
         n |= n >>> 8;
         n |= n >>> 16;
-        return (n < 0) ? 1 : n + 1;
+        int b = (n < 0) ? 1 : n + 1;
+        System.out.println(b);
     }
 
     public static void testIntAnd() {
@@ -86,7 +89,7 @@ public class JavaGrammar {
         }
     }
 
-    public static void referenceArgs(ClassCastModel castModel){
+    public static void referenceArgs(ClassCastModel castModel) {
         castModel.setId(2L);
         castModel = new ClassCastModel();
         castModel.setId(111L);

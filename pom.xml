@@ -27,7 +27,6 @@
         <module>demo-rabbitmq</module>
         <module>demo-junit5</module>
         <module>demo-tomcat</module>
-        <module>demo-protobuf</module>
         <module>demo-zookeeper</module>
         <module>demo-paho</module>
         <module>demo-feign</module>
@@ -51,7 +50,7 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

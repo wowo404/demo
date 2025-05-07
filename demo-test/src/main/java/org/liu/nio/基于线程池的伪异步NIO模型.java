@@ -18,13 +18,16 @@ public class 基于线程池的伪异步NIO模型 {
         基于线程池的伪异步NIO模型 a = new 基于线程池的伪异步NIO模型();
         a.startClient();
     }
+
     private Charset charset = StandardCharsets.UTF_8;
 
     class WriteThread implements Runnable {
         private SelectionKey key;
+
         public WriteThread(SelectionKey key) {
             this.key = key;
         }
+
         @Override
         public void run() {
             SocketChannel socketChannel = (SocketChannel) key.channel();
@@ -37,11 +40,14 @@ public class 基于线程池的伪异步NIO模型 {
             }
         }
     }
+
     class ReadThread implements Runnable {
         private SelectionKey key;
+
         public ReadThread(SelectionKey key) {
             this.key = key;
         }
+
         @Override
         public void run() {
             SocketChannel socketChannel = (SocketChannel) key.channel();
@@ -72,11 +78,14 @@ public class 基于线程池的伪异步NIO模型 {
             System.out.println(receiveData);
         }
     }
+
     class ConnectThread implements Runnable {
         private SelectionKey key;
+
         public ConnectThread(SelectionKey key) {
             this.key = key;
         }
+
         @Override
         public void run() {
             SocketChannel socketChannel = (SocketChannel) key.channel();
@@ -93,6 +102,21 @@ public class 基于线程池的伪异步NIO模型 {
 
         }
     }
+
+    private void processConnect(SelectionKey key) {
+        SocketChannel socketChannel = (SocketChannel) key.channel();
+        try {
+            socketChannel.finishConnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        key.interestOps(SelectionKey.OP_WRITE);
+        InetSocketAddress remote = (InetSocketAddress) socketChannel.socket().getRemoteSocketAddress();
+        String host = remote.getHostName();
+        int port = remote.getPort();
+        System.out.println(String.format("访问地址: %s:%s 连接成功!", host, port));
+    }
+
     public void startClient() {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         try {
@@ -112,10 +136,13 @@ public class 基于线程池的伪异步NIO模型 {
                 while (keys.hasNext()) {
                     SelectionKey key = keys.next();
                     if (key.isConnectable()) {
-                        executorService.submit(new ConnectThread(key));
-                    }else if(key.isReadable()) {
+                        //update at 20250324
+                        //处理连接不应该使用异步，因为可能会在连接还没处理完成后，就开始读取或者写入
+                        processConnect(key);
+//                        executorService.submit(new ConnectThread(key));
+                    } else if (key.isReadable()) {
                         executorService.submit(new ReadThread(key));
-                    }else {
+                    } else {
                         executorService.submit(new WriteThread(key));
                     }
                 }

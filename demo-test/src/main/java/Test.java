@@ -34,9 +34,20 @@ public class Test {
         System.out.println("2023年报".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
         System.out.println("2023年报1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
         System.out.println("2023年1月".matches("\\d{4}年报|\\d{4}年\\d{1,2}月"));
+        int CANCELLED = 0x80000000;
+        System.out.println(CANCELLED);
+        System.out.println(102 >> 1);
+        System.out.println(102 >>> 1);
+        System.out.println(-1 << 29);
+        System.out.println(0 << 29);
+        System.out.println(1 << 29);
+        System.out.println(2 << 29);
+        System.out.println(3 << 29);
+        System.out.println(Integer.numberOfLeadingZeros(8192));
+        System.out.println(Integer.SIZE - 1 - Integer.numberOfLeadingZeros(8192));
     }
 
-    public static void calculate(){
+    public static void calculate() {
         List<List<Integer>> a = new ArrayList<>();
         List<Integer> list1 = new ArrayList<>();
         add(list1);
@@ -96,7 +107,7 @@ public class Test {
             return false;
         }
 
-        for (int j = path.length(); j > 0;) {
+        for (int j = path.length(); j > 0; ) {
             int i = path.lastIndexOf('/', j - 1);
             int gap = j - i;
 

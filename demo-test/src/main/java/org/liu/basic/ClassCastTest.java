@@ -1,10 +1,10 @@
 package org.liu.basic;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * @Author lzs
@@ -24,7 +24,7 @@ public class ClassCastTest {
         ClassCastModel model = new ClassCastModel();
         model.setId(1L);
         model.setModels(new ClassCastInnerModel[]{innerModel});
-        model.setModelList(List.of(innerModel));
+        model.setModelList(CollUtil.newArrayList(innerModel));
 
         Object models = BeanUtil.getFieldValue(model, "models");
         //转成object数组

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package liu;
+
+option java_package = "org.liu.google.protobuf";
+
+enum ClientType {
+  ENUM_TYPE_NAME_UNSPECIFIED = 0;
+  COMPUTER = 1;
+  MOBILE = 2;
+}

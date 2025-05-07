@@ -1,0 +1,29 @@
+//声明语法版本
+syntax = "proto3";
+
+//声明代码的命名空间
+package liu;
+//如果被引入的proto文件在同一目录下，那么import的路径如下，此处idea标为红色，实际是没有问题的，idea的问题
+import "base_info.proto";
+
+//引入其他的proto文件
+
+option java_package = "org.liu.google.protobuf";
+
+//结构化对象的描述
+message PeopleInfo {
+  // 各个字段描述，格式为:   字段类型  字段名 = 字段唯一编号
+  //编号1-15用一个字节，编号16-2047用二个字节
+  int32 id = 1;
+  string name = 2;
+  repeated string phones = 3;//对应数组
+  map<int32, string> mp = 4;
+  PersonGender gender = 5;
+  liu.ClientType client_type = 6;//此处idea标为红色，实际是没有问题，idea的问题
+}
+
+enum PersonGender {
+  UNKNOWN = 0;
+  MAN = 1;
+  FEMALE = 2;
+}

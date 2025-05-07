@@ -24,14 +24,14 @@ public class TestThreadCommunication {
             while (true) {
                 synchronized (product) {
                     if (!product.isFlag()) {
-                        System.out.println("没有产品可以消费，消费者等待");
+                        System.out.println(Thread.currentThread().getName() + "没有产品可以消费，消费者等待");
                         try {
                             product.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        System.out.println("我已经消费了一个产品--" + product.getName());
+                        System.out.println(Thread.currentThread().getName() + "消费了一个产品--" + product.getName());
                         product.setFlag(false);
                         product.notify();//通知生产者生产
                     }
@@ -59,12 +59,12 @@ public class TestThreadCommunication {
                 try {
                     synchronized (product) {
                         if (product.isFlag()) {
-                            System.out.println("产品还没被消费，不需要生产");
+                            System.out.println(Thread.currentThread().getName() + "产品还没被消费，不需要生产");
                             product.wait();//当前线程等待，并释放持有的product对象锁
                         } else {
                             product.setFlag(true);
                             product.setName("product" + i);
-                            System.out.println("生产了一个产品=" + product.getName());
+                            System.out.println(Thread.currentThread().getName() + "生产了一个产品=" + product.getName());
                             i++;
                             Thread.sleep(1000L);//1s生产一个
                             //唤醒消费者
@@ -87,13 +87,17 @@ public class TestThreadCommunication {
     }
 
     public static void main(String[] args) {
-        Product product = new Product();//product同时承担了锁的功能
+        Product product = new Product();//product同时承担了锁的功能，各线程持有同一个对象锁
 
-        Thread producerThread = new Thread(new Producer(product));
-        Thread consumerThread = new Thread(new Consumer(product));
+        Thread producerThread1 = new Thread(new Producer(product), "生产者1");
+        Thread producerThread2 = new Thread(new Producer(product), "生产者2");
+        Thread consumerThread1 = new Thread(new Consumer(product), "消费者1");
+        Thread consumerThread2 = new Thread(new Consumer(product), "消费者2");
 
-        producerThread.start();
-        consumerThread.start();
+        producerThread1.start();
+        producerThread2.start();
+        consumerThread1.start();
+        consumerThread2.start();
     }
 
 }
