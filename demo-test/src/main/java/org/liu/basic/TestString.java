@@ -30,17 +30,18 @@ public class TestString {
         String imageDirectory = "E:\\work\\minxun\\经济普查\\定南县\\dingnan";
         String location = imageDirectory.substring(imageDirectory.lastIndexOf(File.separator) + 1);
         System.out.println(location);
+        System.out.println(imageDirectory.substring(0, imageDirectory.length() - 3));
 
         isAlphabetic();
     }
 
-    public static void isAlphabetic(){
+    public static void isAlphabetic() {
         System.out.println("-----------------------");
         String text = "a哦，.;-=123来BV";
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
             boolean tag = Character.isUpperCase(c) || Character.isLowerCase(c) || Character.isDigit(c);
-            System.out.println("index：" + i+ "，字符：" + c + "，是否字母或数字：" + tag);
+            System.out.println("index：" + i + "，字符：" + c + "，是否字母或数字：" + tag);
         }
     }
 

@@ -5,6 +5,7 @@ import cn.hutool.core.img.ImgUtil;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -14,7 +15,16 @@ import java.util.Base64;
 public class TestBase64 {
 
     public static void main(String[] args) throws IOException {
-        fileToBase64();
+        test();
+    }
+
+    public static void test() {
+        String text = "dW5kZWZpbmVkdW5kZWZpbmVkMjAyNjAxMTAxNTQyNTI=";
+        byte[] bytes = Base64.getDecoder().decode(text.getBytes(StandardCharsets.UTF_8));
+        System.out.println(new String(bytes));
+
+        String s = Base64.getEncoder().encodeToString("111111".getBytes(StandardCharsets.UTF_8));
+        System.out.println(s);
     }
 
     public static void base64ToFile() throws IOException {

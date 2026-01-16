@@ -1,0 +1,12 @@
+查看jvm完整的内存使用的统计信息（以简单的Test为例）：
+java -XX:NativeMemoryTracking=summary -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics Test
+
+开启 NMT 并选择 summary 模式：-XX:NativeMemoryTracking=summary
+在应用退出时打印 NMT 统计信息：-XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
+
+打开 GC 日志（JDK9已废弃，开启无效或报错）：-XX:+PrintGCDetails -XX:+PrintGCDateStamps
+打印 G1 Ergonomics 相关信息：-XX:+PrintAdaptiveSizePolicy
+
+如果是怀疑出现引用清理不及时的情况，则可以打开下面选项，掌握到底是哪里出现了堆积。
+打印引用 GC 的信息：-XX:+PrintReferenceGC
+开启并行引用处理：-XX:+ParallelRefProcEnabled

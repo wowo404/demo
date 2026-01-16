@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table
 @Data
-public class Animal implements Serializable {
+public class Animal implements Serializable, Cloneable {
 
     private Integer id;
     private String name;
@@ -22,7 +22,11 @@ public class Animal implements Serializable {
     private Date birthday;
     private AnimalType animalType;
 
-    public Animal(Integer id){
+    public Animal(Integer id) {
         this.id = id;
+    }
+
+    public Animal clone() throws CloneNotSupportedException {
+        return (Animal) super.clone();
     }
 }

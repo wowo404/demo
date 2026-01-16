@@ -1,4 +1,5 @@
 import cn.hutool.core.util.StrUtil;
+import org.liu.enums.Shape;
 import org.liu.model.ChannelProductReq;
 import org.liu.obj.Superior;
 
@@ -45,6 +46,8 @@ public class Test {
         System.out.println(3 << 29);
         System.out.println(Integer.numberOfLeadingZeros(8192));
         System.out.println(Integer.SIZE - 1 - Integer.numberOfLeadingZeros(8192));
+        System.out.println(new Date(946755932378L));
+        System.out.println(Shape.square.ordinal());
     }
 
     public static void calculate() {

@@ -10,19 +10,43 @@ import java.util.ArrayList;
 public class BinaryTest {
 
     public static void main(String[] args) {
-        byte b = 0x7e;
-        System.out.println(Byte.toString(b));
+        testBitOperator();
+    }
+
+    //移位操作，不要转换成数字，用位运算的视角来看
+    public static void testBitOperator() {
+        int s0 = 1 << 0;
+        int s1 = 1 << 1;
+        int s2 = 1 << 2;
+        int s3 = 1 << 3;
+        int s7 = 1 << 7;
+        int s11 = 1 << 11;
+        System.out.println(Integer.toBinaryString(s0));//1
+        System.out.println(Integer.toBinaryString(s1));//10
+        System.out.println(Integer.toBinaryString(s2));//100
+        System.out.println(Integer.toBinaryString(s3));//1000
+        System.out.println(Integer.toBinaryString(s7));//1000 0000
+        System.out.println(Integer.toBinaryString(s11));//1000 0000 0000
+
+        int a = 0b11111000011101;
+        System.out.println(a);
         System.out.println(Integer.toBinaryString(-128));
         System.out.println(Integer.toBinaryString(127));
         System.out.println(Integer.toBinaryString(-1));
         System.out.println(Integer.toBinaryString(1));
-        int a = 0b10000001;
-        System.out.println(a);
-        byte neOne = 0b00000001;
-        System.out.println(neOne);
-        leadingZeros();
-        intAndRadix();
-        byteAndRadix();
+
+        int b = 15893;
+        System.out.println(Integer.toBinaryString(b));
+        //11111000010101
+        //  100000000000
+        int e3 = b & s3;
+        int e7 = b & s7;
+        int e11 = b & s11;
+        //获取指定bit是0还是1，要对结果进行大于0判断，大于0是1，否则是0
+        System.out.println(b & (1 << 3));//0
+        System.out.println(b & (1 << 7));//0
+        System.out.println(e11);//2048
+        System.out.println(Integer.toBinaryString(e11));//2048
     }
 
     //int也可以用二进制，八进制，十进制，十六进制来表示
@@ -210,9 +234,14 @@ public class BinaryTest {
         System.out.println(extractSpecialBit(a, (byte) 0b0100));
         System.out.println(extractSpecialBit(a, (byte) 0b1000));
         System.out.println(Integer.toBinaryString(a));
+
+        byte c = 0x7e;
+        System.out.println(Byte.toString(c));
+        byte neOne = 0b00000001;
+        System.out.println(neOne);
     }
 
-    public static byte extractSpecialBit(byte val, byte whichBit){
+    public static byte extractSpecialBit(byte val, byte whichBit) {
         return (byte) ((val & whichBit) > 0 ? 1 : 0);
     }
 

@@ -13,9 +13,9 @@ public class TestCommonsCollections {
         multiKeyMap();
     }
 
-    public static void queue(){
+    public static void queue() {
         CircularFifoQueue<Animal> queue = new CircularFifoQueue<>(5);
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             Animal animal = new Animal();
             animal.setId(i);
             queue.add(animal);
@@ -30,7 +30,7 @@ public class TestCommonsCollections {
         System.out.println(queue.size());
     }
 
-    public static void multiKeyMap(){
+    public static void multiKeyMap() {
         MultiKeyMap multiKeyMap = MultiKeyMap.decorate(new LinkedMap());
         multiKeyMap.put("1", "a", "liu");
         multiKeyMap.put("2", "a", "zhang");
@@ -46,7 +46,13 @@ public class TestCommonsCollections {
             System.out.println(key + " ----- " + value);
         });
         boolean containsKey = multiKeyMap.containsKey("1", "a");
-        System.out.println(containsKey);
+        System.out.println(containsKey);//true
+        boolean containsKey1 = multiKeyMap.containsKey("1");
+        System.out.println(containsKey1);//false
+        Object o1 = multiKeyMap.get("1");
+        System.out.println(o1);//null
+        Object o2 = multiKeyMap.get("1", "a");
+        System.out.println(o2);//正常获取到value
     }
 
 }

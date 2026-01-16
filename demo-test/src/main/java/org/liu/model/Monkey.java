@@ -2,29 +2,37 @@ package org.liu.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
+import javax.jws.WebService;
 import java.io.Serializable;
 import java.util.List;
 
 @Data
-@Entity
+@WebService//随便写个注解，用来演示
 public class Monkey extends Animal implements Action, Serializable {
 
-	public boolean good = true;
+    public boolean good = true;
 
-	private String color;
+    private String color;
 
-	private List<MonkeySons> sons;
+    private List<MonkeySons> sons;
 
-	private MonkeySons oldSon;
+    private MonkeySons oldSon;
 
-	public String getColor() {
-		return color;
-	}
+    public Monkey() {
+        super();
+    }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+    private Monkey(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public List<MonkeySons> getSons() {
         return sons;
@@ -34,22 +42,22 @@ public class Monkey extends Animal implements Action, Serializable {
         this.sons = sons;
     }
 
-	public MonkeySons getOldSon() {
-		return oldSon;
-	}
+    public MonkeySons getOldSon() {
+        return oldSon;
+    }
 
-	public void setOldSon(MonkeySons oldSon) {
-		this.oldSon = oldSon;
-	}
+    public void setOldSon(MonkeySons oldSon) {
+        this.oldSon = oldSon;
+    }
 
-	@Override
-	public void run() {
-		System.out.println("Monkey climb tree");
-	}
+    @Override
+    public void run() {
+        System.out.println("Monkey climb tree");
+    }
 
-	public OriginFormTypeEnum getFormType(String id, List<SysDept> depts){
-		System.out.println(id);
-		System.out.println(depts);
-		return OriginFormTypeEnum.OTHER_STORAGE;
-	}
+    public OriginFormTypeEnum getFormType(String id, List<SysDept> depts) {
+        System.out.println(id);
+        System.out.println(depts);
+        return OriginFormTypeEnum.OTHER_STORAGE;
+    }
 }

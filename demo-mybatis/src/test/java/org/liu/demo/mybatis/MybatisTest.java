@@ -1,36 +1,14 @@
 package org.liu.demo.mybatis;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
-public class MybatisTest {
-
-    private SqlSessionFactory sqlSessionFactory;
-
-    @Before
-    public void init() throws IOException {
-        InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-        sqlSessionFactory = builder.build(inputStream);
-        inputStream.close();
-    }
-
-    @After
-    public void destroy() {
-
-    }
+public class MybatisTest extends BaseTest {
 
     @Test
     public void testSave() throws ParseException {
@@ -46,6 +24,7 @@ public class MybatisTest {
         user.setAge(11);
         user.setEnabled(1);
         user.setGis(point);
+        user.setStatus("online");
         userDao.insert(user);
         System.out.println(user.getId());
         sqlSession.commit();

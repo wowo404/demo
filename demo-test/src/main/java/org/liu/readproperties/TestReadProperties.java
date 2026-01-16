@@ -5,12 +5,20 @@ import cn.hutool.core.io.IoUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.Map;
 import java.util.Properties;
 
 public class TestReadProperties {
 
     public static void main(String[] args) throws IOException {
-        readFromClassPath();
+        readEnv();
+    }
+
+    public static void readEnv() {
+        Map<String, String> env = System.getenv();
+        env.forEach((k, v) -> {
+            System.out.println(k + "  ---  " + v);
+        });
     }
 
     public static void readSystemProperties() {

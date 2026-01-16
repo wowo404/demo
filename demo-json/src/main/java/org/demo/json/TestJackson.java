@@ -3,10 +3,12 @@ package org.demo.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
+import org.demo.json.enums.OriginFormTypeEnum;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +35,14 @@ public class TestJackson {
     }
 
     public static void main(String[] args) throws IOException {
-        data();
+        jsonAndEnum();
+    }
+
+    public static void keyIsInt() throws IOException {
+        String json = "{\"1\":0,\"2\":0,\"3\":0,\"4\":0}";
+        Map<Integer, Integer> o = mapper.readValue(json, new TypeReference<Map<Integer, Integer>>() {
+        });
+        System.out.println(o);
     }
 
     public static void data() throws IOException {
@@ -42,12 +51,16 @@ public class TestJackson {
         System.out.println(dataProcessFormula);
     }
 
-    public static void indicator() throws JsonProcessingException {
+    public static void indicator() throws IOException {
         MetadataIndicator indicator = new MetadataIndicator();
         indicator.setNameEnglish("industryCode");
         indicator.setDataType(1);
         indicator.setDataLength(5);
-        System.out.println(mapper.writeValueAsString(indicator));
+        indicator.setOriginFormTypeEnum(OriginFormTypeEnum.OTHER_STORAGE);
+        String json = mapper.writeValueAsString(indicator);
+        System.out.println(json);
+        MetadataIndicator origin = mapper.readValue(json, MetadataIndicator.class);
+        System.out.println(origin);
     }
 
     public static void readJsonFile() throws IOException {
@@ -69,7 +82,7 @@ public class TestJackson {
                 columnConfig.setTable(next.get("table").asText());
             } else if (next.get("table").isObject()) {
                 JsonNode table = next.get("table");
-                Map<String,String[]> map = mapper.treeToValue(table, Map.class);
+                Map<String, String[]> map = mapper.treeToValue(table, Map.class);
                 columnConfig.setTable(map.toString());
             }
             if (next.has("nfmt")) {
@@ -124,7 +137,7 @@ public class TestJackson {
      */
     public static void jsonAndEnum() throws IOException {
         String json = "{\n" +
-                "    \"pageNum\": 1,\n" +
+//                "    \"pageNum\": 1,\n" +//测试pageNum定义为基础数据类型
                 "    \"pageSize\": 10,\n" +
                 "    \"fuzzyString\": \"\",\n" +
                 "    \"specInfo\": \"\",\n" +

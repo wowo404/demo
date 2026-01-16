@@ -13,4 +13,5 @@ public class User implements Serializable {
     private Integer age;
     private Integer enabled;
     private Geometry gis;
+    private String status;//在数据库里是枚举
 }

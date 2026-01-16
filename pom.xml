@@ -13,40 +13,29 @@
         <module>demo-view</module>
         <module>demo-mybatis</module>
         <module>demo-jaxws</module>
-        <module>demo-easymock</module>
         <module>demo-hessian</module>
         <module>demo-office</module>
         <module>demo-designpatterns</module>
         <module>demo-datastructuresandalgorithmanalysis</module>
         <module>demo-shiro</module>
         <module>demo-sms</module>
-        <module>demo-activemq</module>
-        <module>demo-kafka</module>
         <module>demo-log-jboss-logging-logback</module>
         <module>demo-json</module>
-        <module>demo-rabbitmq</module>
-        <module>demo-junit5</module>
         <module>demo-tomcat</module>
         <module>demo-zookeeper</module>
         <module>demo-paho</module>
         <module>demo-feign</module>
-        <module>demo-objenesis</module>
-        <module>demo-asm</module>
-        <module>demo-cglib</module>
         <module>demo-aspectj</module>
         <module>demo-jgit</module>
         <module>demo-web-servlet</module>
         <module>demo-jsqlparse</module>
         <module>demo-apache</module>
         <module>demo-google</module>
-        <module>demo-mockito</module>
         <module>demo-gaode</module>
-        <module>demo-javassist</module>
         <module>demo-caffeine</module>
         <module>demo-itextpdf7</module>
         <module>demo-minio</module>
         <module>demo-fastdfs</module>
-        <module>demo-cassandra</module>
     </modules>
 
     <properties>

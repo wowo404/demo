@@ -5,7 +5,7 @@ import org.demo.json.enums.OriginFormTypeEnum;
 
 @Data
 public class BarcodeQueryReq {
-    private Long pageNum;
+    private long pageNum;
 
     private Long pageSize;
     /**

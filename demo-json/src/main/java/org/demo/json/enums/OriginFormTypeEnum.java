@@ -1,5 +1,7 @@
 package org.demo.json.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum OriginFormTypeEnum implements BaseEnum {
     PURCHASING_ORDER(0, "采购订单"), PURCHASING_STORAGE(1, "采购入库单"),
     SALE_RETURN_NOTE(2, "销售退货单"), OTHER_STORAGE(3, "其他入库单"),
@@ -13,6 +15,7 @@ public enum OriginFormTypeEnum implements BaseEnum {
         this.value = value;
     }
 
+    @JsonValue
     @Override
     public Integer getCode() {
         return code;

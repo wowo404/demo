@@ -14,7 +14,11 @@ import static org.liu.hutool.StrExtendUtil.ordinalIndexOf;
 public class TestRegexp {
 
     public static void main(String[] args) {
-        test();
+        System.out.println(isChineseDateTime("2025-11-11 12:12:12"));
+        System.out.println(isChineseDateTime("2025--11-11 12:12:12"));
+        System.out.println(isChineseDateTime("2025-11-11 12::12:12"));
+        System.out.println(isChineseDateTime("2025-11-1112::12:12"));
+        System.out.println(isChineseDateTime("2025-11-11 12::12:12"));
     }
 
     public static void matchAbs() {
@@ -53,6 +57,8 @@ public class TestRegexp {
         System.out.println(str.matches(reg));
         String reg1 = "pl|erp|crm|sim";
         System.out.println(str.matches(reg1));
+        System.out.println("1".matches("[0123]"));
+        System.out.println("------------------");
 
         String reg2 = "[+\\-*/%]";
         System.out.println("反对".matches(reg2));
@@ -169,7 +175,7 @@ public class TestRegexp {
         System.out.println(pattern.matcher("15058124996").matches());
     }
 
-    public static void containMany(){
+    public static void containMany() {
         String reg = "(?=[1a!]).*";
         System.out.println("1!abcd".matches(reg));
     }
@@ -289,6 +295,14 @@ public class TestRegexp {
             }
         }
         return keyword;
+    }
+
+    /**
+     * 输入字符串是否匹配日期格式：yyyy-MM-dd HH:mm:ss
+     * TIPS:本方法只是简单的检验了数字，没有检查年月日时分秒是否在合法的范围
+     */
+    public static boolean isChineseDateTime(String text) {
+        return Pattern.compile("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}").matcher(text).matches();
     }
 
 }

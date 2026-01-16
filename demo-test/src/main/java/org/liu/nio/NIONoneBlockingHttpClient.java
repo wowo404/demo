@@ -7,14 +7,13 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
 public class NIONoneBlockingHttpClient {
 
     private static Selector selector;
-    private Charset charset = Charset.forName("utf8");
 
     static {
         try {
@@ -86,7 +85,7 @@ public class NIONoneBlockingHttpClient {
         String request = HttpUtil.compositeRequest(host);
         System.out.println(request);
 
-        channel.write(charset.encode(request));
+        channel.write(StandardCharsets.UTF_8.encode(request));
         key.interestOps(SelectionKey.OP_READ);
     }
 
@@ -95,7 +94,7 @@ public class NIONoneBlockingHttpClient {
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         channel.read(buffer);
         buffer.flip();
-        String receiveData = charset.decode(buffer).toString();
+        String receiveData = StandardCharsets.UTF_8.decode(buffer).toString();
 
         if ("".equals(receiveData)) {
             key.cancel();

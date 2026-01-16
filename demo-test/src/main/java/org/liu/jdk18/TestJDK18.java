@@ -24,13 +24,14 @@ public class TestJDK18 {
     }
 
     public void sort() {
-        List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100"), 1),
-                new Person("b", new BigDecimal("200"), 3),
-                new Person("b", new BigDecimal("50"), 2),
-                new Person("c", new BigDecimal("400")),
-                new Person("c", new BigDecimal("600"), 0),
-                new Person("d", new BigDecimal("0")));
-        list.sort(Comparator.comparing(Person::getOrder, Comparator.nullsLast(Integer::compareTo)));
+        List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100"), 1, new Date(1718364783002L)),
+                new Person("b", new BigDecimal("200"), 3, new Date(1718364784402L)),
+                new Person("b", new BigDecimal("50"), 2, new Date(1718364753042L)),
+                new Person("c", new BigDecimal("400"), 3, new Date(1718364383002L)),
+                new Person("c", new BigDecimal("600"), null, new Date(1718364456002L)),
+                new Person("d", new BigDecimal("0"), null, new Date(1718364123002L)));
+//        list.sort(Comparator.comparing(Person::getOrder, Comparator.nullsLast(Integer::compareTo)));//null值放后面
+        list.sort(Comparator.comparing(Person::getCreateTime));//按时间从小到大排序
 //        list.sort(Comparator.comparing(Person::getOrder, Comparator.reverseOrder()));
         //另一种写法：(x,y) -> x.getOrder().compareTo(y.getOrder())
         //下面是idea的推荐
@@ -83,11 +84,13 @@ public class TestJDK18 {
      */
     public void collectToList() {
         List<Person> list = Arrays.asList(new Person("a", new BigDecimal("100")),
-                new Person("b", new BigDecimal("200")));
-        List<String> nameList = list.parallelStream().map(p -> p.getName()).collect(Collectors.toList());
-        nameList.forEach(s -> {
-            System.out.println(s);
-        });
+                new Person("b", new BigDecimal("200")),
+                new Person("", new BigDecimal("1")),
+                new Person("c", new BigDecimal("300")),
+                new Person(null, new BigDecimal("2")),
+                new Person("d", new BigDecimal("400")));
+        List<String> nameList = list.parallelStream().map(Person::getName).collect(Collectors.toList());
+        nameList.forEach(System.out::println);
         String collect = list.stream().map(person -> person.getName()).collect(Collectors.joining(","));
         System.out.println(collect);
     }
@@ -254,6 +257,7 @@ public class TestJDK18 {
         private BigDecimal age;
         private Integer order;
         private Integer category;
+        private Date createTime;
 
         public Person(String name, BigDecimal age) {
             this.name = name;
@@ -264,6 +268,13 @@ public class TestJDK18 {
             this.name = name;
             this.age = age;
             this.order = order;
+        }
+
+        public Person(String name, BigDecimal age, Integer order, Date createTime) {
+            this.name = name;
+            this.age = age;
+            this.order = order;
+            this.createTime = createTime;
         }
 
         public String getName() {
@@ -296,6 +307,14 @@ public class TestJDK18 {
 
         public void setCategory(Integer category) {
             this.category = category;
+        }
+
+        public Date getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(Date createTime) {
+            this.createTime = createTime;
         }
     }
 

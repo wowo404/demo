@@ -1,6 +1,7 @@
 package org.demo.json;
 
 import lombok.Data;
+import org.demo.json.enums.OriginFormTypeEnum;
 
 import java.io.Serializable;
 
@@ -98,5 +99,6 @@ public class MetadataIndicator implements Serializable {
      * 转换后的信息，json格式，字段和此表相同
      */
     private String transformationInfo;
+    private OriginFormTypeEnum originFormTypeEnum;
 }
 

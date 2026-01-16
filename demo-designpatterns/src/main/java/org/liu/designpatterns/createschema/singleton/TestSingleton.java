@@ -6,19 +6,22 @@ package org.liu.designpatterns.createschema.singleton;
  * 系统中只有一个实例，因此构造方法应该为私有 饿汉式：类加载时直接创建静态实例；
  * 懒汉式：第一次需要时才创建一个实例，那么newInstance方法要加同步。
  * 饿汉式比懒汉式要好，尽管资源利用率要差。但是不用同步。
+ *
  * @author liuzhsh
  */
 public class TestSingleton {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		//饿汉式
-		ClassA a = ClassA.newInstance();
-		System.out.println(a);
-		//懒汉式
-		ClassB b = ClassB.newInstance();
-		System.out.println(b);
-		
-	}
+        //饿汉式
+        ClassA a = ClassA.newInstance();
+        System.out.println(a);
+        //懒汉式
+        ClassB b = ClassB.newInstance();
+        System.out.println(b);
+        //静态内部类方式--也是饿汉式
+        ClassC c = ClassC.newInstance();
+        System.out.println(c);
+    }
 
 }

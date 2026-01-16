@@ -1,7 +1,6 @@
 package org.liu.reflect;
 
 import com.alibaba.fastjson.JSON;
-import org.liu.model.Animal;
 import org.liu.model.Monkey;
 import org.liu.model.MonkeySons;
 
@@ -14,12 +13,12 @@ public class TestReflect {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException {
         TestReflect t = new TestReflect();
 
-        t.testField();
-//        Monkey monkey = new Monkey();
-//        monkey.setColor("red");
-//        monkey.setId(1);
-//        monkey.setName("gucci");
-//        t.test(monkey);
+//        t.testField();
+        Monkey monkey = new Monkey();
+        monkey.setColor("red");
+        monkey.setId(1);
+        monkey.setName("gucci");
+        t.test(monkey);
     }
 
     public void convert() {
@@ -43,21 +42,28 @@ public class TestReflect {
     }
 
 
-    public <T extends Animal> T test(T t) {
+    public <T> void test(T t) {
+        System.out.println("------------类的相关信息----------");
         Type clazz = t.getClass().getGenericSuperclass();
         Class<?> superclass = t.getClass().getSuperclass();
-        Type[] interfaces = t.getClass().getGenericInterfaces();
+        Class<?>[] interfaces = t.getClass().getInterfaces();
+        Type[] genericInterfaces = t.getClass().getGenericInterfaces();
         Class<?>[] declaredClasses = t.getClass().getDeclaredClasses();
         Class<?>[] classes = t.getClass().getClasses();
-        Class<? extends Animal> aClass = t.getClass();
+        Class<?> aClass = t.getClass();
         Class<?> declaringClass = t.getClass().getDeclaringClass();
         Class<?> enclosingClass = t.getClass().getEnclosingClass();
+        System.out.println("------------构造方法的相关信息----------");
+        Constructor<?>[] constructors = t.getClass().getConstructors();
+        Constructor<?>[] declaredConstructors = t.getClass().getDeclaredConstructors();
+        System.out.println("------------字段的相关信息----------");
         Field[] declaredFields = t.getClass().getDeclaredFields();
         Field[] fields = t.getClass().getFields();
+        System.out.println("------------方法的相关信息----------");
         Method[] declaredMethods = t.getClass().getDeclaredMethods();
         for (Method declaredMethod : declaredMethods) {
             System.out.println(declaredMethod.getName() + " -- " + Arrays.toString(declaredMethod.getParameterTypes()));
-            if (declaredMethod.getParameterTypes().length > 0 ){
+            if (declaredMethod.getParameterTypes().length > 0) {
                 System.out.println(declaredMethod.getParameterTypes()[0].equals(String.class));
             }
         }
@@ -66,6 +72,7 @@ public class TestReflect {
         for (Method method : methods) {
             System.out.println(method.getName() + " -- " + Arrays.toString(method.getParameterTypes()));
         }
+        System.out.println("------------类的注解的相关信息----------");
         Annotation[] annotations = t.getClass().getAnnotations();
         Annotation[] declaredAnnotations = t.getClass().getDeclaredAnnotations();
         AnnotatedType[] annotatedInterfaces = t.getClass().getAnnotatedInterfaces();
@@ -73,7 +80,6 @@ public class TestReflect {
 
         String s = JSON.toJSONString(t);
         System.out.println(s);
-        return t;
     }
 
     public void testField() throws IllegalAccessException {

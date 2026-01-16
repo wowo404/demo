@@ -10,6 +10,9 @@ public class StringFormatUtil {
         String s = "我是咩咩咩咩%s,我%d岁啦";
         String format = String.format(s, "a", 15);
         System.out.println(format);
+        String deviceNoPrefix = "1";
+        String fixNum = String.format("%07d", Integer.parseInt(deviceNoPrefix) + 1);
+        System.out.println(fixNum);
     }
 
     public static void test() {

@@ -15,7 +15,20 @@ import java.util.stream.Collectors;
 public class TestCollection {
 
     public static void main(String[] args) {
-        listToArray();
+        immutable();
+    }
+
+    public static void immutable() {
+        ChannelProductReq req1 = new ChannelProductReq();
+        req1.setUserId("1");
+        req1.setPhone("111");
+
+        ChannelProductReq req2 = new ChannelProductReq();
+        req2.setUserId("1");
+        req2.setPhone("111");
+        List<ChannelProductReq> list = Collections.unmodifiableList(Arrays.asList(req1, req2));
+        req1.setUserId("2");
+        list.forEach(System.out::println);
     }
 
     public static void queue() {
@@ -217,7 +230,7 @@ public class TestCollection {
         System.out.println(list);
     }
 
-    public static void listToArray(){
+    public static void listToArray() {
         List<Integer> list = new ArrayList<>(5);
         list.add(1);
         list.add(2);
